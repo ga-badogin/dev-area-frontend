@@ -1,0 +1,3 @@
+export type TKeyWithParams<T> = {
+  [K in keyof T]: T[K] extends null ? [K] : [K, T[K]]
+}[keyof T]
