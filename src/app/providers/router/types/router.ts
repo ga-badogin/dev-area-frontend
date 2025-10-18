@@ -7,5 +7,5 @@ export type TAppRoutesProps = RouteProps & {
 export type TAppRoutes = keyof TRouteParams
 
 export type TRouteParams = {
-  mock: { mock: undefined }
+  auth: null
 }

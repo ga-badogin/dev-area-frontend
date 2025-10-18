@@ -1,8 +1,10 @@
+import './styles/index.scss'
 import { AppRouter } from './providers/router/ui/AppRouter'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
 const App = () => {
   return (
-    <div>
+    <div className={classNames('app', {}, ['dark'])}>
       <AppRouter />
     </div>
   )

@@ -1,9 +1,20 @@
 :root {
   // Fonts
-  --font-family-main: Poppins, sans-serif;
-  --font-family-title: Smooch Sans, sans-serif;
-  --font-family-code: Share Tech Mono, monospace;
+  --font-family-main: Inter, sans-serif;
+  --font-family-title: 'Russo One', sans-serif;
+  --font-family-code: JetBrains Mono, monospace;
+
+  --font-size-m: 16px;
+  --font-line-m: 24px;
+  --font-main: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
+
+  --font-size-l: 32px;
+  --font-line-l: 40px;
+  --font-title: var(--font-size-l) / var(--font-line-l) var(--font-family-title);
 
   // Colors
-  --accent-color: #58a6ff;
+  --light-font-color: #f4f6f8;
+
+  // Border-radius
+  --main-border-radius: 13px;
 }

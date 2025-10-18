@@ -1,10 +1,11 @@
 import { TAppRoutes, TAppRoutesProps } from '../types/router'
 
 import { getRoute } from '@/shared/lib/router/getRoute'
+import { AuthPageAsync } from '@/pages/AuthPage'
 
 export const routeConfig: Record<TAppRoutes, TAppRoutesProps> = {
-  mock: {
-    path: getRoute(['mock', { mock: undefined }]),
-    element: <div />
+  auth: {
+    path: getRoute(['auth']),
+    element: <AuthPageAsync />
   }
 }
