@@ -1,48 +1,41 @@
 import cls from './Input.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { CSSProperties, FC, InputHTMLAttributes, memo, SVGProps } from 'react'
+import { FC, InputHTMLAttributes, memo, SVGProps } from 'react'
 
 export enum InputTheme {
-  MAIN = 'main'
+  MAIN = 'main',
+  ICON = 'icon'
 }
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  theme?: InputTheme
-  height?: string
-  width?: string
-  Image: FC<SVGProps<SVGSVGElement>>
-}
+type InputProps =
+  | (BaseInputProps & {
+      theme?: InputTheme.ICON
+      Image: FC<SVGProps<SVGSVGElement>>
+    })
+  | (BaseInputProps & {
+      theme?: Exclude<InputTheme, InputTheme.ICON>
+      Image?: never
+    })
+
+interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
 export const Input = memo((props: InputProps) => {
   const {
     className,
-    height,
-    width,
     Image,
     type = 'text',
+    theme = InputTheme.MAIN,
     ...otherProps
   } = props
-
-  const styles: CSSProperties = {
-    height,
-    width,
-    paddingLeft: `${height}`
-  }
-
-  const imageStyles: CSSProperties = {
-    left: `calc(${height} / 2.3)`,
-    height: `calc(${height} / 2.3)`
-  }
 
   return (
     <div className={cls.inputWrapper}>
       <input
-        style={styles}
-        className={classNames(cls.input, {}, [className])}
+        className={classNames(cls.input, {}, [className, cls[theme]])}
         type={type}
         {...otherProps}
       />
-      <Image style={imageStyles} className={cls.image} />
+      {Image && <Image className={cls.image} />}
     </div>
   )
 })

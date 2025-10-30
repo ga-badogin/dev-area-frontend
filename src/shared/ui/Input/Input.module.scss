@@ -1,10 +1,10 @@
 .inputWrapper {
   position: relative;
-  width: min-content;
-  height: min-content;
 }
 
 .input {
+  width: 100%;
+  height: 50px;
   background-color: var(--inverted-primary-color);
   color: var(--primary-color);
   border-radius: var(--main-border-radius);
@@ -12,11 +12,20 @@
   &::placeholder {
     color: var(--primary-color);
   }
+
+  &.main {
+    padding: 0 20px;
+  }
+
+  &.icon {
+    padding: 0 20px 0 calc(10% + 20px);
+  }
 }
 
 .image {
   position: absolute;
   top: 50%;
+  right: 90%;
+  height: 50%;
   transform: translateY(-50%);
-  fill: var(--bg-color);
 }
