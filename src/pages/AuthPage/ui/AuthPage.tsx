@@ -1,9 +1,15 @@
 import cls from './AuthPage.module.scss'
-import { memo } from 'react'
+import { memo, Suspense } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { Login } from '@/features/Login'
-import { Register } from '@/features/Register'
-import { ResetPassword } from '@/features/ResetPassword'
+import {
+  AuthFormWrapper,
+  LoginFormAsync,
+  LoginFormSkeleton,
+  RegisterFormAsync,
+  RegisterFormSkeleton,
+  ResetPasswordFormAsync,
+  ResetPasswordFormSkeleton
+} from '@/features/Auth'
 
 interface AuthPageProps {
   className?: string
@@ -14,14 +20,38 @@ const AuthPage = memo((props: AuthPageProps) => {
 
   return (
     <div className={cls.authPage}>
-      <div className={cls.formWrapper}>
+      <AuthFormWrapper>
         <Routes>
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="reset-password" element={<ResetPassword />} />
+          <Route
+            path="login"
+            element={
+              <Suspense key="login" fallback={<LoginFormSkeleton />}>
+                <LoginFormAsync />
+              </Suspense>
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <Suspense key="register" fallback={<RegisterFormSkeleton />}>
+                <RegisterFormAsync />
+              </Suspense>
+            }
+          />
+          <Route
+            path="reset-password"
+            element={
+              <Suspense
+                key="reset-password"
+                fallback={<ResetPasswordFormSkeleton />}
+              >
+                <ResetPasswordFormAsync />
+              </Suspense>
+            }
+          />
           <Route path="/" element={<Navigate to="login" />} />
         </Routes>
-      </div>
+      </AuthFormWrapper>
     </div>
   )
 })

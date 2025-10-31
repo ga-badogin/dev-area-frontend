@@ -29,9 +29,9 @@ export const Input = memo((props: InputProps) => {
   } = props
 
   return (
-    <div className={cls.inputWrapper}>
+    <div className={classNames(cls.inputWrapper, {}, [className])}>
       <input
-        className={classNames(cls.input, {}, [className, cls[theme]])}
+        className={classNames(cls.input, {}, [cls[theme]])}
         type={type}
         {...otherProps}
       />

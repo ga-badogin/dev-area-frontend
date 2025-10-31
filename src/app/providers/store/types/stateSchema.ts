@@ -1,14 +1,15 @@
 import { rtkApi } from '@/shared/api/rtkApi'
+import { IAuthSchema } from '@/features/Auth'
 
 export interface IStateSchema {
-  mock?: string
+  auth: IAuthSchema
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 }
 
 export type TStateSchemaKey = keyof IStateSchema
 
 export interface IStateSchemaPartial {
-  mock: undefined
+  auth: IAuthSchema | undefined
 }
 
 export interface IThunkConfig<T> {

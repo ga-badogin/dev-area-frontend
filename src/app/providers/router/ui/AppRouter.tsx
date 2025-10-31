@@ -1,4 +1,4 @@
-import { Suspense, useCallback } from 'react'
+import { useCallback } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { RequireAuth } from './RequireAuth'
 import { routeConfig } from '../config/routeConfig'
@@ -17,9 +17,5 @@ export const AppRouter = () => {
     )
   }, [])
 
-  return (
-    <Suspense fallback={''}>
-      <Routes>{Object.values(routeConfig).map(renderWithWrapper)}</Routes>
-    </Suspense>
-  )
+  return <Routes>{Object.values(routeConfig).map(renderWithWrapper)}</Routes>
 }
