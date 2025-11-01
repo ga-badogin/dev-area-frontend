@@ -4,7 +4,7 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 
 const App = () => {
   return (
-    <div className={classNames('app', {}, ['light'])}>
+    <div className={classNames('app', {}, ['dark'])}>
       <AppRouter />
     </div>
   )

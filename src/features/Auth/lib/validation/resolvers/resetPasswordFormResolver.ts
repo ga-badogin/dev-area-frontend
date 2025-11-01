@@ -1,6 +1,6 @@
 import { FieldErrors, Resolver } from 'react-hook-form'
-import { IResetPasswordReqBody } from '../../../model/types/authSchema'
 import { validateEmail, validatePassword } from './validators'
+import { IResetPasswordReqBody } from '../../../model/types/authApi'
 
 export const resetPasswordFormResolver: Resolver<
   IResetPasswordReqBody

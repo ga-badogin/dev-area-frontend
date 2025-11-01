@@ -1,0 +1,23 @@
+.codeInput {
+  display: flex;
+  gap: 10px;
+}
+
+.input {
+  height: 50px;
+  width: 100%;
+  background-color: var(--inverted-primary-color);
+  color: var(--primary-color);
+  border-radius: var(--main-border-radius);
+  text-align: center;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+
+  &:focus {
+    caret-color: transparent;
+    outline: 2px solid var(--accent-color);
+  }
+}

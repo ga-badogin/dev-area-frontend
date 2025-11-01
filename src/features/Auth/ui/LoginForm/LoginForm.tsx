@@ -6,9 +6,8 @@ import InputLock from '@/shared/assets/icons/InputLock.svg'
 import { Button } from '@/shared/ui/Button/Button'
 import { useForm } from 'react-hook-form'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { useLazyLoginQuery } from '../../api/authApi'
 import { loginFormResolver } from '../../lib/validation/resolvers/loginFormResolver'
-import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
+import { useLoginMutation } from '../../api/authApi'
 
 interface LoginProps {
   className?: string
@@ -17,7 +16,7 @@ interface LoginProps {
 const LoginForm = memo((props: LoginProps) => {
   const { className } = props
 
-  const [login] = useLazyLoginQuery()
+  const [login] = useLoginMutation()
 
   const {
     register,

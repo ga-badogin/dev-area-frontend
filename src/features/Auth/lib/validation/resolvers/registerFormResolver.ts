@@ -1,6 +1,6 @@
 import { FieldErrors, Resolver } from 'react-hook-form'
-import { IRegisterReqBody } from '../../../model/types/authSchema'
 import { validateEmail, validatePassword } from './validators'
+import { IRegisterReqBody } from '../../../model/types/authApi'
 
 export const registerFormResolver: Resolver<IRegisterReqBody> = async (
   values

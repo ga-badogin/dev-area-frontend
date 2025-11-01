@@ -13,6 +13,7 @@ export function buildPlugins({
   isDev,
   apiURL,
   project,
+  accessTokenKey
 }: IBuildOptions): webpack.WebpackPluginInstance[] {
   const isProd = !isDev
 
@@ -25,6 +26,7 @@ export function buildPlugins({
       __IS_DEV__: JSON.stringify(isDev),
       __API_URL__: JSON.stringify(apiURL),
       __PROJECT__: JSON.stringify(project),
+      __ACCESS_TOKEN_KEY__: JSON.stringify(accessTokenKey)
     }),
 	  new ForkTsCheckerWebpackPlugin({
 		  typescript: {

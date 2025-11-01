@@ -8,7 +8,8 @@ import { Button } from '@/shared/ui/Button/Button'
 import { useForm } from 'react-hook-form'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { registerFormResolver } from '../../lib/validation/resolvers/registerFormResolver'
-import { useLazyRegisterQuery } from '../../api/authApi'
+import { useRegisterMutation } from '../../api/authApi'
+import { CodeInput } from '@/shared/ui/CodeInput/CodeInput'
 
 interface RegisterProps {
   className?: string
@@ -17,7 +18,7 @@ interface RegisterProps {
 const RegisterForm = memo((props: RegisterProps) => {
   const { className } = props
 
-  const [register] = useLazyRegisterQuery()
+  const [register] = useRegisterMutation()
 
   const {
     register: formRegister,
@@ -28,7 +29,7 @@ const RegisterForm = memo((props: RegisterProps) => {
     mode: 'onChange'
   })
 
-  const onSubmit = handleSubmit((data) => register(data))
+  const onSubmit = handleSubmit((data) => console.log(data))
 
   return (
     <form
@@ -71,6 +72,9 @@ const RegisterForm = memo((props: RegisterProps) => {
         {...formRegister('password')}
       />
       {errors.password?.message}
+
+      <CodeInput />
+
       <Button>Регистрация</Button>
     </form>
   )

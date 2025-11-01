@@ -16,6 +16,7 @@ export interface IBuildOptions {
   port: number
   apiURL: string
   project: 'storybook' | 'frontend' | 'jest'
+  accessTokenKey: string
 }
 
 export interface IBuildEnv {

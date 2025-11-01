@@ -1,27 +1,35 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 import {
+  IAuthResponse,
   ILoginReqBody,
   IRegisterReqBody,
   IResetPasswordReqBody
-} from '../model/types/authSchema'
+} from '../model/types/authApi'
+import { saveToken } from './utils/saveToken'
 
 const authApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
-    register: build.query<any, IRegisterReqBody>({
+    register: build.mutation<IAuthResponse, IRegisterReqBody>({
       query: (body) => ({
         url: '/auth/register',
         method: 'POST',
         body
-      })
+      }),
+      async onQueryStarted(args, { queryFulfilled }) {
+        await saveToken(queryFulfilled)
+      }
     }),
-    login: build.query<any, ILoginReqBody>({
+    login: build.mutation<IAuthResponse, ILoginReqBody>({
       query: (body) => ({
         url: '/auth/login',
         method: 'POST',
         body
-      })
+      }),
+      async onQueryStarted(args, { queryFulfilled }) {
+        await saveToken(queryFulfilled)
+      }
     }),
-    resetPassword: build.query<any, IResetPasswordReqBody>({
+    resetPassword: build.mutation<string, IResetPasswordReqBody>({
       query: (body) => ({
         url: '/auth/reset-password',
         method: 'PUT',
@@ -32,7 +40,7 @@ const authApi = rtkApi.injectEndpoints({
 })
 
 export const {
-  useLazyRegisterQuery,
-  useLazyLoginQuery,
-  useLazyResetPasswordQuery
+  useLoginMutation,
+  useRegisterMutation,
+  useResetPasswordMutation
 } = authApi

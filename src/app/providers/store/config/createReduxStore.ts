@@ -2,7 +2,6 @@ import { configureStore, ReducersMapObject } from '@reduxjs/toolkit'
 import { IStateSchema } from '../types/stateSchema'
 import { createReducerManager } from './createReducerManager'
 import { rtkApi } from '@/shared/api/rtkApi'
-import { AuthReducer } from '@/features/Auth'
 
 export function createReduxStore(
   initialState: IStateSchema,
@@ -10,7 +9,6 @@ export function createReduxStore(
 ) {
   const rootReducers: ReducersMapObject<IStateSchema> = {
     ...asyncReducers,
-    auth: AuthReducer,
     [rtkApi.reducerPath]: rtkApi.reducer
   }
 

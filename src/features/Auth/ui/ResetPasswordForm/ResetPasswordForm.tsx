@@ -6,8 +6,8 @@ import InputUser from '@/shared/assets/icons/InputUser.svg'
 import InputLock from '@/shared/assets/icons/InputLock.svg'
 import { Button } from '@/shared/ui/Button/Button'
 import { useForm } from 'react-hook-form'
-import { useLazyResetPasswordQuery } from '../../api/authApi'
 import { resetPasswordFormResolver } from '../../lib/validation/resolvers/resetPasswordFormResolver'
+import { useResetPasswordMutation } from '../../api/authApi'
 
 interface ResetPasswordProps {
   className?: string
@@ -16,7 +16,7 @@ interface ResetPasswordProps {
 const ResetPasswordForm = memo((props: ResetPasswordProps) => {
   const { className } = props
 
-  const [resetPassword] = useLazyResetPasswordQuery()
+  const [resetPassword] = useResetPasswordMutation()
 
   const {
     register,
