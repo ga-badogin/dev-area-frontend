@@ -3,26 +3,18 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import { FC, InputHTMLAttributes, memo, SVGProps } from 'react'
 
 export enum InputTheme {
-  MAIN = 'main',
-  ICON = 'icon'
+  MAIN = 'main'
 }
 
-type InputProps =
-  | (BaseInputProps & {
-      theme?: InputTheme.ICON
-      Image: FC<SVGProps<SVGSVGElement>>
-    })
-  | (BaseInputProps & {
-      theme?: Exclude<InputTheme, InputTheme.ICON>
-      Image?: never
-    })
-
-interface BaseInputProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  Icon?: FC<SVGProps<SVGSVGElement>>
+  theme?: InputTheme
+}
 
 export const Input = memo((props: InputProps) => {
   const {
     className,
-    Image,
+    Icon,
     type = 'text',
     theme = InputTheme.MAIN,
     ...otherProps
@@ -35,7 +27,7 @@ export const Input = memo((props: InputProps) => {
         type={type}
         {...otherProps}
       />
-      {Image && <Image className={cls.image} />}
+      {Icon && <Icon className={cls.icon} />}
     </div>
   )
 })

@@ -1,5 +1,9 @@
 .inputWrapper {
   position: relative;
+
+  &:has(.icon) .input {
+    padding: 0 20px 0 calc(10% + 20px);
+  }
 }
 
 .input {
@@ -16,16 +20,13 @@
   &.main {
     padding: 0 20px;
   }
-
-  &.icon {
-    padding: 0 20px 0 calc(10% + 20px);
-  }
 }
 
-.image {
+.icon {
   position: absolute;
   top: 50%;
   right: 90%;
   height: 50%;
   transform: translateY(-50%);
+  fill: var(--primary-color);
 }

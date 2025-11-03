@@ -14,10 +14,15 @@ export const loginFormResolver: Resolver<ILoginReqBody> = async (values) => {
   if (passwordError) errors.password = passwordError
 
   // code
-  if (values.code?.length === 0) {
+  if (!values.code || values.code?.length === 0) {
     errors.code = {
       type: 'required',
       message: 'Поле кода обязательно для заполнения'
+    }
+  } else if (values.code?.length < 6) {
+    errors.code = {
+      type: 'required',
+      message: 'Введите код полностью'
     }
   }
 

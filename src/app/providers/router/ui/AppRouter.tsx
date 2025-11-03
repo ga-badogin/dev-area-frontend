@@ -6,14 +6,10 @@ import { TAppRoutesProps } from '../types/router'
 
 export const AppRouter = () => {
   const renderWithWrapper = useCallback((route: TAppRoutesProps) => {
-    const { element, path, authOnly } = route
+    const { path } = route
 
     return (
-      <Route
-        key={path}
-        path={path}
-        element={authOnly ? <RequireAuth>{element}</RequireAuth> : element}
-      />
+      <Route key={path} path={path} element={<RequireAuth route={route} />} />
     )
   }, [])
 

@@ -1,13 +1,14 @@
 import cls from './LoginForm.module.scss'
 import { memo } from 'react'
-import { Input, InputTheme } from '@/shared/ui/Input/Input'
-import InputMail from '@/shared/assets/icons/InputMail.svg'
-import InputLock from '@/shared/assets/icons/InputLock.svg'
+import { Input } from '@/shared/ui/Input/Input'
 import { Button } from '@/shared/ui/Button/Button'
 import { useForm } from 'react-hook-form'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { loginFormResolver } from '../../lib/validation/resolvers/loginFormResolver'
 import { useLoginMutation } from '../../api/authApi'
+import { CodeInput } from '@/shared/ui/CodeInput/CodeInput'
+import MailIcon from '@/shared/assets/icons/InputMail.svg'
+import LockIcon from '@/shared/assets/icons/InputLock.svg'
 
 interface LoginProps {
   className?: string
@@ -21,10 +22,11 @@ const LoginForm = memo((props: LoginProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    control
   } = useForm({ resolver: loginFormResolver, mode: 'onChange' })
 
-  const onSubmit = handleSubmit((data) => login(data))
+  const onSubmit = handleSubmit((data) => console.log(data))
 
   return (
     <form
@@ -32,22 +34,24 @@ const LoginForm = memo((props: LoginProps) => {
       onSubmit={onSubmit}
     >
       <Input
-        theme={InputTheme.ICON}
-        Image={InputMail}
+        Icon={MailIcon}
         placeholder="Почта"
         className={cls.input}
         {...register('email')}
       />
       {errors.email?.message}
       <Input
-        theme={InputTheme.ICON}
-        Image={InputLock}
+        Icon={LockIcon}
         placeholder="Пароль"
         type="password"
         className={cls.input}
         {...register('password')}
       />
       {errors.password?.message}
+
+      <CodeInput control={control} name={'code'} />
+      {errors.code?.message}
+
       <Button>Войти</Button>
     </form>
   )

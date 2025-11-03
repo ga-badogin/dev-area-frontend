@@ -1,20 +1,19 @@
-import { ReactNode } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
+import { TAppRoutesProps } from '../types/router'
+import { getRoute } from '@/shared/lib/router/getRoute'
 
 interface IRequireAuthProps {
-  children: ReactNode
+  route: TAppRoutesProps
 }
 
 export const RequireAuth = (props: IRequireAuthProps) => {
-  const { children } = props
+  const { element, unAuthOnly } = props.route
 
   const location = useLocation()
 
-  // if () {
-  //   return (
-  //     <Navigate to={getRoute(['main'])} state={{ from: location }} replace />
-  //   )
-  // }
+  if (unAuthOnly && localStorage.getItem(__ACCESS_TOKEN_KEY__)) {
+    return <Navigate to={getRoute(['main'])} />
+  }
 
-  return children
+  return element
 }

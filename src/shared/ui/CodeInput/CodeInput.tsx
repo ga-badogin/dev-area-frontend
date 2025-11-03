@@ -1,24 +1,30 @@
 import cls from './CodeInput.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { KeyboardEvent, memo, useCallback, useRef, useState } from 'react'
+import { KeyboardEvent, useCallback, useRef, useState } from 'react'
+import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 
-interface CodeInputProps {
+interface CodeInputProps<T extends FieldValues> {
   className?: string
   length?: number
+
+  control: Control<T>
+  name: Path<T>
 }
 
-export const CodeInput = memo((props: CodeInputProps) => {
-  const { className, length = 6 } = props
+export const CodeInput = <T extends FieldValues>(props: CodeInputProps<T>) => {
+  const { className, length = 6, control, name } = props
 
   const inputsRef = useRef<(HTMLInputElement | null)[]>([])
   const [values, setValues] = useState<string[]>(Array(length).fill(''))
 
   const handleChange = useCallback(
-    (value: string, index: number) => {
+    (value: string, index: number, onChange: (value: string) => void) => {
       if (value.length === 1) {
         const newValues = [...values]
         newValues[index] = value
         setValues(newValues)
+        onChange(newValues.join(''))
+
         inputsRef.current[index + 1]?.focus()
       }
     },
@@ -26,7 +32,11 @@ export const CodeInput = memo((props: CodeInputProps) => {
   )
 
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLInputElement>, index: number) => {
+    (
+      e: KeyboardEvent<HTMLInputElement>,
+      index: number,
+      onChange: (value: string) => void
+    ) => {
       switch (e.key) {
         case 'ArrowRight':
           inputsRef.current[index + 1]?.focus()
@@ -38,6 +48,8 @@ export const CodeInput = memo((props: CodeInputProps) => {
           const newValues = [...values]
           newValues[index] = ''
           setValues(newValues)
+          onChange(newValues.join(''))
+
           inputsRef.current[index - 1]?.focus()
           break
       }
@@ -47,20 +59,30 @@ export const CodeInput = memo((props: CodeInputProps) => {
 
   return (
     <div className={classNames(cls.codeInput, {}, [className])}>
-      {Array.from({ length }).map((_, index) => (
-        <input
-          ref={(el) => {
-            inputsRef.current[index] = el
-          }}
-          onChange={(e) => handleChange(e.target.value, index)}
-          value={values[index]}
-          maxLength={1}
-          onKeyDown={(e) => handleKeyDown(e, index)}
-          className={cls.input}
-          type="number"
-          key={index}
-        />
-      ))}
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <>
+            {Array.from({ length }).map((_, index) => (
+              <input
+                ref={(el) => {
+                  inputsRef.current[index] = el
+                }}
+                value={values[index]}
+                onChange={(e) =>
+                  handleChange(e.target.value, index, field.onChange)
+                }
+                onKeyDown={(e) => handleKeyDown(e, index, field.onChange)}
+                maxLength={1}
+                className={cls.input}
+                type="number"
+                key={index}
+              />
+            ))}
+          </>
+        )}
+      />
     </div>
   )
-})
+}
