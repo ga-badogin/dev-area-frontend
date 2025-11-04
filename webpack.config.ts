@@ -18,7 +18,6 @@ export default (env: IBuildEnv): webpack.Configuration => {
 
   const apiURL = env.apiURL || 'http://localhost:8000'
   const isDev = mode === 'development'
-  const accessTokenKey = 'access-token'
 
   return buildWebpackConfig({
     mode,
@@ -26,7 +25,6 @@ export default (env: IBuildEnv): webpack.Configuration => {
     isDev,
     port,
     apiURL,
-    accessTokenKey,
     project: 'frontend'
   })
 }

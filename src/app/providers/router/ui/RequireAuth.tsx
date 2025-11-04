@@ -1,6 +1,8 @@
-import { Navigate, useLocation } from 'react-router-dom'
 import { TAppRoutesProps } from '../types/router'
 import { getRoute } from '@/shared/lib/router/getRoute'
+import { ACCESS_TOKEN_KEY } from '@/shared/consts/localestorage'
+import { Navigate } from 'react-router-dom'
+import { useIsAuth } from '@/features/Auth'
 
 interface IRequireAuthProps {
   route: TAppRoutesProps
@@ -9,9 +11,11 @@ interface IRequireAuthProps {
 export const RequireAuth = (props: IRequireAuthProps) => {
   const { element, unAuthOnly } = props.route
 
-  const location = useLocation()
+  useIsAuth()
 
-  if (unAuthOnly && localStorage.getItem(__ACCESS_TOKEN_KEY__)) {
+  const hasToken = Boolean(localStorage.getItem(ACCESS_TOKEN_KEY))
+
+  if (unAuthOnly && hasToken) {
     return <Navigate to={getRoute(['main'])} />
   }
 

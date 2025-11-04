@@ -1,6 +1,7 @@
 import cls from './Input.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { FC, InputHTMLAttributes, memo, SVGProps } from 'react'
+import { Text, TextTheme } from '../Text/Text'
 
 export enum InputTheme {
   MAIN = 'main'
@@ -9,6 +10,7 @@ export enum InputTheme {
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   Icon?: FC<SVGProps<SVGSVGElement>>
   theme?: InputTheme
+  error?: string
 }
 
 export const Input = memo((props: InputProps) => {
@@ -17,17 +19,23 @@ export const Input = memo((props: InputProps) => {
     Icon,
     type = 'text',
     theme = InputTheme.MAIN,
+    error,
     ...otherProps
   } = props
 
   return (
-    <div className={classNames(cls.inputWrapper, {}, [className])}>
-      <input
-        className={classNames(cls.input, {}, [cls[theme]])}
-        type={type}
-        {...otherProps}
-      />
-      {Icon && <Icon className={cls.icon} />}
+    <div className={className}>
+      <div className={classNames(cls.inputWrapper)}>
+        <input
+          className={classNames(cls.input, { [cls.error]: error }, [
+            cls[theme]
+          ])}
+          type={type}
+          {...otherProps}
+        />
+        {Icon && <Icon className={cls.icon} />}
+      </div>
+      {error && <Text theme={TextTheme.ERROR} paragraph={error} />}
     </div>
   )
 })

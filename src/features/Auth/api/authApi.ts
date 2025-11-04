@@ -5,29 +5,22 @@ import {
   IRegisterReqBody,
   IResetPasswordReqBody
 } from '../model/types/authApi'
-import { saveToken } from './utils/saveToken'
 
-const authApi = rtkApi.injectEndpoints({
+export const authApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     register: build.mutation<IAuthResponse, IRegisterReqBody>({
       query: (body) => ({
         url: '/auth/register',
         method: 'POST',
         body
-      }),
-      async onQueryStarted(args, { queryFulfilled }) {
-        await saveToken(queryFulfilled)
-      }
+      })
     }),
     login: build.mutation<IAuthResponse, ILoginReqBody>({
       query: (body) => ({
         url: '/auth/login',
         method: 'POST',
         body
-      }),
-      async onQueryStarted(args, { queryFulfilled }) {
-        await saveToken(queryFulfilled)
-      }
+      })
     }),
     resetPassword: build.mutation<string, IResetPasswordReqBody>({
       query: (body) => ({

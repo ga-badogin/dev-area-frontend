@@ -1,4 +1,4 @@
-import cls from './LoginForm.module.scss'
+import cls from '../AuthForm/AuthForm.module.scss'
 import { memo } from 'react'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
@@ -7,7 +7,7 @@ export const LoginFormSkeleton = memo(() => {
     <div>
       <Skeleton className={cls.input} />
       <Skeleton className={cls.input} />
-      <Skeleton />
+      <Skeleton className={cls.btn} />
     </div>
   )
 })

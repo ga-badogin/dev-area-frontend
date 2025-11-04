@@ -1,0 +1,19 @@
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  aspect-ratio: 1 / 1;
+  border: 5px solid #fff;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

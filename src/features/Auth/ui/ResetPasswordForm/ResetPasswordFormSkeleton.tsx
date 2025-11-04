@@ -1,4 +1,4 @@
-import cls from './ResetPasswordForm.module.scss'
+import cls from '../AuthForm/AuthForm.module.scss'
 import { memo } from 'react'
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
@@ -7,7 +7,7 @@ export const ResetPasswordFormSkeleton = memo(() => {
     <div>
       <Skeleton className={cls.input} />
       <Skeleton className={cls.input} />
-      <Skeleton />
+      <Skeleton className={cls.btn} />
     </div>
   )
 })

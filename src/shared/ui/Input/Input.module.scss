@@ -20,6 +20,10 @@
   &.main {
     padding: 0 20px;
   }
+
+  &.error {
+    outline: 2px solid var(--error-color);
+  }
 }
 
 .icon {
