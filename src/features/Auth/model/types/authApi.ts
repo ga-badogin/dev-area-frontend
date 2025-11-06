@@ -18,6 +18,11 @@ export interface IResetPasswordReqBody {
   code?: string
 }
 
-export interface IAuthResponse {
-  accessToken: string
-}
+export type IAuthResponse =
+  | {
+      accessToken: string
+    }
+  | {
+      message: string
+      statusCode: number
+    }

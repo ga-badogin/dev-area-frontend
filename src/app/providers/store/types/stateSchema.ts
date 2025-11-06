@@ -1,6 +1,7 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 import { IAuthSchema } from '@/features/Auth'
 import { INotificationSchema } from '@/entities/Notification'
+import { AppDispatch } from './appDispatch'
 
 export interface IStateSchema {
   notification: INotificationSchema
@@ -19,4 +20,5 @@ export interface IStateSchemaPartial {
 export interface IThunkConfig<T> {
   rejectValue: T
   state: IStateSchema
+  dispatch: AppDispatch
 }

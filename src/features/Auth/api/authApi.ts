@@ -6,7 +6,7 @@ import {
   IResetPasswordReqBody
 } from '../model/types/authApi'
 
-export const authApi = rtkApi.injectEndpoints({
+const authApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
     register: build.mutation<IAuthResponse, IRegisterReqBody>({
       query: (body) => ({

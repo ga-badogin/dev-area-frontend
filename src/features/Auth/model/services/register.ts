@@ -1,20 +1,35 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { IThunkConfig } from '@/app/providers/store/exclude'
 import { registerInitiate } from '../../api/authApi'
-import { IRegisterReqBody } from '../types/authApi'
+import { IAuthResponse, IRegisterReqBody } from '../types/authApi'
+import { addNotification } from '@/entities/Notification'
 
 export const register = createAsyncThunk<
-  any,
+  IAuthResponse,
   IRegisterReqBody,
   IThunkConfig<string>
 >('auth/register', async (body, thunkAPI) => {
-  const { extra, rejectWithValue, dispatch } = thunkAPI
+  const { rejectWithValue, dispatch } = thunkAPI
 
   try {
     const response = await dispatch(registerInitiate(body))
 
     if (!response.data) {
       throw new Error()
+    } else if ('accessToken' in response.data) {
+      dispatch(
+        addNotification({
+          title: 'Успех',
+          paragraph: 'Учетная запись создана'
+        })
+      )
+    } else {
+      dispatch(
+        addNotification({
+          title: 'Введите код',
+          paragraph: response.data.message
+        })
+      )
     }
 
     return response.data

@@ -3,7 +3,9 @@ import { loginFormResolver } from '../../lib/validation/resolvers/loginFormResol
 import { AuthForm } from '../AuthForm/AuthForm'
 import MailIcon from '@/shared/assets/icons/InputMail.svg'
 import LockIcon from '@/shared/assets/icons/InputLock.svg'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { login } from '../../model/services/login'
+import { useIsLoading } from '../../model/selectors/getIsLoading'
 
 interface LoginProps {
   className?: string
@@ -12,12 +14,15 @@ interface LoginProps {
 const LoginForm = memo((props: LoginProps) => {
   const { className } = props
 
+  const dispatch = useAppDispatch()
+  const isLoading = useIsLoading()
+
   return (
     <AuthForm
       resolver={loginFormResolver}
-      onSubmit={(data) => login(data)}
+      onSubmit={(data) => dispatch(login(data))}
       codeRegisterName="code"
-      isLoading={false}
+      isLoading={isLoading}
       inputs={[
         { name: 'email', Icon: MailIcon, placeholder: 'Почта' },
         {

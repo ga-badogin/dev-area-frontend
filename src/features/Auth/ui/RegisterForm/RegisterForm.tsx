@@ -5,6 +5,7 @@ import LockIcon from '@/shared/assets/icons/InputLock.svg'
 import UserIcon from '@/shared/assets/icons/InputUser.svg'
 import { AuthForm } from '../AuthForm/AuthForm'
 import { register } from '../../model/services/register'
+import { useIsLoading } from '@/features/Auth/model/selectors/getIsLoading'
 
 interface RegisterProps {
   className?: string
@@ -13,12 +14,14 @@ interface RegisterProps {
 const RegisterForm = memo((props: RegisterProps) => {
   const { className } = props
 
+  const isLoading = useIsLoading()
+
   return (
     <AuthForm
       resolver={registerFormResolver}
       onSubmit={(data) => register(data)}
       codeRegisterName="code"
-      isLoading={false}
+      isLoading={isLoading}
       inputs={[
         { name: 'name', Icon: UserIcon, placeholder: 'Имя' },
         { name: 'username', Icon: UserIcon, placeholder: 'Имя пользователя' },
