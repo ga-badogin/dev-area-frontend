@@ -2,11 +2,26 @@ import cls from './Loader.module.scss'
 import { memo } from 'react'
 
 interface LoaderProps {
-  height?: string
+  size?: string
 }
 
 export const Loader = memo((props: LoaderProps) => {
-  const { height = '100%' } = props
+  const { size = '100%' } = props
 
-  return <div className={cls.loader} style={{ height }} />
+  return (
+    <div className={cls.loader} style={{ height: size }}>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  )
 })

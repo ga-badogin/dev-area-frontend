@@ -1,9 +1,9 @@
 import { memo } from 'react'
 import { resetPasswordFormResolver } from '../../lib/validation/resolvers/resetPasswordFormResolver'
-import { useResetPasswordMutation } from '../../api/authApi'
 import MailIcon from '@/shared/assets/icons/InputMail.svg'
 import LockIcon from '@/shared/assets/icons/InputLock.svg'
 import { AuthForm } from '../AuthForm/AuthForm'
+import { resetPassword } from '../../model/services/resetPassword'
 
 interface ResetPasswordProps {
   className?: string
@@ -12,14 +12,12 @@ interface ResetPasswordProps {
 const ResetPasswordForm = memo((props: ResetPasswordProps) => {
   const { className } = props
 
-  const [resetPassword, { isLoading }] = useResetPasswordMutation()
-
   return (
     <AuthForm
       resolver={resetPasswordFormResolver}
       onSubmit={(data) => resetPassword(data)}
       codeRegisterName="code"
-      isLoading={isLoading}
+      isLoading={false}
       inputs={[
         { name: 'email', Icon: MailIcon, placeholder: 'Почта' },
         {

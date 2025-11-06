@@ -24,9 +24,10 @@ export const Button = memo((props: ButtonProps) => {
   return (
     <button
       className={classNames(cls.button, {}, [className, cls[theme]])}
+      disabled={isLoading}
       {...otherProps}
     >
-      {isLoading ? <Loader height="60%" /> : children}
+      {isLoading ? <Loader size="80%" /> : children}
     </button>
   )
 })

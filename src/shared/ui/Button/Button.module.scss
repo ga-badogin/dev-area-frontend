@@ -1,7 +1,9 @@
 .button {
   width: 100%;
   height: 50px;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &.main {
     color: var(--light-font-color);

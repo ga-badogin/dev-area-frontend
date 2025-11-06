@@ -33,7 +33,7 @@ export const authApi = rtkApi.injectEndpoints({
 })
 
 export const {
-  useLoginMutation,
-  useRegisterMutation,
-  useResetPasswordMutation
-} = authApi
+  login: { initiate: loginInitiate },
+  register: { initiate: registerInitiate },
+  resetPassword: { initiate: resetPasswordInitiate }
+} = authApi.endpoints
