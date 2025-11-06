@@ -1,12 +1,11 @@
 import { TKeyWithParams } from '../../types'
 import { TRouteParams } from '@/app/providers/router/exclude'
 
-export const getRoute = ([
-  path,
-  params
-]: TKeyWithParams<TRouteParams>): string => {
+export const getRoute = ([path]: TKeyWithParams<TRouteParams>): string => {
   // prettier-ignore
   switch (path) {
-    default: return ''
+    case 'auth':
+      return '/auth/*'
+    case 'main': return '/main'
   }
 }

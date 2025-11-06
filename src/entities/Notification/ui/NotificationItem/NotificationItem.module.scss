@@ -1,0 +1,45 @@
+.notificationItemWrapper {
+  overflow: hidden;
+  animation: notificationSlideIn 500ms ease forwards;
+
+  &.deleted {
+    animation: notificationSlideOut 500ms ease forwards;
+  }
+}
+
+.notificationItem {
+  border: 1px solid var(--inverted-primary-color);
+  border-radius: 15px;
+  background-color: var(--primary-color);
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.cross {
+  width: 25px;
+  fill: var(--error-color);
+}
+
+@keyframes notificationSlideIn {
+  from {
+    max-height: 0;
+    transform: translateX(calc(-100% - 15px));
+  }
+  to {
+    max-height: 500px;
+    transform: translateX(0);
+  }
+}
+
+@keyframes notificationSlideOut {
+  from {
+    max-height: 500px;
+    transform: translateX(0);
+  }
+  to {
+    max-height: 0;
+    transform: translateX(calc(-100% - 15px));
+  }
+}

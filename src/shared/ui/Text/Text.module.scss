@@ -1,0 +1,17 @@
+.text {
+  width: 100%;
+
+  &.error {
+    .title,
+    .paragraph {
+      color: var(--error-color);
+    }
+  }
+}
+
+.title {
+  font: var(--font-title);
+}
+
+.paragraph {
+}

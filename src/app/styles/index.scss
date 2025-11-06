@@ -2,3 +2,14 @@
 @use 'variables/global';
 @use 'themes/light';
 @use 'themes/dark';
+
+.app {
+  font: var(--font-main);
+
+  background-color: var(--primary-color);
+  color: var(--inverted-primary-color);
+
+  height: 100vh;
+
+  position: relative;
+}

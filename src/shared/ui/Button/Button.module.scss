@@ -1,0 +1,18 @@
+.button {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.main {
+    color: var(--light-font-color);
+    background-color: var(--accent-color);
+    border-radius: var(--main-border-radius);
+  }
+
+  &.clear {
+    width: fit-content;
+    height: fit-content;
+  }
+}

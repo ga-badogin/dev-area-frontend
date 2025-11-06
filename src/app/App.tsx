@@ -1,11 +1,12 @@
+import './styles/index.scss'
 import { AppRouter } from './providers/router/ui/AppRouter'
-import { Notification } from '@/entities/Notification'
+import { NotificationList } from '@/entities/Notification'
 
 const App = () => {
   return (
-    <div>
+    <div className="app dark">
       <AppRouter />
-      <Notification />
+      <NotificationList />
     </div>
   )
 }
