@@ -4,8 +4,8 @@ import { AuthForm } from '../AuthForm/AuthForm'
 import MailIcon from '@/shared/assets/icons/InputMail.svg'
 import LockIcon from '@/shared/assets/icons/InputLock.svg'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { login } from '../../model/services/login'
 import { useIsLoading } from '../../model/selectors/getIsLoading'
+import { login } from '../../model/services/login'
 
 interface LoginProps {
   className?: string

@@ -15,4 +15,8 @@
     width: fit-content;
     height: fit-content;
   }
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }

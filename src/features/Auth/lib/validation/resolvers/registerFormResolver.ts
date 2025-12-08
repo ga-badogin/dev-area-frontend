@@ -3,12 +3,13 @@ import { validateEmail, validatePassword } from './validators'
 import { IRegisterReqBody } from '../../../model/types/authApi'
 
 export const registerFormResolver: Resolver<IRegisterReqBody> = async (
-  values
+  values,
+  mailAvailability: boolean
 ) => {
   const errors: FieldErrors<IRegisterReqBody> = {}
 
   // email
-  const emailError = validateEmail(values.email)
+  const emailError = validateEmail(values.email, mailAvailability)
   if (emailError) errors.email = emailError
 
   // password

@@ -23,6 +23,7 @@ interface AuthFormProps<T extends FieldValues> {
     Icon: FC<SVGProps<SVGSVGElement>>
     placeholder: string
     type?: HTMLInputTypeAttribute
+    onChange?: (args: any) => void
   }[]
   isLoading: boolean
 }
@@ -55,17 +56,27 @@ export const AuthForm = typedMemo(
         onSubmit={handleSubmit(onSubmit)}
       >
         {!isCode ? (
-          inputs.map((input, index) => (
-            <Input
-              key={index}
-              Icon={input.Icon}
-              placeholder={input.placeholder}
-              className={cls.input}
-              type={input.type}
-              error={errors[input.name]?.message?.toString()}
-              {...register(input.name)}
-            />
-          ))
+          inputs.map((input, index) => {
+            const { onChange: registerOnChange, ...restRegister } = register(
+              input.name
+            )
+
+            return (
+              <Input
+                key={index}
+                Icon={input.Icon}
+                placeholder={input.placeholder}
+                className={cls.input}
+                type={input.type}
+                onChange={(e) => {
+                  void registerOnChange(e)
+                  input.onChange?.(e)
+                }}
+                error={errors[input.name]?.message?.toString()}
+                {...restRegister}
+              />
+            )
+          })
         ) : (
           <CodeInput
             className={cls.codeInput}

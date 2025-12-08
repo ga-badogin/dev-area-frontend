@@ -10,6 +10,7 @@ export const register = createAsyncThunk<
   IThunkConfig<string>
 >('auth/register', async (body, thunkAPI) => {
   const { rejectWithValue, dispatch } = thunkAPI
+  console.log('fetch')
 
   try {
     const response = await dispatch(registerInitiate(body))

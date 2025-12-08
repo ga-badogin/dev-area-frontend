@@ -4,7 +4,7 @@ export interface INotificationSchema {
 
 export interface INotificationPayload {
   title?: string
-  paragraph: string
+  paragraph?: string
   duration?: number
 }
 

@@ -25,17 +25,27 @@ export const Input = memo((props: InputProps) => {
 
   return (
     <div className={className}>
-      <div className={classNames(cls.inputWrapper)}>
+      <div className={cls.inputWrapper}>
         <input
           className={classNames(cls.input, { [cls.error]: error }, [
             cls[theme]
           ])}
           type={type}
+          autoComplete="off"
           {...otherProps}
         />
         {Icon && <Icon className={cls.icon} />}
       </div>
-      {error && <Text theme={TextTheme.ERROR} paragraph={error} />}
+
+      {error && (
+        <ul className={cls.errorList}>
+          {error.split('/').map((error, index) => (
+            <li className={cls.listItem} key={index}>
+              <Text theme={TextTheme.ERROR} paragraph={error} />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 })

@@ -1,9 +1,9 @@
 import { FieldErrors, Resolver } from 'react-hook-form'
 import { validateEmail, validatePassword } from './validators'
-import { ILoginReqBody } from '../../../model/types/authApi'
+import { ILoginReqBody, IRegisterReqBody } from '../../../model/types/authApi'
 
 export const loginFormResolver: Resolver<ILoginReqBody> = async (values) => {
-  const errors: FieldErrors<ILoginReqBody> = {}
+  const errors: FieldErrors<IRegisterReqBody> = {}
 
   // email
   const emailError = validateEmail(values.email)

@@ -28,6 +28,12 @@ const authApi = rtkApi.injectEndpoints({
         method: 'PUT',
         body
       })
+    }),
+    checkUserAvailability: build.query<boolean, string>({
+      query: (value) => ({
+        url: `/auth/check-user-availability/${value}`,
+        method: 'GET'
+      })
     })
   })
 })
@@ -35,5 +41,6 @@ const authApi = rtkApi.injectEndpoints({
 export const {
   login: { initiate: loginInitiate },
   register: { initiate: registerInitiate },
-  resetPassword: { initiate: resetPasswordInitiate }
+  resetPassword: { initiate: resetPasswordInitiate },
+  checkUserAvailability: { useLazyQuery: useLazyCheckUserAvailability }
 } = authApi.endpoints

@@ -1,44 +1,49 @@
 import { FieldError } from 'react-hook-form'
 
-export const validateEmail = (email: string): FieldError | null => {
+export const validateEmail = (
+  email: string,
+  mailAvailability?: boolean
+): FieldError | null => {
+  const errors: string[] = []
+
   if (email.length === 0) {
-    return {
-      type: 'required',
-      message: 'Поле почты обязательно для заполнения'
-    }
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-    return {
-      type: 'pattern',
-      message: 'Введите корректный email адрес'
-    }
+    errors.push('Поле почты обязательно для заполнения')
+  }
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+    errors.push('Введите корректный email адрес')
+  }
+  if (mailAvailability) {
+    errors.push('Почта занята')
   }
 
-  return null
+  return {
+    type: 'required',
+    message: errors.join('/')
+  }
 }
 
 export const validatePassword = (
   password: string,
   isStrict = false
 ): FieldError | null => {
+  const errors: string[] = []
+
   if (password.length === 0) {
-    return {
-      type: 'required',
-      message: 'Поле пароля обязательно для заполнения'
-    }
-  } else if (isStrict) {
+    errors.push('Поле пароля обязательно для заполнения')
+  }
+  if (isStrict) {
     if (password.length < 6) {
-      return {
-        type: 'minLength',
-        message: 'Пароль должен содержать минимум 6 символов'
-      }
-    } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
-      return {
-        type: 'pattern',
-        message:
-          'Пароль должен содержать буквы в верхнем и нижнем регистре и цифры'
-      }
+      errors.push('Пароль должен содержать минимум 6 символов')
+    }
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
+      errors.push(
+        'Пароль должен содержать буквы в верхнем и нижнем регистре и цифры'
+      )
     }
   }
 
-  return null
+  return {
+    type: 'required',
+    message: errors.join('/')
+  }
 }
