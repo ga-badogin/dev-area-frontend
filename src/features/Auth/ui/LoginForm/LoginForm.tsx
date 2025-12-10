@@ -21,7 +21,7 @@ const LoginForm = memo((props: LoginProps) => {
     <AuthForm
       resolver={loginFormResolver}
       onSubmit={(data) => dispatch(login(data))}
-      codeRegisterName="code"
+      codeName="code"
       isLoading={isLoading}
       inputs={[
         { name: 'email', Icon: MailIcon, placeholder: 'Почта' },

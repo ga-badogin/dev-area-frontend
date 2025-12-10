@@ -1,9 +1,6 @@
 import { FieldError } from 'react-hook-form'
 
-export const validateEmail = (
-  email: string,
-  mailAvailability?: boolean
-): FieldError | null => {
+export const validateEmail = (email: string): FieldError | null => {
   const errors: string[] = []
 
   if (email.length === 0) {
@@ -12,14 +9,13 @@ export const validateEmail = (
   if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
     errors.push('Введите корректный email адрес')
   }
-  if (mailAvailability) {
-    errors.push('Почта занята')
-  }
 
-  return {
-    type: 'required',
-    message: errors.join('/')
-  }
+  return errors.length > 0
+    ? {
+        type: 'required',
+        message: errors.join('/')
+      }
+    : null
 }
 
 export const validatePassword = (
@@ -42,8 +38,10 @@ export const validatePassword = (
     }
   }
 
-  return {
-    type: 'required',
-    message: errors.join('/')
-  }
+  return errors.length > 0
+    ? {
+        type: 'required',
+        message: errors.join('/')
+      }
+    : null
 }

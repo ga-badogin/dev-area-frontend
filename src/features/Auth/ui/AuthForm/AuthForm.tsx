@@ -16,39 +16,33 @@ interface AuthFormProps<T extends FieldValues> {
   onSubmit: (data: T) => void
   resolver: Resolver<T>
 
-  codeRegisterName: Path<T>
+  codeName: Path<T>
 
   inputs: {
     name: Path<T>
     Icon: FC<SVGProps<SVGSVGElement>>
     placeholder: string
     type?: HTMLInputTypeAttribute
-    onChange?: (args: any) => void
+    isLoading?: boolean
   }[]
   isLoading: boolean
 }
 
 export const AuthForm = typedMemo(
   <T extends FieldValues>(props: AuthFormProps<T>) => {
-    const {
-      className,
-      onSubmit,
-      resolver,
-      inputs,
-      codeRegisterName,
-      isLoading
-    } = props
-
-    const isCode = useIsCode()
-
-    const { pathname } = useLocation()
+    const { className, onSubmit, resolver, inputs, isLoading, codeName } = props
 
     const {
       control,
       register,
       handleSubmit,
       formState: { errors }
-    } = useForm({ resolver, mode: 'onChange' })
+    } = useForm<T>({
+      resolver,
+      mode: 'onChange'
+    })
+    const isCode = useIsCode()
+    const { pathname } = useLocation()
 
     return (
       <form
@@ -56,32 +50,20 @@ export const AuthForm = typedMemo(
         onSubmit={handleSubmit(onSubmit)}
       >
         {!isCode ? (
-          inputs.map((input, index) => {
-            const { onChange: registerOnChange, ...restRegister } = register(
-              input.name
-            )
-
-            return (
-              <Input
-                key={index}
-                Icon={input.Icon}
-                placeholder={input.placeholder}
-                className={cls.input}
-                type={input.type}
-                onChange={(e) => {
-                  void registerOnChange(e)
-                  input.onChange?.(e)
-                }}
-                error={errors[input.name]?.message?.toString()}
-                {...restRegister}
-              />
-            )
-          })
+          inputs.map(({ name, ...restArgs }, index) => (
+            <Input
+              key={index}
+              className={cls.input}
+              error={errors?.[name]?.message?.toString()}
+              {...register(name)}
+              {...restArgs}
+            />
+          ))
         ) : (
           <CodeInput
             className={cls.codeInput}
             control={control}
-            name={codeRegisterName}
+            codeName={codeName}
           />
         )}
 

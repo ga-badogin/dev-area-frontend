@@ -16,7 +16,7 @@ const ResetPasswordForm = memo((props: ResetPasswordProps) => {
     <AuthForm
       resolver={resetPasswordFormResolver}
       onSubmit={(data) => resetPassword(data)}
-      codeRegisterName="code"
+      codeName="code"
       isLoading={false}
       inputs={[
         { name: 'email', Icon: MailIcon, placeholder: 'Почта' },

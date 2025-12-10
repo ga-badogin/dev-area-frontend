@@ -8,11 +8,11 @@ interface CodeInputProps<T extends FieldValues> {
   length?: number
 
   control: Control<T>
-  name: Path<T>
+  codeName: Path<T>
 }
 
 export const CodeInput = <T extends FieldValues>(props: CodeInputProps<T>) => {
-  const { className, length = 6, control, name } = props
+  const { className, length = 6, control, codeName } = props
 
   const inputsRef = useRef<(HTMLInputElement | null)[]>([])
   const [values, setValues] = useState<string[]>(Array(length).fill(''))
@@ -60,7 +60,7 @@ export const CodeInput = <T extends FieldValues>(props: CodeInputProps<T>) => {
   return (
     <div className={classNames(cls.codeInput, {}, [className])}>
       <Controller
-        name={name}
+        name={codeName}
         control={control}
         render={({ field }) => (
           <>

@@ -25,7 +25,11 @@
   width: 8%;
   height: 22%;
   border-radius: 20%;
-  background: currentColor;
+  background: var(--light-font-color);
+}
+
+.loader.accent div:after {
+  background: var(--accent-color);
 }
 
 .loader div:nth-child(1) {

@@ -36,6 +36,13 @@
   fill: var(--primary-color);
 }
 
+.loader {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .inputWrapper:has(.input:focus) ~ .errorList {
   max-height: 200px;
 }

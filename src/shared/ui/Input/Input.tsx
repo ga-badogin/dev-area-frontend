@@ -2,6 +2,7 @@ import cls from './Input.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { FC, InputHTMLAttributes, memo, SVGProps } from 'react'
 import { Text, TextTheme } from '../Text/Text'
+import { Loader, LoaderTheme } from '../Loader/Loader'
 
 export enum InputTheme {
   MAIN = 'main'
@@ -11,6 +12,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   Icon?: FC<SVGProps<SVGSVGElement>>
   theme?: InputTheme
   error?: string
+  isLoading?: boolean
 }
 
 export const Input = memo((props: InputProps) => {
@@ -20,6 +22,7 @@ export const Input = memo((props: InputProps) => {
     type = 'text',
     theme = InputTheme.MAIN,
     error,
+    isLoading,
     ...otherProps
   } = props
 
@@ -35,6 +38,13 @@ export const Input = memo((props: InputProps) => {
           {...otherProps}
         />
         {Icon && <Icon className={cls.icon} />}
+        {isLoading && (
+          <Loader
+            theme={LoaderTheme.ACCENT}
+            className={cls.loader}
+            size="50%"
+          />
+        )}
       </div>
 
       {error && (

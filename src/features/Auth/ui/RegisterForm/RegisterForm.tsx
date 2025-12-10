@@ -1,4 +1,4 @@
-import { ChangeEvent, memo } from 'react'
+import { memo } from 'react'
 import { registerFormResolver } from '../../lib/validation/resolvers/registerFormResolver'
 import MailIcon from '@/shared/assets/icons/InputMail.svg'
 import LockIcon from '@/shared/assets/icons/InputLock.svg'
@@ -18,28 +18,33 @@ const RegisterForm = memo((props: RegisterProps) => {
   const { className } = props
 
   const dispatch = useAppDispatch()
-  const isLoading = useIsLoading()
+  const isLoadingForm = useIsLoading()
 
-  const [checkUserAvailability, {}] = useLazyCheckUserAvailability()
+  const [checkUserAvailability, { isFetching }] = useLazyCheckUserAvailability()
 
-  const onChangeEmail = useDebounce((e: ChangeEvent<HTMLInputElement>) => {
-    checkUserAvailability(e.target.value)
-  }, 500)
+  const [onChangeEmail, deleteTimeout] = useDebounce(
+    async (value: string, callback: () => void) => {
+      const { data } = await checkUserAvailability(value)
+      if (data !== undefined && !data) {
+        callback()
+      }
+    },
+    500
+  )
 
   return (
     <AuthForm
-      resolver={registerFormResolver}
+      resolver={registerFormResolver(onChangeEmail, deleteTimeout)}
       onSubmit={(data) => dispatch(register(data))}
-      codeRegisterName="code"
-      isLoading={isLoading}
+      isLoading={isLoadingForm || isFetching}
+      codeName={'code'}
       inputs={[
         { name: 'name', Icon: UserIcon, placeholder: 'Имя' },
         { name: 'username', Icon: UserIcon, placeholder: 'Имя пользователя' },
         {
           name: 'email',
           Icon: MailIcon,
-          placeholder: 'Почта',
-          onChange: onChangeEmail
+          placeholder: 'Почта'
         },
         {
           name: 'password',
