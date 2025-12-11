@@ -8,8 +8,7 @@ import { login } from '../services/login'
 
 const initialState: IAuthSchema = {
   isCode: false,
-  isAuth: false,
-  isLoading: false
+  isAuth: false
 }
 
 const authSlice = buildSlice({
@@ -17,24 +16,16 @@ const authSlice = buildSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addMatcher(
-        isAnyOf(login.fulfilled, register.fulfilled, resetPassword.fulfilled),
-        (state, { payload }) => {
-          state.isLoading = false
-          state.isCode = true
-          if (typeof payload === 'object' && 'accessToken' in payload) {
-            localStorage.setItem(ACCESS_TOKEN_KEY, payload.accessToken)
-            state.isAuth = true
-          }
+    builder.addMatcher(
+      isAnyOf(login.fulfilled, register.fulfilled, resetPassword.fulfilled),
+      (state, { payload }) => {
+        state.isCode = true
+        if (typeof payload === 'object' && 'accessToken' in payload) {
+          localStorage.setItem(ACCESS_TOKEN_KEY, payload.accessToken)
+          state.isAuth = true
         }
-      )
-      .addMatcher(
-        isAnyOf(login.pending, register.pending, resetPassword.pending),
-        (state, { payload }) => {
-          state.isLoading = true
-        }
-      )
+      }
+    )
   }
 })
 

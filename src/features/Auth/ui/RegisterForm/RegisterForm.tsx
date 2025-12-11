@@ -5,46 +5,61 @@ import LockIcon from '@/shared/assets/icons/InputLock.svg'
 import UserIcon from '@/shared/assets/icons/InputUser.svg'
 import { AuthForm } from '../AuthForm/AuthForm'
 import { register } from '../../model/services/register'
-import { useIsLoading } from '../../model/selectors/getIsLoading'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { useLazyCheckUserAvailability } from '../../api/authApi'
+import {
+  useLazyCheckEmailUnique,
+  useLazyCheckUsernameUnique
+} from '../../api/authApi'
 import { useDebounce } from '@/shared/lib/hooks/useDebounce/useDebounce'
+import { useIsCode } from '../../model/selectors/getIsCode'
 
 interface RegisterProps {
   className?: string
 }
 
 const RegisterForm = memo((props: RegisterProps) => {
-  const { className } = props
-
   const dispatch = useAppDispatch()
-  const isLoadingForm = useIsLoading()
+  const isCode = useIsCode()
 
-  const [checkUserAvailability, { isFetching }] = useLazyCheckUserAvailability()
+  const [checkEmailUnique, { isFetching: isEmailFetching }] =
+    useLazyCheckEmailUnique()
+  const [checkUsernameUnique, { isFetching: isUsernameFetching }] =
+    useLazyCheckUsernameUnique()
 
-  const [onChangeEmail, deleteTimeout] = useDebounce(
-    async (value: string, callback: () => void) => {
-      const { data } = await checkUserAvailability(value)
+  const [checkFieldsUnique, deleteTimeout] = useDebounce(
+    async (
+      field: 'email' | 'username',
+      value: string,
+      callback: () => void
+    ) => {
+      const { data } = await (
+        field === 'email' ? checkEmailUnique : checkUsernameUnique
+      )(value)
       if (data !== undefined && !data) {
         callback()
       }
     },
-    500
+    300
   )
 
   return (
     <AuthForm
-      resolver={registerFormResolver(onChangeEmail, deleteTimeout)}
+      resolver={registerFormResolver(checkFieldsUnique, deleteTimeout, isCode)}
       onSubmit={(data) => dispatch(register(data))}
-      isLoading={isLoadingForm || isFetching}
       codeName={'code'}
       inputs={[
         { name: 'name', Icon: UserIcon, placeholder: 'Имя' },
-        { name: 'username', Icon: UserIcon, placeholder: 'Имя пользователя' },
+        {
+          name: 'username',
+          Icon: UserIcon,
+          placeholder: 'Имя пользователя',
+          isLoading: isUsernameFetching
+        },
         {
           name: 'email',
           Icon: MailIcon,
-          placeholder: 'Почта'
+          placeholder: 'Почта',
+          isLoading: isEmailFetching
         },
         {
           name: 'password',

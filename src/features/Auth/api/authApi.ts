@@ -29,9 +29,15 @@ const authApi = rtkApi.injectEndpoints({
         body
       })
     }),
-    checkUserAvailability: build.query<boolean, string>({
-      query: (value) => ({
-        url: `/auth/check-user-availability/${value}`,
+    checkEmailUnique: build.query<boolean, string>({
+      query: (email) => ({
+        url: `/auth/check-email-unique/${email}`,
+        method: 'GET'
+      })
+    }),
+    checkUsernameUnique: build.query<boolean, string>({
+      query: (username) => ({
+        url: `/auth/check-username-unique/${username}`,
         method: 'GET'
       })
     })
@@ -42,5 +48,6 @@ export const {
   login: { initiate: loginInitiate },
   register: { initiate: registerInitiate },
   resetPassword: { initiate: resetPasswordInitiate },
-  checkUserAvailability: { useLazyQuery: useLazyCheckUserAvailability }
+  checkEmailUnique: { useLazyQuery: useLazyCheckEmailUnique },
+  checkUsernameUnique: { useLazyQuery: useLazyCheckUsernameUnique }
 } = authApi.endpoints

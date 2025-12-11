@@ -45,3 +45,20 @@ export const validatePassword = (
       }
     : null
 }
+
+export const validateCode = (code: string | undefined): FieldError | null => {
+  const errors: string[] = []
+
+  if (code === undefined || code.length === 0) {
+    errors.push('Введите пароль')
+  } else if (code.length < 6) {
+    errors.push('Введите пароль до конца')
+  }
+
+  return errors.length > 0
+    ? {
+        type: 'required',
+        message: errors.join('/')
+      }
+    : null
+}

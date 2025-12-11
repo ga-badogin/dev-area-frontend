@@ -25,7 +25,7 @@ export function useDebounce<T extends (...args: any[]) => any>(
     ),
     useCallback(() => {
       if (timer.current) {
-        console.log('delete timer')
+        console.log('timer')
         clearTimeout(timer.current)
       }
     }, [timer])

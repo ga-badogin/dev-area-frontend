@@ -25,18 +25,17 @@ interface AuthFormProps<T extends FieldValues> {
     type?: HTMLInputTypeAttribute
     isLoading?: boolean
   }[]
-  isLoading: boolean
 }
 
 export const AuthForm = typedMemo(
   <T extends FieldValues>(props: AuthFormProps<T>) => {
-    const { className, onSubmit, resolver, inputs, isLoading, codeName } = props
+    const { className, onSubmit, resolver, inputs, codeName } = props
 
     const {
       control,
       register,
       handleSubmit,
-      formState: { errors }
+      formState: { errors, isSubmitting }
     } = useForm<T>({
       resolver,
       mode: 'onChange'
@@ -50,11 +49,12 @@ export const AuthForm = typedMemo(
         onSubmit={handleSubmit(onSubmit)}
       >
         {!isCode ? (
-          inputs.map(({ name, ...restArgs }, index) => (
+          inputs.map(({ name, isLoading, ...restArgs }, index) => (
             <Input
               key={index}
               className={cls.input}
               error={errors?.[name]?.message?.toString()}
+              isLoading={isLoading && !isSubmitting}
               {...register(name)}
               {...restArgs}
             />
@@ -67,7 +67,7 @@ export const AuthForm = typedMemo(
           />
         )}
 
-        <Button isLoading={isLoading} className={cls.btn}>
+        <Button isLoading={isSubmitting} className={cls.btn}>
           {locationAuthText[pathname].btn}
         </Button>
       </form>
