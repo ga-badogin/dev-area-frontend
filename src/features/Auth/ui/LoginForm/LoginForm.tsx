@@ -5,19 +5,19 @@ import MailIcon from '@/shared/assets/icons/InputMail.svg'
 import LockIcon from '@/shared/assets/icons/InputLock.svg'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { login } from '../../model/services/login'
+import { useIsCode } from '../../model/selectors/getIsCode'
 
 interface LoginProps {
   className?: string
 }
 
 const LoginForm = memo((props: LoginProps) => {
-  const { className } = props
-
   const dispatch = useAppDispatch()
+  const isCode = useIsCode()
 
   return (
     <AuthForm
-      resolver={loginFormResolver}
+      resolver={loginFormResolver(isCode)}
       onSubmit={(data) => dispatch(login(data))}
       codeName="code"
       inputs={[

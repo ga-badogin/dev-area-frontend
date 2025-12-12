@@ -4,6 +4,8 @@ import MailIcon from '@/shared/assets/icons/InputMail.svg'
 import LockIcon from '@/shared/assets/icons/InputLock.svg'
 import { AuthForm } from '../AuthForm/AuthForm'
 import { resetPassword } from '../../model/services/resetPassword'
+import { useIsCode } from '../../model/selectors/getIsCode'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 
 interface ResetPasswordProps {
   className?: string
@@ -12,10 +14,13 @@ interface ResetPasswordProps {
 const ResetPasswordForm = memo((props: ResetPasswordProps) => {
   const { className } = props
 
+  const dispatch = useAppDispatch()
+  const isCode = useIsCode()
+
   return (
     <AuthForm
-      resolver={resetPasswordFormResolver}
-      onSubmit={(data) => resetPassword(data)}
+      resolver={resetPasswordFormResolver(isCode)}
+      onSubmit={(data) => dispatch(resetPassword(data))}
       codeName="code"
       inputs={[
         { name: 'email', Icon: MailIcon, placeholder: 'Почта' },

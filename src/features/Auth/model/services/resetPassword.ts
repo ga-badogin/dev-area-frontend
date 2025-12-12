@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { IThunkConfig } from '@/app/providers/store/exclude'
-import { IResetPasswordReqBody } from '../types/authApi'
+import { IResetPasswordReqBody, IResetResponse } from '../types/authApi'
 import { resetPasswordInitiate } from '../../api/authApi'
 
 export const resetPassword = createAsyncThunk<
-  any,
+  IResetResponse,
   IResetPasswordReqBody,
   IThunkConfig<string>
 >('auth/resetPassword', async (body, thunkAPI) => {
@@ -15,6 +15,10 @@ export const resetPassword = createAsyncThunk<
 
     if (!response.data) {
       throw new Error()
+    }
+
+    if (response.data === true) {
+      extra.navigate('/auth/login')
     }
 
     return response.data

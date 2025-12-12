@@ -3,9 +3,11 @@ import { IStateSchema } from '../types/stateSchema'
 import { createReducerManager } from './createReducerManager'
 import { rtkApi } from '@/shared/api/rtkApi'
 import { notificationReducer } from '@/entities/Notification'
+import { NavigateFunction } from 'react-router-dom'
 
 export function createReduxStore(
   initialState: IStateSchema,
+  navigate: NavigateFunction,
   asyncReducers?: ReducersMapObject<IStateSchema>
 ) {
   const rootReducers: ReducersMapObject<IStateSchema> = {
@@ -21,7 +23,9 @@ export function createReduxStore(
     devTools: __IS_DEV__,
     preloadedState: initialState,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(rtkApi.middleware)
+      getDefaultMiddleware({ thunk: { extraArgument: { navigate } } }).concat(
+        rtkApi.middleware
+      )
   })
 
   // @ts-ignore

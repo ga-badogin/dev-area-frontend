@@ -1,33 +1,28 @@
 import { FieldErrors, Resolver } from 'react-hook-form'
-import { validateEmail, validatePassword } from './validators'
+import { validateCode, validateEmail, validatePassword } from './validators'
 import { ILoginReqBody, IRegisterReqBody } from '../../../model/types/authApi'
 
-export const loginFormResolver: Resolver<ILoginReqBody> = async (values) => {
-  const errors: FieldErrors<IRegisterReqBody> = {}
+export const loginFormResolver =
+  (isCode: boolean | undefined): Resolver<ILoginReqBody> =>
+  async (values) => {
+    const errors: FieldErrors<IRegisterReqBody> = {}
 
-  // email
-  const emailError = validateEmail(values.email)
-  if (emailError) errors.email = emailError
+    if (!isCode) {
+      // email
+      const emailError = validateEmail(values.email)
+      if (emailError) errors.email = emailError
 
-  // password
-  const passwordError = validatePassword(values.password)
-  if (passwordError) errors.password = passwordError
+      // password
+      const passwordError = validatePassword(values.password)
+      if (passwordError) errors.password = passwordError
+    } else {
+      // code
+      const codeError = validateCode(values.code)
+      if (codeError) errors.code = codeError
+    }
 
-  // code
-  // if (!values.code || values.code?.length === 0) {
-  //   errors.code = {
-  //     type: 'required',
-  //     message: 'Поле кода обязательно для заполнения'
-  //   }
-  // } else if (values.code?.length < 6) {
-  //   errors.code = {
-  //     type: 'required',
-  //     message: 'Введите код полностью'
-  //   }
-  // }
-
-  return {
-    values: Object.keys(errors).length === 0 ? values : {},
-    errors
+    return {
+      values: Object.keys(errors).length === 0 ? values : {},
+      errors
+    }
   }
-}

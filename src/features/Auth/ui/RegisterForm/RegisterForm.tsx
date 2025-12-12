@@ -26,7 +26,7 @@ const RegisterForm = memo((props: RegisterProps) => {
   const [checkUsernameUnique, { isFetching: isUsernameFetching }] =
     useLazyCheckUsernameUnique()
 
-  const [checkFieldsUnique, deleteTimeout] = useDebounce(
+  const checkFieldsUnique = useDebounce(
     async (
       field: 'email' | 'username',
       value: string,
@@ -44,7 +44,7 @@ const RegisterForm = memo((props: RegisterProps) => {
 
   return (
     <AuthForm
-      resolver={registerFormResolver(checkFieldsUnique, deleteTimeout, isCode)}
+      resolver={registerFormResolver(checkFieldsUnique, isCode)}
       onSubmit={(data) => dispatch(register(data))}
       codeName={'code'}
       inputs={[

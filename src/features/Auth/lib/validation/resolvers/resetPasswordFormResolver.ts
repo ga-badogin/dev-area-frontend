@@ -1,30 +1,28 @@
 import { FieldErrors, Resolver } from 'react-hook-form'
-import { validateEmail, validatePassword } from './validators'
+import { validateCode, validateEmail, validatePassword } from './validators'
 import { IResetPasswordReqBody } from '../../../model/types/authApi'
 
-export const resetPasswordFormResolver: Resolver<
-  IResetPasswordReqBody
-> = async (values) => {
-  const errors: FieldErrors = {}
+export const resetPasswordFormResolver =
+  (isCode: boolean | undefined): Resolver<IResetPasswordReqBody> =>
+  async (values) => {
+    const errors: FieldErrors = {}
 
-  // email
-  const emailError = validateEmail(values.email)
-  if (emailError) errors.email = emailError
+    if (!isCode) {
+      // email
+      const emailError = validateEmail(values.email)
+      if (emailError) errors.email = emailError
 
-  // password
-  const passwordError = validatePassword(values.password, true)
-  if (passwordError) errors.password = passwordError
+      // password
+      const passwordError = validatePassword(values.password, true)
+      if (passwordError) errors.password = passwordError
+    } else {
+      // code
+      const codeError = validateCode(values.code)
+      if (codeError) errors.code = codeError
+    }
 
-  // code
-  if (values.code?.length === 0) {
-    errors.code = {
-      type: 'required',
-      message: 'Поле кода обязательно для заполнения'
+    return {
+      values: Object.keys(errors).length === 0 ? values : {},
+      errors
     }
   }
-
-  return {
-    values: Object.keys(errors).length === 0 ? values : {},
-    errors
-  }
-}

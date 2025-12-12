@@ -2,6 +2,7 @@ import { rtkApi } from '@/shared/api/rtkApi'
 import { IAuthSchema } from '@/features/Auth'
 import { INotificationSchema } from '@/entities/Notification'
 import { AppDispatch } from './appDispatch'
+import { NavigateFunction } from 'react-router-dom'
 
 export interface IStateSchema {
   notification: INotificationSchema
@@ -21,4 +22,5 @@ export interface IThunkConfig<T> {
   rejectValue: T
   state: IStateSchema
   dispatch: AppDispatch
+  extra: { navigate: NavigateFunction }
 }

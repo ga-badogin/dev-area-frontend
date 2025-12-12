@@ -1,30 +1,31 @@
 import { FieldErrors, Resolver } from 'react-hook-form'
 import { IRegisterReqBody } from '../../../model/types/authApi'
-import { validateCode, validateEmail, validatePassword } from './validators'
+import {
+  validateCode,
+  validateEmail,
+  validatePassword,
+  validateUsername
+} from './validators'
 
 export const registerFormResolver =
   (
     checkFieldsUnique: (
-      field: 'email' | 'username',
-      value: string,
-      callback: () => void
-    ) => Promise<void>,
-    deleteTimeout: () => void,
-    isCode?: boolean
+      args: [field: 'email' | 'username', value: string, callback: () => void],
+      isValid: boolean
+    ) => Promise<void> | void,
+    isCode: boolean | undefined
   ): Resolver<IRegisterReqBody> =>
   async (values, _, options) => {
     const errors: FieldErrors<IRegisterReqBody> = {}
     const currentField = options.names
 
-    console.log('resolver')
+    console.log('\nRESOLVER')
 
     if (!isCode) {
-      // password
-      const passwordError = validatePassword(values.password, true)
-      if (passwordError) errors.password = passwordError
-
+      console.log('FORM')
       // name
       if (values.name.length === 0) {
+        console.log('name')
         errors.name = {
           type: 'required',
           message: 'Поле имени обязательно для заполнения'
@@ -32,29 +33,33 @@ export const registerFormResolver =
       }
 
       // username
-      if (values.username.length === 0) {
-        deleteTimeout()
-        errors.username = {
-          type: 'required',
-          message: 'Поле имени пользователя обязательно для заполнения'
-        }
-      } else if (currentField?.includes('username')) {
+      if (currentField?.includes('username')) {
+        console.log('username')
+        const usernameError = validateUsername(values.username)
+        if (usernameError) errors.username = usernameError
+
         await checkFieldsUnique(
-          'username',
-          values.username,
-          () =>
-            (errors.username = {
-              type: 'required',
-              message: 'Имя занято другим челиком'
-            })
+          [
+            'username',
+            values.username,
+            () =>
+              (errors.username = {
+                type: 'required',
+                message: 'Имя занято другим челиком'
+              })
+          ],
+          !Boolean(usernameError)
         )
       }
 
       //email
-      const emailError = validateEmail(values.email)
-      if (!emailError) {
-        if (currentField?.includes('email')) {
-          await checkFieldsUnique(
+      if (currentField?.includes('email')) {
+        console.log('email')
+        const emailError = validateEmail(values.email)
+        if (emailError) errors.email = emailError
+
+        await checkFieldsUnique(
+          [
             'email',
             values.email,
             () =>
@@ -62,13 +67,20 @@ export const registerFormResolver =
                 type: 'required',
                 message: 'Почта занята другим челиком'
               })
-          )
-        }
-      } else {
-        deleteTimeout()
-        errors.email = emailError
+          ],
+          !Boolean(emailError)
+        )
+      }
+
+      // password
+      const passwordError = validatePassword(values.password, true)
+      if (passwordError) {
+        console.log('password')
+        errors.password = passwordError
       }
     } else {
+      console.log('CODE')
+
       // code
       const codeError = validateCode(values.code)
       if (codeError) errors.code = codeError

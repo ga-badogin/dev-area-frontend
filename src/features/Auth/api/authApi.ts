@@ -22,7 +22,7 @@ const authApi = rtkApi.injectEndpoints({
         body
       })
     }),
-    resetPassword: build.mutation<string, IResetPasswordReqBody>({
+    resetPassword: build.mutation<boolean, IResetPasswordReqBody>({
       query: (body) => ({
         url: '/auth/reset-password',
         method: 'PUT',

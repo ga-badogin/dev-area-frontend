@@ -18,6 +18,13 @@ export interface IResetPasswordReqBody {
   code?: string
 }
 
+export type IResetResponse =
+  | boolean
+  | {
+      message: string
+      statusCode: number
+    }
+
 export type IAuthResponse =
   | {
       accessToken: string

@@ -1,6 +1,6 @@
 import { FieldError } from 'react-hook-form'
 
-export const validateEmail = (email: string): FieldError | null => {
+export const validateEmail = (email: string): FieldError | undefined => {
   const errors: string[] = []
 
   if (email.length === 0) {
@@ -15,13 +15,13 @@ export const validateEmail = (email: string): FieldError | null => {
         type: 'required',
         message: errors.join('/')
       }
-    : null
+    : undefined
 }
 
 export const validatePassword = (
   password: string,
   isStrict = false
-): FieldError | null => {
+): FieldError | undefined => {
   const errors: string[] = []
 
   if (password.length === 0) {
@@ -43,16 +43,17 @@ export const validatePassword = (
         type: 'required',
         message: errors.join('/')
       }
-    : null
+    : undefined
 }
 
-export const validateCode = (code: string | undefined): FieldError | null => {
+export const validateUsername = (username: string): FieldError | undefined => {
   const errors: string[] = []
 
-  if (code === undefined || code.length === 0) {
-    errors.push('Введите пароль')
-  } else if (code.length < 6) {
-    errors.push('Введите пароль до конца')
+  if (username.length === 0) {
+    errors.push('Поле обязательно для заполнения')
+  }
+  if (!/^[a-zA-Z0-9._-]+$/.test(username)) {
+    errors.push('Допустимы только латинские буквы, цифры и . _ -')
   }
 
   return errors.length > 0
@@ -60,5 +61,24 @@ export const validateCode = (code: string | undefined): FieldError | null => {
         type: 'required',
         message: errors.join('/')
       }
-    : null
+    : undefined
+}
+
+export const validateCode = (
+  code: string | undefined
+): FieldError | undefined => {
+  const errors: string[] = []
+
+  if (code === undefined || code.length === 0) {
+    errors.push('Введите код')
+  } else if (code.length < 6) {
+    errors.push('Введите код до конца')
+  }
+
+  return errors.length > 0
+    ? {
+        type: 'required',
+        message: errors.join('/')
+      }
+    : undefined
 }
