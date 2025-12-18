@@ -11,5 +11,5 @@ export const deleteNotification = (id: number) => (dispatch: AppDispatch) => {
   removeNotification(id)
   setTimeout(() => {
     removeNotification(id)
-  }, 500)
+  }, 800)
 }

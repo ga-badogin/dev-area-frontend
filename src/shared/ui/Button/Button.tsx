@@ -3,13 +3,13 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import { ButtonHTMLAttributes, memo } from 'react'
 import { Loader } from '../Loader/Loader'
 
-export enum ButtonTheme {
-  MAIN = 'main',
-  CLEAR = 'clear'
-}
+export const ButtonTheme = {
+  MAIN: 'main',
+  CLEAR: 'clear'
+} as const
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  theme?: ButtonTheme
+  theme?: (typeof ButtonTheme)[keyof typeof ButtonTheme]
   isLoading?: boolean
 }
 

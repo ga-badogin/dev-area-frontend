@@ -20,7 +20,11 @@ export const NotificationList = memo((props: NotificationListProps) => {
     <div className={classNames(cls.notification, {}, [className])}>
       {/*<Button*/}
       {/*  onClick={() =>*/}
-      {/*    addNotification({ title: 'Error', paragraph: 'error error error' })*/}
+      {/*    addNotification({*/}
+      {/*      title: 'Успех',*/}
+      {/*      paragraph: 'Вы успешно авторизовались',*/}
+      {/*      duration: 500*/}
+      {/*    })*/}
       {/*  }*/}
       {/*>*/}
       {/*  Add*/}

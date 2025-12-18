@@ -1,11 +1,13 @@
 import { rtkApi } from '@/shared/api/rtkApi'
-import { IAuthSchema } from '@/features/Auth'
+import { IAuthSchema } from '@/entities/auth'
 import { INotificationSchema } from '@/entities/Notification'
 import { AppDispatch } from './appDispatch'
 import { NavigateFunction } from 'react-router-dom'
+import { IThemeSchema } from '@/entities/theme'
 
 export interface IStateSchema {
   notification: INotificationSchema
+  theme: IThemeSchema
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 
   // async reducers

@@ -6,6 +6,7 @@ import { Text } from '@/shared/ui/Text/Text'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import { useNotification } from '../../model/hooks/useNotification'
 import CrossIcon from '@/shared/assets/icons/Cross.svg'
+import { Sizes } from '@/shared/consts/ui'
 
 interface NotificationItemProps extends INotification {
   className?: string
@@ -25,9 +26,10 @@ export const NotificationItem = memo((props: NotificationItemProps) => {
       )}
     >
       <div className={cls.notificationItem}>
-        <Text title={title} paragraph={paragraph} />
+        <Text title={title} paragraph={paragraph} size={Sizes.S} />
         <Button
           theme={ButtonTheme.CLEAR}
+          className={cls.deleteBtn}
           onClick={() => deleteNotification(id)}
         >
           <CrossIcon className={cls.cross} />

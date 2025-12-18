@@ -1,0 +1,15 @@
+.select {
+  position: relative;
+  display: flex;
+  margin-top: 10px;
+}
+
+.slider {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--accent-color);
+  border-radius: var(--main-border-radius);
+  z-index: 1;
+}

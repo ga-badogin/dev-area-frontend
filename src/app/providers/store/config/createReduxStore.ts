@@ -4,6 +4,7 @@ import { createReducerManager } from './createReducerManager'
 import { rtkApi } from '@/shared/api/rtkApi'
 import { notificationReducer } from '@/entities/Notification'
 import { NavigateFunction } from 'react-router-dom'
+import { themeReducer } from '@/entities/theme'
 
 export function createReduxStore(
   initialState: IStateSchema,
@@ -12,7 +13,9 @@ export function createReduxStore(
 ) {
   const rootReducers: ReducersMapObject<IStateSchema> = {
     ...asyncReducers,
+    theme: themeReducer,
     notification: notificationReducer,
+
     [rtkApi.reducerPath]: rtkApi.reducer
   }
 

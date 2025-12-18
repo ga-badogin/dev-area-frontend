@@ -1,3 +1,5 @@
+@use '@/shared/styles/font' as *;
+
 .inputWrapper {
   position: relative;
 
@@ -41,6 +43,18 @@
   right: 0;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.toggle {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-50%, -50%);
+}
+
+.passwordIcon {
+  fill: var(--accent-color);
+  width: 30px;
 }
 
 .inputWrapper:has(.input:focus) ~ .errorList {

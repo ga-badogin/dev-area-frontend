@@ -1,5 +1,5 @@
 import tseslint from 'typescript-eslint'
-import {defineConfig} from 'eslint/config'
+import { defineConfig } from 'eslint/config'
 import pluginReact from 'eslint-plugin-react'
 import globals from 'globals'
 import customPluginEslint from 'custom-plugin-eslint'

@@ -26,6 +26,6 @@ export const addNotification =
     if (duration > 0) {
       setTimeout(() => {
         dispatch(deleteNotification(newNotification.id))
-      }, duration)
+      }, duration + 800)
     }
   }

@@ -1,0 +1,15 @@
+$sizes: (
+  small: s,
+  medium: m,
+  large: l
+);
+
+@mixin text($size) {
+  font-size: var(--text-size-#{$size});
+  line-height: var(--text-line-#{$size});
+}
+
+@mixin title($size) {
+  font-size: var(--title-size-#{$size});
+  line-height: var(--title-line-#{$size});
+}
