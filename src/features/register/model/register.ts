@@ -6,7 +6,7 @@ import {
   IRegisterReqBody,
   registerInitiate
 } from '@/entities/auth'
-import { addNotification } from '@/entities/Notification'
+import { addNotification } from '@/entities/notification'
 import { ACCESS_TOKEN_KEY } from '@/shared/consts/localestorage'
 
 export const register = createAsyncThunk<
@@ -23,12 +23,12 @@ export const register = createAsyncThunk<
   const { setIsCode } = bindActionCreators(authActions, dispatch)
 
   try {
-    const response = await dispatch(registerInitiate(body))
+    const response = await dispatch(registerInitiate(body)).unwrap()
 
-    if (!response.data) {
+    if (!response) {
       throw new Error()
-    } else if ('accessToken' in response.data) {
-      localStorage.setItem(ACCESS_TOKEN_KEY, response.data.accessToken)
+    } else if ('accessToken' in response) {
+      localStorage.setItem(ACCESS_TOKEN_KEY, response.accessToken)
       navigate('/main')
       dispatch(
         addNotification({
@@ -41,14 +41,20 @@ export const register = createAsyncThunk<
       dispatch(
         addNotification({
           title: 'Введите код',
-          paragraph: response.data.message
+          paragraph: response.message
         })
       )
     }
 
-    return response.data
-  } catch (e) {
+    return response
+  } catch (e: any) {
     console.log(e)
+    dispatch(
+      addNotification({
+        title: 'Ошибка',
+        paragraph: e.data.message
+      })
+    )
     return rejectWithValue('')
   }
 })

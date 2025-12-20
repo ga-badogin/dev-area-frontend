@@ -105,6 +105,7 @@ export const Input = memo((props: InputProps) => {
         )}
       </div>
 
+      {/*Отдельный компонент*/}
       {error && (
         <ul className={cls.errorList}>
           {error.split('/').map((error, index) => (

@@ -23,11 +23,11 @@ export const ThemeSwitcher = memo((props: ThemeSwitcherProps) => {
       onToggle={setTheme}
       values={[
         {
-          content: <MoonIcon className={cls.themeIcon} />,
+          content: <MoonIcon className={cls.moonIcon} />,
           value: AppTheme.DARK
         },
         {
-          content: <SunIcon className={cls.themeIcon} />,
+          content: <SunIcon className={cls.sunIcon} />,
           value: AppTheme.LIGHT
         }
       ]}

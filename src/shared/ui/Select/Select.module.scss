@@ -1,15 +1,20 @@
 .select {
   position: relative;
   display: flex;
-  margin-top: 10px;
+  align-items: center;
+
+  & > .button {
+    flex: 1;
+  }
 }
 
 .slider {
   position: absolute;
   height: 100%;
   top: 0;
-  left: 0;
+  transform: translateX(0);
   background-color: var(--accent-color);
-  border-radius: var(--main-border-radius);
+  border-radius: var(--ui-border-radius);
   z-index: 1;
+  transition: transform 300ms ease;
 }

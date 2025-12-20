@@ -2,6 +2,7 @@ import cls from './Button.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ButtonHTMLAttributes, memo } from 'react'
 import { Loader } from '../Loader/Loader'
+import { ValueOf } from '@/shared/types'
 
 export const ButtonTheme = {
   MAIN: 'main',
@@ -9,7 +10,7 @@ export const ButtonTheme = {
 } as const
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  theme?: (typeof ButtonTheme)[keyof typeof ButtonTheme]
+  theme?: ValueOf<typeof ButtonTheme>
   isLoading?: boolean
 }
 

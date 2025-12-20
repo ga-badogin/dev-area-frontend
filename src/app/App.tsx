@@ -1,7 +1,8 @@
 import './styles/index.scss'
 import { AppRouter } from './providers/router/ui/AppRouter'
-import { NotificationList } from '@/entities/Notification'
+import { NotificationList } from '@/widgets/notification-list'
 import { useTheme } from '@/entities/theme'
+import { Navbar } from '@/widgets/navbar'
 
 const App = () => {
   const theme = useTheme()
@@ -10,6 +11,7 @@ const App = () => {
     <div className={`app ${theme}`}>
       <AppRouter />
       <NotificationList />
+      <Navbar />
     </div>
   )
 }

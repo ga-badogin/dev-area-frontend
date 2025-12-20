@@ -1,3 +1,12 @@
-.themeIcon {
+.moonIcon,
+.sunIcon {
   height: 30px;
+}
+
+.moonIcon {
+  fill: var(--moon-gray-color);
+}
+
+.sunIcon {
+  fill: var(--sun-light-color);
 }

@@ -9,8 +9,8 @@
 
 .notificationItem {
   position: relative;
-  border: 1px solid var(--inverted-primary-color);
-  border-radius: 15px;
+  border: var(--block-border);
+  border-radius: var(--ui-border-radius);
   background-color: var(--primary-color);
   padding: 15px;
   margin-top: 20px;

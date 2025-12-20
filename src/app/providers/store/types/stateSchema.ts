@@ -1,6 +1,6 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 import { IAuthSchema } from '@/entities/auth'
-import { INotificationSchema } from '@/entities/Notification'
+import { INotificationSchema } from '@/entities/notification'
 import { AppDispatch } from './appDispatch'
 import { NavigateFunction } from 'react-router-dom'
 import { IThemeSchema } from '@/entities/theme'

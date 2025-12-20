@@ -9,12 +9,11 @@
 }
 
 .input {
-  position: relative;
   width: 100%;
-  height: 50px;
+  height: var(--ui-height);
   background-color: var(--inverted-primary-color);
   color: var(--primary-color);
-  border-radius: var(--main-border-radius);
+  border-radius: var(--ui-border-radius);
 
   &::placeholder {
     color: var(--secondary-color);
@@ -25,7 +24,7 @@
   }
 
   &.error {
-    outline: 2px solid var(--error-color);
+    outline: var(--error-border);
   }
 }
 
@@ -38,17 +37,11 @@
   fill: var(--primary-color);
 }
 
-.loader {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
+.loader,
 .toggle {
   position: absolute;
-  top: 50%;
   right: 0;
+  top: 50%;
   transform: translate(-50%, -50%);
 }
 

@@ -1,10 +1,9 @@
 import cls from './NotificationItem.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { INotification } from '../../model/types/notificationSchema'
+import { INotification, useNotification } from '@/entities/notification'
 import { Text } from '@/shared/ui/Text/Text'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
-import { useNotification } from '../../model/hooks/useNotification'
 import CrossIcon from '@/shared/assets/icons/Cross.svg'
 import { Sizes } from '@/shared/consts/ui'
 

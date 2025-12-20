@@ -2,7 +2,7 @@ import { configureStore, ReducersMapObject } from '@reduxjs/toolkit'
 import { IStateSchema } from '../types/stateSchema'
 import { createReducerManager } from './createReducerManager'
 import { rtkApi } from '@/shared/api/rtkApi'
-import { notificationReducer } from '@/entities/Notification'
+import { notificationReducer } from '@/entities/notification'
 import { NavigateFunction } from 'react-router-dom'
 import { themeReducer } from '@/entities/theme'
 

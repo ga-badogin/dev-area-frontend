@@ -16,17 +16,18 @@ export const Select = typedMemo(<T,>(props: SelectProps<T>) => {
 
   const sliderPosition = useMemo(() => {
     return options.findIndex((option) => option.value === selectedValue)
-  }, [selectedValue])
+  }, [selectedValue, options])
 
   const sliderStyle: CSSProperties = {
-    width: `calc(100% / ${options.length})`,
-    left: `calc(100% / ${options.length} * ${sliderPosition})`
+    width: `${100 / options.length}%`,
+    transform: `translateX(${sliderPosition * 100}%)`
   }
 
   return (
     <div className={classNames(cls.select, {}, [className])}>
       {options.map(({ content, value }, index) => (
         <Button
+          className={cls.button}
           theme={ButtonTheme.CLEAR}
           onClick={() => onSelect(value)}
           key={index}

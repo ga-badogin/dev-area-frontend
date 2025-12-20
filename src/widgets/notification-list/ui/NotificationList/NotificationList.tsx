@@ -1,10 +1,9 @@
 import cls from './NotificationList.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { useNotifications } from '../../model/selectors/getNotifications'
+import { useNotification, useNotifications } from '@/entities/notification'
 import { NotificationItem } from '../NotificationItem/NotificationItem'
 import { Button } from '@/shared/ui/Button/Button'
-import { useNotification } from '../../model/hooks/useNotification'
 
 interface NotificationListProps {
   className?: string
@@ -22,8 +21,7 @@ export const NotificationList = memo((props: NotificationListProps) => {
       {/*  onClick={() =>*/}
       {/*    addNotification({*/}
       {/*      title: 'Успех',*/}
-      {/*      paragraph: 'Вы успешно авторизовались',*/}
-      {/*      duration: 500*/}
+      {/*      paragraph: 'Вы успешно авторизовались'*/}
       {/*    })*/}
       {/*  }*/}
       {/*>*/}
