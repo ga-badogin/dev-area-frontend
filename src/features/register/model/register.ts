@@ -1,13 +1,14 @@
-import { bindActionCreators, createAsyncThunk } from '@reduxjs/toolkit'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 import { IThunkConfig } from '@/app/providers/store/exclude'
 import {
-  authActions,
+  getAuthActions,
   IAuthResponse,
   IRegisterReqBody,
   registerInitiate
 } from '@/entities/auth'
-import { addNotification } from '@/entities/notification'
+import { getNotificationThunks } from '@/entities/notification'
 import { ACCESS_TOKEN_KEY } from '@/shared/consts/localestorage'
+import { getAppRoute } from '@/shared/lib/router/getRoute'
 
 export const register = createAsyncThunk<
   IAuthResponse,
@@ -20,7 +21,8 @@ export const register = createAsyncThunk<
     extra: { navigate }
   } = thunkAPI
 
-  const { setIsCode } = bindActionCreators(authActions, dispatch)
+  const { setIsCode } = getAuthActions(dispatch)
+  const { addNotification } = getNotificationThunks(dispatch)
 
   try {
     const response = await dispatch(registerInitiate(body)).unwrap()
@@ -29,32 +31,26 @@ export const register = createAsyncThunk<
       throw new Error()
     } else if ('accessToken' in response) {
       localStorage.setItem(ACCESS_TOKEN_KEY, response.accessToken)
-      navigate('/main')
-      dispatch(
-        addNotification({
-          title: 'Успех',
-          paragraph: 'Учетная запись создана'
-        })
-      )
+      navigate(getAppRoute(['main']))
+      addNotification({
+        title: 'Успех',
+        paragraph: 'Учетная запись создана'
+      })
     } else {
       setIsCode(true)
-      dispatch(
-        addNotification({
-          title: 'Введите код',
-          paragraph: response.message
-        })
-      )
+      addNotification({
+        title: 'Введите код',
+        paragraph: response.message
+      })
     }
 
     return response
   } catch (e: any) {
     console.log(e)
-    dispatch(
-      addNotification({
-        title: 'Ошибка',
-        paragraph: e.data.message
-      })
-    )
+    addNotification({
+      title: 'Ошибка',
+      paragraph: e.data.message
+    })
     return rejectWithValue('')
   }
 })

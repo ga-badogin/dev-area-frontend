@@ -7,13 +7,13 @@ export interface IRegisterReqBody {
 }
 
 export interface ILoginReqBody {
-  email: string
+  identifier: string
   password: string
   code?: string
 }
 
 export interface IResetPasswordReqBody {
-  email: string
+  identifier: string
   password: string
   code?: string
 }

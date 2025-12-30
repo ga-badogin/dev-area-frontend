@@ -29,5 +29,7 @@ const notificationSlice = buildSlice({
   }
 })
 
-export const { reducer: notificationReducer, actions: notificationActions } =
-  notificationSlice
+export const {
+  reducer: notificationReducer,
+  getActions: getNotificationActions
+} = notificationSlice

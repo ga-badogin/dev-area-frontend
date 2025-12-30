@@ -16,4 +16,4 @@ const authSlice = buildSlice({
   }
 })
 
-export const { actions: authActions, reducer: authReducer } = authSlice
+export const { reducer: authReducer, getActions: getAuthActions } = authSlice

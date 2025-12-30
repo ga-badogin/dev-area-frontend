@@ -17,4 +17,4 @@ const themeSlice = buildSlice({
   }
 })
 
-export const { actions: themeActions, reducer: themeReducer } = themeSlice
+export const { reducer: themeReducer, useActions: useThemeActions } = themeSlice

@@ -1,6 +1,6 @@
 import cls from './CodeInput.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { KeyboardEvent, useCallback, useRef, useState } from 'react'
+import { KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 
 interface CodeInputProps<T extends FieldValues> {
@@ -17,16 +17,27 @@ export const CodeInput = <T extends FieldValues>(props: CodeInputProps<T>) => {
   const inputsRef = useRef<(HTMLInputElement | null)[]>([])
   const [values, setValues] = useState<string[]>(Array(length).fill(''))
 
+  useEffect(() => {
+    inputsRef.current[0]?.focus()
+  }, [])
+
   const handleChange = useCallback(
     (value: string, index: number, onChange: (value: string) => void) => {
+      let newValues: string[]
+
       if (value.length === 1) {
-        const newValues = [...values]
+        newValues = [...values]
         newValues[index] = value
-        setValues(newValues)
-        onChange(newValues.join(''))
 
         inputsRef.current[index + 1]?.focus()
+      } else if (value.length === length) {
+        newValues = value.split('').slice(0, length)
+      } else {
+        return
       }
+
+      setValues(newValues)
+      onChange(newValues.join(''))
     },
     [values]
   )
@@ -46,11 +57,16 @@ export const CodeInput = <T extends FieldValues>(props: CodeInputProps<T>) => {
           break
         case 'Backspace':
           const newValues = [...values]
-          newValues[index] = ''
+
+          if (values[index]) {
+            newValues[index] = ''
+          } else {
+            inputsRef.current[index - 1]?.focus()
+            newValues[index - 1] = ''
+          }
+
           setValues(newValues)
           onChange(newValues.join(''))
-
-          inputsRef.current[index - 1]?.focus()
           break
       }
     },

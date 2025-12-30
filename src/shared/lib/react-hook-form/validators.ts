@@ -82,3 +82,11 @@ export const validateCode = (
       }
     : undefined
 }
+
+export const validateIdentifier = (
+  identifier: string
+): FieldError | undefined => {
+  const isEmail = identifier.includes('@')
+
+  return (isEmail ? validateEmail : validateUsername)(identifier)
+}

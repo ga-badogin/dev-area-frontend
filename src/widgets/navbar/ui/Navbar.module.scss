@@ -9,6 +9,10 @@
   align-items: center;
   padding: 10px;
   border-radius: var(--ui-border-radius);
+
+  &:not(:has(.select)) .themeSwitcher {
+    margin-left: auto;
+  }
 }
 
 .select {

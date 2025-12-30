@@ -1,7 +1,7 @@
 import cls from './NotificationItem.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { INotification, useNotification } from '@/entities/notification'
+import { INotification, useNotificationThunks } from '@/entities/notification'
 import { Text } from '@/shared/ui/Text/Text'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import CrossIcon from '@/shared/assets/icons/Cross.svg'
@@ -14,7 +14,7 @@ interface NotificationItemProps extends INotification {
 export const NotificationItem = memo((props: NotificationItemProps) => {
   const { className, paragraph, title, deleted, id } = props
 
-  const { deleteNotification } = useNotification()
+  const { deleteNotification } = useNotificationThunks()
 
   return (
     <div

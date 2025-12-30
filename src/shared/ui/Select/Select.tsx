@@ -23,7 +23,7 @@ export const Select = typedMemo(<T,>(props: SelectProps<T>) => {
     transform: `translateX(${sliderPosition * 100}%)`
   }
 
-  return (
+  return sliderPosition >= 0 ? (
     <div className={classNames(cls.select, {}, [className])}>
       {options.map(({ content, value }, index) => (
         <Button
@@ -37,5 +37,5 @@ export const Select = typedMemo(<T,>(props: SelectProps<T>) => {
       ))}
       <div className={cls.slider} style={sliderStyle} />
     </div>
-  )
+  ) : undefined
 })

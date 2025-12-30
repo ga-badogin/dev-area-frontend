@@ -8,7 +8,7 @@ import { FieldValues, Path, Resolver, useForm } from 'react-hook-form'
 import { FC, HTMLInputTypeAttribute, SVGProps } from 'react'
 import { typedMemo } from '@/shared/consts/memo'
 import { useLocation } from 'react-router-dom'
-import { locationAuthText } from '@/shared/consts/auth'
+import { authRoutesContent } from '../../model/consts/content'
 
 interface AuthFormProps<T extends FieldValues> {
   className?: string
@@ -47,7 +47,7 @@ export const AuthFormTemplate = typedMemo(
         className={classNames(cls.authForm, {}, [className])}
         onSubmit={handleSubmit(onSubmit)}
       >
-        {!isCode ? (
+        {isCode ? (
           inputs.map(({ name, isLoading, ...restArgs }, index) => {
             const { ref, ...restRegister } = register(name)
 
@@ -72,7 +72,7 @@ export const AuthFormTemplate = typedMemo(
         )}
 
         <Button isLoading={isSubmitting} className={cls.btn}>
-          {locationAuthText[pathname].btn}
+          {authRoutesContent[pathname].btn}
         </Button>
       </form>
     )

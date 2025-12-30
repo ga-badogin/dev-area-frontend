@@ -3,7 +3,7 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import { ReactNode } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Text } from '@/shared/ui/Text/Text'
-import { locationAuthText } from '@/shared/consts/auth'
+import { authRoutesContent } from '@/entities/auth'
 
 interface AuthFormWrapperProps {
   className?: string
@@ -17,7 +17,7 @@ export const AuthFormWrapper = (props: AuthFormWrapperProps) => {
 
   return (
     <div className={classNames(cls.authFormWrapper, {}, [className])}>
-      <Text {...locationAuthText[pathname]} />
+      <Text {...authRoutesContent[pathname]} />
       {children}
     </div>
   )

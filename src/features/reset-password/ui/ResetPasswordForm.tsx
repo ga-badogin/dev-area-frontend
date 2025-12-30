@@ -22,7 +22,11 @@ const ResetPasswordForm = memo((props: ResetPasswordProps) => {
       onSubmit={(data) => dispatch(resetPassword(data))}
       codeName="code"
       inputs={[
-        { name: 'email', Icon: MailIcon, placeholder: 'Почта' },
+        {
+          name: 'identifier',
+          Icon: MailIcon,
+          placeholder: 'Имя пользователя или почта'
+        },
         {
           name: 'password',
           Icon: LockIcon,

@@ -1,20 +1,20 @@
 import { FieldErrors, Resolver } from 'react-hook-form'
 import {
   validateCode,
-  validateEmail,
+  validateIdentifier,
   validatePassword
 } from '@/shared/lib/react-hook-form/validators'
-import { ILoginReqBody, IRegisterReqBody } from '@/entities/auth'
+import { ILoginReqBody } from '@/entities/auth'
 
 export const loginFormResolver =
   (isCode: boolean | undefined): Resolver<ILoginReqBody> =>
   async (values) => {
-    const errors: FieldErrors<IRegisterReqBody> = {}
+    const errors: FieldErrors<ILoginReqBody> = {}
 
-    if (!isCode) {
-      // email
-      const emailError = validateEmail(values.email)
-      if (emailError) errors.email = emailError
+    if (isCode) {
+      // identifier
+      const identifierError = validateIdentifier(values.identifier)
+      if (identifierError) errors.identifier = identifierError
 
       // password
       const passwordError = validatePassword(values.password)

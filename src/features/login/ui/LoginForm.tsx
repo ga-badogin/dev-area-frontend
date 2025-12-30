@@ -20,7 +20,11 @@ const LoginForm = memo((props: LoginProps) => {
       onSubmit={(data) => dispatch(login(data))}
       codeName="code"
       inputs={[
-        { name: 'email', Icon: MailIcon, placeholder: 'Почта' },
+        {
+          name: 'identifier',
+          Icon: MailIcon,
+          placeholder: 'Имя пользователя или почта'
+        },
         {
           name: 'password',
           Icon: LockIcon,

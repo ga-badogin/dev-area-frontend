@@ -3,18 +3,14 @@ import {
   INotificationPayload
 } from '../types/notificationSchema'
 import { AppDispatch } from '@/app/providers/store/exclude'
-import { bindActionCreators } from '@reduxjs/toolkit'
-import { notificationActions } from '../slice/notificationSlice'
+import { getNotificationActions } from '../slice/notificationSlice'
 import { deleteNotification } from './deleteNotification'
 
 export const addNotification =
   (payload: INotificationPayload) => (dispatch: AppDispatch) => {
     const { duration = 0, ...other } = payload
 
-    const { createNotification } = bindActionCreators(
-      notificationActions,
-      dispatch
-    )
+    const { createNotification } = getNotificationActions(dispatch)
 
     const newNotification: INotification = {
       id: Date.now(),

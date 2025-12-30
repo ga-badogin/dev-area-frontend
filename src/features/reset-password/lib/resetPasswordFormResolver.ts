@@ -1,7 +1,7 @@
 import { FieldErrors, Resolver } from 'react-hook-form'
 import {
   validateCode,
-  validateEmail,
+  validateIdentifier,
   validatePassword
 } from '@/shared/lib/react-hook-form/validators'
 import { IResetPasswordReqBody } from '@/entities/auth'
@@ -9,12 +9,12 @@ import { IResetPasswordReqBody } from '@/entities/auth'
 export const resetPasswordFormResolver =
   (isCode: boolean | undefined): Resolver<IResetPasswordReqBody> =>
   async (values) => {
-    const errors: FieldErrors = {}
+    const errors: FieldErrors<IResetPasswordReqBody> = {}
 
     if (!isCode) {
-      // email
-      const emailError = validateEmail(values.email)
-      if (emailError) errors.email = emailError
+      // identifier
+      const identifierError = validateIdentifier(values.identifier)
+      if (identifierError) errors.identifier = identifierError
 
       // password
       const passwordError = validatePassword(values.password, true)
