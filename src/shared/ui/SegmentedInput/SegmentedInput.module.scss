@@ -1,0 +1,13 @@
+.segmentedInput {
+  display: flex;
+  gap: 10px;
+}
+
+.segment {
+  height: auto;
+  aspect-ratio: 1 / 1;
+  caret-color: transparent;
+  color: var(--accent-color);
+  font: var(--font-title);
+  text-align: center;
+}

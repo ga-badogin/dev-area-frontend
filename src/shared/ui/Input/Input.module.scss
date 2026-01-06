@@ -21,6 +21,10 @@
 
   &.main {
     padding: 0 20px;
+
+    &:not(.error):focus {
+      outline: 2px solid var(--accent-color);
+    }
   }
 
   &.error {
@@ -48,17 +52,4 @@
 .passwordIcon {
   fill: var(--accent-color);
   width: 30px;
-}
-
-.inputWrapper:has(.input:focus) ~ .errorList {
-  max-height: 200px;
-}
-
-.errorList {
-  margin-top: 5px;
-  width: 100%;
-  padding-left: 20px;
-  max-height: 0;
-  overflow: hidden;
-  list-style: disc;
 }

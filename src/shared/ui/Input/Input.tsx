@@ -10,14 +10,14 @@ import {
   useRef,
   useState
 } from 'react'
-import { Text, TextTheme } from '../Text/Text'
 import { Loader, LoaderTheme } from '../Loader/Loader'
 import { RefCallBack } from 'react-hook-form'
 import { Toggle } from '../Toggle/Toggle'
 import ClosedEye from '@/shared/assets/icons/ClosedEye.svg'
 import OpenedEye from '@/shared/assets/icons/OpenedEye.svg'
 import { ValueOf } from '@/shared/types'
-import { Sizes } from '@/shared/consts/ui'
+import { ErrorList } from '../ErrorList/ErrorList'
+import { useFocus } from '@/shared/lib/hooks/useFocus/useFocus'
 
 export const InputTheme = {
   MAIN: 'main'
@@ -48,6 +48,8 @@ export const Input = memo((props: InputProps) => {
   const [passwordType, setPasswordType] =
     useState<HTMLInputTypeAttribute>('password')
 
+  const { isFocused, handlers } = useFocus()
+
   const handleToggle = useCallback(
     (value: HTMLInputTypeAttribute) => {
       setPasswordType(value)
@@ -77,6 +79,7 @@ export const Input = memo((props: InputProps) => {
             inputRef.current = el
           }}
           {...otherProps}
+          {...handlers}
         />
         {Icon && <Icon className={cls.icon} />}
         {isLoading && (
@@ -105,16 +108,7 @@ export const Input = memo((props: InputProps) => {
         )}
       </div>
 
-      {/*Отдельный компонент*/}
-      {error && (
-        <ul className={cls.errorList}>
-          {error.split('/').map((error, index) => (
-            <li className={cls.listItem} key={index}>
-              <Text theme={TextTheme.ERROR} paragraph={error} size={Sizes.S} />
-            </li>
-          ))}
-        </ul>
-      )}
+      <ErrorList isActive={isFocused} error={error} />
     </div>
   )
 })

@@ -1,14 +1,20 @@
 import cls from './AuthFormTemplate.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Input } from '@/shared/ui/Input/Input'
-import { CodeInput } from '@/shared/ui/CodeInput/CodeInput'
 import { Button } from '@/shared/ui/Button/Button'
 import { useIsCode } from '../../model/selectors/getIsCode'
-import { FieldValues, Path, Resolver, useForm } from 'react-hook-form'
+import {
+  Controller,
+  FieldValues,
+  Path,
+  Resolver,
+  useForm
+} from 'react-hook-form'
 import { FC, HTMLInputTypeAttribute, SVGProps } from 'react'
 import { typedMemo } from '@/shared/consts/memo'
 import { useLocation } from 'react-router-dom'
 import { authRoutesContent } from '../../model/consts/content'
+import { SegmentedInput } from '@/shared/ui/SegmentedInput/SegmentedInput'
 
 interface AuthFormProps<T extends FieldValues> {
   className?: string
@@ -64,10 +70,18 @@ export const AuthFormTemplate = typedMemo(
             )
           })
         ) : (
-          <CodeInput
-            className={cls.codeInput}
+          <Controller
+            name={codeName}
             control={control}
-            codeName={codeName}
+            render={({ field }) => (
+              <SegmentedInput
+                length={6}
+                value={field.value ?? ''}
+                onChange={field.onChange}
+                className={cls.codeInput}
+                error={errors[codeName]?.message?.toString()}
+              />
+            )}
           />
         )}
 
