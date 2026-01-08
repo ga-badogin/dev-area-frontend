@@ -6,7 +6,10 @@ import {
   useRef
 } from 'react'
 
-export const useSegmentedInput = (length: number) => {
+export const useSegmentedInput = (
+  length: number,
+  inputMode: 'text' | 'numeric'
+) => {
   const inputsRef = useRef<(HTMLInputElement | null)[]>([])
 
   const handleChange = useCallback(
@@ -18,7 +21,9 @@ export const useSegmentedInput = (length: number) => {
     ) => {
       const { value } = e.target
 
-      if (/^\d$/.test(value) && value.length === 1) {
+      const pattern = inputMode === 'text' ? /^[a-zA-Zа-яА-ЯёЁ]$/ : /^\d$/
+
+      if (pattern.test(value)) {
         const chars = fieldValue.split('')
         chars[index] = value
         const nextValue = chars.join('').slice(0, length)
@@ -28,7 +33,7 @@ export const useSegmentedInput = (length: number) => {
         inputsRef.current[index + 1]?.focus()
       }
     },
-    [length]
+    [length, inputMode]
   )
 
   const handlePaste = useCallback(
@@ -38,9 +43,11 @@ export const useSegmentedInput = (length: number) => {
     ) => {
       e.preventDefault()
 
+      const pattern = inputMode === 'text' ? /[^a-zA-Zа-яА-ЯёЁ]/g : /\D/g
+
       const pastedText = e.clipboardData
         .getData('text')
-        .replace(/\D/g, '')
+        .replace(pattern, '')
         .slice(0, length)
 
       if (!pastedText) return
@@ -51,7 +58,7 @@ export const useSegmentedInput = (length: number) => {
         pastedText.length >= length ? length - 1 : pastedText.length
       inputsRef.current[focusIndex]?.focus()
     },
-    [length]
+    [length, inputMode]
   )
 
   const handleKeyDown = useCallback(

@@ -11,7 +11,7 @@ export const loginFormResolver =
   async (values) => {
     const errors: FieldErrors<ILoginReqBody> = {}
 
-    if (isCode) {
+    if (!isCode) {
       // identifier
       const identifierError = validateIdentifier(values.identifier)
       if (identifierError) errors.identifier = identifierError

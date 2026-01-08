@@ -22,7 +22,7 @@
   &.main {
     padding: 0 20px;
 
-    &:not(.error):focus {
+    &:focus {
       outline: 2px solid var(--accent-color);
     }
   }

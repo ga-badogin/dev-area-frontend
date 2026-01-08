@@ -17,13 +17,22 @@ interface SegmentedInputProps {
 
   value: string
   onChange: () => void
+
+  inputMode?: 'text' | 'numeric'
 }
 
 export const SegmentedInput = memo((props: SegmentedInputProps) => {
-  const { className, value, length, onChange, error } = props
+  const {
+    className,
+    value,
+    length,
+    onChange,
+    error,
+    inputMode = 'text'
+  } = props
 
   const { inputsRef, handlePaste, handleKeyDown, handleChange } =
-    useSegmentedInput(length)
+    useSegmentedInput(length, inputMode)
 
   useEffect(() => {
     inputsRef.current[0]?.focus()
@@ -42,8 +51,11 @@ export const SegmentedInput = memo((props: SegmentedInputProps) => {
             onKeyDown={(e) => handleKeyDown(e, index, value, onChange)}
             onPaste={(e) => handlePaste(e, onChange)}
             maxLength={1}
-            className={classNames(cls.input, {}, [cls.main, cls.segment])}
-            inputMode="numeric"
+            className={classNames(cls.input, { [cls.error]: error }, [
+              cls.main,
+              cls.segment
+            ])}
+            inputMode={inputMode}
             key={index}
           />
         ))}

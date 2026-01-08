@@ -53,7 +53,7 @@ export const AuthFormTemplate = typedMemo(
         className={classNames(cls.authForm, {}, [className])}
         onSubmit={handleSubmit(onSubmit)}
       >
-        {isCode ? (
+        {!isCode ? (
           inputs.map(({ name, isLoading, ...restArgs }, index) => {
             const { ref, ...restRegister } = register(name)
 
@@ -76,6 +76,7 @@ export const AuthFormTemplate = typedMemo(
             render={({ field }) => (
               <SegmentedInput
                 length={6}
+                inputMode="numeric"
                 value={field.value ?? ''}
                 onChange={field.onChange}
                 className={cls.codeInput}
