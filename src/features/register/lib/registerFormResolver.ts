@@ -23,14 +23,6 @@ export const registerFormResolver =
 
     if (!isCode) {
       console.log('FORM')
-      // name
-      if (values.name.length === 0) {
-        console.log('name')
-        errors.name = {
-          type: 'required',
-          message: 'Поле имени обязательно для заполнения'
-        }
-      }
 
       // username
       if (currentField?.includes('username')) {

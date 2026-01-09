@@ -2,7 +2,6 @@ export interface IRegisterReqBody {
   email: string
   password: string
   username: string
-  name: string
   code?: string
 }
 

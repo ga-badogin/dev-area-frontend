@@ -1,6 +1,6 @@
 import { ACCESS_TOKEN_KEY } from '@/shared/consts/localestorage'
 import { Navigate } from 'react-router-dom'
-import { getAppRoute } from './getRoute'
+import { getAppRoute } from '../../../../shared/lib/router/getRoute'
 import { ReactNode } from 'react'
 
 interface RequireAuthProps {

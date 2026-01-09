@@ -1,12 +1,16 @@
 import { TKeyWithParams } from '@/shared/types'
 import { TAppRoutes, TAuthRoutes } from './types'
 
-export const getAppRoute = ([path]: TKeyWithParams<TAppRoutes>) => {
+export const getAppRoute = ([path, params]: TKeyWithParams<TAppRoutes>) => {
   switch (path) {
     case 'auth':
       return '/auth/*'
     case 'main':
       return '/'
+    case 'profile':
+      return `/profile/${params.username}`
+    case 'onboarding':
+      return '/onboarding'
     case 'other':
       return '*'
   }

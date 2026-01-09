@@ -5,7 +5,7 @@ import {
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader'
 import { authReducer } from '@/entities/auth'
 import { AuthFormWrapper } from '../AuthFormWrapper/AuthFormWrapper'
-import { RenderRouter } from '@/shared/lib/router/RenderRouter'
+import { RenderRouter } from '@/app/providers/router/exclude'
 import { authRouteConfig } from '../../lib/authRouteConfig'
 
 const reducers: TReducersList = {

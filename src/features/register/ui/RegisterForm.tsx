@@ -48,7 +48,6 @@ const RegisterForm = memo((props: RegisterProps) => {
       onSubmit={(data) => dispatch(register(data))}
       codeName={'code'}
       inputs={[
-        { name: 'name', Icon: UserIcon, placeholder: 'Имя' },
         {
           name: 'username',
           Icon: UserIcon,

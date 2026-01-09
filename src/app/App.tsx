@@ -2,8 +2,8 @@ import './styles/index.scss'
 import { NotificationList } from '@/widgets/notification-list'
 import { useTheme } from '@/entities/theme'
 import { Navbar } from '@/widgets/navbar'
-import { RenderRouter } from '@/shared/lib/router/RenderRouter'
-import { appRouteConfig } from './providers/router/appRouteConfig'
+import { RenderRouter } from './providers/router/ui/RenderRouter'
+import { appRouteConfig } from './providers/router/config/appRouteConfig'
 
 const App = () => {
   const theme = useTheme()

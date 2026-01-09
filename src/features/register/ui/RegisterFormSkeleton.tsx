@@ -8,7 +8,6 @@ export const RegisterFormSkeleton = memo(() => {
       <Skeleton className={cls.input} />
       <Skeleton className={cls.input} />
       <Skeleton className={cls.input} />
-      <Skeleton className={cls.input} />
       <Skeleton className={cls.btn} />
     </div>
   )
