@@ -1,26 +1,31 @@
 import { Navigate } from 'react-router-dom'
-import { getAppRoute } from '../../../../shared/lib/router/getRoute'
+import { getAppRoute } from '@/shared/lib/router/getRoute'
 import { ReactNode } from 'react'
 import { useHasProfile } from '@/entities/profile'
+import { ACCESS_TOKEN_KEY } from '@/shared/consts/localestorage'
 
-interface RequireProfileProps {
+interface RequireAuthProps {
   onboarding?: boolean
   children: ReactNode
 }
 
-export const RequireProfile = (props: RequireProfileProps) => {
-  const { onboarding, children } = props
+export const RequireProfile = (props: RequireAuthProps) => {
+  const { children, onboarding } = props
 
-  const { data: hasProfile, isLoading } = useHasProfile()
+  const hasToken = Boolean(localStorage.getItem(ACCESS_TOKEN_KEY))
 
-  if (isLoading) {
-    return null
-  }
+  const { data: hasProfile } = useHasProfile(undefined, {
+    skip: !hasToken
+  })
 
-  if (!hasProfile && !onboarding) {
-    return <Navigate to={getAppRoute(['onboarding'])} />
-  } else if (hasProfile && onboarding) {
-    return <Navigate to={getAppRoute(['main'])} />
+  if (hasProfile !== undefined) {
+    if (!hasProfile && !onboarding) {
+      return <Navigate to={getAppRoute(['onboarding'])} replace />
+    }
+
+    if (hasProfile && onboarding) {
+      return <Navigate to={getAppRoute(['main'])} replace />
+    }
   }
 
   return children

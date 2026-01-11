@@ -1,6 +1,7 @@
 import cls from './OnboardingPage.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
+import { Page } from '@/shared/ui/Page/Page'
 
 interface OnboardingPageProps {
   className?: string
@@ -10,9 +11,9 @@ const OnboardingPage = memo((props: OnboardingPageProps) => {
   const { className } = props
 
   return (
-    <div className={classNames(cls.onboardingPage, {}, [className])}>
-      OnboardingPage
-    </div>
+    <Page className={classNames(cls.onboardingPage, {}, [className])}>
+      OnboardingPagesdfsfsdhjfhjsdhjfksjdhfjsdhfjsdhfjhdsjk
+    </Page>
   )
 })
 

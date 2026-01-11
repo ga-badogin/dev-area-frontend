@@ -1,4 +1,5 @@
 import { rtkApi } from '@/shared/api/rtkApi'
+import { IProfile } from '../types/profileSchema'
 
 const profileApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
@@ -8,7 +9,7 @@ const profileApi = rtkApi.injectEndpoints({
         method: 'GET'
       })
     }),
-    getProfile: build.query<boolean, string | undefined>({
+    getProfile: build.query<IProfile, string | undefined>({
       query: (username) => ({
         url: `/profile/${username || ''}`,
         method: 'GET'

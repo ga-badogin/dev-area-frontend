@@ -4,6 +4,7 @@ import { INotificationSchema } from '@/entities/notification'
 import { AppDispatch } from './appDispatch'
 import { NavigateFunction } from 'react-router-dom'
 import { IThemeSchema } from '@/entities/theme'
+import { IProfileSchema } from '@/entities/profile'
 
 export interface IStateSchema {
   notification: INotificationSchema
@@ -12,6 +13,7 @@ export interface IStateSchema {
 
   // async reducers
   auth?: IAuthSchema
+  profile?: IProfileSchema
 }
 
 export type TStateSchemaKey = keyof IStateSchema

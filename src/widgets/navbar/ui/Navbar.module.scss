@@ -3,12 +3,18 @@
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80vw;
+  width: var(--container-width);
   display: flex;
   gap: 20px;
   align-items: center;
   padding: 10px;
   border-radius: var(--ui-border-radius);
+
+  background: rgba(28, 28, 28, 0.6);
+  backdrop-filter: var(--frosted-glass-blur);
+  -webkit-backdrop-filter: var(--frosted-glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 
   &:not(:has(.select)) .themeSwitcher {
     margin-left: auto;

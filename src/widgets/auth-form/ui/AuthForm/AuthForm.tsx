@@ -22,7 +22,7 @@ export const AuthForm = memo((props: AuthFormProps) => {
   return (
     <DynamicModuleLoader reducers={reducers}>
       <AuthFormWrapper>
-        <RenderRouter routeConfig={authRouteConfig} />
+        <RenderRouter routeConfig={authRouteConfig} isChildRouter />
       </AuthFormWrapper>
     </DynamicModuleLoader>
   )

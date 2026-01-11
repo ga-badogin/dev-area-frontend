@@ -18,12 +18,14 @@ export const appRouteConfig: TRouteConfig<keyof TAppRoutes> = {
   },
   profile: {
     path: getAppRoute(['profile', { username: ':username' }]),
-    element: <ProfilePageAsync />
+    element: <ProfilePageAsync />,
+    authOnly: true
   },
   onboarding: {
     path: getAppRoute(['onboarding']),
     element: <OnboardingPageAsync />,
-    onboarding: true
+    onboarding: true,
+    authOnly: true
   },
   other: {
     path: getAppRoute(['other']),

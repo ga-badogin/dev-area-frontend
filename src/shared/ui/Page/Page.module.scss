@@ -1,0 +1,12 @@
+.page {
+  &.full {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  &.container {
+    width: var(--container-width);
+    padding-top: 110px;
+    margin: 0 auto;
+  }
+}

@@ -1,17 +1,13 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import { useHasProfile } from '@/entities/profile'
+import { createSlice } from '@reduxjs/toolkit'
+import { IProfileSchema } from '../types/profileSchema'
 
-const initialState:  = {
-
-}
+const initialState: IProfileSchema = {}
 
 const profileSlice = createSlice({
-	name: '',
-	initialState,
-	reducers: {
-	
-	},
+  name: 'profile',
+  initialState,
+  reducers: {}
 })
 
-export const { actions: Actions } = profileSlice
-export const { reducer: Reducer } = profileSlice
+export const { actions: profileActions } = profileSlice
+export const { reducer: profileReducer } = profileSlice
