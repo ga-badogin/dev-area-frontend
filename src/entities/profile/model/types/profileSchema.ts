@@ -1,5 +1,6 @@
 export interface IProfileSchema {
   profile?: IProfile
+  isEdit: boolean
 }
 
 export interface IProfile {
@@ -9,9 +10,9 @@ export interface IProfile {
   bio?: string
   avatarUrl?: string
 
-  experience?: IExperience[]
-  education?: IEducation[]
-  skill?: ISkill[]
+  experience: IExperience[]
+  education: IEducation[]
+  skill: ISkill[]
 }
 
 export interface IExperience {

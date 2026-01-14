@@ -3,6 +3,7 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import { ButtonHTMLAttributes, memo } from 'react'
 import { Loader } from '../Loader/Loader'
 import { ValueOf } from '@/shared/types'
+import { Sizes } from '@/shared/consts/ui'
 
 export const ButtonTheme = {
   MAIN: 'main',
@@ -11,6 +12,7 @@ export const ButtonTheme = {
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: ValueOf<typeof ButtonTheme>
+  size?: ValueOf<typeof Sizes>
   isLoading?: boolean
 }
 
@@ -18,6 +20,7 @@ export const Button = memo((props: ButtonProps) => {
   const {
     className,
     theme = ButtonTheme.MAIN,
+    size = Sizes.M,
     children,
     isLoading,
     ...otherProps
@@ -25,7 +28,7 @@ export const Button = memo((props: ButtonProps) => {
 
   return (
     <button
-      className={classNames(cls.button, {}, [className, cls[theme]])}
+      className={classNames(cls.button, {}, [className, cls[theme], cls[size]])}
       disabled={isLoading}
       {...otherProps}
     >

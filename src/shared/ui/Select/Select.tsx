@@ -1,6 +1,6 @@
 import cls from './Select.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { CSSProperties, memo, ReactNode, useMemo } from 'react'
+import { CSSProperties, ReactNode, useMemo } from 'react'
 import { typedMemo } from '@/shared/consts/memo'
 import { Button, ButtonTheme } from '../Button/Button'
 

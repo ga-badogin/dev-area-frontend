@@ -4,32 +4,26 @@
   --font-family-title: 'Russo One', sans-serif;
   --font-family-code: JetBrains Mono, monospace;
 
-  --caption-size: 12px;
-  --caption-line: 20px;
+  --font-size-xs: 12px;
+  --font-line-xs: 16px;
 
-  //S size
-  --text-size-s: 14px;
-  --text-line-s: 22px;
+  --font-size-s: 14px;
+  --font-line-s: 20px;
 
-  --title-size-s: 24px;
-  --title-line-s: 32px;
+  --font-size-m: 16px;
+  --font-line-m: 24px;
 
-  // M size
-  --text-size-m: 16px;
-  --text-line-m: 24px;
+  --font-size-l: 24px;
+  --font-line-l: 32px;
 
-  --title-size-m: 32px;
-  --title-line-m: 40px;
+  --font-size-xl: 32px;
+  --font-line-xl: 40px;
 
-  // L size
-  --text-size-l: 18px;
-  --text-line-l: 26px;
+  --font-size-xxl: 40px;
+  --font-line-xxl: 48px;
 
-  --title-size-l: 40px;
-  --title-line-l: 48px;
-
-  --font-main: var(--text-size-m) / var(--text-line-m) var(--font-family-main);
-  --font-title: var(--title-size-l) / var(--title-line-l)
+  --font-main: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
+  --font-title: var(--font-line-xxl) / var(--font-line-xxl)
     var(--font-family-title);
 
   // Colors

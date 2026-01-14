@@ -1,8 +1,8 @@
 import cls from './ErrorList.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { Text, TextTheme } from '../Text/Text'
 import { Sizes } from '@/shared/consts/ui'
+import { Paragraph } from '../Paragraph/Paragraph'
 
 interface ErrorListProps {
   className?: string
@@ -21,7 +21,7 @@ export const ErrorList = memo((props: ErrorListProps) => {
     >
       {error.split('/').map((error, index) => (
         <li className={cls.listItem} key={index}>
-          <Text theme={TextTheme.ERROR} paragraph={error} size={Sizes.S} />
+          <Paragraph size={Sizes.S}>{error}</Paragraph>
         </li>
       ))}
     </ul>

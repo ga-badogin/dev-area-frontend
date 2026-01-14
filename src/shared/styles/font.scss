@@ -1,15 +1,17 @@
 $sizes: (
-  small: s,
-  medium: m,
-  large: l
+  XS: xs,
+  S: s,
+  M: m,
+  L: l,
+  XL: xl,
+  XXL: xxl
 );
 
-@mixin text($size) {
-  font-size: var(--text-size-#{$size});
-  line-height: var(--text-line-#{$size});
-}
-
-@mixin title($size) {
-  font-size: var(--title-size-#{$size});
-  line-height: var(--title-line-#{$size});
+@mixin font() {
+  @each $name, $key in $sizes {
+    &.#{$name} {
+      font-size: var(--font-size-#{$key});
+      line-height: var(--font-line-#{$key});
+    }
+  }
 }

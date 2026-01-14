@@ -6,6 +6,7 @@ import { Select } from '@/shared/ui/Select/Select'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Logo } from '@/shared/ui/Logo/Logo'
 import { getAuthRoute } from '@/shared/lib/router/getRoute'
+import { Block } from '@/shared/ui/Block/Block'
 
 interface NavbarProps {
   className?: string
@@ -22,7 +23,7 @@ export const Navbar = memo((props: NavbarProps) => {
   }, [])
 
   return (
-    <div className={classNames(cls.navbar, {}, [className])}>
+    <Block className={classNames(cls.navbar, {}, [className])}>
       <Logo />
       <Select
         className={cls.select}
@@ -38,6 +39,6 @@ export const Navbar = memo((props: NavbarProps) => {
         ]}
       />
       <ThemeSwitcher className={cls.themeSwitcher} />
-    </div>
+    </Block>
   )
 })

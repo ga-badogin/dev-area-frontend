@@ -2,9 +2,10 @@ import cls from './NotificationItem.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
 import { INotification, useNotificationThunks } from '@/entities/notification'
-import { Text } from '@/shared/ui/Text/Text'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import CrossIcon from '@/shared/assets/icons/Cross.svg'
+import { Title } from '@/shared/ui/Title/Title'
+import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
 import { Sizes } from '@/shared/consts/ui'
 
 interface NotificationItemProps extends INotification {
@@ -25,7 +26,8 @@ export const NotificationItem = memo((props: NotificationItemProps) => {
       )}
     >
       <div className={cls.notificationItem}>
-        <Text title={title} paragraph={paragraph} size={Sizes.S} />
+        <Title as="h2" />
+        <Paragraph size={Sizes.S} />
         <Button
           theme={ButtonTheme.CLEAR}
           className={cls.deleteBtn}

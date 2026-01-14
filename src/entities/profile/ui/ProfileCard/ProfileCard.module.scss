@@ -1,0 +1,21 @@
+.profileCard {
+  display: grid;
+  grid-template-areas:
+    'icon fields'
+    'block block';
+  grid-template-columns: auto 1fr;
+  column-gap: 20px;
+  row-gap: 50px;
+}
+
+.icon {
+  grid-area: icon;
+}
+
+.fields {
+  grid-area: fields;
+}
+
+.block {
+  grid-area: block;
+}

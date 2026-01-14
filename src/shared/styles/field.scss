@@ -1,0 +1,19 @@
+@use '@/shared/styles/block' as *;
+
+@mixin field($padding: null) {
+  &.main {
+    @include block($padding);
+
+    &:focus {
+      outline: 2px solid var(--accent-color);
+    }
+  }
+
+  &.error {
+    outline: var(--error-border);
+  }
+
+  &::placeholder {
+    color: var(--secondary-color);
+  }
+}

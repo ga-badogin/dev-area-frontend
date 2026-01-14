@@ -1,0 +1,7 @@
+@use '@/shared/styles/font' as *;
+
+.title {
+  font: var(--font-title);
+
+  @include font;
+}

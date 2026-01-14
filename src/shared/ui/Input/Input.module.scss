@@ -1,4 +1,19 @@
 @use '@/shared/styles/font' as *;
+@use '@/shared/styles/field' as *;
+
+.input {
+  width: 100%;
+
+  @include font;
+
+  &:read-write {
+    height: var(--ui-height);
+    @include field(0 20px);
+  }
+
+  &:read-only {
+  }
+}
 
 .inputWrapper {
   position: relative;
@@ -8,37 +23,13 @@
   }
 }
 
-.input {
-  width: 100%;
-  height: var(--ui-height);
-  background-color: var(--inverted-primary-color);
-  color: var(--primary-color);
-  border-radius: var(--ui-border-radius);
-
-  &::placeholder {
-    color: var(--secondary-color);
-  }
-
-  &.main {
-    padding: 0 20px;
-
-    &:focus {
-      outline: 2px solid var(--accent-color);
-    }
-  }
-
-  &.error {
-    outline: var(--error-border);
-  }
-}
-
 .icon {
   position: absolute;
   top: 50%;
   right: 90%;
   height: 50%;
   transform: translateY(-50%);
-  fill: var(--primary-color);
+  fill: var(--inverted-primary-color);
 }
 
 .loader,

@@ -1,3 +1,7 @@
 export { useGetProfile, useHasProfile } from './model/api/profileApi'
 export type { IProfileSchema } from './model/types/profileSchema'
 export { ProfileCard } from './ui/ProfileCard/ProfileCard'
+export { ExperienceList } from './ui/ExperienceList/ExperienceList/ExperienceList'
+export { EducationList } from './ui/EducationList/EducationList/EducationList'
+export { SkillBoard } from './ui/SkillBoard/SkillBoard/SkillBoard'
+export { useIsEdit } from './model/selectors/getIsEdit'

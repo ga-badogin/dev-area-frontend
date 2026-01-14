@@ -1,0 +1,24 @@
+@use '@/shared/styles/block' as *;
+
+.block {
+  &:has(.title) {
+    position: relative;
+    margin-top: 55px;
+  }
+
+  &.main {
+    @include block;
+  }
+
+  &.small {
+    @include block(5px 20px);
+    width: fit-content;
+  }
+}
+
+.title {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(calc(-100% - 15px));
+}

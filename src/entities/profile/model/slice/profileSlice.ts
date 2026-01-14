@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IProfileSchema } from '../types/profileSchema'
 
-const initialState: IProfileSchema = {}
+const initialState: IProfileSchema = {
+  isEdit: false
+}
 
 const profileSlice = createSlice({
   name: 'profile',

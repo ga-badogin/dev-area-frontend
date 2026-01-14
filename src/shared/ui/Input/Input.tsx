@@ -1,5 +1,14 @@
 import cls from './Input.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import { Loader, LoaderTheme } from '../Loader/Loader'
+import { RefCallBack } from 'react-hook-form'
+import { Toggle } from '../Toggle/Toggle'
+import ClosedEye from '@/shared/assets/icons/ClosedEye.svg'
+import OpenedEye from '@/shared/assets/icons/OpenedEye.svg'
+import { ValueOf } from '@/shared/types'
+import { ErrorList } from '../ErrorList/ErrorList'
+import { useFocus } from '@/shared/lib/hooks/useFocus/useFocus'
+import { FieldTheme, Sizes } from '@/shared/consts/ui'
 import {
   FC,
   HTMLInputTypeAttribute,
@@ -10,22 +19,12 @@ import {
   useRef,
   useState
 } from 'react'
-import { Loader, LoaderTheme } from '../Loader/Loader'
-import { RefCallBack } from 'react-hook-form'
-import { Toggle } from '../Toggle/Toggle'
-import ClosedEye from '@/shared/assets/icons/ClosedEye.svg'
-import OpenedEye from '@/shared/assets/icons/OpenedEye.svg'
-import { ValueOf } from '@/shared/types'
-import { ErrorList } from '../ErrorList/ErrorList'
-import { useFocus } from '@/shared/lib/hooks/useFocus/useFocus'
 
-export const InputTheme = {
-  MAIN: 'main'
-} as const
-
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   Icon?: FC<SVGProps<SVGSVGElement>>
-  theme?: ValueOf<typeof InputTheme>
+  theme?: ValueOf<typeof FieldTheme>
+  size?: ValueOf<typeof Sizes>
   error?: string
   isLoading?: boolean
   ref?: RefCallBack
@@ -36,7 +35,8 @@ export const Input = memo((props: InputProps) => {
     className,
     Icon,
     type = 'text',
-    theme = InputTheme.MAIN,
+    theme = FieldTheme.MAIN,
+    size = Sizes.S,
     error,
     isLoading,
     ref,
@@ -70,14 +70,15 @@ export const Input = memo((props: InputProps) => {
       <div className={cls.inputWrapper}>
         <input
           className={classNames(cls.input, { [cls.error]: error }, [
-            cls[theme]
+            cls[theme],
+            cls[size]
           ])}
-          type={type === 'password' ? passwordType : type}
-          autoComplete="off"
           ref={(el) => {
             ref?.(el)
             inputRef.current = el
           }}
+          type={type === 'password' ? passwordType : type}
+          autoComplete="off"
           {...otherProps}
           {...handlers}
         />

@@ -1,6 +1,9 @@
+@use '@/shared/styles/font' as *;
+
 .button {
   display: block;
   z-index: 2;
+  @include font;
 
   &.main {
     width: 100%;
