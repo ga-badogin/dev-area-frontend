@@ -6,31 +6,55 @@ import { Icon } from '@/shared/ui/Icon/Icon'
 import { Input } from '@/shared/ui/Input/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
-import { Sizes } from '@/shared/consts/ui'
+import { FieldTheme, Sizes } from '@/shared/consts/ui'
+import { useFormContext } from 'react-hook-form'
+import { useIsEdit } from '../../model/selectors/getIsEdit'
 
 interface ProfileCardProps {
   className?: string
   profile: IProfile
-  isEdit: boolean
 }
 
 export const ProfileCard = memo((props: ProfileCardProps) => {
-  const { className, profile, isEdit } = props
-  const { avatarUrl, firstName, lastName, title, bio } = profile
+  const { className, profile } = props
 
-  const fullName = [firstName, lastName].join(' ')
+  const isEdit = !useIsEdit()
+
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext<IProfile>()
 
   return (
     <div className={classNames(cls.profileCard, {}, [className])}>
-      <Icon className={cls.icon} size="100px" src={avatarUrl} />
+      <Icon className={cls.icon} size="100px" src={profile.avatarUrl} />
 
       <div className={cls.info}>
-        <Input size={Sizes.XL} readOnly={isEdit} value={fullName} />
-        <Input size={Sizes.M} readOnly={isEdit} value={title} />
+        <Input
+          theme={FieldTheme.MINIMAL}
+          size={Sizes.XL}
+          readOnly={isEdit}
+          error={errors.firstName?.message}
+          {...register('firstName')}
+        />
+        <Input
+          theme={FieldTheme.MINIMAL}
+          size={Sizes.XL}
+          readOnly={isEdit}
+          error={errors.lastName?.message}
+          {...register('lastName')}
+        />
+        <Input
+          theme={FieldTheme.MINIMAL}
+          size={Sizes.M}
+          readOnly={isEdit}
+          error={errors.title?.message}
+          {...register('title')}
+        />
       </div>
 
       <Block className={cls.block} theme={BlockTheme.CLEAR} title="About">
-        <Textarea value={bio} readOnly={isEdit} />
+        <Textarea readOnly={isEdit} {...register('bio')} />
       </Block>
     </div>
   )

@@ -7,7 +7,8 @@ import { Sizes } from '@/shared/consts/ui'
 
 export const ButtonTheme = {
   MAIN: 'main',
-  CLEAR: 'clear'
+  CLEAR: 'clear',
+  OUTLINE: 'outline'
 } as const
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

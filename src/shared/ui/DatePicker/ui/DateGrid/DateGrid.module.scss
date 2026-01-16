@@ -1,0 +1,28 @@
+.dateGrid {
+  display: grid;
+  gap: 5px;
+
+  &.days {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  &.months {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &.years {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.button {
+  aspect-ratio: 1 / 1;
+
+  &.today {
+    border-color: var(--accent-color);
+  }
+
+  &.current {
+    background-color: var(--accent-color);
+  }
+}

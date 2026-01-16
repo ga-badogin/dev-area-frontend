@@ -4,6 +4,7 @@ export interface IProfileSchema {
 }
 
 export interface IProfile {
+  id: string
   firstName: string
   lastName: string
   title?: string
@@ -16,6 +17,7 @@ export interface IProfile {
 }
 
 export interface IExperience {
+  id: string
   company: string
   position: string
   description: string
@@ -24,6 +26,7 @@ export interface IExperience {
 }
 
 export interface IEducation {
+  id: string
   institution: string
   speciality: string
   startDate: string
@@ -31,5 +34,6 @@ export interface IEducation {
 }
 
 export interface ISkill {
+  id: string
   name: string
 }

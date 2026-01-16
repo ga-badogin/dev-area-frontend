@@ -8,5 +8,6 @@ export const Sizes = {
 } as const
 
 export const FieldTheme = {
-  MAIN: 'main'
+  MAIN: 'main',
+  MINIMAL: 'minimal'
 } as const

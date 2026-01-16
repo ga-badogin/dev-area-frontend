@@ -1,15 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit'
 import { IProfileSchema } from '../types/profileSchema'
+import { buildSlice } from '@/shared/lib/store/buildSlice'
+import { PayloadAction } from '@reduxjs/toolkit'
 
 const initialState: IProfileSchema = {
-  isEdit: false
+  isEdit: true
 }
 
-const profileSlice = createSlice({
+const profileSlice = buildSlice({
   name: 'profile',
   initialState,
-  reducers: {}
+  reducers: {
+    setIsEdit(state, { payload }: PayloadAction<boolean>) {
+      state.isEdit = payload
+    }
+  }
 })
 
-export const { actions: profileActions } = profileSlice
-export const { reducer: profileReducer } = profileSlice
+export const { reducer: profileReducer, useActions: useProfileActions } =
+  profileSlice

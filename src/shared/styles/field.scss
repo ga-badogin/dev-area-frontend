@@ -1,16 +1,29 @@
 @use '@/shared/styles/block' as *;
 
-@mixin field($padding: null) {
+@mixin field($padding: null, $height: auto) {
   &.main {
+    height: $height;
     @include block($padding);
 
     &:focus {
       outline: 2px solid var(--accent-color);
     }
+
+    &.error {
+      outline: var(--error-border);
+    }
   }
 
-  &.error {
-    outline: var(--error-border);
+  &.minimal {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+    &:focus {
+      border-color: var(--accent-color);
+    }
+
+    &.error {
+      border-color: var(--error-color);
+    }
   }
 
   &::placeholder {

@@ -1,19 +1,24 @@
 import cls from './ExperienceList.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { List } from '@/shared/ui/List/List'
-import { IExperience } from '../../../model/types/profileSchema'
+import { IProfile } from '../../../model/types/profileSchema'
 import { ExperienceItem } from '../ExperienceItem/ExperienceItem'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
+import { useFieldArray, useFormContext } from 'react-hook-form'
 
 interface ExperienceProps {
   className?: string
-  experiences: IExperience[]
-  isEdit: boolean
 }
 
 export const ExperienceList = memo((props: ExperienceProps) => {
-  const { className, experiences, isEdit } = props
+  const { className } = props
+
+  const { control } = useFormContext<IProfile>()
+
+  const { fields, remove } = useFieldArray({
+    control,
+    name: 'experience'
+  })
 
   return (
     <Block
@@ -21,7 +26,13 @@ export const ExperienceList = memo((props: ExperienceProps) => {
       title="Experience"
       theme={BlockTheme.CLEAR}
     >
-      <List items={experiences} Element={ExperienceItem} />
+      {fields.map((field, index) => (
+        <ExperienceItem
+          key={field.id}
+          index={index}
+          onRemove={() => remove(index)}
+        />
+      ))}
     </Block>
   )
 })
