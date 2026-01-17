@@ -11,7 +11,7 @@
   }
 
   &.small {
-    @include block(5px 20px);
+    @include block;
     width: fit-content;
   }
 

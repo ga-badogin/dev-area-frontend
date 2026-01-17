@@ -7,7 +7,7 @@
   @include font;
 
   &:read-write {
-    @include field(0 20px, var(--ui-height));
+    @include field(var(--ui-height));
   }
 
   &:read-only {

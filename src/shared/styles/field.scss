@@ -1,9 +1,9 @@
 @use '@/shared/styles/block' as *;
 
-@mixin field($padding: null, $height: auto) {
+@mixin field($height: auto) {
   &.main {
     height: $height;
-    @include block($padding);
+    @include block;
 
     &:focus {
       outline: 2px solid var(--accent-color);

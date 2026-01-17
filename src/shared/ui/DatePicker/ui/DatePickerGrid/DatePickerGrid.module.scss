@@ -1,4 +1,4 @@
-.dateGrid {
+.datePickerGrid {
   display: grid;
   gap: 5px;
 
@@ -7,7 +7,7 @@
   }
 
   &.months {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   &.years {
@@ -16,13 +16,11 @@
 }
 
 .button {
-  aspect-ratio: 1 / 1;
+  &.selected {
+    background-color: var(--accent-color);
+  }
 
   &.today {
     border-color: var(--accent-color);
-  }
-
-  &.current {
-    background-color: var(--accent-color);
   }
 }

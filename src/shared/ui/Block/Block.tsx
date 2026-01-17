@@ -1,6 +1,6 @@
 import cls from './Block.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { ReactNode } from 'react'
+import { HTMLAttributes, ReactNode } from 'react'
 import { ValueOf } from '@/shared/types'
 import { Title } from '../Title/Title'
 import { Sizes } from '@/shared/consts/ui'
@@ -13,12 +13,13 @@ export const BlockTheme = {
   SMALL: 'small'
 } as const
 
-interface BlockWrapperProps {
+interface BlockWrapperProps extends HTMLAttributes<HTMLDivElement> {
   className?: string
   children: ReactNode
   title?: string
   theme?: ValueOf<typeof BlockTheme>
   handleCross?: () => void
+  padding?: string
 }
 
 export const Block = (props: BlockWrapperProps) => {
@@ -27,11 +28,17 @@ export const Block = (props: BlockWrapperProps) => {
     children,
     title,
     theme = BlockTheme.MAIN,
-    handleCross
+    handleCross,
+    padding = '20px',
+    ...otherProps
   } = props
 
   return (
-    <div className={classNames(cls.block, {}, [className, cls[theme]])}>
+    <div
+      className={classNames(cls.block, {}, [className, cls[theme]])}
+      style={{ padding }}
+      {...otherProps}
+    >
       <Title size={Sizes.XL} className={cls.title} as="h1">
         {title}
       </Title>

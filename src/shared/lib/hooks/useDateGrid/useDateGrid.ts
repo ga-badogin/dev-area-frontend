@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { TDateView } from '@/shared/types/date'
+import { TDatePickerView } from '@/shared/ui/DatePicker/model/types/datePicker'
 
 interface IDateItem {
   date: Date
@@ -21,7 +21,10 @@ const isSameMonth: TSameFunc = (a: Date, b: Date) =>
 const isSameYear: TSameFunc = (a: Date, b: Date) =>
   a.getFullYear() === b.getFullYear()
 
-export const useDate = (currentDate: Date, view: TDateView): IDateItem[] => {
+export const useDateGrid = (
+  currentDate: Date,
+  view: TDatePickerView
+): IDateItem[] => {
   const year = currentDate.getFullYear()
   const month = currentDate.getMonth()
   const today = new Date()
@@ -63,5 +66,5 @@ export const useDate = (currentDate: Date, view: TDateView): IDateItem[] => {
           return makeItem(d, d.getFullYear(), isSameYear)
         })
     }
-  }, [currentDate, year, month, view])
+  }, [currentDate, year, month, view, today])
 }

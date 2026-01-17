@@ -18,7 +18,7 @@
 
   &.outline {
     width: 100%;
-    @include block(0);
+    @include block;
   }
 
   &.clear {
