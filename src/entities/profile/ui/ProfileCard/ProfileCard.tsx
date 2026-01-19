@@ -1,7 +1,7 @@
 import cls from './ProfileCard.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { IProfile } from '../../model/types/profileSchema'
+import { IProfile, IProfileForm } from '../../model/types/profileApi'
 import { Icon } from '@/shared/ui/Icon/Icon'
 import { Input } from '@/shared/ui/Input/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
@@ -23,7 +23,7 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
   const {
     register,
     formState: { errors }
-  } = useFormContext<IProfile>()
+  } = useFormContext<IProfileForm>()
 
   return (
     <div className={classNames(cls.profileCard, {}, [className])}>

@@ -2,7 +2,7 @@ import cls from './EducationItem.module.scss'
 import { memo } from 'react'
 import { Block } from '@/shared/ui/Block/Block'
 import { Input } from '@/shared/ui/Input/Input'
-import { IProfile } from '../../../model/types/profileSchema'
+import { IProfileForm } from '../../../model/types/profileApi'
 import { FieldTheme, Sizes } from '@/shared/consts/ui'
 import { useFormContext } from 'react-hook-form'
 import { useIsEdit } from '../../../model/selectors/getIsEdit'
@@ -19,7 +19,7 @@ export const EducationItem = memo((props: EducationItemProps) => {
   const {
     register,
     formState: { errors }
-  } = useFormContext<IProfile>()
+  } = useFormContext<IProfileForm>()
 
   return (
     <Block className={cls.educationItem}>

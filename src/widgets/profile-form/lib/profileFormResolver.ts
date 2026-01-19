@@ -1,7 +1,7 @@
 import { Resolver } from 'react-hook-form'
-import { IProfile } from '@/entities/profile'
+import { IProfileForm } from '@/entities/profile'
 
-export const profileFormResolver: Resolver<IProfile> = (values) => {
+export const profileFormResolver: Resolver<IProfileForm> = (values) => {
   const errors: Record<string, any> = {}
 
   if (!values.firstName || values.firstName.trim() === '') {

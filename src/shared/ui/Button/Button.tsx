@@ -22,6 +22,7 @@ export const Button = memo((props: ButtonProps) => {
     className,
     theme = ButtonTheme.MAIN,
     size = Sizes.M,
+    type = 'button',
     children,
     isLoading,
     ...otherProps
@@ -31,6 +32,7 @@ export const Button = memo((props: ButtonProps) => {
     <button
       className={classNames(cls.button, {}, [className, cls[theme], cls[size]])}
       disabled={isLoading}
+      type={type}
       {...otherProps}
     >
       {isLoading ? <Loader size="80%" /> : children}

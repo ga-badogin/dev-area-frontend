@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom'
 import {
   EducationList,
   ExperienceList,
-  IProfile,
+  IProfileForm,
   ProfileCard,
   SkillBoard,
   useGetProfile,
@@ -30,11 +30,11 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
   const { username } = useParams()
   const { data: profile } = useGetProfile(username)
 
-  const onSubmit = (data: IProfile) => {
+  const onSubmit = (data: IProfileForm) => {
     console.log(data)
   }
 
-  const methods = useForm<IProfile>({
+  const methods = useForm<IProfileForm>({
     mode: 'onChange',
     resolver: profileFormResolver
   })
@@ -75,6 +75,7 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
             Редактировать
           </Button>
         )}
+        <Button type="submit">Сохранить</Button>
       </form>
     </FormProvider>
   ) : undefined

@@ -1,7 +1,7 @@
 import cls from './EducationList.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { IProfile } from '../../../model/types/profileSchema'
+import { IProfileForm } from '../../../model/types/profileApi'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
 import { EducationItem } from '../EducationItem/EducationItem'
 import { useFieldArray, useFormContext } from 'react-hook-form'
@@ -13,7 +13,7 @@ interface EducationListProps {
 export const EducationList = memo((props: EducationListProps) => {
   const { className } = props
 
-  const { control } = useFormContext<IProfile>()
+  const { control } = useFormContext<IProfileForm>()
 
   const { fields } = useFieldArray({ control, name: 'education' })
 

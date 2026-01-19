@@ -1,5 +1,5 @@
 import { rtkApi } from '@/shared/api/rtkApi'
-import { IProfile } from '../types/profileSchema'
+import { IProfile } from '../types/profileApi'
 
 const profileApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
