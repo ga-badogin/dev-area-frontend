@@ -7,7 +7,7 @@ import { Block } from '@/shared/ui/Block/Block'
 import { FieldTheme, Sizes } from '@/shared/consts/ui'
 import { Controller, useFormContext } from 'react-hook-form'
 import { useIsEdit } from '../../../model/selectors/getIsEdit'
-import { DatePicker } from '@/shared/ui/DatePicker/ui/DatePicker/DatePicker'
+import { DatePicker } from '@/shared/ui/DatePicker/DatePicker'
 
 interface ExperienceItemProps {
   index: number
@@ -55,7 +55,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
         render={({
           field: {
             value: { firstDate, secondDate },
-            onChange
+            onChange: onSelect
           }
         }) => (
           <DatePicker
@@ -64,7 +64,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
               firstDate: new Date(firstDate),
               secondDate: secondDate ? new Date(secondDate) : null
             }}
-            onChange={onChange}
+            onSelect={onSelect}
           />
         )}
       />

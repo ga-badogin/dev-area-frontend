@@ -1,6 +1,6 @@
 import cls from './Block.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { HTMLAttributes, ReactNode } from 'react'
+import { forwardRef, HTMLAttributes, ReactNode } from 'react'
 import { ValueOf } from '@/shared/types'
 import { Title } from '../Title/Title'
 import { Sizes } from '@/shared/consts/ui'
@@ -22,36 +22,39 @@ interface BlockWrapperProps extends HTMLAttributes<HTMLDivElement> {
   padding?: string
 }
 
-export const Block = (props: BlockWrapperProps) => {
-  const {
-    className,
-    children,
-    title,
-    theme = BlockTheme.MAIN,
-    handleCross,
-    padding = '20px',
-    ...otherProps
-  } = props
+export const Block = forwardRef<HTMLDivElement, BlockWrapperProps>(
+  (props, ref) => {
+    const {
+      className,
+      children,
+      title,
+      theme = BlockTheme.MAIN,
+      handleCross,
+      padding = '20px',
+      ...otherProps
+    } = props
 
-  return (
-    <div
-      className={classNames(cls.block, {}, [className, cls[theme]])}
-      style={{ padding }}
-      {...otherProps}
-    >
-      <Title size={Sizes.XL} className={cls.title} as="h1">
-        {title}
-      </Title>
-      {handleCross && (
-        <Button
-          theme={ButtonTheme.CLEAR}
-          className={cls.deleteBtn}
-          onClick={handleCross}
-        >
-          <CrossIcon className={cls.cross} />
-        </Button>
-      )}
-      {children}
-    </div>
-  )
-}
+    return (
+      <div
+        ref={ref}
+        className={classNames(cls.block, {}, [className, cls[theme]])}
+        style={{ padding }}
+        {...otherProps}
+      >
+        <Title size={Sizes.XL} className={cls.title} as="h1">
+          {title}
+        </Title>
+        {handleCross && (
+          <Button
+            theme={ButtonTheme.CLEAR}
+            className={cls.deleteBtn}
+            onClick={handleCross}
+          >
+            <CrossIcon className={cls.cross} />
+          </Button>
+        )}
+        {children}
+      </div>
+    )
+  }
+)

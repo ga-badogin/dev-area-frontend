@@ -1,18 +1,18 @@
 import { useMemo } from 'react'
-import { TDatePickerView } from '@/shared/ui/DatePicker/model/types/datePicker'
+import { TCalendarView, TSelectedDate } from '../Calendar'
 import {
   isSameDay,
   isSameMonth,
   isSameYear,
   TSameFunc
-} from '../../date/compare'
+} from '../../../lib/date/compare'
 import {
   isFutureDay,
   isFutureMonth,
   isFutureYear,
   TFutureFunc
-} from '../../date/future'
-import { TDate } from '@/shared/ui/DatePicker/ui/DatePicker/DatePicker'
+} from '../../../lib/date/future'
+import { capitalize } from '@/shared/lib/date/format'
 
 interface IDateItem {
   date: Date
@@ -22,15 +22,19 @@ interface IDateItem {
   isDisabled: boolean
 }
 
-export const useDateGrid = (
-  selectedDate: TDate,
-  currentDate: Date,
-  view: TDatePickerView
-): IDateItem[] => {
+interface UseCalendarGridParams {
+  selectedDate: TSelectedDate
+  calendarDate: Date
+  view: TCalendarView
+  isFutureDateDisabled: boolean
+}
+
+export const useCalendarGrid = (params: UseCalendarGridParams): IDateItem[] => {
+  const { view, calendarDate, selectedDate, isFutureDateDisabled } = params
   const { firstDate, secondDate } = selectedDate
 
-  const year = currentDate.getFullYear()
-  const month = currentDate.getMonth()
+  const year = calendarDate.getFullYear()
+  const month = calendarDate.getMonth()
   const today = new Date()
 
   return useMemo(() => {
@@ -40,8 +44,7 @@ export const useDateGrid = (
       isSame: TSameFunc,
       isFuture: TFutureFunc
     ): IDateItem => {
-      const isDisabled = false
-      // isFuture(date, today)
+      const isDisabled = isFutureDateDisabled ? isFuture(date, today) : false
 
       return {
         date,
@@ -66,7 +69,7 @@ export const useDateGrid = (
           const d = new Date(year, i, 1)
           return makeItem(
             d,
-            d.toLocaleString('ru-RU', { month: 'long' }),
+            capitalize(d.toLocaleString('ru-RU', { month: 'long' })),
             isSameMonth,
             isFutureMonth
           )

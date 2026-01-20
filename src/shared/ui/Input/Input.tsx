@@ -11,6 +11,8 @@ import { useFocus } from '@/shared/lib/hooks/useFocus/useFocus'
 import { FieldTheme, Sizes } from '@/shared/consts/ui'
 import {
   FC,
+  ForwardedRef,
+  forwardRef,
   HTMLInputTypeAttribute,
   InputHTMLAttributes,
   memo,
@@ -19,6 +21,20 @@ import {
   useRef,
   useState
 } from 'react'
+
+const setRefs =
+  <T,>(...refs: Array<ForwardedRef<T>>) =>
+  (node: T | null) => {
+    refs.forEach((ref) => {
+      if (!ref) return
+
+      if (typeof ref === 'function') {
+        ref(node)
+      } else {
+        ref.current = node
+      }
+    })
+  }
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
@@ -30,86 +46,84 @@ interface InputProps
   ref?: RefCallBack
 }
 
-export const Input = memo((props: InputProps) => {
-  const {
-    className,
-    Icon,
-    type = 'text',
-    theme = FieldTheme.MAIN,
-    size = Sizes.S,
-    error,
-    isLoading,
-    ref,
-    ...otherProps
-  } = props
+export const Input = memo(
+  forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+    const {
+      className,
+      Icon,
+      type = 'text',
+      theme = FieldTheme.MAIN,
+      size = Sizes.S,
+      error,
+      isLoading,
+      ...otherProps
+    } = props
 
-  const inputRef = useRef<HTMLInputElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
 
-  const [passwordType, setPasswordType] =
-    useState<HTMLInputTypeAttribute>('password')
+    const [passwordType, setPasswordType] =
+      useState<HTMLInputTypeAttribute>('password')
 
-  const { isFocused, handlers } = useFocus()
+    const { isFocused, handlers } = useFocus()
 
-  const handleToggle = useCallback(
-    (value: HTMLInputTypeAttribute) => {
-      setPasswordType(value)
+    const handleToggle = useCallback(
+      (value: HTMLInputTypeAttribute) => {
+        setPasswordType(value)
 
-      requestAnimationFrame(() => {
-        const input = inputRef.current
-        if (!input) return
+        requestAnimationFrame(() => {
+          const input = inputRef.current
+          if (!input) return
 
-        const length = input.value.length
-        input.setSelectionRange(length, length)
-      })
-    },
-    [inputRef]
-  )
+          const length = input.value.length
+          input.setSelectionRange(length, length)
+        })
+      },
+      [inputRef]
+    )
 
-  return (
-    <div className={className}>
-      <div className={cls.inputWrapper}>
-        <input
-          className={classNames(cls.input, { [cls.error]: error }, [
-            cls[theme],
-            cls[size]
-          ])}
-          ref={(el) => {
-            ref?.(el)
-            inputRef.current = el
-          }}
-          type={type === 'password' ? passwordType : type}
-          autoComplete="off"
-          {...otherProps}
-          {...handlers}
-        />
-        {Icon && <Icon className={cls.icon} />}
-        {isLoading && (
-          <Loader
-            theme={LoaderTheme.ACCENT}
-            className={cls.loader}
-            size="50%"
+    return (
+      <div className={className}>
+        <div className={cls.inputWrapper}>
+          <input
+            className={classNames(cls.input, { [cls.error]: error }, [
+              cls[theme],
+              cls[size]
+            ])}
+            ref={setRefs(ref, inputRef)}
+            type={type === 'password' ? passwordType : type}
+            autoComplete="off"
+            {...otherProps}
+            {...handlers}
           />
-        )}
-        {type === 'password' && (
-          <Toggle
-            className={cls.toggle}
-            currentValue={passwordType}
-            onToggle={handleToggle}
-            values={[
-              {
-                content: <ClosedEye className={cls.passwordIcon} />,
-                value: 'text'
-              },
-              {
-                content: <OpenedEye className={cls.passwordIcon} />,
-                value: 'password'
-              }
-            ]}
-          />
-        )}
+          {Icon && <Icon className={cls.icon} />}
+          {isLoading && (
+            <Loader
+              theme={LoaderTheme.ACCENT}
+              className={cls.loader}
+              size="50%"
+            />
+          )}
+          {type === 'password' && (
+            <Toggle
+              className={cls.toggle}
+              currentValue={passwordType}
+              onToggle={handleToggle}
+              values={[
+                {
+                  content: <ClosedEye className={cls.passwordIcon} />,
+                  value: 'text'
+                },
+                {
+                  content: <OpenedEye className={cls.passwordIcon} />,
+                  value: 'password'
+                }
+              ]}
+            />
+          )}
+        </div>
+
+        <ErrorList isActive={isFocused} error={error} />
       </div>
-
-      <ErrorList isActive={isFocused} error={error} />
-    </div>
-  )
-})
+    )
+  })
+)
