@@ -5,6 +5,8 @@ import { IProfileForm } from '../../../model/types/profileApi'
 import { ExperienceItem } from '../ExperienceItem/ExperienceItem'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
 import { useFieldArray, useFormContext } from 'react-hook-form'
+import { EMPTY_EXPERIENCE } from '../../../model/consts/empty'
+import { useIsEdit } from '../../../model/selectors/getIsEdit'
 
 interface ExperienceProps {
   className?: string
@@ -13,9 +15,11 @@ interface ExperienceProps {
 export const ExperienceList = memo((props: ExperienceProps) => {
   const { className } = props
 
+  const isEdit = useIsEdit()
+
   const { control } = useFormContext<IProfileForm>()
 
-  const { fields, remove } = useFieldArray({
+  const { fields, remove, append } = useFieldArray({
     control,
     name: 'experience'
   })
@@ -25,6 +29,7 @@ export const ExperienceList = memo((props: ExperienceProps) => {
       className={classNames(cls.experience, {}, [className])}
       title="Experience"
       theme={BlockTheme.CLEAR}
+      handleAdd={isEdit ? () => append(EMPTY_EXPERIENCE) : undefined}
     >
       {fields.map((field, index) => (
         <ExperienceItem

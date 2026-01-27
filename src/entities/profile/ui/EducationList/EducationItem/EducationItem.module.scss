@@ -1,4 +1,20 @@
 .educationItem {
   display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'speciality period'
+    'institution period';
   gap: 10px;
+}
+
+.speciality {
+  grid-area: speciality;
+}
+
+.institution {
+  grid-area: institution;
+}
+
+.period {
+  grid-area: period;
 }

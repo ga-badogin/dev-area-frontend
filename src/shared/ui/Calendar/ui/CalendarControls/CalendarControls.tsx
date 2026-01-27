@@ -1,11 +1,12 @@
 import cls from './CalendarControls.module.scss'
 import { Dispatch, memo, SetStateAction } from 'react'
-import { Block } from '../../Block/Block'
-import { Button, ButtonTheme } from '../../Button/Button'
+import { Block } from '../../../Block/Block'
+import { Button, ButtonTheme } from '../../../Button/Button'
 import ArrowLeft from '@/shared/assets/icons/ArrowLeft.svg'
 import ArrowRight from '@/shared/assets/icons/ArrowRight.svg'
-import { TCalendarView } from '../Calendar'
 import { useCalendarControls } from './useCalendarControls'
+import { TCalendarView } from '../../model/types/calendar'
+import { Sizes } from '@/shared/consts/ui'
 
 interface CalendarControlsProps {
   className?: string
@@ -27,7 +28,7 @@ export const CalendarControls = memo((props: CalendarControlsProps) => {
       <Button theme={ButtonTheme.CLEAR} onClick={() => handleFlip('prev')}>
         <ArrowLeft className={cls.arrow} />
       </Button>
-      <Button theme={ButtonTheme.CLEAR} onClick={handleView}>
+      <Button size={Sizes.S} theme={ButtonTheme.CLEAR} onClick={handleView}>
         {headerLabel}
       </Button>
       <Button theme={ButtonTheme.CLEAR} onClick={() => handleFlip('next')}>

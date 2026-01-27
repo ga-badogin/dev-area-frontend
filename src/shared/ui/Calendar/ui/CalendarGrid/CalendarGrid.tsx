@@ -1,9 +1,10 @@
 import cls from './CalendarGrid.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { Button, ButtonTheme } from '../../Button/Button'
+import { Button, ButtonTheme } from '../../../Button/Button'
 import { useCalendarGrid } from './useCalendarGrid'
-import { TCalendarView, TSelectedDate } from '../Calendar'
+import { TCalendarView, TSelectedDate } from '../../model/types/calendar'
+import { Sizes } from '@/shared/consts/ui'
 
 interface CalendarGridProps {
   className?: string
@@ -30,6 +31,7 @@ export const CalendarGrid = memo((props: CalendarGridProps) => {
         <Button
           key={date.getTime()}
           disabled={isDisabled}
+          size={Sizes.S}
           theme={ButtonTheme.OUTLINE}
           onClick={() => onSelect?.(date)}
           className={classNames(cls.button, {

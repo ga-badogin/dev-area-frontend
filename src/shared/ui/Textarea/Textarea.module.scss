@@ -3,13 +3,14 @@
 
 .textarea {
   resize: none;
-  width: 100%;
   overflow: hidden;
+  width: 100%;
 
   @include font;
 
   &:read-write {
-    @include field;
+    @include field(none);
+    padding: 15px;
   }
 
   &:focus {

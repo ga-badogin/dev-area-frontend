@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import { authRoutesContent } from '@/entities/auth'
 import { Title } from '@/shared/ui/Title/Title'
 import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
+import { Block } from '@/shared/ui/Block/Block'
 
 interface AuthFormWrapperProps {
   className?: string
@@ -19,10 +20,10 @@ export const AuthFormWrapper = (props: AuthFormWrapperProps) => {
   const { title, paragraph } = authRoutesContent[pathname]
 
   return (
-    <div className={classNames(cls.authFormWrapper, {}, [className])}>
+    <Block className={classNames(cls.authFormWrapper, {}, [className])}>
       <Title as="h1">{title}</Title>
       <Paragraph>{paragraph}</Paragraph>
       {children}
-    </div>
+    </Block>
   )
 }

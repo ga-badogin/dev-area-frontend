@@ -1,33 +1,46 @@
 import cls from './DatePicker.module.scss'
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useCallback, useMemo, useRef, useState } from 'react'
 import { Input } from '../Input/Input'
-import CalendarIcon from '@/shared/assets/icons/Calendar.svg'
 import { formatDay, formatMonth, formatYear } from '@/shared/lib/date/format'
-import { Calendar, TCalendarMode, TCalendarView, TSelectedDate } from '../Calendar/Calendar'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import { useClickOutside } from '@/shared/lib/hooks/useClickOutside/useClickOutside'
+import { Calendar, CalendarProps } from '../Calendar/ui/Calendar/Calendar'
+import { TSelectedDate } from '../Calendar/model/types/calendar'
+import { Button, ButtonTheme } from '../Button/Button'
+import { Sizes } from '@/shared/consts/ui'
 
-interface DatePickerProps {
+interface DatePickerProps extends CalendarProps {
   className?: string
-  view?: TCalendarView
-  mode?: TCalendarMode
-
-  value?: TSelectedDate
-  onSelect?: (value: TSelectedDate) => void
+  readOnly?: boolean
 }
 
 export const DatePicker = memo((props: DatePickerProps) => {
-  const { className, value, onSelect, view = 'days', mode } = props
+  const {
+    className,
+    value,
+    onSelect,
+    initialView = 'days',
+    readOnly = false,
+    mode,
+    isFutureDateDisabled
+  } = props
 
-  const inputRef = useRef<HTMLInputElement>(null)
-  const calendarRef = useRef<HTMLDivElement>(null)
+  const datePickerRef = useRef<HTMLDivElement>(null)
+
   const [isActive, setIsActive] = useState(false)
-
   const [selectedDate, setSelectedDate] = useState<TSelectedDate>(
     value ?? {
       firstDate: null,
       secondDate: null
     }
   )
+
+  useClickOutside(datePickerRef, () => setIsActive(false))
+
+  const handleSelect = useCallback((value: TSelectedDate) => {
+    onSelect?.(value)
+    setSelectedDate(value)
+  }, [])
 
   const inputLabel = useMemo(() => {
     const { firstDate, secondDate } = selectedDate
@@ -38,57 +51,39 @@ export const DatePicker = memo((props: DatePickerProps) => {
       days: formatDay,
       months: formatMonth,
       years: formatYear
-    }[view]
+    }[initialView]
 
     if (!secondDate) {
       return format(firstDate)
     }
 
-    return `${format(firstDate)} — ${format(secondDate)}`
-  }, [selectedDate, view])
-
-  const handleSelect = useCallback((value: TSelectedDate) => {
-    onSelect?.(value)
-    setSelectedDate(value)
-  }, [])
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (!(e.target instanceof Node)) return
-      console.log(inputRef.current, e.target)
-      console.log(calendarRef.current, e.target)
-      if (
-        inputRef.current &&
-        !inputRef.current.contains(e.target) &&
-        calendarRef.current &&
-        !calendarRef.current.contains(e.target)
-      ) {
-        setIsActive(false)
-      }
-    }
-
-    document.addEventListener('click', handleClickOutside)
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside)
-    }
-  }, [])
+    return `${format(firstDate)} / ${format(secondDate)}`
+  }, [selectedDate, initialView])
 
   return (
-    <div className={cls.datePicker}>
-      <Input
-        ref={inputRef}
+    <div
+      ref={datePickerRef}
+      className={classNames(cls.datePicker, { [cls.readOnly]: readOnly }, [
+        className,
+        cls[initialView]
+      ])}
+    >
+      <Button
+        className={classNames(cls.button, { [cls.isFocus]: isActive })}
+        size={Sizes.S}
+        theme={ButtonTheme.OUTLINE}
+        readOnly={readOnly}
         onClick={() => setIsActive(true)}
-        Icon={CalendarIcon}
-        value={inputLabel}
-      />
+      >
+        {inputLabel}
+      </Button>
       <Calendar
-        ref={calendarRef}
         mode={mode}
-        initialView={view}
+        initialView={initialView}
         value={value}
         className={classNames(cls.calendar, { [cls.isActive]: isActive }, [])}
         onSelect={handleSelect}
+        isFutureDateDisabled={isFutureDateDisabled}
       />
     </div>
   )

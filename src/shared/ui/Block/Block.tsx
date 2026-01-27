@@ -1,11 +1,12 @@
 import cls from './Block.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { forwardRef, HTMLAttributes, ReactNode } from 'react'
+import { CSSProperties, forwardRef, HTMLAttributes, ReactNode } from 'react'
 import { ValueOf } from '@/shared/types'
 import { Title } from '../Title/Title'
 import { Sizes } from '@/shared/consts/ui'
 import { Button, ButtonTheme } from '../Button/Button'
 import CrossIcon from '@/shared/assets/icons/Cross.svg'
+import PlusIcon from '@/shared/assets/icons/PlusIcon.svg'
 
 export const BlockTheme = {
   MAIN: 'main',
@@ -19,6 +20,7 @@ interface BlockWrapperProps extends HTMLAttributes<HTMLDivElement> {
   title?: string
   theme?: ValueOf<typeof BlockTheme>
   handleCross?: () => void
+  handleAdd?: () => void
   padding?: string
 }
 
@@ -30,20 +32,37 @@ export const Block = forwardRef<HTMLDivElement, BlockWrapperProps>(
       title,
       theme = BlockTheme.MAIN,
       handleCross,
+      handleAdd,
       padding = '20px',
       ...otherProps
     } = props
+
+    const styles: CSSProperties = {
+      padding: !title || theme !== BlockTheme.CLEAR ? padding : 0
+    }
 
     return (
       <div
         ref={ref}
         className={classNames(cls.block, {}, [className, cls[theme]])}
-        style={{ padding }}
+        style={styles}
         {...otherProps}
       >
-        <Title size={Sizes.XL} className={cls.title} as="h1">
-          {title}
-        </Title>
+        <div className={cls.panel}>
+          <Title size={Sizes.XL} className={cls.title} as="h1">
+            {title}
+          </Title>
+          {handleAdd && (
+            <Button
+              theme={ButtonTheme.CLEAR}
+              className={cls.addBtn}
+              onClick={handleAdd}
+            >
+              <PlusIcon className={cls.plus} />
+            </Button>
+          )}
+        </div>
+
         {handleCross && (
           <Button
             theme={ButtonTheme.CLEAR}
@@ -53,6 +72,7 @@ export const Block = forwardRef<HTMLDivElement, BlockWrapperProps>(
             <CrossIcon className={cls.cross} />
           </Button>
         )}
+
         {children}
       </div>
     )

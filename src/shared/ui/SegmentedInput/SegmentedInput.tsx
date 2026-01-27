@@ -1,14 +1,8 @@
-import clsInput from '../Input/Input.module.scss'
-import clsSegmentedInput from './SegmentedInput.module.scss'
+import cls from './SegmentedInput.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo, useEffect } from 'react'
 import { useSegmentedInput } from './model/useSegmentedInput'
 import { ErrorList } from '../ErrorList/ErrorList'
-
-const cls = {
-  ...clsInput,
-  ...clsSegmentedInput
-}
 
 interface SegmentedInputProps {
   className?: string
@@ -52,8 +46,7 @@ export const SegmentedInput = memo((props: SegmentedInputProps) => {
             onPaste={(e) => handlePaste(e, onChange)}
             maxLength={1}
             className={classNames(cls.input, { [cls.error]: error }, [
-              cls.main,
-              cls.segment
+              cls.main
             ])}
             inputMode={inputMode}
             key={index}

@@ -1,10 +1,12 @@
-import { TCalendarView } from '../Calendar'
 import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
+import { TCalendarView } from '../../model/types/calendar'
+
 import {
   formatMonth,
   formatYear,
   formatYearRange
 } from '@/shared/lib/date/format'
+import { getNextView } from '@/shared/ui/Calendar/model/utils/getNextView'
 
 interface UseCalendarControlsParams {
   calendarDate: Date
@@ -18,11 +20,7 @@ export const useCalendarControls = (params: UseCalendarControlsParams) => {
   const { view, initialView, setView, calendarDate, setCalendarDate } = params
 
   const handleView = useCallback(() => {
-    setView((prev) => {
-      if (prev === 'days') return 'months'
-      if (prev === 'months') return 'years'
-      return initialView
-    })
+    setView(getNextView(initialView, 'prev'))
   }, [initialView])
 
   const headerLabel = useMemo(() => {

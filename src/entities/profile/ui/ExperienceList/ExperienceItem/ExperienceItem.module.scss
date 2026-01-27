@@ -1,4 +1,25 @@
 .experienceItem {
   display: grid;
   gap: 10px;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'position period'
+    'company period'
+    'description description';
+}
+
+.position {
+  grid-area: position;
+}
+
+.company {
+  grid-area: company;
+}
+
+.description {
+  grid-area: description;
+}
+
+.period {
+  grid-area: period;
 }

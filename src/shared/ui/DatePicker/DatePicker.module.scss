@@ -1,11 +1,33 @@
 .datePicker {
-  position: absolute;
-  width: 500px;
-  margin: 0 auto;
-  z-index: 10;
+  position: relative;
+
+  &:not(.readOnly) {
+    &.days {
+      min-width: 260px;
+    }
+    &.months {
+      min-width: 220px;
+    }
+
+    &.years {
+      min-width: 90px;
+    }
+  }
+}
+
+.button {
+  height: 100%;
+
+  &.isFocus {
+    border-color: var(--accent-color);
+  }
 }
 
 .calendar {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateY(calc(100% + 10px));
   visibility: hidden;
 
   &.isActive {

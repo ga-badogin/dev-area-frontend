@@ -2,7 +2,7 @@
 
 @mixin field($height: auto) {
   &.main {
-    height: $height;
+    //height: $height;
     @include block;
 
     &:focus {

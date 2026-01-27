@@ -2,31 +2,34 @@
 @use '@/shared/styles/block' as *;
 
 .button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
+  width: 100%;
   @include font;
 
-  &.main {
-    width: 100%;
-    height: var(--ui-height);
-    color: var(--light-font-color);
-    background-color: var(--accent-color);
-    border-radius: var(--ui-border-radius);
+  &:not(.readOnly) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+
+    &.main {
+      height: var(--ui-height);
+      color: var(--light-font-color);
+      background-color: var(--accent-color);
+      border-radius: var(--ui-border-radius);
+    }
+
+    &.outline {
+      @include block;
+    }
+
+    &:disabled {
+      opacity: var(--disabled-opacity);
+    }
   }
 
-  &.outline {
-    width: 100%;
-    @include block;
-  }
-
+  &.readOnly,
   &.clear {
     width: fit-content;
     height: fit-content;
-  }
-
-  &:disabled {
-    opacity: var(--disabled-opacity);
   }
 }

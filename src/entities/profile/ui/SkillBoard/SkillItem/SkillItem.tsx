@@ -9,20 +9,26 @@ import { IProfileForm } from '../../../model/types/profileApi'
 
 interface SkillItemProps {
   index: number
+  onRemove?: () => void
 }
 
 export const SkillItem = memo((props: SkillItemProps) => {
-  const { index } = props
+  const { index, onRemove } = props
 
   const isEdit = !useIsEdit()
 
   const { register } = useFormContext<IProfileForm>()
 
   return (
-    <Block theme={BlockTheme.SMALL} className={cls.skillItem}>
+    <Block
+      theme={BlockTheme.SMALL}
+      handleCross={!isEdit ? onRemove : undefined}
+      className={cls.skillItem}
+    >
       <Input
         readOnly={isEdit}
         theme={FieldTheme.MINIMAL}
+        className={cls.input}
         {...register(`skill.${index}.name`)}
       />
     </Block>

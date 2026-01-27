@@ -86,7 +86,7 @@ export const AuthFormTemplate = typedMemo(
           />
         )}
 
-        <Button isLoading={isSubmitting} className={cls.btn}>
+        <Button type="submit" isLoading={isSubmitting} className={cls.btn}>
           {authRoutesContent[pathname].btn}
         </Button>
       </form>

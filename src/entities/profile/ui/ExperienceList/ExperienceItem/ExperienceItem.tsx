@@ -31,6 +31,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
       handleCross={!isEdit ? onRemove : undefined}
     >
       <Input
+        className={cls.position}
         theme={FieldTheme.MINIMAL}
         size={Sizes.L}
         readOnly={isEdit}
@@ -38,6 +39,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
         {...register(`experience.${index}.position`)}
       />
       <Input
+        className={cls.company}
         theme={FieldTheme.MINIMAL}
         size={Sizes.M}
         readOnly={isEdit}
@@ -45,8 +47,10 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
         {...register(`experience.${index}.company`)}
       />
       <Textarea
+        className={cls.description}
         size={Sizes.S}
         readOnly={isEdit}
+        error={errors.experience?.[index]?.description?.message}
         {...register(`experience.${index}.description`)}
       />
       <Controller
@@ -59,12 +63,16 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
           }
         }) => (
           <DatePicker
-            view="months"
+            className={cls.period}
+            mode="range"
+            initialView="months"
             value={{
               firstDate: new Date(firstDate),
               secondDate: secondDate ? new Date(secondDate) : null
             }}
             onSelect={onSelect}
+            isFutureDateDisabled
+            readOnly={isEdit}
           />
         )}
       />

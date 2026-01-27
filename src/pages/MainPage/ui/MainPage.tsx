@@ -13,7 +13,8 @@ export const MainPage = memo((props: MainPageProps) => {
 
   return (
     <Page className={classNames(cls.mainPage, {}, [className])}>
-      <DatePicker view="months" mode="range" />
+      {/*<DatePicker initialView="months" mode="range" isFutureDateDisabled />*/}
+      MAIN PAGE
     </Page>
   )
 })

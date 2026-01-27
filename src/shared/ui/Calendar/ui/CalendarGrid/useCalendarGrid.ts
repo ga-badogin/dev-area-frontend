@@ -1,18 +1,18 @@
+import { capitalize } from '@/shared/lib/date/format'
+import { TCalendarView, TSelectedDate } from '../../model/types/calendar'
 import { useMemo } from 'react'
-import { TCalendarView, TSelectedDate } from '../Calendar'
 import {
   isSameDay,
   isSameMonth,
   isSameYear,
   TSameFunc
-} from '../../../lib/date/compare'
+} from '../../../../lib/date/compare'
 import {
   isFutureDay,
   isFutureMonth,
   isFutureYear,
   TFutureFunc
-} from '../../../lib/date/future'
-import { capitalize } from '@/shared/lib/date/format'
+} from '../../../../lib/date/future'
 
 interface IDateItem {
   date: Date

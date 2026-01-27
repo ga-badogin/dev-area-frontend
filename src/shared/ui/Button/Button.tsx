@@ -15,6 +15,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: ValueOf<typeof ButtonTheme>
   size?: ValueOf<typeof Sizes>
   isLoading?: boolean
+  readOnly?: boolean
 }
 
 export const Button = memo((props: ButtonProps) => {
@@ -25,13 +26,18 @@ export const Button = memo((props: ButtonProps) => {
     type = 'button',
     children,
     isLoading,
+    readOnly = false,
     ...otherProps
   } = props
 
   return (
     <button
-      className={classNames(cls.button, {}, [className, cls[theme], cls[size]])}
-      disabled={isLoading}
+      className={classNames(cls.button, { [cls.readOnly]: readOnly }, [
+        cls[theme],
+        cls[size],
+        className
+      ])}
+      disabled={isLoading || readOnly}
       type={type}
       {...otherProps}
     >

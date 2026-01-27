@@ -3,3 +3,5 @@ export type TKeyWithParams<T> = {
 }[keyof T]
 
 export type ValueOf<T> = T[keyof T]
+
+export type MaybeArray<T> = T | T[]

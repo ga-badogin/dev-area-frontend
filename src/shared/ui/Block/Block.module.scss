@@ -15,25 +15,41 @@
     width: fit-content;
   }
 
-  &:hover {
-    .cross {
-      visibility: visible;
-    }
+  &:hover > .deleteBtn {
+    visibility: visible;
   }
 }
 
-.title {
+.panel {
   position: absolute;
   left: 0;
   top: 0;
+  width: 100%;
   transform: translateY(calc(-100% - 15px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  visibility: hidden;
+}
+
+.addBtn {
 }
 
 .cross {
   width: 20px;
   fill: var(--error-color);
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  visibility: hidden;
+}
+
+.plus {
+  width: 20px;
+  fill: var(--accent-color);
 }

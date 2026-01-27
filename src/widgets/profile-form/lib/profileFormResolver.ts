@@ -18,6 +18,13 @@ export const profileFormResolver: Resolver<IProfileForm> = (values) => {
     }
   }
 
+  if (!values.bio || values.bio.trim() === '') {
+    errors.bio = {
+      type: 'required',
+      message: 'Описание обязательно обязательна'
+    }
+  }
+
   values.experience.forEach((exp, index) => {
     if (!exp.company || exp.company.trim() === '') {
       errors[`experience.${index}.company`] = {

@@ -14,24 +14,6 @@
   background-color: var(--primary-color);
   padding: 15px;
   margin-top: 20px;
-
-  &:hover {
-    .deleteBtn {
-      visibility: visible;
-    }
-  }
-}
-
-.cross {
-  width: 20px;
-  fill: var(--error-color);
-}
-
-.deleteBtn {
-  visibility: hidden;
-  position: absolute;
-  top: 10px;
-  right: 10px;
 }
 
 @keyframes notificationSlideIn {

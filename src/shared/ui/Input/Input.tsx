@@ -11,7 +11,6 @@ import { useFocus } from '@/shared/lib/hooks/useFocus/useFocus'
 import { FieldTheme, Sizes } from '@/shared/consts/ui'
 import {
   FC,
-  ForwardedRef,
   forwardRef,
   HTMLInputTypeAttribute,
   InputHTMLAttributes,
@@ -21,20 +20,7 @@ import {
   useRef,
   useState
 } from 'react'
-
-const setRefs =
-  <T,>(...refs: Array<ForwardedRef<T>>) =>
-  (node: T | null) => {
-    refs.forEach((ref) => {
-      if (!ref) return
-
-      if (typeof ref === 'function') {
-        ref(node)
-      } else {
-        ref.current = node
-      }
-    })
-  }
+import { setRefs } from '@/shared/lib/refs/setRefs'
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
