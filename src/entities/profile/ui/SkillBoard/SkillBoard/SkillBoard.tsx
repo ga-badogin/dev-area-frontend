@@ -21,7 +21,7 @@ export const SkillBoard = memo((props: SkillBoardProps) => {
   return (
     <Block
       className={classNames(cls.skillBoard, {}, [className])}
-      title="Skills"
+      title="Навыки"
       handleAdd={() => append(EMPTY_SKILL)}
     >
       {fields.map((field, index) => (

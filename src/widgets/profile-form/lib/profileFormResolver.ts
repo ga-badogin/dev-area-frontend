@@ -25,30 +25,48 @@ export const profileFormResolver: Resolver<IProfileForm> = (values) => {
     }
   }
 
+  if (!errors.experience) {
+    errors.experience = []
+  }
+
   values.experience.forEach((exp, index) => {
+    if (!errors.experience[index]) {
+      errors.experience[index] = {}
+    }
+
     if (!exp.company || exp.company.trim() === '') {
-      errors[`experience.${index}.company`] = {
+      errors.experience[index].company = {
         type: 'required',
         message: 'Компания обязательна'
       }
     }
+
     if (!exp.position || exp.position.trim() === '') {
-      errors[`experience.${index}.position`] = {
+      errors.experience[index].position = {
         type: 'required',
         message: 'Должность обязательна'
       }
     }
   })
 
+  if (!errors.education) {
+    errors.education = []
+  }
+
   values.education.forEach((ed, index) => {
+    if (!errors.education[index]) {
+      errors.education[index] = {}
+    }
+
     if (!ed.institution || ed.institution.trim() === '') {
-      errors[`education.${index}.institution`] = {
+      errors.education[index].institution = {
         type: 'required',
         message: 'Институт обязателен'
       }
     }
+
     if (!ed.speciality || ed.speciality.trim() === '') {
-      errors[`education.${index}.speciality`] = {
+      errors.education[index].speciality = {
         type: 'required',
         message: 'Специальность обязательна'
       }

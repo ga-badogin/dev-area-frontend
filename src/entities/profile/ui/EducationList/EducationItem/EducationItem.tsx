@@ -35,6 +35,7 @@ export const EducationItem = memo((props: EducationItemProps) => {
         size={Sizes.L}
         readOnly={isEdit}
         error={errors.education?.[index]?.speciality?.message}
+        placeholder="Специальность"
         {...register(`education.${index}.speciality`)}
       />
       <Input
@@ -43,6 +44,7 @@ export const EducationItem = memo((props: EducationItemProps) => {
         size={Sizes.M}
         readOnly={isEdit}
         error={errors.education?.[index]?.institution?.message}
+        placeholder="Учебное заведение"
         {...register(`education.${index}.institution`)}
       />
       <Controller
@@ -59,7 +61,7 @@ export const EducationItem = memo((props: EducationItemProps) => {
             mode="range"
             initialView="months"
             value={{
-              firstDate: new Date(firstDate),
+              firstDate: firstDate ? new Date(firstDate) : null,
               secondDate: secondDate ? new Date(secondDate) : null
             }}
             readOnly={isEdit}

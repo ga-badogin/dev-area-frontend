@@ -5,7 +5,7 @@ export const EMPTY_EXPERIENCE: Omit<IExperience, 'id'> = {
   position: '',
   description: '',
   period: {
-    firstDate: '',
+    firstDate: null,
     secondDate: null
   }
 }
@@ -14,7 +14,7 @@ export const EMPTY_EDUCATION: Omit<IEducation, 'id'> = {
   institution: '',
   speciality: '',
   period: {
-    firstDate: '',
+    firstDate: null,
     secondDate: null
   }
 }

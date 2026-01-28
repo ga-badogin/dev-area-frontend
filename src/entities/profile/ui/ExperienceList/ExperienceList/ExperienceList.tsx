@@ -17,7 +17,7 @@ export const ExperienceList = memo((props: ExperienceProps) => {
 
   const isEdit = useIsEdit()
 
-  const { control } = useFormContext<IProfileForm>()
+  const { control, trigger } = useFormContext<IProfileForm>()
 
   const { fields, remove, append } = useFieldArray({
     control,
@@ -27,7 +27,7 @@ export const ExperienceList = memo((props: ExperienceProps) => {
   return (
     <Block
       className={classNames(cls.experience, {}, [className])}
-      title="Experience"
+      title="Опыт"
       theme={BlockTheme.CLEAR}
       handleAdd={isEdit ? () => append(EMPTY_EXPERIENCE) : undefined}
     >

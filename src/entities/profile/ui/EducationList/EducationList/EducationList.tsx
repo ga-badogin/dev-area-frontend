@@ -24,7 +24,7 @@ export const EducationList = memo((props: EducationListProps) => {
   return (
     <Block
       className={classNames(cls.educationList, {}, [className])}
-      title="Education"
+      title="Образование"
       theme={BlockTheme.CLEAR}
       handleAdd={() => append(EMPTY_EDUCATION)}
     >

@@ -29,6 +29,7 @@ export const SkillItem = memo((props: SkillItemProps) => {
         readOnly={isEdit}
         theme={FieldTheme.MINIMAL}
         className={cls.input}
+        placeholder="Навык"
         {...register(`skill.${index}.name`)}
       />
     </Block>

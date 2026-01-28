@@ -31,7 +31,7 @@ export interface ISkill {
 
 interface IPeriod {
   period: {
-    firstDate: string
+    firstDate: string | null
     secondDate: string | null
   }
 }

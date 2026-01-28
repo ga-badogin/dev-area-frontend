@@ -36,6 +36,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
         size={Sizes.L}
         readOnly={isEdit}
         error={errors.experience?.[index]?.position?.message}
+        placeholder="Должность"
         {...register(`experience.${index}.position`)}
       />
       <Input
@@ -44,6 +45,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
         size={Sizes.M}
         readOnly={isEdit}
         error={errors.experience?.[index]?.company?.message}
+        placeholder="Компания"
         {...register(`experience.${index}.company`)}
       />
       <Textarea
@@ -51,6 +53,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
         size={Sizes.S}
         readOnly={isEdit}
         error={errors.experience?.[index]?.description?.message}
+        placeholder="Описание"
         {...register(`experience.${index}.description`)}
       />
       <Controller
@@ -67,7 +70,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
             mode="range"
             initialView="months"
             value={{
-              firstDate: new Date(firstDate),
+              firstDate: firstDate ? new Date(firstDate) : null,
               secondDate: secondDate ? new Date(secondDate) : null
             }}
             onSelect={onSelect}

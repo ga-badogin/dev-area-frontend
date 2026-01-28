@@ -1,33 +1,43 @@
 import cls from './ProfileCard.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { IProfile, IProfileForm } from '../../model/types/profileApi'
-import { Icon } from '@/shared/ui/Icon/Icon'
+import { IProfileForm } from '../../model/types/profileApi'
 import { Input } from '@/shared/ui/Input/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
 import { FieldTheme, Sizes } from '@/shared/consts/ui'
-import { useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import { useIsEdit } from '../../model/selectors/getIsEdit'
+import { ImageUploader } from '@/shared/ui/ImageUploader/ImageUploader'
 
 interface ProfileCardProps {
   className?: string
-  profile: IProfile
 }
 
 export const ProfileCard = memo((props: ProfileCardProps) => {
-  const { className, profile } = props
+  const { className } = props
 
   const isEdit = !useIsEdit()
 
   const {
     register,
+    control,
     formState: { errors }
   } = useFormContext<IProfileForm>()
 
   return (
     <div className={classNames(cls.profileCard, {}, [className])}>
-      <Icon className={cls.icon} size="100px" src={profile.avatarUrl} />
+      <Controller
+        name="avatarUrl"
+        control={control}
+        render={({ field }) => (
+          <ImageUploader
+            value={field.value}
+            onChange={field.onChange}
+            className={cls.icon}
+          />
+        )}
+      />
 
       <div className={cls.info}>
         <Input
@@ -35,6 +45,7 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
           size={Sizes.XL}
           readOnly={isEdit}
           error={errors.firstName?.message}
+          placeholder="Имя"
           {...register('firstName')}
         />
         <Input
@@ -42,6 +53,7 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
           size={Sizes.XL}
           readOnly={isEdit}
           error={errors.lastName?.message}
+          placeholder="Фамилия"
           {...register('lastName')}
         />
         <Input
@@ -49,14 +61,16 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
           size={Sizes.M}
           readOnly={isEdit}
           error={errors.title?.message}
+          placeholder="Специальность"
           {...register('title')}
         />
       </div>
 
-      <Block className={cls.block} theme={BlockTheme.CLEAR} title="About">
+      <Block className={cls.block} theme={BlockTheme.CLEAR} title="О себе">
         <Textarea
           readOnly={isEdit}
           error={errors.bio?.message}
+          placeholder="Описание"
           {...register('bio')}
         />
       </Block>

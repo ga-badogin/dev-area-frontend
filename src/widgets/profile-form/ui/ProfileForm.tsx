@@ -35,7 +35,7 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
   }
 
   const methods = useForm<IProfileForm>({
-    mode: 'onChange',
+    mode: 'onSubmit',
     resolver: profileFormResolver
   })
 
@@ -55,7 +55,7 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
         onSubmit={methods.handleSubmit(onSubmit)}
         className={classNames(cls.profileForm, {}, [className])}
       >
-        <ProfileCard profile={profile} />
+        <ProfileCard />
         <ExperienceList />
         <EducationList />
         <SkillBoard />
