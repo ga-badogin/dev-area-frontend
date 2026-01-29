@@ -2,7 +2,7 @@ import cls from './Button.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ButtonHTMLAttributes, memo } from 'react'
 import { Loader } from '../Loader/Loader'
-import { ValueOf } from '@/shared/types'
+import { Mods, ValueOf } from '@/shared/types'
 import { Sizes } from '@/shared/consts/ui'
 
 export const ButtonTheme = {
@@ -16,6 +16,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ValueOf<typeof Sizes>
   isLoading?: boolean
   readOnly?: boolean
+  isAccent?: boolean
 }
 
 export const Button = memo((props: ButtonProps) => {
@@ -27,12 +28,15 @@ export const Button = memo((props: ButtonProps) => {
     children,
     isLoading,
     readOnly = false,
+    isAccent,
     ...otherProps
   } = props
 
+  const mods: Mods = { [cls.readOnly]: readOnly, [cls.accent]: isAccent }
+
   return (
     <button
-      className={classNames(cls.button, { [cls.readOnly]: readOnly }, [
+      className={classNames(cls.button, mods, [
         cls[theme],
         cls[size],
         className

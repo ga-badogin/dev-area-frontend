@@ -16,13 +16,3 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
-.button {
-  &.selected {
-    background-color: var(--accent-color);
-  }
-
-  &.today {
-    border-color: var(--accent-color);
-  }
-}

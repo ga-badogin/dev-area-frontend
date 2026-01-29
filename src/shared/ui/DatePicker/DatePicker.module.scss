@@ -25,12 +25,12 @@
 
 .calendar {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  transform: translateY(calc(100% + 10px));
-  visibility: hidden;
+  left: 0;
+  top: 0;
+  transform: translateX(calc(-100% - 10px));
+  display: none;
 
   &.isActive {
-    visibility: visible;
+    display: block;
   }
 }

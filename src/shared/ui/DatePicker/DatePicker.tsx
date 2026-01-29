@@ -54,7 +54,7 @@ export const DatePicker = memo((props: DatePickerProps) => {
     }[initialView]
 
     if (!secondDate) {
-      return format(firstDate)
+      return `${format(firstDate)} / До сегодня`
     }
 
     return `${format(firstDate)} / ${format(secondDate)}`

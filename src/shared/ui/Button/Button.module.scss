@@ -25,6 +25,10 @@
     &:disabled {
       opacity: var(--disabled-opacity);
     }
+
+    &.accent {
+      background-color: var(--accent-color);
+    }
   }
 
   &.readOnly,

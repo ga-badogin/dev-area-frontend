@@ -1,8 +1,9 @@
 @use '@/shared/styles/block' as *;
 
 .block {
+  position: relative;
+
   &:has(.title) {
-    position: relative;
     margin-top: 55px;
   }
 

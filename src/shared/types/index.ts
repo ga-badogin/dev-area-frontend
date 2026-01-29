@@ -5,3 +5,5 @@ export type TKeyWithParams<T> = {
 export type ValueOf<T> = T[keyof T]
 
 export type MaybeArray<T> = T | T[]
+
+export type Mods = Record<string, boolean | string | undefined>

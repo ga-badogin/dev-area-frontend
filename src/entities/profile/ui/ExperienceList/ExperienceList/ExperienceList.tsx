@@ -17,7 +17,7 @@ export const ExperienceList = memo((props: ExperienceProps) => {
 
   const isEdit = useIsEdit()
 
-  const { control, trigger } = useFormContext<IProfileForm>()
+  const { control } = useFormContext<IProfileForm>()
 
   const { fields, remove, append } = useFieldArray({
     control,

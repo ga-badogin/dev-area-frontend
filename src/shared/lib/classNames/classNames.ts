@@ -1,4 +1,4 @@
-type Mods = Record<string, boolean | string | undefined>
+import { Mods } from '@/shared/types'
 
 export function classNames(
   cls: string,
