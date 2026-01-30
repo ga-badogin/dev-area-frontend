@@ -1,20 +1,33 @@
 import { rtkApi } from '@/shared/api/rtkApi'
+import { IProfile } from '../model/types/profileApi'
+import { IProfileForm } from '../model/types/profileForm'
 
 const profileApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
-    update: build.mutation({
+    hasProfile: build.query<boolean, void>({
       query: () => ({
+        url: '/profile/has-profile',
+        method: 'GET'
+      })
+    }),
+    getProfile: build.query<IProfile, string | undefined>({
+      query: (username) => ({
+        url: `/profile/${username || ''}`,
+        method: 'GET'
+      })
+    }),
+    updateProfile: build.mutation<IProfile, IProfileForm>({
+      query: (profile) => ({
         url: '/profile/update',
-        method: 'PATCH'
+        method: 'PATCH',
+        body: profile
       })
     })
   })
 })
 
 export const {
-  // login: { initiate: loginInitiate },
-  // register: { initiate: registerInitiate },
-  // resetPassword: { initiate: resetPasswordInitiate },
-  // checkEmailUnique: { useLazyQuery: useLazyCheckEmailUnique },
-  // checkUsernameUnique: { useLazyQuery: useLazyCheckUsernameUnique }
+  hasProfile: { useQuery: useHasProfile },
+  getProfile: { useQuery: useGetProfile },
+  updateProfile: { initiate: updateProfileInitiate }
 } = profileApi.endpoints

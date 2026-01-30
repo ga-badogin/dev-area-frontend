@@ -1,7 +1,6 @@
 import cls from './ProfileCard.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { IProfileForm } from '../../model/types/profileApi'
 import { Input } from '@/shared/ui/Input/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
@@ -9,6 +8,7 @@ import { FieldTheme, Sizes } from '@/shared/consts/ui'
 import { Controller, useFormContext } from 'react-hook-form'
 import { useIsEdit } from '../../model/selectors/getIsEdit'
 import { ImageUploader } from '@/shared/ui/ImageUploader/ImageUploader'
+import { IProfileForm } from '../../model/types/profileForm'
 
 interface ProfileCardProps {
   className?: string

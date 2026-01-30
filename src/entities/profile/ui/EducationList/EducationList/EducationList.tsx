@@ -1,11 +1,11 @@
 import cls from './EducationList.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { IProfileForm } from '../../../model/types/profileApi'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
 import { EducationItem } from '../EducationItem/EducationItem'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { EMPTY_EDUCATION } from '../../../model/consts/empty'
+import { IProfileForm } from '../../../model/types/profileForm'
 
 interface EducationListProps {
   className?: string

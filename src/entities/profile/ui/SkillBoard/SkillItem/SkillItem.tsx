@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form'
 import { Input } from '@/shared/ui/Input/Input'
 import { FieldTheme } from '@/shared/consts/ui'
 import { useIsEdit } from '../../../model/selectors/getIsEdit'
-import { IProfileForm } from '../../../model/types/profileApi'
+import { IProfileForm } from '../../../model/types/profileForm'
 
 interface SkillItemProps {
   index: number

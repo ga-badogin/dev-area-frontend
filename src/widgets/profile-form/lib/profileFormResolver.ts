@@ -49,6 +49,13 @@ export const profileFormResolver: Resolver<IProfileForm> = (values) => {
       }
     }
 
+    if (!exp.startDate) {
+      experienceErrors.startDate = {
+        type: 'required',
+        message: 'Выберите дату'
+      }
+    }
+
     if (Object.keys(experienceErrors).length > 0) {
       errors.experience ??= []
       errors.experience[index] = experienceErrors
@@ -65,6 +72,13 @@ export const profileFormResolver: Resolver<IProfileForm> = (values) => {
       educationErrors.institution = {
         type: 'required',
         message: 'Институт обязателен'
+      }
+    }
+
+    if (!ed.startDate) {
+      educationErrors.startDate = {
+        type: 'required',
+        message: 'Выберите дату'
       }
     }
 

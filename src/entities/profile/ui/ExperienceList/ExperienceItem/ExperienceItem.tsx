@@ -1,13 +1,13 @@
 import cls from './ExperienceItem.module.scss'
 import { memo } from 'react'
-import { IProfileForm } from '../../../model/types/profileApi'
 import { Input } from '@/shared/ui/Input/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { Block } from '@/shared/ui/Block/Block'
 import { FieldTheme, Sizes } from '@/shared/consts/ui'
-import { Controller, useFormContext } from 'react-hook-form'
+import { useController, useFormContext } from 'react-hook-form'
 import { useIsEdit } from '../../../model/selectors/getIsEdit'
 import { DatePicker } from '@/shared/ui/DatePicker/DatePicker'
+import { IProfileForm } from '../../../model/types/profileForm'
 
 interface ExperienceItemProps {
   index: number
@@ -24,6 +24,16 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
     control,
     formState: { errors }
   } = useFormContext<IProfileForm>()
+
+  const { field: startDate } = useController({
+    name: `experience.${index}.startDate`,
+    control
+  })
+
+  const { field: endDate } = useController({
+    name: `experience.${index}.endDate`,
+    control
+  })
 
   return (
     <Block
@@ -56,28 +66,20 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
         placeholder="Описание"
         {...register(`experience.${index}.description`)}
       />
-      <Controller
-        name={`experience.${index}.period`}
-        control={control}
-        render={({
-          field: {
-            value: { firstDate, secondDate },
-            onChange: onSelect
-          }
-        }) => (
-          <DatePicker
-            className={cls.period}
-            mode="range"
-            initialView="months"
-            value={{
-              firstDate: firstDate ? new Date(firstDate) : null,
-              secondDate: secondDate ? new Date(secondDate) : null
-            }}
-            onSelect={onSelect}
-            isFutureDateDisabled
-            readOnly={isEdit}
-          />
-        )}
+      <DatePicker
+        className={cls.period}
+        mode="range"
+        initialView="months"
+        value={{
+          firstDate: startDate.value ? new Date(startDate.value) : null,
+          secondDate: endDate.value ? new Date(endDate.value) : null
+        }}
+        onSelect={({ firstDate, secondDate }) => {
+          startDate.onChange(firstDate)
+          endDate.onChange(secondDate)
+        }}
+        isFutureDateDisabled
+        readOnly={isEdit}
       />
     </Block>
   )

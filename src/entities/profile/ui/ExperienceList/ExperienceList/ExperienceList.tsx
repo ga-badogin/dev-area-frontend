@@ -1,12 +1,12 @@
 import cls from './ExperienceList.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { IProfileForm } from '../../../model/types/profileApi'
 import { ExperienceItem } from '../ExperienceItem/ExperienceItem'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { EMPTY_EXPERIENCE } from '../../../model/consts/empty'
 import { useIsEdit } from '../../../model/selectors/getIsEdit'
+import { IProfileForm } from '../../../model/types/profileForm'
 
 interface ExperienceProps {
   className?: string

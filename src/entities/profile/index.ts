@@ -1,6 +1,11 @@
-export { useGetProfile, useHasProfile } from './model/api/profileApi'
+export {
+  useGetProfile,
+  useHasProfile,
+  updateProfileInitiate
+} from '@/entities/profile/api/profileApi'
 export type { IProfileSchema } from './model/types/profileSchema'
-export type { IProfile, IProfileForm } from './model/types/profileApi'
+export type { IProfile } from './model/types/profileApi'
+export type { IProfileForm } from './model/types/profileForm'
 export { ProfileCard } from './ui/ProfileCard/ProfileCard'
 export { ExperienceList } from './ui/ExperienceList/ExperienceList/ExperienceList'
 export { EducationList } from './ui/EducationList/EducationList/EducationList'

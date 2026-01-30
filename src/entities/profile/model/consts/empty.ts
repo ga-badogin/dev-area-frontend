@@ -1,24 +1,24 @@
-import { IEducation, IExperience, ISkill } from '../types/profileApi'
+import {
+  IEducationForm,
+  IExperienceForm,
+  ISkillForm
+} from '../types/profileForm'
 
-export const EMPTY_EXPERIENCE: Omit<IExperience, 'id'> = {
+export const EMPTY_EXPERIENCE: IExperienceForm = {
   company: '',
   position: '',
   description: '',
-  period: {
-    firstDate: null,
-    secondDate: null
-  }
+  startDate: null,
+  endDate: null
 }
 
-export const EMPTY_EDUCATION: Omit<IEducation, 'id'> = {
+export const EMPTY_EDUCATION: IEducationForm = {
   institution: '',
   speciality: '',
-  period: {
-    firstDate: null,
-    secondDate: null
-  }
+  startDate: null,
+  endDate: null
 }
 
-export const EMPTY_SKILL: Omit<ISkill, 'id'> = {
+export const EMPTY_SKILL: ISkillForm = {
   name: ''
 }

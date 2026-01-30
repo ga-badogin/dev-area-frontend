@@ -2,10 +2,10 @@ import cls from './SkillBoard.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
 import { Block } from '@/shared/ui/Block/Block'
-import { IProfileForm } from '../../../model/types/profileApi'
 import { SkillItem } from '../SkillItem/SkillItem'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { EMPTY_SKILL } from '../../../model/consts/empty'
+import { IProfileForm } from '../../../model/types/profileForm'
 
 interface SkillBoardProps {
   className?: string

@@ -2,11 +2,11 @@ import cls from './EducationItem.module.scss'
 import { memo } from 'react'
 import { Block } from '@/shared/ui/Block/Block'
 import { Input } from '@/shared/ui/Input/Input'
-import { IProfileForm } from '../../../model/types/profileApi'
 import { FieldTheme, Sizes } from '@/shared/consts/ui'
-import { Controller, useFormContext } from 'react-hook-form'
+import { useController, useFormContext } from 'react-hook-form'
 import { useIsEdit } from '../../../model/selectors/getIsEdit'
 import { DatePicker } from '@/shared/ui/DatePicker/DatePicker'
+import { IProfileForm } from '../../../model/types/profileForm'
 
 interface EducationItemProps {
   index: number
@@ -23,6 +23,16 @@ export const EducationItem = memo((props: EducationItemProps) => {
     control,
     formState: { errors }
   } = useFormContext<IProfileForm>()
+
+  const { field: startDate } = useController({
+    name: `education.${index}.startDate`,
+    control
+  })
+
+  const { field: endDate } = useController({
+    name: `education.${index}.endDate`,
+    control
+  })
 
   return (
     <Block
@@ -47,28 +57,20 @@ export const EducationItem = memo((props: EducationItemProps) => {
         placeholder="Учебное заведение"
         {...register(`education.${index}.institution`)}
       />
-      <Controller
-        name={`education.${index}.period`}
-        control={control}
-        render={({
-          field: {
-            value: { firstDate, secondDate },
-            onChange: onSelect
-          }
-        }) => (
-          <DatePicker
-            className={cls.period}
-            mode="range"
-            initialView="months"
-            value={{
-              firstDate: firstDate ? new Date(firstDate) : null,
-              secondDate: secondDate ? new Date(secondDate) : null
-            }}
-            readOnly={isEdit}
-            onSelect={onSelect}
-            isFutureDateDisabled
-          />
-        )}
+      <DatePicker
+        className={cls.period}
+        mode="range"
+        initialView="months"
+        value={{
+          firstDate: startDate.value ? new Date(startDate.value) : null,
+          secondDate: endDate.value ? new Date(endDate.value) : null
+        }}
+        onSelect={({ firstDate, secondDate }) => {
+          startDate.onChange(firstDate)
+          endDate.onChange(secondDate)
+        }}
+        isFutureDateDisabled
+        readOnly={isEdit}
       />
     </Block>
   )

@@ -2,20 +2,21 @@ import cls from './ProfileForm.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo, useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-
 import { Button } from '@/shared/ui/Button/Button'
 import { useParams } from 'react-router-dom'
+import { profileFormResolver } from '../lib/profileFormResolver'
 import {
   EducationList,
   ExperienceList,
   IProfileForm,
   ProfileCard,
   SkillBoard,
+  updateProfileInitiate,
   useGetProfile,
   useIsEdit,
   useProfileActions
 } from '@/entities/profile'
-import { profileFormResolver } from '../lib/profileFormResolver'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 
 interface ProfileFormProps {
   className?: string
@@ -26,12 +27,13 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
 
   const isEdit = useIsEdit()
   const { setIsEdit } = useProfileActions()
-
   const { username } = useParams()
+  const dispatch = useAppDispatch()
+
   const { data: profile } = useGetProfile(username)
 
   const onSubmit = (data: IProfileForm) => {
-    console.log(data)
+    dispatch(updateProfileInitiate(data))
   }
 
   const methods = useForm<IProfileForm>({
@@ -39,9 +41,15 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
     resolver: profileFormResolver
   })
 
+  const {
+    reset,
+    handleSubmit,
+    formState: { isDirty }
+  } = methods
+
   const resetForm = () => {
     if (profile) {
-      methods.reset(profile)
+      reset(profile)
     }
   }
 
@@ -52,7 +60,7 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
   return profile ? (
     <FormProvider {...methods}>
       <form
-        onSubmit={methods.handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit)}
         className={classNames(cls.profileForm, {}, [className])}
       >
         <ProfileCard />
@@ -75,7 +83,7 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
             Редактировать
           </Button>
         )}
-        <Button type="submit">Сохранить</Button>
+        {isDirty && isEdit && <Button type="submit">Сохранить</Button>}
       </form>
     </FormProvider>
   ) : undefined
