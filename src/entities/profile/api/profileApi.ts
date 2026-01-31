@@ -22,6 +22,18 @@ const profileApi = rtkApi.injectEndpoints({
         method: 'PATCH',
         body: profile
       })
+    }),
+    updateAvatar: build.mutation<boolean, File>({
+      query: (file) => {
+        const formData = new FormData()
+        formData.append('file', file)
+
+        return {
+          url: '/profile/update-avatar',
+          method: 'PUT',
+          body: formData
+        }
+      }
     })
   })
 })
@@ -29,5 +41,6 @@ const profileApi = rtkApi.injectEndpoints({
 export const {
   hasProfile: { useQuery: useHasProfile },
   getProfile: { useQuery: useGetProfile },
-  updateProfile: { initiate: updateProfileInitiate }
+  updateProfile: { initiate: updateProfileInitiate },
+  updateAvatar: { initiate: updateAvatarInitiate }
 } = profileApi.endpoints

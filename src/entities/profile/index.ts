@@ -1,7 +1,8 @@
 export {
   useGetProfile,
   useHasProfile,
-  updateProfileInitiate
+  updateProfileInitiate,
+  updateAvatarInitiate
 } from '@/entities/profile/api/profileApi'
 export type { IProfileSchema } from './model/types/profileSchema'
 export type { IProfile } from './model/types/profileApi'

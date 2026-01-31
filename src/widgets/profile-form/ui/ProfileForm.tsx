@@ -11,12 +11,12 @@ import {
   IProfileForm,
   ProfileCard,
   SkillBoard,
-  updateProfileInitiate,
   useGetProfile,
   useIsEdit,
   useProfileActions
 } from '@/entities/profile'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { updateProfile } from '@/widgets/profile-form/model/updateProfile'
 
 interface ProfileFormProps {
   className?: string
@@ -33,7 +33,7 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
   const { data: profile } = useGetProfile(username)
 
   const onSubmit = (data: IProfileForm) => {
-    dispatch(updateProfileInitiate(data))
+    dispatch(updateProfile(data))
   }
 
   const methods = useForm<IProfileForm>({
