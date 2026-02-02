@@ -1,5 +1,5 @@
 import { rtkApi } from '@/shared/api/rtkApi'
-import { IProfile } from '../model/types/profileApi'
+import { IAbout, IProfile } from '../model/types/profileApi'
 import { IProfileForm } from '../model/types/profileForm'
 
 const profileApi = rtkApi.injectEndpoints({
@@ -13,6 +13,12 @@ const profileApi = rtkApi.injectEndpoints({
     getProfile: build.query<IProfile, string | undefined>({
       query: (username) => ({
         url: `/profile/${username || ''}`,
+        method: 'GET'
+      })
+    }),
+    getSomeProfiles: build.query<IAbout[], string>({
+      query: (value) => ({
+        url: '/profile/some/profiles',
         method: 'GET'
       })
     }),
@@ -41,6 +47,7 @@ const profileApi = rtkApi.injectEndpoints({
 export const {
   hasProfile: { useQuery: useHasProfile },
   getProfile: { useQuery: useGetProfile },
+  getSomeProfiles: { useQuery: useGetProfiles },
   updateProfile: { initiate: updateProfileInitiate },
   updateAvatar: { initiate: updateAvatarInitiate }
 } = profileApi.endpoints

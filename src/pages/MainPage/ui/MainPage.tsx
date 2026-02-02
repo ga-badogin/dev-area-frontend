@@ -2,7 +2,7 @@ import cls from './MainPage.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
 import { Page } from '@/shared/ui/Page/Page'
-import { DatePicker } from '@/shared/ui/DatePicker/DatePicker'
+import { SearchProfiles } from '@/features/search-profiles'
 
 interface MainPageProps {
   className?: string
@@ -13,8 +13,7 @@ export const MainPage = memo((props: MainPageProps) => {
 
   return (
     <Page className={classNames(cls.mainPage, {}, [className])}>
-      {/*<DatePicker initialView="months" mode="range" isFutureDateDisabled />*/}
-      MAIN PAGE
+      <SearchProfiles />
     </Page>
   )
 })

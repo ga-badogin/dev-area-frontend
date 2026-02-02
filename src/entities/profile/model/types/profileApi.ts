@@ -1,4 +1,10 @@
-export interface IProfile {
+export interface IProfile extends IAbout {
+  experience: IExperience[]
+  education: IEducation[]
+  skill: ISkill[]
+}
+
+export interface IAbout {
   id: string
   userId: string
   firstName: string
@@ -6,10 +12,6 @@ export interface IProfile {
   title?: string
   bio?: string
   avatarUrl?: string
-
-  experience: IExperience[]
-  education: IEducation[]
-  skill: ISkill[]
 }
 
 export interface IExperience extends IPeriod {

@@ -1,15 +1,20 @@
 import cls from './Image.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { ImgHTMLAttributes, memo, useEffect, useState } from 'react'
+import {
+  CSSProperties,
+  ImgHTMLAttributes,
+  memo,
+  useEffect,
+  useState
+} from 'react'
 
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   className?: string
   value?: File | string
-  fallback?: string
 }
 
 export const Image = memo((props: ImageProps) => {
-  const { className, value, fallback = '', alt, ...otherProps } = props
+  const { className, value, alt, width, height, ...otherProps } = props
 
   const [src, setSrc] = useState<string | null>(null)
 
@@ -26,12 +31,19 @@ export const Image = memo((props: ImageProps) => {
     }
   }, [value])
 
+  const styles: CSSProperties = {
+    height,
+    width
+  }
+
   return (
-    <img
-      className={classNames(cls.icon, {}, [className])}
-      src={src ?? fallback}
-      alt={alt}
-      {...otherProps}
-    />
+    <div style={styles}>
+      <img
+        className={classNames(cls.image, {}, [className])}
+        src={src ?? undefined}
+        alt={alt}
+        {...otherProps}
+      />
+    </div>
   )
 })

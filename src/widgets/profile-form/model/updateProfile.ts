@@ -24,7 +24,6 @@ export const updateProfile = createAsyncThunk<
         throw new Error()
       }
     }
-
     const profileRes = await dispatch(updateProfileInitiate(profile)).unwrap()
 
     if (!profileRes) {

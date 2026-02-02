@@ -5,18 +5,19 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { Button } from '@/shared/ui/Button/Button'
 import { useParams } from 'react-router-dom'
 import { profileFormResolver } from '../lib/profileFormResolver'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { updateProfile } from '../model/updateProfile'
 import {
+  About,
   EducationList,
   ExperienceList,
+  IProfile,
   IProfileForm,
-  ProfileCard,
   SkillBoard,
   useGetProfile,
   useIsEdit,
   useProfileActions
 } from '@/entities/profile'
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { updateProfile } from '@/widgets/profile-form/model/updateProfile'
 
 interface ProfileFormProps {
   className?: string
@@ -32,8 +33,9 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
 
   const { data: profile } = useGetProfile(username)
 
-  const onSubmit = (data: IProfileForm) => {
-    dispatch(updateProfile(data))
+  const onSubmit = async (data: IProfileForm) => {
+    const res = await dispatch(updateProfile(data)).unwrap()
+    resetForm(res)
   }
 
   const methods = useForm<IProfileForm>({
@@ -47,14 +49,14 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
     formState: { isDirty }
   } = methods
 
-  const resetForm = () => {
-    if (profile) {
-      reset(profile)
+  const resetForm = (data?: IProfile) => {
+    if (data) {
+      reset(data)
     }
   }
 
   useEffect(() => {
-    resetForm()
+    resetForm(profile)
   }, [profile])
 
   return profile ? (
@@ -63,7 +65,7 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
         onSubmit={handleSubmit(onSubmit)}
         className={classNames(cls.profileForm, {}, [className])}
       >
-        <ProfileCard />
+        <About />
         <ExperienceList />
         <EducationList />
         <SkillBoard />

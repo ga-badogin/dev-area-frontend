@@ -1,7 +1,6 @@
 import { IPeriod } from './profileApi'
 
 export interface IProfileForm {
-  id: string
   firstName: string
   lastName: string
   title?: string

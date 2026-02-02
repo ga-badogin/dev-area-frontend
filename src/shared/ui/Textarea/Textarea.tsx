@@ -1,12 +1,12 @@
 import cls from './Textarea.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import {
+  ChangeEvent,
   forwardRef,
   memo,
   TextareaHTMLAttributes,
   useLayoutEffect,
-  useRef,
-  useState
+  useRef
 } from 'react'
 import { ValueOf } from '@/shared/types'
 import { FieldTheme, Sizes } from '@/shared/consts/ui'
@@ -29,40 +29,43 @@ export const Textarea = memo(
         theme = FieldTheme.MAIN,
         error,
         readOnly,
+        onChange,
         ...otherProps
       } = props
 
       const textareaRef = useRef<HTMLTextAreaElement>(null)
-      const [height, setHeight] = useState<number>(0)
+
+      const resize = () => {
+        requestAnimationFrame(() => {
+          const el = textareaRef.current
+          if (!el) return
+
+          el.style.height = 'auto'
+          el.style.height = `${el.scrollHeight}px`
+        })
+      }
+
+      const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        onChange?.(e)
+        resize()
+      }
 
       useLayoutEffect(() => {
-        if (!textareaRef.current) return
         const el = textareaRef.current
-
-        const resize = () => {
-          setHeight((prev) => {
-            const scrollHeight = el.scrollHeight
-            if (scrollHeight !== prev) {
-              console.log(height, scrollHeight)
-              return scrollHeight
-            }
-
-            return prev
-          })
-        }
+        if (!el) return
 
         const observer = new ResizeObserver(resize)
         observer.observe(el)
         return () => observer.disconnect()
-      }, [readOnly])
+      }, [])
 
       return (
         <div className={classNames(cls.wrapper, {}, [className])}>
           <textarea
+            rows={1}
             ref={setRefs(ref, textareaRef)}
-            onInput={() => console.log('input')}
             className={classNames(cls.textarea, {}, [cls[theme], cls[size]])}
-            style={{ height: height }}
+            onChange={handleChange}
             readOnly={readOnly}
             {...otherProps}
           />

@@ -1,16 +1,24 @@
 import cls from './ImageUploader.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { ChangeEvent, memo, useRef } from 'react'
+import { ChangeEvent, CSSProperties, memo, useRef } from 'react'
 import { Image } from '../Image/Image'
 
 interface ImageProps {
   className?: string
   value?: File | string
-  onChange?: (file?: File | string) => void
+  width?: string
+  height?: string
+  onChange?: (file?: File) => void
 }
 
 export const ImageUploader = memo((props: ImageProps) => {
-  const { className, value, onChange } = props
+  const {
+    className,
+    value,
+    onChange,
+    width = '250px',
+    height = '250px'
+  } = props
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -25,8 +33,16 @@ export const ImageUploader = memo((props: ImageProps) => {
     }
   }
 
+  const styles: CSSProperties = {
+    width,
+    height
+  }
+
   return (
-    <div className={classNames(cls.image, {}, [className])}>
+    <div
+      className={classNames(cls.imageUploader, {}, [className])}
+      style={styles}
+    >
       <input
         ref={inputRef}
         onChange={handleChangeFile}
@@ -36,8 +52,9 @@ export const ImageUploader = memo((props: ImageProps) => {
       />
 
       <Image
-        width="200px"
-        height="200px"
+        className={cls.image}
+        width={width}
+        height={height}
         value={value}
         alt="ImageUploader"
         onClick={openFileDialog}

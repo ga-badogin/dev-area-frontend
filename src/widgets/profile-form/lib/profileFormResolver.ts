@@ -29,6 +29,13 @@ export const profileFormResolver: Resolver<IProfileForm> = (values) => {
     }
   }
 
+  if (!values.bio || values.bio.trim() === '') {
+    errors.bio = {
+      type: 'required',
+      message: 'Описание обязательна'
+    }
+  }
+
   values.experience.forEach((exp, index) => {
     const experienceErrors: Merge<
       FieldError,
@@ -39,6 +46,13 @@ export const profileFormResolver: Resolver<IProfileForm> = (values) => {
       experienceErrors.position = {
         type: 'required',
         message: 'Должность обязательна'
+      }
+    }
+
+    if (!exp.company?.trim()) {
+      experienceErrors.company = {
+        type: 'required',
+        message: 'Компания обязательна'
       }
     }
 

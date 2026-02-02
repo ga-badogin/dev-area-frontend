@@ -2,6 +2,7 @@
 @use '@/shared/styles/font' as *;
 
 .textarea {
+  display: block;
   resize: none;
   overflow: hidden;
   width: 100%;
