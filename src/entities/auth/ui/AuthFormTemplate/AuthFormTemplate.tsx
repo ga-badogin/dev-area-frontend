@@ -3,18 +3,19 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import { Input } from '@/shared/ui/Input/Input'
 import { Button } from '@/shared/ui/Button/Button'
 import { useIsCode } from '../../model/selectors/getIsCode'
-import {
-  Controller,
-  FieldValues,
-  Path,
-  Resolver,
-  useForm
-} from 'react-hook-form'
 import { FC, HTMLInputTypeAttribute, SVGProps } from 'react'
 import { typedMemo } from '@/shared/consts/memo'
 import { useLocation } from 'react-router-dom'
 import { authRoutesContent } from '../../model/consts/content'
 import { SegmentedInput } from '@/shared/ui/SegmentedInput/SegmentedInput'
+import {
+  Controller,
+  ErrorOption,
+  FieldValues,
+  Path,
+  Resolver,
+  useForm
+} from 'react-hook-form'
 
 interface AuthFormProps<T extends FieldValues> {
   className?: string
@@ -29,6 +30,10 @@ interface AuthFormProps<T extends FieldValues> {
     placeholder: string
     type?: HTMLInputTypeAttribute
     isLoading?: boolean
+    onValidate?: (
+      value: string,
+      callback: (option: ErrorOption) => void
+    ) => void
   }[]
 }
 
@@ -40,6 +45,7 @@ export const AuthFormTemplate = typedMemo(
       control,
       register,
       handleSubmit,
+      setError,
       formState: { errors, isSubmitting }
     } = useForm<T>({
       resolver,
@@ -54,8 +60,8 @@ export const AuthFormTemplate = typedMemo(
         onSubmit={handleSubmit(onSubmit)}
       >
         {!isCode ? (
-          inputs.map(({ name, isLoading, ...restArgs }, index) => {
-            const { ref, ...restRegister } = register(name)
+          inputs.map(({ name, isLoading, onValidate, ...restArgs }, index) => {
+            const { ref, onChange, ...restRegister } = register(name)
 
             return (
               <Input
@@ -63,6 +69,12 @@ export const AuthFormTemplate = typedMemo(
                 className={cls.input}
                 error={errors?.[name]?.message?.toString()}
                 isLoading={isLoading && !isSubmitting}
+                onChange={(e) => {
+                  onChange(e)
+                  onValidate?.(e.target.value, (option) =>
+                    setError(name, option)
+                  )
+                }}
                 ref={ref}
                 {...restRegister}
                 {...restArgs}

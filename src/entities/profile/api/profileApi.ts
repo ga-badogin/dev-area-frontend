@@ -16,9 +16,9 @@ const profileApi = rtkApi.injectEndpoints({
         method: 'GET'
       })
     }),
-    getSomeProfiles: build.query<IAbout[], string>({
+    searchProfile: build.query<IAbout[], string>({
       query: (value) => ({
-        url: '/profile/some/profiles',
+        url: `/profile/search?search=${value}`,
         method: 'GET'
       })
     }),
@@ -47,7 +47,7 @@ const profileApi = rtkApi.injectEndpoints({
 export const {
   hasProfile: { useQuery: useHasProfile },
   getProfile: { useQuery: useGetProfile },
-  getSomeProfiles: { useQuery: useGetProfiles },
+  searchProfile: { useQuery: useSearchProfile },
   updateProfile: { initiate: updateProfileInitiate },
   updateAvatar: { initiate: updateAvatarInitiate }
 } = profileApi.endpoints

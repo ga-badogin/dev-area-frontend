@@ -1,9 +1,9 @@
 import cls from './SearchProfiles.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ChangeEvent, memo, useState } from 'react'
-import { ProfileCard, useGetProfiles } from '@/entities/profile'
+import { ProfileCard, useSearchProfile } from '@/entities/profile'
 import { Input } from '@/shared/ui/Input/Input'
-import SerachIcon from '@/shared/assets/icons/SearchIcon.svg'
+import SearchIcon from '@/shared/assets/icons/SearchIcon.svg'
 import { useDebounce } from '@/shared/lib/hooks/useDebounce/useDebounce'
 
 interface SearchProfilesProps {
@@ -15,7 +15,7 @@ export const SearchProfiles = memo((props: SearchProfilesProps) => {
 
   const [searchValue, setSearchValue] = useState<string>('')
 
-  const { data: profiles } = useGetProfiles(searchValue)
+  const { data: profiles } = useSearchProfile(searchValue)
 
   const searchProfiles = useDebounce((e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value)
@@ -23,7 +23,11 @@ export const SearchProfiles = memo((props: SearchProfilesProps) => {
 
   return (
     <div className={classNames(cls.searchProfiles, {}, [className])}>
-      <Input className={cls.input} Icon={SerachIcon} />
+      <Input
+        onChange={searchProfiles}
+        className={cls.input}
+        Icon={SearchIcon}
+      />
       <div className={cls.list}>
         {profiles?.map((profile) => (
           <ProfileCard profile={profile} key={profile.id} />

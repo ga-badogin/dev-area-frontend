@@ -12,6 +12,11 @@ import {
   useLazyCheckUsernameUnique
 } from '@/entities/auth'
 import { useDebounce } from '@/shared/lib/hooks/useDebounce/useDebounce'
+import {
+  validateEmail,
+  validateUsername
+} from '@/shared/lib/react-hook-form/validators'
+import { ErrorOption } from 'react-hook-form'
 
 interface RegisterProps {
   className?: string
@@ -26,17 +31,25 @@ const RegisterForm = memo((props: RegisterProps) => {
   const [checkUsernameUnique, { isFetching: isUsernameFetching }] =
     useLazyCheckUsernameUnique()
 
-  const checkFieldsUnique = useDebounce(
-    async (
-      field: 'email' | 'username',
-      value: string,
-      callback: () => void
-    ) => {
-      const { data } = await (
-        field === 'email' ? checkEmailUnique : checkUsernameUnique
-      )(value)
-      if (data !== undefined && !data) {
-        callback()
+  const checkEmail = useDebounce(
+    async (value: string, callback: (option: ErrorOption) => void) => {
+      if (!validateEmail(value)) {
+        const { data } = await checkEmailUnique(value)
+        if (data !== undefined && !data) {
+          callback({ message: 'Почта занята другим челиком' })
+        }
+      }
+    },
+    300
+  )
+
+  const checkUsername = useDebounce(
+    async (value: string, callback: (option: ErrorOption) => void) => {
+      if (!validateUsername(value)) {
+        const { data } = await checkUsernameUnique(value)
+        if (data !== undefined && !data) {
+          callback({ message: 'Имя пользователя занято другим челиком' })
+        }
       }
     },
     300
@@ -44,7 +57,7 @@ const RegisterForm = memo((props: RegisterProps) => {
 
   return (
     <AuthFormTemplate
-      resolver={registerFormResolver(checkFieldsUnique, isCode)}
+      resolver={registerFormResolver(isCode)}
       onSubmit={(data) => dispatch(register(data))}
       codeName={'code'}
       inputs={[
@@ -52,13 +65,15 @@ const RegisterForm = memo((props: RegisterProps) => {
           name: 'username',
           Icon: UserIcon,
           placeholder: 'Имя пользователя',
-          isLoading: isUsernameFetching
+          isLoading: isUsernameFetching,
+          onValidate: checkUsername
         },
         {
           name: 'email',
           Icon: MailIcon,
           placeholder: 'Почта',
-          isLoading: isEmailFetching
+          isLoading: isEmailFetching,
+          onValidate: checkEmail
         },
         {
           name: 'password',

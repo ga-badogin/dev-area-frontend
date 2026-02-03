@@ -8,72 +8,20 @@ import {
 } from '@/shared/lib/react-hook-form/validators'
 
 export const registerFormResolver =
-  (
-    checkFieldsUnique: (
-      args: [field: 'email' | 'username', value: string, callback: () => void],
-      isValid: boolean
-    ) => Promise<void> | void,
-    isCode: boolean | undefined
-  ): Resolver<IRegisterReqBody> =>
-  async (values, _, options) => {
+  (isCode: boolean | undefined): Resolver<IRegisterReqBody> =>
+  (values) => {
     const errors: FieldErrors<IRegisterReqBody> = {}
-    const currentField = options.names
-
-    console.log('\nRESOLVER')
 
     if (!isCode) {
-      console.log('FORM')
+      const usernameError = validateUsername(values.username)
+      if (usernameError) errors.username = usernameError
 
-      // username
-      if (currentField?.includes('username')) {
-        console.log('username')
-        const usernameError = validateUsername(values.username)
-        if (usernameError) errors.username = usernameError
+      const emailError = validateEmail(values.email)
+      if (emailError) errors.email = emailError
 
-        await checkFieldsUnique(
-          [
-            'username',
-            values.username,
-            () =>
-              (errors.username = {
-                type: 'required',
-                message: 'Имя занято другим челиком'
-              })
-          ],
-          !Boolean(usernameError)
-        )
-      }
-
-      //email
-      if (currentField?.includes('email')) {
-        console.log('email')
-        const emailError = validateEmail(values.email)
-        if (emailError) errors.email = emailError
-
-        await checkFieldsUnique(
-          [
-            'email',
-            values.email,
-            () =>
-              (errors.email = {
-                type: 'required',
-                message: 'Почта занята другим челиком'
-              })
-          ],
-          !Boolean(emailError)
-        )
-      }
-
-      // password
       const passwordError = validatePassword(values.password, true)
-      if (passwordError) {
-        console.log('password')
-        errors.password = passwordError
-      }
+      if (passwordError) errors.password = passwordError
     } else {
-      console.log('CODE')
-
-      // code
       const codeError = validateCode(values.code)
       if (codeError) errors.code = codeError
     }
