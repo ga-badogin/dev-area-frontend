@@ -12,7 +12,7 @@ const profileApi = rtkApi.injectEndpoints({
     }),
     getProfile: build.query<IProfile, string | undefined>({
       query: (username) => ({
-        url: `/profile/${username || ''}`,
+        url: `/profile/get/${username || ''}`,
         method: 'GET'
       })
     }),

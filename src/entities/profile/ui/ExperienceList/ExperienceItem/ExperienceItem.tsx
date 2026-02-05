@@ -68,6 +68,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
       />
       <DatePicker
         className={cls.period}
+        error={errors.experience?.[index]?.startDate?.message}
         mode="range"
         initialView="months"
         value={{

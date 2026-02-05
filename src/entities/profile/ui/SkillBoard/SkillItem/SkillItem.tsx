@@ -17,7 +17,10 @@ export const SkillItem = memo((props: SkillItemProps) => {
 
   const isEdit = !useIsEdit()
 
-  const { register } = useFormContext<IProfileForm>()
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext<IProfileForm>()
 
   return (
     <Block
@@ -30,6 +33,8 @@ export const SkillItem = memo((props: SkillItemProps) => {
         theme={FieldTheme.MINIMAL}
         className={cls.input}
         placeholder="Навык"
+        isDynamic
+        isError={Boolean(errors.skill?.[index]?.name?.message)}
         {...register(`skill.${index}.name`)}
       />
     </Block>

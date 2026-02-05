@@ -17,6 +17,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean
   readOnly?: boolean
   isAccent?: boolean
+  error?: string
 }
 
 export const Button = memo((props: ButtonProps) => {
@@ -29,10 +30,15 @@ export const Button = memo((props: ButtonProps) => {
     isLoading,
     readOnly = false,
     isAccent,
+    error,
     ...otherProps
   } = props
 
-  const mods: Mods = { [cls.readOnly]: readOnly, [cls.accent]: isAccent }
+  const mods: Mods = {
+    [cls.readOnly]: readOnly,
+    [cls.accent]: isAccent,
+    [cls.error]: error
+  }
 
   return (
     <button

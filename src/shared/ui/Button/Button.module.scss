@@ -20,6 +20,10 @@
 
     &.outline {
       @include block;
+
+      &.error {
+        border-color: var(--error-color);
+      }
     }
 
     &:disabled {

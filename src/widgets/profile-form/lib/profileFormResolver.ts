@@ -29,13 +29,6 @@ export const profileFormResolver: Resolver<IProfileForm> = (values) => {
     }
   }
 
-  if (!values.bio || values.bio.trim() === '') {
-    errors.bio = {
-      type: 'required',
-      message: 'Описание обязательна'
-    }
-  }
-
   values.experience.forEach((exp, index) => {
     const experienceErrors: Merge<
       FieldError,
@@ -56,8 +49,8 @@ export const profileFormResolver: Resolver<IProfileForm> = (values) => {
       }
     }
 
-    if (!exp.company?.trim()) {
-      experienceErrors.company = {
+    if (!exp.description?.trim()) {
+      experienceErrors.description = {
         type: 'required',
         message: 'Компания обязательна'
       }
@@ -89,17 +82,17 @@ export const profileFormResolver: Resolver<IProfileForm> = (values) => {
       }
     }
 
-    if (!ed.startDate) {
-      educationErrors.startDate = {
-        type: 'required',
-        message: 'Выберите дату'
-      }
-    }
-
     if (!ed.speciality?.trim()) {
       educationErrors.speciality = {
         type: 'required',
         message: 'Специальность обязательна'
+      }
+    }
+
+    if (!ed.startDate) {
+      educationErrors.startDate = {
+        type: 'required',
+        message: 'Выберите дату'
       }
     }
 

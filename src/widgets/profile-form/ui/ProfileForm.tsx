@@ -11,7 +11,6 @@ import {
   About,
   EducationList,
   ExperienceList,
-  IProfile,
   IProfileForm,
   SkillBoard,
   useGetProfile,
@@ -35,7 +34,7 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
 
   const onSubmit = async (data: IProfileForm) => {
     const res = await dispatch(updateProfile(data)).unwrap()
-    resetForm(res)
+    reset(res)
   }
 
   const methods = useForm<IProfileForm>({
@@ -49,14 +48,8 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
     formState: { isDirty }
   } = methods
 
-  const resetForm = (data?: IProfile) => {
-    if (data) {
-      reset(data)
-    }
-  }
-
   useEffect(() => {
-    resetForm(profile)
+    reset(profile)
   }, [profile])
 
   return profile ? (
@@ -75,7 +68,7 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
             type="button"
             onClick={() => {
               setIsEdit(false)
-              resetForm()
+              reset()
             }}
           >
             Отмена

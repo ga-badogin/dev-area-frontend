@@ -1,17 +1,17 @@
 import cls from './Textarea.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import { ValueOf } from '@/shared/types'
+import { FieldTheme, Sizes } from '@/shared/consts/ui'
+import { ErrorList } from '../ErrorList/ErrorList'
+import { setRefs } from '@/shared/lib/refs/setRefs'
 import {
   ChangeEvent,
   forwardRef,
   memo,
   TextareaHTMLAttributes,
-  useLayoutEffect,
   useRef
 } from 'react'
-import { ValueOf } from '@/shared/types'
-import { FieldTheme, Sizes } from '@/shared/consts/ui'
-import { ErrorList } from '../ErrorList/ErrorList'
-import { setRefs } from '@/shared/lib/refs/setRefs'
+import { useDynamicTextarea } from '@/shared/lib/hooks/useDynamicTextarea/useDynamicTextarea '
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string
@@ -34,30 +34,12 @@ export const Textarea = memo(
       } = props
 
       const textareaRef = useRef<HTMLTextAreaElement>(null)
-
-      const resize = () => {
-        requestAnimationFrame(() => {
-          const el = textareaRef.current
-          if (!el) return
-
-          el.style.height = 'auto'
-          el.style.height = `${el.scrollHeight}px`
-        })
-      }
+      const resizeHeight = useDynamicTextarea(textareaRef)
 
       const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         onChange?.(e)
-        resize()
+        resizeHeight()
       }
-
-      useLayoutEffect(() => {
-        const el = textareaRef.current
-        if (!el) return
-
-        const observer = new ResizeObserver(resize)
-        observer.observe(el)
-        return () => observer.disconnect()
-      }, [])
 
       return (
         <div className={classNames(cls.wrapper, {}, [className])}>

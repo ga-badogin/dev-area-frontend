@@ -59,6 +59,7 @@ export const EducationItem = memo((props: EducationItemProps) => {
       />
       <DatePicker
         className={cls.period}
+        error={errors.education?.[index]?.startDate?.message}
         mode="range"
         initialView="months"
         value={{

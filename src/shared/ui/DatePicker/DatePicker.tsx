@@ -12,6 +12,7 @@ import { Sizes } from '@/shared/consts/ui'
 interface DatePickerProps extends CalendarProps {
   className?: string
   readOnly?: boolean
+  error?: string
 }
 
 export const DatePicker = memo((props: DatePickerProps) => {
@@ -22,6 +23,7 @@ export const DatePicker = memo((props: DatePickerProps) => {
     initialView = 'days',
     readOnly = false,
     mode,
+    error,
     isFutureDateDisabled
   } = props
 
@@ -69,7 +71,10 @@ export const DatePicker = memo((props: DatePickerProps) => {
       ])}
     >
       <Button
-        className={classNames(cls.button, { [cls.isFocus]: isActive })}
+        className={classNames(cls.button, {
+          [cls.isFocus]: isActive
+        })}
+        error={error}
         size={Sizes.S}
         theme={ButtonTheme.OUTLINE}
         readOnly={readOnly}
