@@ -4,11 +4,13 @@ import { CSSProperties, ReactNode, useMemo } from 'react'
 import { typedMemo } from '@/shared/consts/memo'
 import { Button, ButtonTheme } from '../Button/Button'
 
+export type TSelectConfig<T> = { content: ReactNode; value: T }[]
+
 interface SelectProps<T> {
   className?: string
   selectedValue: T
   onSelect: (value: T) => void
-  options: { content: ReactNode; value: T }[]
+  options: TSelectConfig<T>
 }
 
 export const Select = typedMemo(<T,>(props: SelectProps<T>) => {

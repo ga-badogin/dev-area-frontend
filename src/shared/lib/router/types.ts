@@ -24,3 +24,11 @@ export type TAuthRoutes = {
   resetPassword: null
   index: null
 }
+
+export type TOnboardingRoutes = {
+  welcome: null
+  about: null
+  experience: null
+  education: null
+  skill: null
+}

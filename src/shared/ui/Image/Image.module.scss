@@ -1,6 +1,14 @@
-.image {
+.image,
+.icon {
   width: 100%;
   height: 100%;
+}
+
+.image {
   object-fit: cover;
   border-radius: var(--block-border-radius);
+}
+
+.icon {
+  fill: var(--secondary-color);
 }

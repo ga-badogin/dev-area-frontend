@@ -9,6 +9,7 @@ import { Controller, useFormContext } from 'react-hook-form'
 import { useIsEdit } from '../../model/selectors/getIsEdit'
 import { ImageUploader } from '@/shared/ui/ImageUploader/ImageUploader'
 import { IProfileForm } from '../../model/types/profileForm'
+import UserIcon from '@/shared/assets/icons/User.svg'
 
 interface ProfileCardProps {
   className?: string
@@ -35,6 +36,7 @@ export const About = memo((props: ProfileCardProps) => {
             value={field.value}
             onChange={field.onChange}
             className={cls.icon}
+            FallbackImage={UserIcon}
           />
         )}
       />

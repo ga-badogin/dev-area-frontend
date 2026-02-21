@@ -1,6 +1,6 @@
 import cls from './ImageUploader.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { ChangeEvent, CSSProperties, memo, useRef } from 'react'
+import { ChangeEvent, CSSProperties, FC, memo, SVGProps, useRef } from 'react'
 import { Image } from '../Image/Image'
 
 interface ImageProps {
@@ -9,6 +9,7 @@ interface ImageProps {
   width?: string
   height?: string
   onChange?: (file?: File) => void
+  FallbackImage?: FC<SVGProps<SVGSVGElement>>
 }
 
 export const ImageUploader = memo((props: ImageProps) => {
@@ -17,7 +18,8 @@ export const ImageUploader = memo((props: ImageProps) => {
     value,
     onChange,
     width = '250px',
-    height = '250px'
+    height = '250px',
+    FallbackImage
   } = props
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -57,7 +59,7 @@ export const ImageUploader = memo((props: ImageProps) => {
         height={height}
         value={value}
         alt="ImageUploader"
-        onClick={openFileDialog}
+        FallbackImage={FallbackImage}
       />
     </div>
   )

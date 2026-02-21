@@ -17,6 +17,8 @@ import {
   useIsEdit,
   useProfileActions
 } from '@/entities/profile'
+import { Block } from '@/shared/ui/Block/Block'
+import { ActionBar } from '@/shared/ui/ActionBar/ActionBar'
 
 interface ProfileFormProps {
   className?: string
@@ -63,22 +65,24 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
         <EducationList />
         <SkillBoard />
 
-        {isEdit ? (
-          <Button
-            type="button"
-            onClick={() => {
-              setIsEdit(false)
-              reset()
-            }}
-          >
-            Отмена
-          </Button>
-        ) : (
-          <Button type="button" onClick={() => setIsEdit(true)}>
-            Редактировать
-          </Button>
-        )}
-        {isDirty && isEdit && <Button type="submit">Сохранить</Button>}
+        <ActionBar>
+          {isEdit ? (
+            <Button
+              type="button"
+              onClick={() => {
+                setIsEdit(false)
+                reset()
+              }}
+            >
+              Отмена
+            </Button>
+          ) : (
+            <Button type="button" onClick={() => setIsEdit(true)}>
+              Редактировать
+            </Button>
+          )}
+          {isEdit && <Button type="submit">Сохранить</Button>}
+        </ActionBar>
       </form>
     </FormProvider>
   ) : undefined

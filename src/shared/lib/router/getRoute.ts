@@ -1,5 +1,5 @@
 import { TKeyWithParams } from '@/shared/types'
-import { TAppRoutes, TAuthRoutes } from './types'
+import { TAppRoutes, TAuthRoutes, TOnboardingRoutes } from './types'
 
 export const getAppRoute = ([path, params]: TKeyWithParams<TAppRoutes>) => {
   switch (path) {
@@ -10,7 +10,7 @@ export const getAppRoute = ([path, params]: TKeyWithParams<TAppRoutes>) => {
     case 'profile':
       return `/profile/${params.username}`
     case 'onboarding':
-      return '/onboarding'
+      return '/onboarding/*'
     case 'other':
       return '*'
   }
@@ -31,5 +31,25 @@ export const getAuthRoute = (
       return `${parentRoute}/reset-password`
     case 'index':
       return '/'
+  }
+}
+
+export const getOnboardingRoute = (
+  [path]: TKeyWithParams<TOnboardingRoutes>,
+  type: 'nav' | 'path' = 'nav'
+) => {
+  const parentRoute = type === 'nav' ? '/onboarding' : ''
+
+  switch (path) {
+    case 'welcome':
+      return `${parentRoute}/welcome`
+    case 'about':
+      return `${parentRoute}/about`
+    case 'experience':
+      return `${parentRoute}/experience`
+    case 'education':
+      return `${parentRoute}/education`
+    case 'skill':
+      return `${parentRoute}/skill`
   }
 }
