@@ -8,7 +8,8 @@ const profileApi = rtkApi.injectEndpoints({
       query: () => ({
         url: '/profile/has-profile',
         method: 'GET'
-      })
+      }),
+      providesTags: ['Profile']
     }),
     getProfile: build.query<IProfile, string | undefined>({
       query: (username) => ({
@@ -28,6 +29,14 @@ const profileApi = rtkApi.injectEndpoints({
         method: 'PATCH',
         body: profile
       })
+    }),
+    createProfile: build.mutation<boolean, IProfileForm>({
+      query: (profile) => ({
+        url: '/profile/create',
+        method: 'POST',
+        body: profile
+      }),
+      invalidatesTags: ['Profile']
     }),
     updateAvatar: build.mutation<boolean, File>({
       query: (file) => {
@@ -49,5 +58,6 @@ export const {
   getProfile: { useQuery: useGetProfile },
   searchProfile: { useQuery: useSearchProfile },
   updateProfile: { initiate: updateProfileInitiate },
-  updateAvatar: { initiate: updateAvatarInitiate }
+  updateAvatar: { initiate: updateAvatarInitiate },
+  createProfile: { useMutation: useCreateProfile }
 } = profileApi.endpoints

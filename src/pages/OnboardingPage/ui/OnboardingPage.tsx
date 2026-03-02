@@ -8,6 +8,7 @@ import {
   TReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader'
 import { profileReducer } from '@/entities/profile'
+import { OnboardingFormWrapper } from '../../../widgets/onboarding-form/ui/OnboardingFormWrapper/OnboardingFormWrapper'
 
 const reducers: TReducersList = {
   profile: profileReducer
@@ -23,7 +24,9 @@ const OnboardingPage = memo((props: OnboardingPageProps) => {
   return (
     <DynamicModuleLoader reducers={reducers}>
       <Page className={classNames(cls.onboardingPage, {}, [className])}>
-        <OnboardingForm />
+        <OnboardingFormWrapper>
+          <OnboardingForm />
+        </OnboardingFormWrapper>
       </Page>
     </DynamicModuleLoader>
   )

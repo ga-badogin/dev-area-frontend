@@ -1,8 +1,8 @@
 import { Navigate } from 'react-router-dom'
-import { getAppRoute } from '@/shared/lib/router/getRoute'
 import { ReactNode } from 'react'
-import { useHasProfile } from '@/entities/profile'
 import { ACCESS_TOKEN_KEY } from '@/shared/consts/localestorage'
+import { getAppRoute, getOnboardingRoute } from '@/shared/lib/router/getRoute'
+import { useHasProfile } from '@/entities/profile'
 
 interface RequireAuthProps {
   onboarding?: boolean
@@ -20,7 +20,7 @@ export const RequireProfile = (props: RequireAuthProps) => {
 
   if (hasProfile !== undefined) {
     if (!hasProfile && !onboarding) {
-      return <Navigate to={getAppRoute(['onboarding'])} replace />
+      return <Navigate to={getOnboardingRoute(['welcome'])} replace />
     }
 
     if (hasProfile && onboarding) {

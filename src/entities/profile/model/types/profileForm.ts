@@ -7,9 +7,9 @@ export interface IProfileForm {
   bio?: string
   avatarUrl?: File | string
 
-  experience: IExperienceForm[]
-  education: IEducationForm[]
-  skill: ISkillForm[]
+  experience?: IExperienceForm[]
+  education?: IEducationForm[]
+  skill?: ISkillForm[]
 }
 
 export interface IExperienceForm extends IPeriod {

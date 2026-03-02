@@ -6,6 +6,9 @@ import { SkillItem } from '../SkillItem/SkillItem'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { EMPTY_SKILL } from '../../../model/consts/empty'
 import { IProfileForm } from '../../../model/types/profileForm'
+import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
+import { FontTheme } from '@/shared/consts/ui'
+import { useIsEdit } from '../../../model/selectors/getIsEdit'
 
 interface SkillBoardProps {
   className?: string
@@ -14,6 +17,7 @@ interface SkillBoardProps {
 export const SkillBoard = memo((props: SkillBoardProps) => {
   const { className } = props
 
+  const isEdit = useIsEdit()
   const { control } = useFormContext<IProfileForm>()
 
   const { fields, remove, append } = useFieldArray({ control, name: 'skill' })
@@ -22,7 +26,7 @@ export const SkillBoard = memo((props: SkillBoardProps) => {
     <Block
       className={classNames(cls.skillBoard, {}, [className])}
       title="Навыки"
-      handleAdd={() => append(EMPTY_SKILL)}
+      handleAdd={isEdit ? () => append(EMPTY_SKILL) : undefined}
     >
       {fields.map((field, index) => (
         <SkillItem
@@ -31,6 +35,9 @@ export const SkillBoard = memo((props: SkillBoardProps) => {
           onRemove={() => remove(index)}
         />
       ))}
+      {fields.length === 0 && (
+        <Paragraph theme={FontTheme.SECONDARY}>Пусто...</Paragraph>
+      )}
     </Block>
   )
 })

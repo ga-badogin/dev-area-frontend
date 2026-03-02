@@ -6,6 +6,9 @@ import { EducationItem } from '../EducationItem/EducationItem'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { EMPTY_EDUCATION } from '../../../model/consts/empty'
 import { IProfileForm } from '../../../model/types/profileForm'
+import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
+import { FontTheme } from '@/shared/consts/ui'
+import { useIsEdit } from '../../../model/selectors/getIsEdit'
 
 interface EducationListProps {
   className?: string
@@ -14,6 +17,7 @@ interface EducationListProps {
 export const EducationList = memo((props: EducationListProps) => {
   const { className } = props
 
+  const isEdit = useIsEdit()
   const { control } = useFormContext<IProfileForm>()
 
   const { fields, remove, append } = useFieldArray({
@@ -26,7 +30,7 @@ export const EducationList = memo((props: EducationListProps) => {
       className={classNames(cls.educationList, {}, [className])}
       title="Образование"
       theme={BlockTheme.CLEAR}
-      handleAdd={() => append(EMPTY_EDUCATION)}
+      handleAdd={isEdit ? () => append(EMPTY_EDUCATION) : undefined}
     >
       {fields.map((field, index) => (
         <EducationItem
@@ -35,6 +39,9 @@ export const EducationList = memo((props: EducationListProps) => {
           onRemove={() => remove(index)}
         />
       ))}
+      {fields.length === 0 && (
+        <Paragraph theme={FontTheme.SECONDARY}>Пусто...</Paragraph>
+      )}
     </Block>
   )
 })

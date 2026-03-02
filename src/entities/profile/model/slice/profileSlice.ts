@@ -3,7 +3,7 @@ import { buildSlice } from '@/shared/lib/store/buildSlice'
 import { PayloadAction } from '@reduxjs/toolkit'
 
 const initialState: IProfileSchema = {
-  isEdit: true
+  isEdit: false
 }
 
 const profileSlice = buildSlice({

@@ -3,7 +3,8 @@ export {
   useHasProfile,
   updateProfileInitiate,
   updateAvatarInitiate,
-  useSearchProfile
+  useSearchProfile,
+  useCreateProfile
 } from '@/entities/profile/api/profileApi'
 export type { IProfileSchema } from './model/types/profileSchema'
 export type { IProfile, IAbout } from './model/types/profileApi'
@@ -16,3 +17,4 @@ export { ProfileCard } from './ui/ProfileCard/ProfileCard'
 export { useIsEdit } from './model/selectors/getIsEdit'
 export { profileReducer } from './model/slice/profileSlice'
 export { useProfileActions } from './model/slice/profileSlice'
+export { AboutSkeleton } from './ui/About/AboutSkeleton'

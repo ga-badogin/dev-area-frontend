@@ -11,3 +11,8 @@ export const FieldTheme = {
   MAIN: 'main',
   MINIMAL: 'minimal'
 } as const
+
+export const FontTheme = {
+  MAIN: 'main',
+  SECONDARY: 'secondary'
+} as const

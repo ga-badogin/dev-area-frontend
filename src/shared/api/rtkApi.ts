@@ -3,6 +3,7 @@ import { ACCESS_TOKEN_KEY } from '../consts/localestorage'
 
 export const rtkApi = createApi({
   reducerPath: 'rtkApi',
+  tagTypes: ['Profile'],
   baseQuery: fetchBaseQuery({
     baseUrl: __API_URL__,
     prepareHeaders: (headers) => {

@@ -1,3 +1,4 @@
+import { IProfileForm } from '@/entities/profile'
 import {
   FieldError,
   FieldErrors,
@@ -5,7 +6,6 @@ import {
   Merge,
   Resolver
 } from 'react-hook-form'
-import { IProfileForm } from '@/entities/profile'
 import {
   IEducation,
   IExperience,
@@ -29,7 +29,7 @@ export const profileFormResolver: Resolver<IProfileForm> = (values) => {
     }
   }
 
-  values.experience.forEach((exp, index) => {
+  values.experience?.forEach((exp, index) => {
     const experienceErrors: Merge<
       FieldError,
       FieldErrorsImpl<Omit<IExperience, 'id'>>
@@ -69,7 +69,7 @@ export const profileFormResolver: Resolver<IProfileForm> = (values) => {
     }
   })
 
-  values.education.forEach((ed, index) => {
+  values.education?.forEach((ed, index) => {
     const educationErrors: Merge<
       FieldError,
       FieldErrorsImpl<Omit<IEducation, 'id'>>
@@ -102,7 +102,7 @@ export const profileFormResolver: Resolver<IProfileForm> = (values) => {
     }
   })
 
-  values.skill.forEach((ski, index) => {
+  values.skill?.forEach((ski, index) => {
     const skillErrors: Merge<
       FieldError,
       FieldErrorsImpl<Omit<ISkill, 'id'>>

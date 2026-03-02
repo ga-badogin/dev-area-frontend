@@ -5,7 +5,9 @@
   }
 
   &.container {
+    height: 100vh;
     width: 75vw;
-    margin: 152px auto 0 auto;
+    margin: 0 auto;
+    padding-top: 152px;
   }
 }

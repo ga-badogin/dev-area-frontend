@@ -1,11 +1,11 @@
 import cls from './AuthFormWrapper.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import { Block } from '@/shared/ui/Block/Block'
+import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
+import { Title } from '@/shared/ui/Title/Title'
 import { ReactNode } from 'react'
 import { useLocation } from 'react-router-dom'
 import { authRoutesContent } from '@/entities/auth'
-import { Title } from '@/shared/ui/Title/Title'
-import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
-import { Block } from '@/shared/ui/Block/Block'
 
 interface AuthFormWrapperProps {
   className?: string

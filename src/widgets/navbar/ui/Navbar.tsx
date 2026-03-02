@@ -5,8 +5,9 @@ import { ThemeSwitcher } from '@/features/switch-theme'
 import { Select } from '@/shared/ui/Select/Select'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Logo } from '@/shared/ui/Logo/Logo'
-import { getAuthRoute } from '@/shared/lib/router/getRoute'
 import { Block } from '@/shared/ui/Block/Block'
+import { navbarSelectConfig } from '../lib/navbarSelectConfig'
+import { getAppRoute } from '@/shared/lib/router/getRoute'
 
 interface NavbarProps {
   className?: string
@@ -29,12 +30,17 @@ export const Navbar = memo((props: NavbarProps) => {
         className={cls.select}
         onSelect={handleSelect}
         selectedValue={pathname}
+        options={navbarSelectConfig}
+      />
+      <Select
+        className={cls.select}
+        onSelect={handleSelect}
+        selectedValue={pathname}
         options={[
-          { content: 'Вход', value: getAuthRoute(['login']) },
-          { content: 'Регистрация', value: getAuthRoute(['register']) },
+          { content: 'Main', value: getAppRoute(['main']) },
           {
-            content: 'Смена пароля',
-            value: getAuthRoute(['resetPassword'])
+            content: 'Profile',
+            value: getAppRoute(['profile', { username: 'ga-badogin' }])
           }
         ]}
       />

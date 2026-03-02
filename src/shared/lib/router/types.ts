@@ -31,4 +31,5 @@ export type TOnboardingRoutes = {
   experience: null
   education: null
   skill: null
+  index: null
 }

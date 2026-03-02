@@ -41,7 +41,7 @@ export const About = memo((props: ProfileCardProps) => {
         )}
       />
 
-      <div className={cls.info}>
+      <div className={cls.fields}>
         <Input
           theme={FieldTheme.MINIMAL}
           size={Sizes.XL}

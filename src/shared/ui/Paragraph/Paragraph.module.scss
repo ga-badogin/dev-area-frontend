@@ -2,4 +2,8 @@
 
 .paragraph {
   @include font;
+
+  &.secondary {
+    color: var(--secondary-color);
+  }
 }

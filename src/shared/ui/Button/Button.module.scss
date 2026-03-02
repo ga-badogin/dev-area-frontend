@@ -2,6 +2,7 @@
 @use '@/shared/styles/block' as *;
 
 .button {
+  //position: relative;
   width: 100%;
   @include font;
 

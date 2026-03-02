@@ -1,12 +1,14 @@
 import cls from './ProfileForm.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo, useEffect } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { Button } from '@/shared/ui/Button/Button'
 import { useParams } from 'react-router-dom'
 import { profileFormResolver } from '../lib/profileFormResolver'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
 import { updateProfile } from '../model/updateProfile'
+import { ActionBar } from '@/shared/ui/ActionBar/ActionBar'
+import { Form } from '@/shared/ui/Form/Form'
 import {
   About,
   EducationList,
@@ -17,8 +19,6 @@ import {
   useIsEdit,
   useProfileActions
 } from '@/entities/profile'
-import { Block } from '@/shared/ui/Block/Block'
-import { ActionBar } from '@/shared/ui/ActionBar/ActionBar'
 
 interface ProfileFormProps {
   className?: string
@@ -55,35 +55,34 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
   }, [profile])
 
   return profile ? (
-    <FormProvider {...methods}>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className={classNames(cls.profileForm, {}, [className])}
-      >
-        <About />
-        <ExperienceList />
-        <EducationList />
-        <SkillBoard />
+    <Form
+      methods={methods}
+      onSubmit={handleSubmit(onSubmit)}
+      className={classNames(cls.profileForm, {}, [className])}
+    >
+      <About />
+      <ExperienceList />
+      <EducationList />
+      <SkillBoard />
 
-        <ActionBar>
-          {isEdit ? (
-            <Button
-              type="button"
-              onClick={() => {
-                setIsEdit(false)
-                reset()
-              }}
-            >
-              Отмена
-            </Button>
-          ) : (
-            <Button type="button" onClick={() => setIsEdit(true)}>
-              Редактировать
-            </Button>
-          )}
-          {isEdit && <Button type="submit">Сохранить</Button>}
-        </ActionBar>
-      </form>
-    </FormProvider>
+      <ActionBar>
+        {isEdit ? (
+          <Button
+            type="button"
+            onClick={() => {
+              setIsEdit(false)
+              reset()
+            }}
+          >
+            Отмена
+          </Button>
+        ) : (
+          <Button type="button" onClick={() => setIsEdit(true)}>
+            Редактировать
+          </Button>
+        )}
+        {isEdit && <Button type="submit">Сохранить</Button>}
+      </ActionBar>
+    </Form>
   ) : undefined
 })

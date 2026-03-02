@@ -3,15 +3,18 @@ import { Route, Routes } from 'react-router-dom'
 import { RequireAuth } from './RequireAuth'
 import { TRouteProps } from '../../../../shared/lib/router/types'
 import { RequireProfile } from './RequireProfile'
+import { RequireFirstRender } from './RequireFirstRender'
 
 interface RenderRouterProps {
   routeConfig: Record<string, TRouteProps>
   isChildRouter?: boolean
+  firstRenderRoute?: string
 }
 
 export const RenderRouter = ({
   routeConfig,
-  isChildRouter
+  isChildRouter,
+  firstRenderRoute
 }: RenderRouterProps) => {
   const renderWithWrapper = useCallback(
     (route: TRouteProps) => {
@@ -27,7 +30,9 @@ export const RenderRouter = ({
       )
 
       const routeElement = isChildRouter ? (
-        content
+        <RequireFirstRender firstRenderRoute={firstRenderRoute}>
+          {content}
+        </RequireFirstRender>
       ) : (
         <RequireAuth unAuthOnly={unAuthOnly} authOnly={authOnly}>
           <RequireProfile onboarding={onboarding}>{content}</RequireProfile>

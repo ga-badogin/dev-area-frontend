@@ -51,5 +51,7 @@ export const getOnboardingRoute = (
       return `${parentRoute}/education`
     case 'skill':
       return `${parentRoute}/skill`
+    case 'index':
+      return '/'
   }
 }

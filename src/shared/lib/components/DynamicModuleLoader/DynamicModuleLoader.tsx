@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect } from 'react'
+import { FC, ReactNode, useEffect, useLayoutEffect } from 'react'
 import { useDispatch, useStore } from 'react-redux'
 import { Reducer } from '@reduxjs/toolkit'
 import {
@@ -24,7 +24,7 @@ export const DynamicModuleLoader: FC<DynamicModuleLoaderProps> = (props) => {
   const store = useStore() as IReduxStoreWithManager
   const dispatch = useDispatch()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const mountedReducers = store.reducerManager.getReducerMap()
 
     Object.entries(reducers).forEach(([reducerKey, reducer]) => {

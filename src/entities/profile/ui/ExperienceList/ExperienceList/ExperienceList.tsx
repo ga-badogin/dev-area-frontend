@@ -7,6 +7,8 @@ import { useFieldArray, useFormContext } from 'react-hook-form'
 import { EMPTY_EXPERIENCE } from '../../../model/consts/empty'
 import { useIsEdit } from '../../../model/selectors/getIsEdit'
 import { IProfileForm } from '../../../model/types/profileForm'
+import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
+import { FontTheme } from '@/shared/consts/ui'
 
 interface ExperienceProps {
   className?: string
@@ -16,7 +18,6 @@ export const ExperienceList = memo((props: ExperienceProps) => {
   const { className } = props
 
   const isEdit = useIsEdit()
-
   const { control } = useFormContext<IProfileForm>()
 
   const { fields, remove, append } = useFieldArray({
@@ -38,6 +39,9 @@ export const ExperienceList = memo((props: ExperienceProps) => {
           onRemove={() => remove(index)}
         />
       ))}
+      {fields.length === 0 && (
+        <Paragraph theme={FontTheme.SECONDARY}>Пусто...</Paragraph>
+      )}
     </Block>
   )
 })

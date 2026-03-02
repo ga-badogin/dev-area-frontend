@@ -5,11 +5,16 @@
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 10px;
+  gap: 22px;
   align-items: stretch;
 }
 
-.separator {
+.actionBar > *:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -12px;
+  top: 0;
   width: 2px;
+  height: 100%;
   background-color: var(--secondary-color);
 }
