@@ -22,7 +22,7 @@ const ProfilePage = memo((props: ProfilePageProps) => {
 
   return (
     <DynamicModuleLoader reducers={reducers}>
-      <Page className={classNames(cls.profilePage, {}, [className])}>
+      <Page container className={classNames(cls.profilePage, {}, [className])}>
         <ProfileForm />
       </Page>
     </DynamicModuleLoader>

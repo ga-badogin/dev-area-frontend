@@ -3,10 +3,6 @@
 .block {
   position: relative;
 
-  &:has(.title) {
-    margin-top: 55px;
-  }
-
   &.main {
     @include block;
   }
@@ -22,14 +18,11 @@
 }
 
 .panel {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  transform: translateY(calc(-100% - 15px));
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .title {

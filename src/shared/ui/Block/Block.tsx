@@ -15,7 +15,7 @@ export const BlockTheme = {
 } as const
 
 interface BlockWrapperProps extends HTMLAttributes<HTMLDivElement> {
-  className?: string
+  wrapperClassName?: string
   children: ReactNode
   title?: string
   theme?: ValueOf<typeof BlockTheme>
@@ -28,6 +28,7 @@ export const Block = forwardRef<HTMLDivElement, BlockWrapperProps>(
   (props, ref) => {
     const {
       className,
+      wrapperClassName,
       children,
       title,
       theme = BlockTheme.MAIN,
@@ -42,38 +43,41 @@ export const Block = forwardRef<HTMLDivElement, BlockWrapperProps>(
     }
 
     return (
-      <div
-        ref={ref}
-        className={classNames(cls.block, {}, [className, cls[theme]])}
-        style={styles}
-        {...otherProps}
-      >
-        <div className={cls.panel}>
-          <Title size={Sizes.XL} className={cls.title} as="h1">
-            {title}
-          </Title>
-          {handleAdd && (
+      <div className={classNames(cls.wrapper, {}, [wrapperClassName])}>
+        {title && (
+          <div className={cls.panel}>
+            <Title size={Sizes.XL} className={cls.title} as="h1">
+              {title}
+            </Title>
+            {handleAdd && (
+              <Button
+                theme={ButtonTheme.CLEAR}
+                className={cls.addBtn}
+                onClick={handleAdd}
+              >
+                <PlusIcon className={cls.plus} />
+              </Button>
+            )}
+          </div>
+        )}
+        <div
+          ref={ref}
+          className={classNames(cls.block, {}, [className, cls[theme]])}
+          style={styles}
+          {...otherProps}
+        >
+          {handleCross && (
             <Button
               theme={ButtonTheme.CLEAR}
-              className={cls.addBtn}
-              onClick={handleAdd}
+              className={cls.deleteBtn}
+              onClick={handleCross}
             >
-              <PlusIcon className={cls.plus} />
+              <CrossIcon className={cls.cross} />
             </Button>
           )}
+
+          {children}
         </div>
-
-        {handleCross && (
-          <Button
-            theme={ButtonTheme.CLEAR}
-            className={cls.deleteBtn}
-            onClick={handleCross}
-          >
-            <CrossIcon className={cls.cross} />
-          </Button>
-        )}
-
-        {children}
       </div>
     )
   }

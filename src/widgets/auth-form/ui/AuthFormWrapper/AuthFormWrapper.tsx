@@ -20,7 +20,7 @@ export const AuthFormWrapper = (props: AuthFormWrapperProps) => {
   const { title, paragraph } = authRoutesContent[pathname]
 
   return (
-    <Block className={classNames(cls.authFormWrapper, {}, [className])}>
+    <Block className={cls.authFormWrapper} wrapperClassName={className}>
       <Title as="h1">{title}</Title>
       <Paragraph>{paragraph}</Paragraph>
       {children}

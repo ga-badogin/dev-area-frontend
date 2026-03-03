@@ -24,7 +24,10 @@ export const Navbar = memo((props: NavbarProps) => {
   }, [])
 
   return (
-    <Block className={classNames(cls.navbar, {}, [className])}>
+    <Block
+      className={classNames(cls.navbar, {}, [className])}
+      wrapperClassName={cls.blockWrapper}
+    >
       <Logo />
       <Select
         className={cls.select}

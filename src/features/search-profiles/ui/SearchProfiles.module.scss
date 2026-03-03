@@ -1,3 +1,23 @@
-.input {
+.searchProfiles {
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: 1fr 100px;
   margin-bottom: 30px;
+  gap: 10px;
+}
+
+.icon {
+  height: 50px;
+  fill: var(--secondary-color);
+}
+
+.list {
+  display: grid;
+  gap: 20px;
+
+  &.tiles {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
 }

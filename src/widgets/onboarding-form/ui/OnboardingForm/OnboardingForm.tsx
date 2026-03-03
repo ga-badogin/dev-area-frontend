@@ -19,6 +19,9 @@ import { getOnboardingRoute } from '@/shared/lib/router/getRoute'
 import { chainNavigation } from '../../model/consts/navigate'
 import { useNotificationThunks } from '@/entities/notification'
 import { Form } from '@/shared/ui/Form/Form'
+import { Title } from '@/shared/ui/Title/Title'
+import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
+import { onboardingRoutesContent } from '../../model/consts/content'
 
 interface OnboardingFormProps {
   className?: string
@@ -66,12 +69,23 @@ export const OnboardingForm = memo((props: OnboardingFormProps) => {
       addNotification({ title: 'Успех', paragraph: 'Профиль создан' })
   }
 
+  const content = onboardingRoutesContent[pathname]
+
   return (
     <Form
       methods={methods}
       onSubmit={handleSubmit(handleCreate)}
       className={classNames(cls.onboardingForm, {}, [className])}
     >
+      {content && (
+        <>
+          <Title className={cls.title} as="h1">
+            {content.title}
+          </Title>
+          <Paragraph className={cls.paragraph}>{content.paragraph}</Paragraph>
+        </>
+      )}
+
       <RenderRouter
         routeConfig={onboardingRouteConfig}
         firstRenderRoute={getOnboardingRoute(['welcome'])}

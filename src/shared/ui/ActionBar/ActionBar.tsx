@@ -12,7 +12,10 @@ export const ActionBar = memo((props: ActionBarProps) => {
   const { className, children } = props
 
   return (
-    <Block className={classNames(cls.actionBar, {}, [className])}>
+    <Block
+      className={classNames(cls.actionBar, {}, [className])}
+      wrapperClassName={cls.wrapper}
+    >
       {children}
     </Block>
   )

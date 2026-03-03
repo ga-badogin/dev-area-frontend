@@ -68,7 +68,11 @@ export const About = memo((props: ProfileCardProps) => {
         />
       </div>
 
-      <Block className={cls.block} theme={BlockTheme.CLEAR} title="О себе">
+      <Block
+        wrapperClassName={cls.block}
+        theme={BlockTheme.CLEAR}
+        title="О себе"
+      >
         <Textarea
           readOnly={isEdit}
           error={errors.bio?.message}

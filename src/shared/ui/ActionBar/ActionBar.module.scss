@@ -1,9 +1,12 @@
-.actionBar {
+.wrapper {
   width: var(--container-width);
   position: fixed;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.actionBar {
   display: flex;
   gap: 22px;
   align-items: stretch;
