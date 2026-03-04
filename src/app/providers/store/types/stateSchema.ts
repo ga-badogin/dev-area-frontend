@@ -9,17 +9,17 @@ import { IProfileSchema } from '@/entities/profile'
 export interface IStateSchema {
   notification: INotificationSchema
   theme: IThemeSchema
+  auth: IAuthSchema
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 
   // async reducers
-  auth?: IAuthSchema
   profile?: IProfileSchema
 }
 
 export type TStateSchemaKey = keyof IStateSchema
 
 export interface IStateSchemaPartial {
-  auth?: undefined
+  profile?: undefined
 }
 
 export interface IThunkConfig<T> {

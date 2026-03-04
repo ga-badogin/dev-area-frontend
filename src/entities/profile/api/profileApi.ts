@@ -1,6 +1,6 @@
-import { rtkApi } from '@/shared/api/rtkApi'
 import { IAbout, IProfile } from '../model/types/profileApi'
 import { IProfileForm } from '../model/types/profileForm'
+import { rtkApi } from '@/shared/api/rtkApi'
 
 const profileApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({

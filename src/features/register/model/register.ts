@@ -21,7 +21,7 @@ export const register = createAsyncThunk<
     extra: { navigate }
   } = thunkAPI
 
-  const { setIsCode } = getAuthActions(dispatch)
+  const { setIsCode, setIsAuth } = getAuthActions(dispatch)
   const { addNotification } = getNotificationThunks(dispatch)
 
   try {
@@ -31,6 +31,7 @@ export const register = createAsyncThunk<
       throw new Error()
     } else if ('accessToken' in response) {
       localStorage.setItem(ACCESS_TOKEN_KEY, response.accessToken)
+      setIsAuth(true)
       navigate(getAppRoute(['main']))
       addNotification({
         title: 'Успех',

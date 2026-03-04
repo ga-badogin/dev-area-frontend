@@ -1,10 +1,7 @@
-import { ACCESS_TOKEN_KEY } from '@/shared/consts/localestorage'
-import { Navigate } from 'react-router-dom'
-import {
-  getAppRoute,
-  getAuthRoute
-} from '../../../../shared/lib/router/getRoute'
 import { ReactNode } from 'react'
+import { Navigate } from 'react-router-dom'
+import { getAppRoute, getAuthRoute } from '@/shared/lib/router/getRoute'
+import { useIsAuth } from '@/entities/auth'
 
 interface RequireAuthProps {
   unAuthOnly?: boolean
@@ -15,14 +12,16 @@ interface RequireAuthProps {
 export const RequireAuth = (props: RequireAuthProps) => {
   const { unAuthOnly, children, authOnly } = props
 
-  const hasToken = Boolean(localStorage.getItem(ACCESS_TOKEN_KEY))
+  const isAuth = useIsAuth()
 
-  if (unAuthOnly && hasToken) {
-    return <Navigate to={getAppRoute(['main'])} replace />
-  }
+  if (isAuth !== undefined) {
+    if (unAuthOnly && isAuth) {
+      return <Navigate to={getAppRoute(['main'])} replace />
+    }
 
-  if (authOnly && !hasToken) {
-    return <Navigate to={getAuthRoute(['login'])} replace />
+    if (authOnly && !isAuth) {
+      return <Navigate to={getAuthRoute(['login'])} replace />
+    }
   }
 
   return children

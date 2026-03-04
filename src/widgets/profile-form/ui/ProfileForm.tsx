@@ -2,7 +2,7 @@ import cls from './ProfileForm.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { Button } from '@/shared/ui/Button/Button'
+import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
 import { useParams } from 'react-router-dom'
 import { profileFormResolver } from '../lib/profileFormResolver'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
@@ -69,6 +69,7 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
         {isEdit ? (
           <Button
             type="button"
+            theme={ButtonTheme.OUTLINE}
             onClick={() => {
               setIsEdit(false)
               reset()

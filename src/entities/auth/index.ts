@@ -8,7 +8,12 @@ export {
   useLazyCheckEmailUnique
 } from './api/authApi'
 export { useIsCode } from './model/selectors/getIsCode'
-export { authReducer, getAuthActions } from './model/slice/authSlice'
+export { useIsAuth } from './model/selectors/getIsAuth'
+export {
+  authReducer,
+  getAuthActions,
+  useAuthActions
+} from './model/slice/authSlice'
 export { AuthFormTemplate } from './ui/AuthFormTemplate/AuthFormTemplate'
 export type {
   ILoginReqBody,
