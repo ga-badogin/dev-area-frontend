@@ -19,6 +19,7 @@ import {
   useIsEdit,
   useProfileActions
 } from '@/entities/profile'
+import { useNotificationThunks } from '@/entities/notification'
 
 interface ProfileFormProps {
   className?: string
@@ -31,28 +32,43 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
   const { setIsEdit } = useProfileActions()
   const { username } = useParams()
   const dispatch = useAppDispatch()
-
-  const { data: profile } = useGetProfile(username)
-
-  const onSubmit = async (data: IProfileForm) => {
-    const res = await dispatch(updateProfile(data)).unwrap()
-    reset(res)
-  }
-
+  const { addNotification } = useNotificationThunks()
   const methods = useForm<IProfileForm>({
     mode: 'onSubmit',
     resolver: profileFormResolver
   })
-
   const {
     reset,
     handleSubmit,
     formState: { isDirty }
   } = methods
 
+  const { data: profile } = useGetProfile(username)
+
   useEffect(() => {
     reset(profile)
   }, [profile])
+
+  const onSubmit = async (data: IProfileForm) => {
+    const res = await dispatch(updateProfile(data)).unwrap()
+    reset(res)
+  }
+
+  const handleCancel = async () => {
+    const res = await new Promise<boolean>((resolve) => {
+      addNotification({
+        title: 'Предупреждение',
+        paragraph: 'Отмена сбросит все изменения, подтвердить?',
+        onApprove: () => resolve(true),
+        onReject: () => resolve(false)
+      })
+    })
+
+    if (res) {
+      setIsEdit(false)
+      reset()
+    }
+  }
 
   return profile ? (
     <Form
@@ -70,10 +86,7 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
           <Button
             type="button"
             theme={ButtonTheme.OUTLINE}
-            onClick={() => {
-              setIsEdit(false)
-              reset()
-            }}
+            onClick={handleCancel}
           >
             Отмена
           </Button>
@@ -82,7 +95,11 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
             Редактировать
           </Button>
         )}
-        {isEdit && <Button type="submit">Сохранить</Button>}
+        {isEdit && (
+          <Button type="submit" disabled={!isDirty}>
+            Сохранить
+          </Button>
+        )}
       </ActionBar>
     </Form>
   ) : undefined

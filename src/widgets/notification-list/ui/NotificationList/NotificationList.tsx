@@ -31,7 +31,7 @@ export const NotificationList = memo((props: NotificationListProps) => {
       {/*  Add*/}
       {/*</Button>*/}
       {notifications.map((notification) => (
-        <NotificationItem {...notification} key={notification.id} />
+        <NotificationItem notification={notification} key={notification.id} />
       ))}
     </div>
   )
