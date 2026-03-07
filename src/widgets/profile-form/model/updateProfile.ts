@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import {
+  getProfileActions,
   IProfile,
   IProfileForm,
   updateAvatarInitiate,
@@ -13,10 +14,12 @@ export const updateProfile = createAsyncThunk<
   IThunkConfig<string>
 >('profile/update', async (profileForm, thunkAPI) => {
   const { extra, rejectWithValue, dispatch } = thunkAPI
-
   const { avatarUrl, ...profile } = profileForm
 
+  const { setIsLoading } = getProfileActions(dispatch)
+
   try {
+    setIsLoading(true)
     if (avatarUrl instanceof File) {
       const avatarRes = await dispatch(updateAvatarInitiate(avatarUrl)).unwrap()
 
@@ -30,9 +33,12 @@ export const updateProfile = createAsyncThunk<
       throw new Error()
     }
 
+    setIsLoading(false)
+
     return profileRes
   } catch (e) {
     console.log(e)
+    setIsLoading(false)
     return rejectWithValue('')
   }
 })

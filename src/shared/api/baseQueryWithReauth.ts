@@ -5,7 +5,6 @@ import {
   FetchArgs,
   FetchBaseQueryError
 } from '@reduxjs/toolkit/query'
-import { getAuthActions } from '../../entities/auth/model/slice/authSlice'
 
 const baseQuery = fetchBaseQuery({
   baseUrl: __API_URL__,
@@ -27,7 +26,7 @@ export const baseQueryWithRefresh: BaseQueryFn<
   let res = await baseQuery(args, api, extraOptions)
 
   if (res.error && res.error.status === 401) {
-    const { setIsAuth } = getAuthActions(api.dispatch)
+    // const { setIsAuth } = getAuthActions(api.dispatch)
 
     const refreshRes = await baseQuery(
       { url: '/auth/refresh', method: 'POST' },
@@ -43,7 +42,7 @@ export const baseQueryWithRefresh: BaseQueryFn<
       res = await baseQuery(args, api, extraOptions)
     } else {
       localStorage.removeItem(ACCESS_TOKEN_KEY)
-      setIsAuth(false)
+      // setIsAuth(false)
     }
   }
 

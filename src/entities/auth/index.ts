@@ -5,10 +5,10 @@ export {
   registerInitiate,
   resetPasswordInitiate,
   useLazyCheckUsernameUnique,
-  useLazyCheckEmailUnique
+  useLazyCheckEmailUnique,
+  useLogoutMutation
 } from './api/authApi'
 export { useIsCode } from './model/selectors/getIsCode'
-export { useIsAuth } from './model/selectors/getIsAuth'
 export {
   authReducer,
   getAuthActions,

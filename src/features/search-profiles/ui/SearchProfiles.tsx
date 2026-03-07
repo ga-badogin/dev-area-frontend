@@ -1,6 +1,6 @@
 import cls from './SearchProfiles.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { ChangeEvent, memo, useState } from 'react'
+import { ChangeEvent, memo, useEffect, useState } from 'react'
 import { IAbout, ProfileCard, useSearchProfile } from '@/entities/profile'
 import { Input } from '@/shared/ui/Input/Input'
 import SearchIcon from '@/shared/assets/icons/SearchIcon.svg'
@@ -20,8 +20,13 @@ export const SearchProfiles = memo((props: SearchProfilesProps) => {
 
   const [searchValue, setSearchValue] = useState<string>('')
   const [listType, setListType] = useState<TListType>('lines')
+  const [scrollParent, setScrollParent] = useState<HTMLElement | null>(null)
 
   const { data: profiles } = useSearchProfile(searchValue)
+
+  useEffect(() => {
+    setScrollParent(document.getElementById('MAIN_PAGE_ID'))
+  }, [])
 
   const searchProfiles = useDebounce((e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value)
@@ -51,12 +56,9 @@ export const SearchProfiles = memo((props: SearchProfilesProps) => {
             userId: `${i}-aslkklgoisa`
           })
         )}
-        totalCount={50}
-        itemContent={(_, profile) => (
-          <ProfileCard profile={profile} key={profile.id} />
-        )}
+        itemContent={(_, profile) => <ProfileCard profile={profile} />}
         listClassName={classNames(cls.list, {}, [cls[listType]])}
-        customScrollParent={document.getElementById('PAGE_ID') ?? undefined}
+        customScrollParent={scrollParent ?? undefined}
       />
     </div>
   )

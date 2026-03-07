@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
+import { useIsAuth } from '@/entities/user'
 import { Navigate } from 'react-router-dom'
 import { getAppRoute, getAuthRoute } from '@/shared/lib/router/getRoute'
-import { useIsAuth } from '@/entities/auth'
 
 interface RequireAuthProps {
   unAuthOnly?: boolean

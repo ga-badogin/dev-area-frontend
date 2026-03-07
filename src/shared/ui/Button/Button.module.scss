@@ -8,8 +8,8 @@
 
   &:not(.readOnly) {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    //align-items: center;
+    //justify-content: center;
     z-index: 2;
 
     &.main {
@@ -38,7 +38,7 @@
 
   &.readOnly,
   &.clear {
-    width: fit-content;
+    //width: fit-content;
     height: fit-content;
   }
 }

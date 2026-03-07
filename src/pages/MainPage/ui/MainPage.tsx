@@ -12,7 +12,11 @@ export const MainPage = memo((props: MainPageProps) => {
   const { className } = props
 
   return (
-    <Page container className={classNames(cls.mainPage, {}, [className])}>
+    <Page
+      id={'MAIN_PAGE_ID'}
+      container
+      className={classNames(cls.mainPage, {}, [className])}
+    >
       <SearchProfiles />
     </Page>
   )

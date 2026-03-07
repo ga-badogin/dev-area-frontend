@@ -6,8 +6,8 @@ import { Title } from '@/shared/ui/Title/Title'
 import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
 import { Sizes } from '@/shared/consts/ui'
 import { Block } from '@/shared/ui/Block/Block'
-import { Button } from '@/shared/ui/Button/Button'
-import { getResolver } from '@/entities/notification/model/slice/notificationRegister'
+import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
+import { getResolver } from '@/shared/lib/store/resolverRegister'
 
 interface NotificationItemProps {
   className?: string
@@ -41,12 +41,19 @@ export const NotificationItem = memo((props: NotificationItemProps) => {
           {title}
         </Title>
         <Paragraph size={Sizes.S}>{paragraph}</Paragraph>
-        {approveId && (
-          <Button onClick={handleAction(getResolver(approveId))}>Ок</Button>
-        )}
-        {rejectId && (
-          <Button onClick={handleAction(getResolver(rejectId))}>Отмена</Button>
-        )}
+        <div className={cls.actions}>
+          {rejectId && (
+            <Button
+              theme={ButtonTheme.OUTLINE}
+              onClick={handleAction(getResolver(rejectId))}
+            >
+              Отмена
+            </Button>
+          )}
+          {approveId && (
+            <Button onClick={handleAction(getResolver(approveId))}>Ок</Button>
+          )}
+        </div>
       </Block>
     </div>
   )

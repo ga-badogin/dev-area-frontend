@@ -8,7 +8,6 @@ import {
 } from '@/entities/auth'
 import { getNotificationThunks } from '@/entities/notification'
 import { ACCESS_TOKEN_KEY } from '@/shared/consts/localestorage'
-import { getAppRoute } from '@/shared/lib/router/getRoute'
 
 export const login = createAsyncThunk<
   IAuthResponse,
@@ -21,7 +20,7 @@ export const login = createAsyncThunk<
     extra: { navigate }
   } = thunkAPI
 
-  const { setIsCode, setIsAuth } = getAuthActions(dispatch)
+  const { setIsCode } = getAuthActions(dispatch)
   const { addNotification } = getNotificationThunks(dispatch)
 
   try {
@@ -31,8 +30,7 @@ export const login = createAsyncThunk<
       throw new Error()
     } else if ('accessToken' in response) {
       localStorage.setItem(ACCESS_TOKEN_KEY, response.accessToken)
-      setIsAuth(true)
-      navigate(getAppRoute(['main']))
+      // navigate(getAppRoute(['main']))
       addNotification({
         title: 'Успех',
         paragraph: 'Вход в учетную запись выполнен'

@@ -13,7 +13,7 @@ import {
 
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   className?: string
-  value?: File | string
+  value?: File | string | null
   FallbackImage?: FC<SVGProps<SVGSVGElement>>
 }
 

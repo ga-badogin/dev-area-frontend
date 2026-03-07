@@ -5,7 +5,7 @@ import { rtkApi } from '@/shared/api/rtkApi'
 import { notificationReducer } from '@/entities/notification'
 import { NavigateFunction } from 'react-router-dom'
 import { themeReducer } from '@/entities/theme'
-import { authReducer } from '@/entities/auth'
+import { userReducer } from '@/entities/user'
 
 export function createReduxStore(
   initialState: IStateSchema,
@@ -16,7 +16,7 @@ export function createReduxStore(
     ...asyncReducers,
     theme: themeReducer,
     notification: notificationReducer,
-    auth: authReducer,
+    user: userReducer,
 
     [rtkApi.reducerPath]: rtkApi.reducer
   }

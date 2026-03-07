@@ -5,7 +5,7 @@ import {
 import { AppDispatch } from '@/app/providers/store/exclude'
 import { getNotificationActions } from '../slice/notificationSlice'
 import { deleteNotification } from './deleteNotification'
-import { registerResolver } from '@/entities/notification/model/slice/notificationRegister'
+import { registerResolver } from '@/shared/lib/store/resolverRegister'
 
 export const addNotification =
   (payload: INotificationPayload) => (dispatch: AppDispatch) => {

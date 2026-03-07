@@ -1,6 +1,5 @@
 export {
   useGetProfile,
-  useHasProfile,
   updateProfileInitiate,
   updateAvatarInitiate,
   useSearchProfile,
@@ -15,6 +14,10 @@ export { EducationList } from './ui/EducationList/EducationList/EducationList'
 export { SkillBoard } from './ui/SkillBoard/SkillBoard/SkillBoard'
 export { ProfileCard } from './ui/ProfileCard/ProfileCard'
 export { useIsEdit } from './model/selectors/getIsEdit'
+export { useIsLoading } from './model/selectors/getIsLoading'
 export { profileReducer } from './model/slice/profileSlice'
-export { useProfileActions } from './model/slice/profileSlice'
+export {
+  useProfileActions,
+  getProfileActions
+} from './model/slice/profileSlice'
 export { AboutSkeleton } from './ui/About/AboutSkeleton'

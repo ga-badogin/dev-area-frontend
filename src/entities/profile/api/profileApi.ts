@@ -4,13 +4,6 @@ import { rtkApi } from '@/shared/api/rtkApi'
 
 const profileApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
-    hasProfile: build.query<boolean, void>({
-      query: () => ({
-        url: '/profile/has-profile',
-        method: 'GET'
-      }),
-      providesTags: ['Profile']
-    }),
     getProfile: build.query<IProfile, string | undefined>({
       query: (username) => ({
         url: `/profile/get/${username || ''}`,
@@ -36,7 +29,7 @@ const profileApi = rtkApi.injectEndpoints({
         method: 'POST',
         body: profile
       }),
-      invalidatesTags: ['Profile']
+      invalidatesTags: ['User']
     }),
     updateAvatar: build.mutation<boolean, File>({
       query: (file) => {
@@ -54,7 +47,6 @@ const profileApi = rtkApi.injectEndpoints({
 })
 
 export const {
-  hasProfile: { useQuery: useHasProfile },
   getProfile: { useQuery: useGetProfile },
   searchProfile: { useQuery: useSearchProfile },
   updateProfile: { initiate: updateProfileInitiate },

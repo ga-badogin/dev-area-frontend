@@ -12,9 +12,6 @@ const authSlice = buildSlice({
   reducers: {
     setIsCode: (state, { payload }: PayloadAction<boolean>) => {
       state.isCode = payload
-    },
-    setIsAuth: (state, { payload }: PayloadAction<boolean>) => {
-      state.isAuth = payload
     }
   }
 })

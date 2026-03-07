@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Logo } from '@/shared/ui/Logo/Logo'
 import { Block } from '@/shared/ui/Block/Block'
 import { navbarSelectConfig } from '../lib/navbarSelectConfig'
-import { getAppRoute } from '@/shared/lib/router/getRoute'
+import { UserMenu } from '../../user-menu'
 
 interface NavbarProps {
   className?: string
@@ -35,19 +35,8 @@ export const Navbar = memo((props: NavbarProps) => {
         selectedValue={pathname}
         options={navbarSelectConfig}
       />
-      <Select
-        className={cls.select}
-        onSelect={handleSelect}
-        selectedValue={pathname}
-        options={[
-          { content: 'Main', value: getAppRoute(['main']) },
-          {
-            content: 'Profile',
-            value: getAppRoute(['profile', { username: 'ga-badogin' }])
-          }
-        ]}
-      />
       <ThemeSwitcher className={cls.themeSwitcher} />
+      <UserMenu />
     </Block>
   )
 })

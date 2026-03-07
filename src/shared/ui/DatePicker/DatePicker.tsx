@@ -1,6 +1,5 @@
 import cls from './DatePicker.module.scss'
 import { memo, useCallback, useMemo, useRef, useState } from 'react'
-import { Input } from '../Input/Input'
 import { formatDay, formatMonth, formatYear } from '@/shared/lib/date/format'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useClickOutside } from '@/shared/lib/hooks/useClickOutside/useClickOutside'

@@ -6,18 +6,21 @@ interface PageProps {
   className?: string
   children: ReactNode
   container?: boolean
+  id?: string
 }
 
 export const Page = (props: PageProps) => {
-  const { className, children, container = false } = props
+  const { className, children, container = false, id = 'PAGE_ID' } = props
 
   return container ? (
-    <div id="PAGE_ID" className={cls.page}>
+    <div id={id} className={cls.page}>
       <div className={classNames(cls.container, {}, [className])}>
         {children}
       </div>
     </div>
   ) : (
-    <div className={classNames(cls.page, {}, [className])}>{children}</div>
+    <div id={id} className={classNames(cls.page, {}, [className])}>
+      {children}
+    </div>
   )
 }

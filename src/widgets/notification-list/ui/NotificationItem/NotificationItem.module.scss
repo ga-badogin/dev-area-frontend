@@ -16,6 +16,12 @@
   margin-top: 20px;
 }
 
+.actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
 @keyframes notificationSlideIn {
   from {
     max-height: 0;

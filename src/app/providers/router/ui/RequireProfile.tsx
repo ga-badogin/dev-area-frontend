@@ -1,8 +1,7 @@
-import { Navigate } from 'react-router-dom'
 import { ReactNode } from 'react'
-import { ACCESS_TOKEN_KEY } from '@/shared/consts/localestorage'
+import { useHasProfile } from '@/entities/user'
+import { Navigate } from 'react-router-dom'
 import { getAppRoute, getOnboardingRoute } from '@/shared/lib/router/getRoute'
-import { useHasProfile } from '@/entities/profile'
 
 interface RequireAuthProps {
   onboarding?: boolean
@@ -12,11 +11,7 @@ interface RequireAuthProps {
 export const RequireProfile = (props: RequireAuthProps) => {
   const { children, onboarding } = props
 
-  const hasToken = Boolean(localStorage.getItem(ACCESS_TOKEN_KEY))
-
-  const { data: hasProfile } = useHasProfile(undefined, {
-    skip: !hasToken
-  })
+  const hasProfile = useHasProfile()
 
   if (hasProfile !== undefined) {
     if (!hasProfile && !onboarding) {

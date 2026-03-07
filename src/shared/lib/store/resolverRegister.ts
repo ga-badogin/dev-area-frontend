@@ -10,7 +10,6 @@ export const registerResolver = (callback: () => void) => {
 
 export const getResolver = (id: string) => {
   const resolver = resolvers.get(id)
-  if (!resolver) return
-
+  resolvers.delete(id)
   return resolver
 }

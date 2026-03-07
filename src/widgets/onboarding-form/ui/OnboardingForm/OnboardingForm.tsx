@@ -3,11 +3,6 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { profileFormResolver } from '../../../profile-form/lib/profileFormResolver'
-import {
-  IProfileForm,
-  useCreateProfile,
-  useProfileActions
-} from '@/entities/profile'
 import { RenderRouter } from '@/app/providers/router/exclude'
 import { onboardingRouteConfig } from '../../lib/onboardingRouteConfig'
 import { ActionBar } from '@/shared/ui/ActionBar/ActionBar'
@@ -22,6 +17,11 @@ import { Form } from '@/shared/ui/Form/Form'
 import { Title } from '@/shared/ui/Title/Title'
 import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
 import { onboardingRoutesContent } from '../../model/consts/content'
+import {
+  IProfileForm,
+  useCreateProfile,
+  useProfileActions
+} from '@/entities/profile'
 
 interface OnboardingFormProps {
   className?: string
@@ -33,7 +33,7 @@ export const OnboardingForm = memo((props: OnboardingFormProps) => {
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const { addNotification } = useNotificationThunks()
-  const [createProfile, {}] = useCreateProfile()
+  const [createProfile, { isLoading }] = useCreateProfile()
   const { setIsEdit } = useProfileActions()
 
   const methods = useForm<IProfileForm>({
@@ -105,7 +105,9 @@ export const OnboardingForm = memo((props: OnboardingFormProps) => {
           >
             Продолжить
           </Button>
-          <Button type="submit">Сохранить</Button>
+          <Button isLoading={isLoading} type="submit">
+            Сохранить
+          </Button>
         </ActionBar>
       )}
     </Form>

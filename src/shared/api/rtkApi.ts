@@ -3,7 +3,7 @@ import { baseQueryWithRefresh } from './baseQueryWithReauth'
 
 export const rtkApi = createApi({
   reducerPath: 'rtkApi',
-  tagTypes: ['Profile'],
+  tagTypes: ['User'],
   baseQuery: baseQueryWithRefresh,
   endpoints: () => ({})
 })
