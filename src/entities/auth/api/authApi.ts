@@ -14,22 +14,21 @@ const authApi = rtkApi.injectEndpoints({
         url: '/auth/register',
         method: 'POST',
         body
-      }),
-      invalidatesTags: ['User']
+      })
     }),
     login: build.mutation<IAuthResponse, ILoginReqBody>({
       query: (body) => ({
         url: '/auth/login',
         method: 'POST',
         body
-      }),
-      invalidatesTags: ['User']
+      })
     }),
     logout: build.mutation<true, void>({
       query: () => ({
         url: '/auth/logout',
         method: 'POST'
       }),
+
       invalidatesTags: ['User']
     }),
     resetPassword: build.mutation<IResetResponse, IResetPasswordReqBody>({

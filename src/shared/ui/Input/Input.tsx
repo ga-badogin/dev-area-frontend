@@ -10,6 +10,7 @@ import { ErrorList } from '../ErrorList/ErrorList'
 import { useFocus } from '@/shared/lib/hooks/useFocus/useFocus'
 import { FieldTheme, Sizes } from '@/shared/consts/ui'
 import { setRefs } from '@/shared/lib/refs/setRefs'
+import { useDynamicInput } from '@/shared/lib/hooks/useDynamicInput/useDynamicInput'
 import {
   ChangeEvent,
   FC,
@@ -22,7 +23,6 @@ import {
   useRef,
   useState
 } from 'react'
-import { useDynamicInput } from '@/shared/lib/hooks/useDynamicInput/useDynamicInput'
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {

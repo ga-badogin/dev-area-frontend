@@ -8,6 +8,8 @@ import { Logo } from '@/shared/ui/Logo/Logo'
 import { Block } from '@/shared/ui/Block/Block'
 import { navbarSelectConfig } from '../lib/navbarSelectConfig'
 import { UserMenu } from '../../user-menu'
+import { useIsAuth } from '@/entities/user'
+import { Button } from '@/shared/ui/Button/Button'
 
 interface NavbarProps {
   className?: string
@@ -18,6 +20,7 @@ export const Navbar = memo((props: NavbarProps) => {
 
   const { pathname } = useLocation()
   const navigate = useNavigate()
+  const isAuth = useIsAuth()
 
   const handleSelect = useCallback((value: string) => {
     navigate(value)
@@ -36,7 +39,7 @@ export const Navbar = memo((props: NavbarProps) => {
         options={navbarSelectConfig}
       />
       <ThemeSwitcher className={cls.themeSwitcher} />
-      <UserMenu />
+      {isAuth && <UserMenu />}
     </Block>
   )
 })

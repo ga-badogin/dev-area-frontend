@@ -8,8 +8,11 @@ const userSlice = buildSlice({
   name: 'user',
   initialState,
   reducers: {
-    // setIsAuth: (state, { payload }: PayloadAction<boolean>) => {
-    //   state.isAuth = payload
+    // setUserInfo: (
+    //   state,
+    //   { payload }: PayloadAction<IGetMeResponse | undefined>
+    // ) => {
+    //   state.info = payload
     // }
   },
   extraReducers: (builder) => {
@@ -29,4 +32,4 @@ const userSlice = buildSlice({
   }
 })
 
-export const { reducer: userReducer } = userSlice
+export const { reducer: userReducer, getActions: getUserActions } = userSlice

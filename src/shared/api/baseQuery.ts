@@ -1,5 +1,6 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { ACCESS_TOKEN_KEY } from '@/shared/consts/localestorage'
+import { Mutex } from 'async-mutex'
 import {
   BaseQueryFn,
   FetchArgs,
@@ -18,31 +19,43 @@ const baseQuery = fetchBaseQuery({
   }
 })
 
+const mutex = new Mutex()
+
 export const baseQueryWithRefresh: BaseQueryFn<
   string | FetchArgs,
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
+  await mutex.waitForUnlock()
+
   let res = await baseQuery(args, api, extraOptions)
 
   if (res.error && res.error.status === 401) {
-    // const { setIsAuth } = getAuthActions(api.dispatch)
+    if (!mutex.isLocked()) {
+      const release = await mutex.acquire()
 
-    const refreshRes = await baseQuery(
-      { url: '/auth/refresh', method: 'POST' },
-      api,
-      extraOptions
-    )
+      try {
+        const refreshRes = await baseQuery(
+          { url: '/auth/refresh', method: 'POST' },
+          api,
+          extraOptions
+        )
 
-    if (refreshRes.data) {
-      const data = refreshRes.data as { accessToken: string }
+        if (refreshRes.data) {
+          const data = refreshRes.data as { accessToken: string }
 
-      localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken)
+          localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken)
 
-      res = await baseQuery(args, api, extraOptions)
+          res = await baseQuery(args, api, extraOptions)
+        } else {
+          localStorage.removeItem(ACCESS_TOKEN_KEY)
+        }
+      } finally {
+        release()
+      }
     } else {
-      localStorage.removeItem(ACCESS_TOKEN_KEY)
-      // setIsAuth(false)
+      await mutex.waitForUnlock()
+      res = await baseQuery(args, api, extraOptions)
     }
   }
 

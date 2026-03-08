@@ -8,6 +8,7 @@ import {
 } from '@/entities/auth'
 import { getNotificationThunks } from '@/entities/notification'
 import { ACCESS_TOKEN_KEY } from '@/shared/consts/localestorage'
+import { rtkApi } from '@/shared/api/rtkApi'
 
 export const login = createAsyncThunk<
   IAuthResponse,
@@ -30,7 +31,7 @@ export const login = createAsyncThunk<
       throw new Error()
     } else if ('accessToken' in response) {
       localStorage.setItem(ACCESS_TOKEN_KEY, response.accessToken)
-      // navigate(getAppRoute(['main']))
+      dispatch(rtkApi.util.invalidateTags(['User']))
       addNotification({
         title: 'Успех',
         paragraph: 'Вход в учетную запись выполнен'

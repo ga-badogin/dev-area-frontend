@@ -18,14 +18,14 @@
   position: relative;
 
   &:has(.icon) .input {
-    padding: 0 20px 0 calc(10% + 20px);
+    padding: 0 20px 0 65px;
   }
 }
 
 .icon {
   position: absolute;
   top: 50%;
-  right: 90%;
+  left: 20px;
   height: 50%;
   aspect-ratio: 1 / 1;
   transform: translateY(-50%);
