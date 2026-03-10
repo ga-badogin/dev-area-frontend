@@ -41,19 +41,21 @@ export const NotificationItem = memo((props: NotificationItemProps) => {
           {title}
         </Title>
         <Paragraph size={Sizes.S}>{paragraph}</Paragraph>
-        <div className={cls.actions}>
-          {rejectId && (
-            <Button
-              theme={ButtonTheme.OUTLINE}
-              onClick={handleAction(getResolver(rejectId))}
-            >
-              Отмена
-            </Button>
-          )}
-          {approveId && (
-            <Button onClick={handleAction(getResolver(approveId))}>Ок</Button>
-          )}
-        </div>
+        {(rejectId || approveId) && (
+          <div className={cls.actions}>
+            {rejectId && (
+              <Button
+                theme={ButtonTheme.OUTLINE}
+                onClick={handleAction(getResolver(rejectId))}
+              >
+                Отмена
+              </Button>
+            )}
+            {approveId && (
+              <Button onClick={handleAction(getResolver(approveId))}>Ок</Button>
+            )}
+          </div>
+        )}
       </Block>
     </div>
   )

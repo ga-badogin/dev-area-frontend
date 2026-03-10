@@ -16,7 +16,6 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ValueOf<typeof Sizes>
   isLoading?: boolean
   readOnly?: boolean
-  isAccent?: boolean
   error?: string
 }
 
@@ -29,14 +28,12 @@ export const Button = memo((props: ButtonProps) => {
     children,
     isLoading,
     readOnly = false,
-    isAccent,
     error,
     ...otherProps
   } = props
 
   const mods: Mods = {
     [cls.readOnly]: readOnly,
-    [cls.accent]: isAccent,
     [cls.error]: error
   }
 

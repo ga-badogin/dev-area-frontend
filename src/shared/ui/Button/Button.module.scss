@@ -2,14 +2,10 @@
 @use '@/shared/styles/block' as *;
 
 .button {
-  //position: relative;
   width: 100%;
   @include font;
 
   &:not(.readOnly) {
-    //display: flex;
-    //align-items: center;
-    //justify-content: center;
     z-index: 2;
 
     &.main {
@@ -31,14 +27,14 @@
       opacity: var(--disabled-opacity);
     }
 
-    &.accent {
-      background-color: var(--accent-color);
-    }
+    //&.accent {
+    //  background-color: var(--accent-color);
+    //}
   }
 
   &.readOnly,
   &.clear {
-    //width: fit-content;
+    width: fit-content;
     height: fit-content;
   }
 }
