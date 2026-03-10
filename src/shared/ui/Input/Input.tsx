@@ -8,7 +8,7 @@ import OpenedEye from '@/shared/assets/icons/OpenedEye.svg'
 import { ValueOf } from '@/shared/types'
 import { ErrorList } from '../ErrorList/ErrorList'
 import { useFocus } from '@/shared/lib/hooks/useFocus/useFocus'
-import { FieldTheme, Sizes } from '@/shared/consts/ui'
+import { Sizes } from '@/shared/consts/ui'
 import { setRefs } from '@/shared/lib/refs/setRefs'
 import { useDynamicInput } from '@/shared/lib/hooks/useDynamicInput/useDynamicInput'
 import {
@@ -24,11 +24,15 @@ import {
   useState
 } from 'react'
 
-interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export const InputTheme = {
+  MAIN: 'main',
+  MINIMAL: 'minimal'
+} as const
+
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   Icon?: FC<SVGProps<SVGSVGElement>>
-  theme?: ValueOf<typeof FieldTheme>
-  size?: ValueOf<typeof Sizes>
+  theme?: ValueOf<typeof InputTheme>
+  fontSize?: ValueOf<typeof Sizes>
   error?: string
   isLoading?: boolean
   ref?: RefCallBack
@@ -42,8 +46,8 @@ export const Input = memo(
       className,
       Icon,
       type = 'text',
-      theme = FieldTheme.MAIN,
-      size = Sizes.S,
+      theme = InputTheme.MAIN,
+      fontSize = Sizes.M,
       error,
       isLoading,
       isDynamic = false,
@@ -87,7 +91,7 @@ export const Input = memo(
             className={classNames(
               cls.input,
               { [cls.error]: error || isError },
-              [cls[theme], cls[size]]
+              [cls[theme], cls[fontSize]]
             )}
             ref={setRefs(ref, inputRef)}
             type={type === 'password' ? passwordType : type}

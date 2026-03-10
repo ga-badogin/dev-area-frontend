@@ -24,11 +24,11 @@ export const CalendarControls = memo((props: CalendarControlsProps) => {
     useCalendarControls(otherProps)
 
   return (
-    <Block className={cls.datePickerCaption} padding="10px">
+    <Block className={cls.datePickerCaption}>
       <Button theme={ButtonTheme.CLEAR} onClick={() => handleFlip('prev')}>
         <ArrowLeft className={cls.arrow} />
       </Button>
-      <Button size={Sizes.S} theme={ButtonTheme.CLEAR} onClick={handleView}>
+      <Button fontSize={Sizes.S} theme={ButtonTheme.CLEAR} onClick={handleView}>
         {headerLabel}
       </Button>
       <Button theme={ButtonTheme.CLEAR} onClick={() => handleFlip('next')}>

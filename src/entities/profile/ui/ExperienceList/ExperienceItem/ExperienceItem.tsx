@@ -1,9 +1,9 @@
 import cls from './ExperienceItem.module.scss'
 import { memo } from 'react'
-import { Input } from '@/shared/ui/Input/Input'
+import { Input, InputTheme } from '@/shared/ui/Input/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { Block } from '@/shared/ui/Block/Block'
-import { FieldTheme, Sizes } from '@/shared/consts/ui'
+import { Sizes } from '@/shared/consts/ui'
 import { useController, useFormContext } from 'react-hook-form'
 import { useIsEdit } from '../../../model/selectors/getIsEdit'
 import { DatePicker } from '@/shared/ui/DatePicker/DatePicker'
@@ -42,8 +42,8 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
     >
       <Input
         className={cls.position}
-        theme={FieldTheme.MINIMAL}
-        size={Sizes.L}
+        theme={InputTheme.MINIMAL}
+        fontSize={Sizes.L}
         readOnly={isEdit}
         error={errors.experience?.[index]?.position?.message}
         placeholder="Должность"
@@ -51,8 +51,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
       />
       <Input
         className={cls.company}
-        theme={FieldTheme.MINIMAL}
-        size={Sizes.M}
+        theme={InputTheme.MINIMAL}
         readOnly={isEdit}
         error={errors.experience?.[index]?.company?.message}
         placeholder="Компания"

@@ -45,6 +45,7 @@ export const NotificationItem = memo((props: NotificationItemProps) => {
           <div className={cls.actions}>
             {rejectId && (
               <Button
+                className={cls.button}
                 theme={ButtonTheme.OUTLINE}
                 onClick={handleAction(getResolver(rejectId))}
               >
@@ -52,7 +53,12 @@ export const NotificationItem = memo((props: NotificationItemProps) => {
               </Button>
             )}
             {approveId && (
-              <Button onClick={handleAction(getResolver(approveId))}>Ок</Button>
+              <Button
+                className={cls.button}
+                onClick={handleAction(getResolver(approveId))}
+              >
+                Ок
+              </Button>
             )}
           </div>
         )}

@@ -2,8 +2,7 @@ import cls from './SkillItem.module.scss'
 import { memo } from 'react'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
 import { useFormContext } from 'react-hook-form'
-import { Input } from '@/shared/ui/Input/Input'
-import { FieldTheme } from '@/shared/consts/ui'
+import { Input, InputTheme } from '@/shared/ui/Input/Input'
 import { useIsEdit } from '../../../model/selectors/getIsEdit'
 import { IProfileForm } from '../../../model/types/profileForm'
 
@@ -30,7 +29,7 @@ export const SkillItem = memo((props: SkillItemProps) => {
     >
       <Input
         readOnly={isEdit}
-        theme={FieldTheme.MINIMAL}
+        theme={InputTheme.MINIMAL}
         className={cls.input}
         placeholder="Навык"
         isDynamic

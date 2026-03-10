@@ -1,4 +1,4 @@
-@use '@/shared/styles/field' as *;
+@use '@/shared/styles/block' as *;
 
 .segmentedInput {
   display: flex;
@@ -6,11 +6,20 @@
 }
 
 .input {
-  @include field();
   width: 100%;
   aspect-ratio: 1 / 1;
   caret-color: transparent;
   color: var(--accent-color);
   font: var(--font-title);
   text-align: center;
+
+  @include block;
+
+  &:focus {
+    outline: 2px solid var(--accent-color);
+  }
+
+  &.error {
+    outline: var(--error-border);
+  }
 }

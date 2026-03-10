@@ -1,8 +1,8 @@
 import cls from './EducationItem.module.scss'
 import { memo } from 'react'
 import { Block } from '@/shared/ui/Block/Block'
-import { Input } from '@/shared/ui/Input/Input'
-import { FieldTheme, Sizes } from '@/shared/consts/ui'
+import { Input, InputTheme } from '@/shared/ui/Input/Input'
+import { Sizes } from '@/shared/consts/ui'
 import { useController, useFormContext } from 'react-hook-form'
 import { useIsEdit } from '../../../model/selectors/getIsEdit'
 import { DatePicker } from '@/shared/ui/DatePicker/DatePicker'
@@ -41,8 +41,8 @@ export const EducationItem = memo((props: EducationItemProps) => {
     >
       <Input
         className={cls.speciality}
-        theme={FieldTheme.MINIMAL}
-        size={Sizes.L}
+        theme={InputTheme.MINIMAL}
+        fontSize={Sizes.L}
         readOnly={isEdit}
         error={errors.education?.[index]?.speciality?.message}
         placeholder="Специальность"
@@ -50,8 +50,7 @@ export const EducationItem = memo((props: EducationItemProps) => {
       />
       <Input
         className={cls.institution}
-        theme={FieldTheme.MINIMAL}
-        size={Sizes.M}
+        theme={InputTheme.MINIMAL}
         readOnly={isEdit}
         error={errors.education?.[index]?.institution?.message}
         placeholder="Учебное заведение"

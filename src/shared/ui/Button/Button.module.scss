@@ -3,13 +3,13 @@
 
 .button {
   width: 100%;
+  height: var(--ui-height);
   @include font;
 
   &:not(.readOnly) {
     z-index: 2;
 
     &.main {
-      height: var(--ui-height);
       color: var(--light-font-color);
       background-color: var(--accent-color);
       border-radius: var(--ui-border-radius);
@@ -26,10 +26,6 @@
     &:disabled {
       opacity: var(--disabled-opacity);
     }
-
-    //&.accent {
-    //  background-color: var(--accent-color);
-    //}
   }
 
   &.readOnly,

@@ -1,7 +1,7 @@
 import cls from './Textarea.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ValueOf } from '@/shared/types'
-import { FieldTheme, Sizes } from '@/shared/consts/ui'
+import { Sizes } from '@/shared/consts/ui'
 import { ErrorList } from '../ErrorList/ErrorList'
 import { setRefs } from '@/shared/lib/refs/setRefs'
 import {
@@ -13,9 +13,13 @@ import {
 } from 'react'
 import { useDynamicTextarea } from '@/shared/lib/hooks/useDynamicTextarea/useDynamicTextarea '
 
+export const TextareaTheme = {
+  MAIN: 'main'
+} as const
+
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string
-  theme?: ValueOf<typeof FieldTheme>
+  theme?: ValueOf<typeof TextareaTheme>
   size?: ValueOf<typeof Sizes>
   error?: string
 }
@@ -26,7 +30,7 @@ export const Textarea = memo(
       const {
         className,
         size = Sizes.M,
-        theme = FieldTheme.MAIN,
+        theme = TextareaTheme.MAIN,
         error,
         readOnly,
         onChange,

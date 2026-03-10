@@ -7,11 +7,6 @@ export const Sizes = {
   XXL: 'xxl'
 } as const
 
-export const FieldTheme = {
-  MAIN: 'main',
-  MINIMAL: 'minimal'
-} as const
-
 export const FontTheme = {
   MAIN: 'main',
   SECONDARY: 'secondary'

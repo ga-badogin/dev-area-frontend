@@ -1,10 +1,10 @@
 import cls from './About.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { Input } from '@/shared/ui/Input/Input'
+import { Input, InputTheme } from '@/shared/ui/Input/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
-import { FieldTheme, Sizes } from '@/shared/consts/ui'
+import { Sizes } from '@/shared/consts/ui'
 import { Controller, useFormContext } from 'react-hook-form'
 import { useIsEdit } from '../../model/selectors/getIsEdit'
 import { ImageUploader } from '@/shared/ui/ImageUploader/ImageUploader'
@@ -37,30 +37,30 @@ export const About = memo((props: ProfileCardProps) => {
             onChange={field.onChange}
             className={cls.icon}
             FallbackImage={UserIcon}
+            readOnly={isEdit}
           />
         )}
       />
 
       <div className={cls.fields}>
         <Input
-          theme={FieldTheme.MINIMAL}
-          size={Sizes.XL}
+          theme={InputTheme.MINIMAL}
+          fontSize={Sizes.XL}
           readOnly={isEdit}
           error={errors.firstName?.message}
           placeholder="Имя"
           {...register('firstName')}
         />
         <Input
-          theme={FieldTheme.MINIMAL}
-          size={Sizes.XL}
+          theme={InputTheme.MINIMAL}
+          fontSize={Sizes.XL}
           readOnly={isEdit}
           error={errors.lastName?.message}
           placeholder="Фамилия"
           {...register('lastName')}
         />
         <Input
-          theme={FieldTheme.MINIMAL}
-          size={Sizes.M}
+          theme={InputTheme.MINIMAL}
           readOnly={isEdit}
           error={errors.title?.message}
           placeholder="Специальность"

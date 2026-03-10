@@ -4,7 +4,7 @@ import { TAppTheme } from '../../../../entities/theme/model/types/themeSchema'
 export const ThemeDecorator =
   (theme: TAppTheme): Decorator =>
   (Story) => (
-    <div className={`app ${theme}`}>
+    <div className={`app ${theme}`} style={{ padding: '10px' }}>
       <Story />
     </div>
   )

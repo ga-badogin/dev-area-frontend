@@ -6,6 +6,7 @@ import { AppTheme } from '../../src/entities/theme'
 
 const preview: Preview = {
   parameters: {
+    layout: 'fullscreen',
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -13,7 +14,7 @@ const preview: Preview = {
       }
     }
   },
-  decorators: [StyleDecorator, ThemeDecorator(AppTheme.LIGHT), RouterDecorator]
+  decorators: [StyleDecorator, ThemeDecorator(AppTheme.DARK), RouterDecorator]
 }
 
 export default preview

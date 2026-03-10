@@ -16,13 +16,13 @@ export const useDynamicInput = (
     if (!fontRef.current) {
       const style = getComputedStyle(el)
       fontRef.current = style.font
-      console.log('getComputedStyle')
+      // console.log('getComputedStyle')
     }
 
     const text = el.value || el.placeholder || ' '
     const width = getTextWidth(text, fontRef.current)
 
-    console.log(width)
+    // console.log(width)
 
     el.style.width = 'auto'
     el.style.width = `${width}px`

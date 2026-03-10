@@ -1,16 +1,40 @@
 @use '@/shared/styles/font' as *;
-@use '@/shared/styles/field' as *;
+@use '@/shared/styles/block' as *;
 
 .input {
   width: 100%;
-
   @include font;
 
   &:read-write {
-    @include field(var(--ui-height));
-  }
+    &.main {
+      padding: 0 20px 0 20px;
+      height: var(--ui-height);
+      @include block;
 
-  &:read-only {
+      &:focus {
+        outline: 2px solid var(--accent-color);
+      }
+
+      &.error {
+        outline: var(--error-border);
+      }
+    }
+
+    &.minimal {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+      &:focus {
+        border-color: var(--accent-color);
+      }
+
+      &.error {
+        border-color: var(--error-color);
+      }
+    }
+
+    &::placeholder {
+      color: var(--secondary-color);
+    }
   }
 }
 
@@ -26,7 +50,7 @@
   position: absolute;
   top: 50%;
   left: 20px;
-  height: 50%;
+  height: 25px;
   aspect-ratio: 1 / 1;
   transform: translateY(-50%);
   fill: var(--inverted-primary-color);

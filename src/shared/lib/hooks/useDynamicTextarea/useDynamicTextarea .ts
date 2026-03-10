@@ -9,8 +9,6 @@ export const useDynamicTextarea = (
 
     if (parseFloat(el.style.height) !== el.scrollHeight) {
       requestAnimationFrame(() => {
-        console.log('resize')
-
         el.style.height = 'auto'
         el.style.height = `${el.scrollHeight}px`
       })

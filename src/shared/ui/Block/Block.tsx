@@ -1,6 +1,6 @@
 import cls from './Block.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { CSSProperties, forwardRef, HTMLAttributes, ReactNode } from 'react'
+import { forwardRef, HTMLAttributes, ReactNode } from 'react'
 import { ValueOf } from '@/shared/types'
 import { Title } from '../Title/Title'
 import { Sizes } from '@/shared/consts/ui'
@@ -21,7 +21,6 @@ interface BlockWrapperProps extends HTMLAttributes<HTMLDivElement> {
   theme?: ValueOf<typeof BlockTheme>
   handleCross?: () => void
   handleAdd?: () => void
-  padding?: string
 }
 
 export const Block = forwardRef<HTMLDivElement, BlockWrapperProps>(
@@ -34,13 +33,8 @@ export const Block = forwardRef<HTMLDivElement, BlockWrapperProps>(
       theme = BlockTheme.MAIN,
       handleCross,
       handleAdd,
-      padding = '20px',
       ...otherProps
     } = props
-
-    const styles: CSSProperties = {
-      padding: !title || theme !== BlockTheme.CLEAR ? padding : 0
-    }
 
     return (
       <div className={classNames(cls.wrapper, {}, [wrapperClassName])}>
@@ -63,7 +57,6 @@ export const Block = forwardRef<HTMLDivElement, BlockWrapperProps>(
         <div
           ref={ref}
           className={classNames(cls.block, {}, [className, cls[theme]])}
-          style={styles}
           {...otherProps}
         >
           {handleCross && (

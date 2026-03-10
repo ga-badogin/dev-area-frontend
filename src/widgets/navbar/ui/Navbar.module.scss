@@ -10,15 +10,20 @@
   display: flex;
   gap: 20px;
   align-items: center;
+}
 
-  &:not(:has(.select)) .themeSwitcher {
-    margin-left: auto;
-  }
+.logo {
+  margin-right: auto;
 }
 
 .select {
-  margin-left: auto;
   flex: 1;
   max-width: 400px;
   height: 40px;
+}
+
+.button {
+  width: fit-content;
+  height: 40px;
+  padding: 0 20px;
 }

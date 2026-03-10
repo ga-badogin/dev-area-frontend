@@ -74,7 +74,7 @@ export const DatePicker = memo((props: DatePickerProps) => {
           [cls.isFocus]: isActive
         })}
         error={error}
-        size={Sizes.S}
+        fontSize={Sizes.S}
         theme={ButtonTheme.OUTLINE}
         readOnly={readOnly}
         onClick={() => setIsActive(true)}

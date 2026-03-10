@@ -2,6 +2,10 @@ import cls from './ImageUploader.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ChangeEvent, CSSProperties, FC, memo, SVGProps, useRef } from 'react'
 import { Image } from '../Image/Image'
+import { Block, BlockTheme } from '../Block/Block'
+import { Button, ButtonTheme } from '../Button/Button'
+import ChangeImageIcon from '@/shared/assets/icons/ChangeImage.svg'
+import RemoveImageIcon from '@/shared/assets/icons/RemoveImageIcon.svg'
 
 interface ImageProps {
   className?: string
@@ -10,6 +14,7 @@ interface ImageProps {
   height?: string
   onChange?: (file?: File) => void
   FallbackImage?: FC<SVGProps<SVGSVGElement>>
+  readOnly?: boolean
 }
 
 export const ImageUploader = memo((props: ImageProps) => {
@@ -19,7 +24,8 @@ export const ImageUploader = memo((props: ImageProps) => {
     onChange,
     width = '250px',
     height = '250px',
-    FallbackImage
+    FallbackImage,
+    readOnly
   } = props
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -61,6 +67,23 @@ export const ImageUploader = memo((props: ImageProps) => {
         alt="ImageUploader"
         FallbackImage={FallbackImage}
       />
+
+      {!readOnly && (
+        <Block
+          className={cls.actionBlock}
+          wrapperClassName={cls.blockWrapper}
+          theme={BlockTheme.SMALL}
+        >
+          <Button onClick={openFileDialog} theme={ButtonTheme.CLEAR}>
+            <ChangeImageIcon className={cls.changeIcon} />
+          </Button>
+          {value && (
+            <Button onClick={() => onChange?.()} theme={ButtonTheme.CLEAR}>
+              <RemoveImageIcon className={cls.removeIcon} />
+            </Button>
+          )}
+        </Block>
+      )}
     </div>
   )
 })

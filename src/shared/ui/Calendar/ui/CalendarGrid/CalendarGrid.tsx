@@ -31,7 +31,7 @@ export const CalendarGrid = memo((props: CalendarGridProps) => {
         <Button
           key={date.getTime()}
           disabled={isDisabled}
-          size={Sizes.S}
+          fontSize={Sizes.S}
           theme={ButtonTheme.OUTLINE}
           onClick={() => onSelect?.(date)}
           className={cls.button}

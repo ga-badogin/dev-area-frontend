@@ -1,5 +1,5 @@
-@use '@/shared/styles/field' as *;
 @use '@/shared/styles/font' as *;
+@use '@/shared/styles/block' as *;
 
 .textarea {
   display: block;
@@ -10,8 +10,23 @@
   @include font;
 
   &:read-write {
-    @include field(none);
-    padding: 15px;
+    padding: 20px;
+
+    &.main {
+      @include block;
+
+      &:focus {
+        outline: 2px solid var(--accent-color);
+      }
+
+      &.error {
+        outline: var(--error-border);
+      }
+    }
+
+    &::placeholder {
+      color: var(--secondary-color);
+    }
   }
 
   &:focus {

@@ -55,7 +55,7 @@ export const Calendar = memo((props: CalendarProps) => {
   )
 
   return (
-    <Block padding="10px" className={classNames(cls.calendar, {}, [className])}>
+    <Block className={classNames(cls.calendar, {}, [className])}>
       <CalendarControls
         calendarDate={calendarDate}
         setCalendarDate={setCalendarDate}
