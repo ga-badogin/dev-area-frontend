@@ -5,8 +5,8 @@ export const getAppRoute = ([path, params]: TKeyWithParams<TAppRoutes>) => {
   switch (path) {
     case 'auth':
       return '/auth/*'
-    case 'main':
-      return '/'
+    case 'profiles':
+      return '/profiles'
     case 'profile':
       return `/profile/${params.username}`
     case 'onboarding':

@@ -21,3 +21,6 @@ export {
   getProfileActions
 } from './model/slice/profileSlice'
 export { AboutSkeleton } from './ui/About/AboutSkeleton'
+export { ProfileList } from './ui/ProfileList/ProfileList'
+export type { TProfileListView } from './model/types/types'
+export { ProfileListView } from './model/consts/consts'

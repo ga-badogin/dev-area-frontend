@@ -6,6 +6,7 @@ import { NavigateFunction } from 'react-router-dom'
 import { IThemeSchema } from '@/entities/theme'
 import { IProfileSchema } from '@/entities/profile'
 import { IUserSchema } from '@/entities/user'
+import { IProfileSearchSchema } from '@/features/profile-search'
 
 export interface IStateSchema {
   notification: INotificationSchema
@@ -16,6 +17,7 @@ export interface IStateSchema {
   // async reducers
   profile?: IProfileSchema
   auth?: IAuthSchema
+  profileSearch?: IProfileSearchSchema
 }
 
 export type TStateSchemaKey = keyof IStateSchema
@@ -23,6 +25,7 @@ export type TStateSchemaKey = keyof IStateSchema
 export interface IStateSchemaPartial {
   profile?: undefined
   auth?: undefined
+  searchProfile?: undefined
 }
 
 export interface IThunkConfig<T> {

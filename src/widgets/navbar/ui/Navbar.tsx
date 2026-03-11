@@ -41,7 +41,7 @@ export const Navbar = memo((props: NavbarProps) => {
       />
       {isAuth && !pathname.includes('auth') && (
         <Button
-          onClick={() => navigate(getAppRoute(['main']))}
+          onClick={() => navigate(getAppRoute(['profiles']))}
           className={cls.button}
         >
           Профили

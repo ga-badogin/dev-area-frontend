@@ -19,7 +19,7 @@ export const RequireProfile = (props: RequireAuthProps) => {
     }
 
     if (hasProfile && onboarding) {
-      return <Navigate to={getAppRoute(['main'])} replace />
+      return <Navigate to={getAppRoute(['profiles'])} replace />
     }
   }
 

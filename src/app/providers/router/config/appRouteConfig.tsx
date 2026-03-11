@@ -1,10 +1,10 @@
 import { AuthPageAsync } from '@/pages/AuthPage'
-import { MainPage } from '@/pages/MainPage'
 import { TAppRoutes, TRouteConfig } from '@/shared/lib/router/types'
 import { getAppRoute } from '@/shared/lib/router/getRoute'
 import { Navigate } from 'react-router-dom'
 import { ProfilePageAsync } from '@/pages/ProfilePage'
 import { OnboardingPageAsync } from '@/pages/OnboardingPage'
+import { SearchProfilePageAsync } from '@/pages/SearchProfilePage'
 
 export const appRouteConfig: TRouteConfig<keyof TAppRoutes> = {
   auth: {
@@ -12,9 +12,9 @@ export const appRouteConfig: TRouteConfig<keyof TAppRoutes> = {
     element: <AuthPageAsync />,
     unAuthOnly: true
   },
-  main: {
-    path: getAppRoute(['main']),
-    element: <MainPage />
+  profiles: {
+    path: getAppRoute(['profiles']),
+    element: <SearchProfilePageAsync />
   },
   profile: {
     path: getAppRoute(['profile', { username: ':username' }]),
@@ -29,6 +29,6 @@ export const appRouteConfig: TRouteConfig<keyof TAppRoutes> = {
   },
   other: {
     path: getAppRoute(['other']),
-    element: <Navigate to={getAppRoute(['main'])} />
+    element: <Navigate to={getAppRoute(['profiles'])} />
   }
 }

@@ -1,0 +1,8 @@
+.profileList {
+  display: grid;
+  gap: 20px;
+
+  &.tile {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+}
