@@ -1,4 +1,15 @@
 export { ProfileSearch } from './ui/ProfileSearch/ProfileSearch'
-export { profileSearchReducer } from './model/slice/profileSearchSlice'
+export {
+  profileSearchReducer,
+  useProfileSearchActions,
+  getProfileSearchActions
+} from './model/slice/profileSearchSlice'
 export type { IProfileSearchSchema } from './model/types/profileSearchSchema'
-export { useProfileSearchActions } from './model/slice/profileSearchSlice'
+
+export {
+  useSearchParams,
+  getSearchParams
+} from './model/selectors/getSearchParams'
+export { profileSearch } from './model/services/profileSearch'
+export { useIsLoading } from './model/selectors/getIsLoading'
+export { useHasMore } from './model/selectors/getHasMore'

@@ -10,10 +10,14 @@ const profileApi = rtkApi.injectEndpoints({
         method: 'GET'
       })
     }),
-    searchProfile: build.query<IAbout[], string>({
-      query: (value) => ({
-        url: `/profile/search?search=${value}`,
-        method: 'GET'
+    searchProfile: build.query<
+      IAbout[],
+      { search: string; page: number; limit: number }
+    >({
+      query: (params) => ({
+        url: '/profile/search',
+        method: 'GET',
+        params
       })
     }),
     updateProfile: build.mutation<IProfile, IProfileForm>({
@@ -48,7 +52,7 @@ const profileApi = rtkApi.injectEndpoints({
 
 export const {
   getProfile: { useQuery: useGetProfile },
-  searchProfile: { useQuery: useSearchProfile },
+  searchProfile: { initiate: searchProfileInitiate },
   updateProfile: { initiate: updateProfileInitiate },
   updateAvatar: { initiate: updateAvatarInitiate },
   createProfile: { useMutation: useCreateProfile }
