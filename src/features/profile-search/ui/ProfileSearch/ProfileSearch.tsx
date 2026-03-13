@@ -5,6 +5,8 @@ import { ProfileList } from '@/entities/profile'
 import { SearchFilter } from '../SearchFilter/SearchFilter'
 import { useView } from '../../model/selectors/getView'
 import { useProfiles } from '../../model/selectors/getProfiles'
+import { useIsLoading } from '../../model/selectors/getIsLoading'
+import { useSearchParams } from '../../model/selectors/getSearchParams'
 
 interface ProfileSearchProps {
   className?: string
@@ -16,6 +18,8 @@ export const ProfileSearch = memo((props: ProfileSearchProps) => {
 
   const view = useView()
   const profiles = useProfiles()
+  const isLoading = useIsLoading()
+  const { limit } = useSearchParams()
 
   return (
     <div className={classNames(cls.profileSearch, {}, [className])}>
@@ -24,6 +28,8 @@ export const ProfileSearch = memo((props: ProfileSearchProps) => {
         profiles={profiles}
         virtualized
         scrollParent={scrollParent}
+        isLoading={isLoading}
+        limit={limit}
         view={view}
       />
     </div>

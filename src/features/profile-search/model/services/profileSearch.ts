@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { IThunkConfig } from '@/app/providers/store/exclude'
 import { IAbout, searchProfileInitiate } from '@/entities/profile'
 import { getSearchParams } from '../selectors/getSearchParams'
+import { addQueryParams } from '@/shared/lib/url/addQueryParams'
 
 export const profileSearch = createAsyncThunk<
   IAbout[],
@@ -13,6 +14,7 @@ export const profileSearch = createAsyncThunk<
   const searchParams = getSearchParams(getState())
 
   try {
+    addQueryParams(searchParams)
     const response = await dispatch(
       searchProfileInitiate(searchParams)
     ).unwrap()

@@ -33,8 +33,8 @@ const SearchProfilePage = (props: SearchProfilePageProps) => {
 
   const onLoadNextPart = useCallback(() => {
     if (hasMore) {
-      dispatch(profileSearch({}))
       nextPage()
+      dispatch(profileSearch({}))
 
       console.log('CALLBACK')
     }

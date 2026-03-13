@@ -29,12 +29,14 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
         FallbackImage={UserIcon}
       />
       <div className={cls.wrapper}>
-        <Paragraph size={Sizes.L}>{fullName}</Paragraph>
-        <Paragraph>{title || 'Пусто...'}</Paragraph>
+        <Paragraph className={cls.fullName} size={Sizes.L}>
+          {fullName}
+        </Paragraph>
+        <Paragraph className={cls.title}>{title || 'Пусто...'}</Paragraph>
+        <Paragraph size={Sizes.S} className={cls.bio}>
+          {bio || 'Пусто...'}
+        </Paragraph>
       </div>
-      <Paragraph size={Sizes.S} className={cls.bio}>
-        {bio || 'Пусто...'}
-      </Paragraph>
     </Block>
   )
 })

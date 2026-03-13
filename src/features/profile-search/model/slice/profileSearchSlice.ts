@@ -13,11 +13,12 @@ const initialState = profilesAdapter.getInitialState<IProfileSearchSchema>({
   ids: [],
   entities: {},
   view: ProfileListView.LINE,
-  page: 1,
+  page: 0,
   limit: 4,
   search: '',
   isLoading: false,
-  hasMore: true
+  hasMore: true,
+  loadingCount: 0
 })
 
 export const profilesEntitySelectors =
@@ -44,11 +45,13 @@ const profileSearchSlice = buildSlice({
   },
   extraReducers: (builder) =>
     builder
-      .addCase(profileSearch.pending, (state, { payload, meta }) => {
+      .addCase(profileSearch.pending, (state) => {
         state.isLoading = true
+        state.loadingCount += 1
       })
       .addCase(profileSearch.fulfilled, (state, { payload, meta }) => {
-        state.isLoading = false
+        state.loadingCount -= 1
+        state.isLoading = state.loadingCount > 0
         state.hasMore = payload.length >= state.limit
 
         if (meta.arg.replace) {
@@ -57,8 +60,9 @@ const profileSearchSlice = buildSlice({
           profilesAdapter.addMany(state, payload)
         }
       })
-      .addCase(profileSearch.rejected, (state, { payload, meta }) => {
-        state.isLoading = false
+      .addCase(profileSearch.rejected, (state) => {
+        state.loadingCount -= 1
+        state.isLoading = state.loadingCount > 0
       })
 })
 

@@ -3,6 +3,7 @@ import { EntityState } from '@reduxjs/toolkit'
 
 export interface IProfileSearchSchema extends EntityState<IAbout, string> {
   isLoading: boolean
+  loadingCount: number
   hasMore: boolean
 
   view: TProfileListView

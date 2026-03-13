@@ -1,10 +1,8 @@
 .profileCard {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 20px;
-  grid-template-areas:
-    'image wrapper'
-    'bio bio';
+  column-gap: 20px;
+  grid-template-areas: 'image wrapper';
 }
 
 .image {
@@ -16,5 +14,10 @@
 }
 
 .bio {
-  grid-area: bio;
+  margin-top: 5px;
+  height: max-content;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
