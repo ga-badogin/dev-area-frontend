@@ -10,6 +10,7 @@ import { updateProfile } from '../model/updateProfile'
 import { ActionBar } from '@/shared/ui/ActionBar/ActionBar'
 import { Form } from '@/shared/ui/Form/Form'
 import { useNotificationThunks } from '@/entities/notification'
+import { OwnerOnly } from '@/entities/user'
 import {
   About,
   EducationList,
@@ -21,7 +22,6 @@ import {
   useIsLoading,
   useProfileActions
 } from '@/entities/profile'
-import { OwnerOnly } from '@/entities/user'
 
 interface ProfileFormProps {
   className?: string

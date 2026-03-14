@@ -1,10 +1,10 @@
-import { AuthPageAsync } from '@/pages/AuthPage'
 import { TAppRoutes, TRouteConfig } from '@/shared/lib/router/types'
 import { getAppRoute } from '@/shared/lib/router/getRoute'
 import { Navigate } from 'react-router-dom'
 import { ProfilePageAsync } from '@/pages/ProfilePage'
 import { OnboardingPageAsync } from '@/pages/OnboardingPage'
 import { SearchProfilePageAsync } from '@/pages/SearchProfilePage'
+import { AuthPageAsync } from '@/pages/AuthPage'
 
 export const appRouteConfig: TRouteConfig<keyof TAppRoutes> = {
   auth: {

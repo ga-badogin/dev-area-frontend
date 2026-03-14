@@ -45,3 +45,5 @@ export const EducationList = memo((props: EducationListProps) => {
     </Block>
   )
 })
+
+export default EducationList

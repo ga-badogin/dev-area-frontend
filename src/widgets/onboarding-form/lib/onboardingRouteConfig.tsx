@@ -2,10 +2,14 @@ import { TOnboardingRoutes, TRouteConfig } from '@/shared/lib/router/types'
 import { getOnboardingRoute } from '@/shared/lib/router/getRoute'
 import { Navigate } from 'react-router-dom'
 import {
-  About,
-  EducationList,
-  ExperienceList,
-  SkillBoard
+  AboutAsync,
+  AboutSkeleton,
+  EducationListAsync,
+  EducationListSkeleton,
+  ExperienceListAsync,
+  ExperienceListSkeleton,
+  SkillBoardAsync,
+  SkillBoardSkeleton
 } from '@/entities/profile'
 import { Welcome } from '../ui/Welcome/Welcome'
 
@@ -16,19 +20,23 @@ export const onboardingRouteConfig: TRouteConfig<keyof TOnboardingRoutes> = {
   },
   about: {
     path: getOnboardingRoute(['about'], 'path'),
-    element: <About />
+    element: <AboutAsync />,
+    fallback: <AboutSkeleton />
   },
   experience: {
     path: getOnboardingRoute(['experience'], 'path'),
-    element: <ExperienceList />
+    element: <ExperienceListAsync />,
+    fallback: <ExperienceListSkeleton />
   },
   education: {
     path: getOnboardingRoute(['education'], 'path'),
-    element: <EducationList />
+    element: <EducationListAsync />,
+    fallback: <EducationListSkeleton />
   },
   skill: {
     path: getOnboardingRoute(['skill'], 'path'),
-    element: <SkillBoard />
+    element: <SkillBoardAsync />,
+    fallback: <SkillBoardSkeleton />
   },
   index: {
     path: getOnboardingRoute(['index']),

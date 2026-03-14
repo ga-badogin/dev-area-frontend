@@ -45,3 +45,5 @@ export const ExperienceList = memo((props: ExperienceProps) => {
     </Block>
   )
 })
+
+export default ExperienceList

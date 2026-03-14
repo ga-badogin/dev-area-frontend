@@ -83,3 +83,5 @@ export const About = memo((props: ProfileCardProps) => {
     </div>
   )
 })
+
+export default About

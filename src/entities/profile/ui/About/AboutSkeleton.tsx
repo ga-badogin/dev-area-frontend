@@ -13,15 +13,8 @@ export const AboutSkeleton = memo((props: AboutSkeletonProps) => {
   return (
     <div className={cls.profileCard}>
       <Skeleton width="250px" height="250px" className={cls.icon} />
-      <div className={cls.fields}>
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-      </div>
-      <div className={cls.block}>
-        <Skeleton />
-        <Skeleton />
-      </div>
+      <Skeleton height="107px" className={cls.fields} />
+      <Skeleton height="104px" className={cls.block} />
     </div>
   )
 })

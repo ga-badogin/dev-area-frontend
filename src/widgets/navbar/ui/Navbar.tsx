@@ -9,7 +9,7 @@ import { Block } from '@/shared/ui/Block/Block'
 import { navbarSelectConfig } from '../lib/navbarSelectConfig'
 import { useIsAuth } from '@/entities/user'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
-import { UserMenu } from '@/widgets/user-menu'
+import { UserMenu } from '../../user-menu'
 import { getAppRoute, getAuthRoute } from '@/shared/lib/router/getRoute'
 
 interface NavbarProps {

@@ -41,3 +41,5 @@ export const SkillBoard = memo((props: SkillBoardProps) => {
     </Block>
   )
 })
+
+export default SkillBoard
