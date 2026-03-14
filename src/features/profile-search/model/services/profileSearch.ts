@@ -8,13 +8,14 @@ export const profileSearch = createAsyncThunk<
   IAbout[],
   { replace?: boolean },
   IThunkConfig<string>
->('', async (_, thunkAPI) => {
+>('profileSearch', async (_, thunkAPI) => {
   const { extra, rejectWithValue, dispatch, getState } = thunkAPI
 
   const searchParams = getSearchParams(getState())
+  const { search } = searchParams
 
   try {
-    addQueryParams(searchParams)
+    addQueryParams({ search })
     const response = await dispatch(
       searchProfileInitiate(searchParams)
     ).unwrap()

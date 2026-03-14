@@ -2,18 +2,17 @@ import cls from './SearchProfilePage.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Page } from '@/shared/ui/Page/Page'
 import {
-  profileSearch,
+  mountProfileSearch,
   ProfileSearch,
-  profileSearchReducer,
-  useHasMore,
-  useProfileSearchActions
+  profileSearchReducer
 } from '@/features/profile-search'
-import { useCallback, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import {
   DynamicModuleLoader,
   TReducersList
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader'
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { useSearchParams } from 'react-router-dom'
 
 const reducers: TReducersList = {
   profileSearch: profileSearchReducer
@@ -27,28 +26,22 @@ const SearchProfilePage = (props: SearchProfilePageProps) => {
   const { className } = props
 
   const pageRef = useRef<HTMLDivElement>(null)
-  const { nextPage } = useProfileSearchActions()
-  const hasMore = useHasMore()
+
   const dispatch = useAppDispatch()
+  const [searchParams] = useSearchParams()
 
-  const onLoadNextPart = useCallback(() => {
-    if (hasMore) {
-      nextPage()
-      dispatch(profileSearch({}))
-
-      console.log('CALLBACK')
-    }
-  }, [hasMore])
+  useEffect(() => {
+    dispatch(mountProfileSearch(searchParams))
+  }, [])
 
   return (
     <DynamicModuleLoader reducers={reducers}>
       <Page
         ref={pageRef}
         container
-        onScrollEnd={onLoadNextPart}
         className={classNames(cls.searchProfilePage, {}, [className])}
       >
-        <ProfileSearch scrollParent={pageRef} />
+        <ProfileSearch className={cls.profileSearch} />
       </Page>
     </DynamicModuleLoader>
   )

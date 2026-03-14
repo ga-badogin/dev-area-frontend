@@ -18,7 +18,8 @@ const initialState = profilesAdapter.getInitialState<IProfileSearchSchema>({
   search: '',
   isLoading: false,
   hasMore: true,
-  loadingCount: 0
+  loadingCount: 0,
+  _mounted: false
 })
 
 export const profilesEntitySelectors =
@@ -41,13 +42,18 @@ const profileSearchSlice = buildSlice({
     },
     setSearch: (state, { payload }: PayloadAction<string>) => {
       state.search = payload
+    },
+    initState: (state) => {
+      state._mounted = true
     }
   },
   extraReducers: (builder) =>
     builder
-      .addCase(profileSearch.pending, (state) => {
+      .addCase(profileSearch.pending, (state, { meta }) => {
         state.isLoading = true
         state.loadingCount += 1
+
+        if (meta.arg.replace) profilesAdapter.removeAll(state)
       })
       .addCase(profileSearch.fulfilled, (state, { payload, meta }) => {
         state.loadingCount -= 1

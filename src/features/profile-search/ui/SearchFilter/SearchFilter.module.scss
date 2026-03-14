@@ -1,10 +1,6 @@
 .searchFilter {
-  position: sticky;
-  top: 132px;
-  z-index: 30;
   display: grid;
   grid-template-columns: 1fr 100px;
-  margin-bottom: 30px;
   gap: 10px;
 }
 

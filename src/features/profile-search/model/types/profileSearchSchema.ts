@@ -11,4 +11,6 @@ export interface IProfileSearchSchema extends EntityState<IAbout, string> {
   page: number
   limit: number
   search: string
+
+  _mounted: boolean
 }

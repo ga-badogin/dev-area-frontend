@@ -20,11 +20,7 @@ export const onboardingRouteConfig: TRouteConfig<keyof TOnboardingRoutes> = {
   },
   experience: {
     path: getOnboardingRoute(['experience'], 'path'),
-    element: (
-      <div>
-        <ExperienceList />
-      </div>
-    )
+    element: <ExperienceList />
   },
   education: {
     path: getOnboardingRoute(['education'], 'path'),

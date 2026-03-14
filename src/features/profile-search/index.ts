@@ -13,3 +13,4 @@ export {
 export { profileSearch } from './model/services/profileSearch'
 export { useIsLoading } from './model/selectors/getIsLoading'
 export { useHasMore } from './model/selectors/getHasMore'
+export { mountProfileSearch } from './model/services/mountProfileSearch'

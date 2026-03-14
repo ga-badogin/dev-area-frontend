@@ -1,5 +1,5 @@
 .welcome {
-  height: 100%;
+  height: calc(var(--container-height) - 132px);
   display: flex;
   flex-direction: column;
   align-items: center;
