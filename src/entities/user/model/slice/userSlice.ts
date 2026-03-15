@@ -7,14 +7,7 @@ const initialState: IUserSchema = {}
 const userSlice = buildSlice({
   name: 'user',
   initialState,
-  reducers: {
-    // setUserInfo: (
-    //   state,
-    //   { payload }: PayloadAction<IGetMeResponse | undefined>
-    // ) => {
-    //   state.info = payload
-    // }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addMatcher(
@@ -23,12 +16,9 @@ const userSlice = buildSlice({
           state.info = payload
         }
       )
-      .addMatcher(
-        userApi.endpoints.getMe.matchRejected,
-        (state, { payload }) => {
-          state.info = null
-        }
-      )
+      .addMatcher(userApi.endpoints.getMe.matchRejected, (state) => {
+        state.info = null
+      })
   }
 })
 

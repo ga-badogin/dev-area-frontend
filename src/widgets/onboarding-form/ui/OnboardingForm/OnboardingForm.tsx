@@ -35,19 +35,13 @@ export const OnboardingForm = memo((props: OnboardingFormProps) => {
   const { addNotification } = useNotificationThunks()
   const [createProfile, { isLoading }] = useCreateProfile()
   const { setIsEdit } = useProfileActions()
-
+  const actionBarVisibility = getOnboardingRoute(['welcome']) !== pathname
+  const content = onboardingRoutesContent[pathname]
   const methods = useForm<IProfileForm>({
     mode: 'onSubmit',
     resolver: profileFormResolver
   })
-
   const { handleSubmit, trigger } = methods
-
-  useEffect(() => {
-    setIsEdit(true)
-  }, [])
-
-  const actionBarVisibility = getOnboardingRoute(['welcome']) !== pathname
 
   const handleNavigation = async (value?: string) => {
     const isValid = await trigger()
@@ -69,7 +63,9 @@ export const OnboardingForm = memo((props: OnboardingFormProps) => {
       addNotification({ title: 'Успех', paragraph: 'Профиль создан' })
   }
 
-  const content = onboardingRoutesContent[pathname]
+  useEffect(() => {
+    setIsEdit(true)
+  }, [])
 
   return (
     <Form

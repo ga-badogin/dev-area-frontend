@@ -5,7 +5,7 @@ import { Page } from '@/shared/ui/Page/Page'
 import {
   DynamicModuleLoader,
   TReducersList
-} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader'
+} from '@/shared/lib/components/DynamicModuleLoader'
 import { authReducer } from '@/entities/auth'
 
 interface AuthPageProps {

@@ -10,7 +10,7 @@ import { updateProfile } from '../model/updateProfile'
 import { ActionBar } from '@/shared/ui/ActionBar/ActionBar'
 import { Form } from '@/shared/ui/Form/Form'
 import { useNotificationThunks } from '@/entities/notification'
-import { OwnerOnly } from '@/entities/user'
+import { OwnerOnly } from '@/features/access-control'
 import {
   About,
   EducationList,
@@ -46,7 +46,7 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
     formState: { isDirty }
   } = methods
 
-  const { data: profile } = useGetProfile(username)
+  const { data: profile } = useGetProfile(username!, { skip: !username })
 
   useEffect(() => {
     reset(profile)
@@ -64,8 +64,10 @@ export const ProfileForm = memo((props: ProfileFormProps) => {
           addNotification({
             title: 'Предупреждение',
             paragraph: 'Отмена сбросит все изменения, подтвердить?',
-            onApprove: () => resolve(true),
-            onReject: () => resolve(false)
+            confirmation: {
+              onApprove: () => resolve(true),
+              onReject: () => resolve(false)
+            }
           })
         })
       : true

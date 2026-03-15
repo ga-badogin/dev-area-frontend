@@ -27,7 +27,7 @@ export const resetPassword = createAsyncThunk<
 
     if (!response) {
       throw new Error()
-    } else if (response === true) {
+    } else if (response.step === 'DONE') {
       navigate(getAuthRoute(['login']))
       setIsCode(false)
       addNotification({
@@ -38,7 +38,7 @@ export const resetPassword = createAsyncThunk<
       setIsCode(true)
       addNotification({
         title: 'Введите код',
-        paragraph: response.message
+        paragraph: 'Код подтверждения направлен на почту'
       })
     }
 

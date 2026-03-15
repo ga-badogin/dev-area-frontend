@@ -2,7 +2,6 @@ export {
   useGetProfile,
   updateProfileInitiate,
   updateAvatarInitiate,
-  searchProfileInitiate,
   useCreateProfile
 } from '@/entities/profile/api/profileApi'
 export type { IProfileSchema } from './model/types/profileSchema'
@@ -31,3 +30,4 @@ export { About } from './ui/About/About'
 export { ExperienceList } from './ui/ExperienceList/ExperienceList/ExperienceList'
 export { EducationList } from './ui/EducationList/EducationList/EducationList'
 export { SkillBoard } from './ui/SkillBoard/SkillBoard/SkillBoard'
+export { EMPTY_EXPERIENCE } from './model/consts/empty'

@@ -6,14 +6,20 @@ export interface INotificationPayload {
   title?: string
   paragraph?: string
   duration?: number
-  onApprove?: () => void
-  onReject?: () => void
+  confirmation?: {
+    onApprove: () => void
+    onReject: () => void
+  }
 }
 
 export interface INotification
-  extends Omit<INotificationPayload, 'duration' | 'onApprove' | 'onReject'> {
+  extends Omit<INotificationPayload, 'duration' | 'confirmation'> {
   id: number
-  approveId?: string
-  rejectId?: string
+  confirmationIds?: INotificationConfirmationIds
   deleted?: boolean
+}
+
+export interface INotificationConfirmationIds {
+  approveId: string
+  rejectId: string
 }

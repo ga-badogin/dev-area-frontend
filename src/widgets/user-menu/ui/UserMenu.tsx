@@ -19,7 +19,7 @@ export const UserMenu = memo((props: UserMenuProps) => {
 
   const navigate = useNavigate()
   const userInfo = useUserInfo()
-  const [logout, { isLoading }] = useLogoutMutation()
+  const [logout] = useLogoutMutation()
 
   return (
     <DropDown

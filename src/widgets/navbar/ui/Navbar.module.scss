@@ -1,12 +1,9 @@
-.blockWrapper {
+.navbar {
   position: fixed;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
   width: var(--container-width);
-}
-
-.navbar {
   display: flex;
   gap: 20px;
   align-items: center;

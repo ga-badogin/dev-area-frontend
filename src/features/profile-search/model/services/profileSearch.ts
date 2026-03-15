@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { IThunkConfig } from '@/app/providers/store/exclude'
-import { IAbout, searchProfileInitiate } from '@/entities/profile'
+import { IAbout } from '@/entities/profile'
 import { getSearchParams } from '../selectors/getSearchParams'
 import { addQueryParams } from '@/shared/lib/url/addQueryParams'
+import { searchProfileInitiate } from '../../api/profileSearchApi'
 
 export const profileSearch = createAsyncThunk<
   IAbout[],

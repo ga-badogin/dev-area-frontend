@@ -7,7 +7,7 @@ import { Block, BlockTheme } from '@/shared/ui/Block/Block'
 import { Sizes } from '@/shared/consts/ui'
 import { Controller, useFormContext } from 'react-hook-form'
 import { useIsEdit } from '../../model/selectors/getIsEdit'
-import { ImageUploader } from '@/shared/ui/ImageUploader/ImageUploader'
+import { ImageUploader } from '@/shared/ui/Image/ImageUploader/ImageUploader'
 import { IProfileForm } from '../../model/types/profileForm'
 import UserIcon from '@/shared/assets/icons/User.svg'
 
@@ -68,11 +68,7 @@ export const About = memo((props: ProfileCardProps) => {
         />
       </div>
 
-      <Block
-        wrapperClassName={cls.block}
-        theme={BlockTheme.CLEAR}
-        title="О себе"
-      >
+      <Block className={cls.block} theme={BlockTheme.CLEAR} title="О себе">
         <Textarea
           readOnly={isEdit}
           error={errors.bio?.message}

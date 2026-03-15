@@ -4,6 +4,10 @@
   position: relative;
   padding: 20px;
 
+  &:has(.panel) {
+    margin-top: 50px;
+  }
+
   &.main {
     @include block;
   }
@@ -23,6 +27,10 @@
 }
 
 .panel {
+  position: absolute;
+  width: 100%;
+  top: -50px;
+  left: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -30,17 +38,11 @@
   margin-bottom: 10px;
 }
 
-.title {
-}
-
 .deleteBtn {
   position: absolute;
   top: 5px;
   right: 5px;
   visibility: hidden;
-}
-
-.addBtn {
 }
 
 .cross {

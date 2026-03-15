@@ -21,7 +21,9 @@ export const ErrorList = memo((props: ErrorListProps) => {
     >
       {error.split('/').map((error, index) => (
         <li className={cls.listItem} key={index}>
-          <Paragraph size={Sizes.S}>{error}</Paragraph>
+          <Paragraph className={cls.paragraph} size={Sizes.S}>
+            {error}
+          </Paragraph>
         </li>
       ))}
     </ul>

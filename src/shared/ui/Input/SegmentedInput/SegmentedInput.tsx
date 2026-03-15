@@ -2,7 +2,7 @@ import cls from './SegmentedInput.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo, useEffect } from 'react'
 import { useSegmentedInput } from './model/useSegmentedInput'
-import { ErrorList } from '../ErrorList/ErrorList'
+import { ErrorList } from '../../ErrorList/ErrorList'
 
 interface SegmentedInputProps {
   className?: string

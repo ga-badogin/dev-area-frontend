@@ -1,6 +1,6 @@
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ReactNode } from 'react'
-import { useUserInfo } from '../model/selectors/getUserInfo'
+import { useUserInfo } from '@/entities/user'
 
 interface OwnerOnlyProps {
   className?: string

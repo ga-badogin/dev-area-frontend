@@ -1,18 +1,18 @@
 import cls from './SearchProfilePage.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Page } from '@/shared/ui/Page/Page'
+import { useEffect, useRef } from 'react'
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
+import { useSearchParams } from 'react-router-dom'
 import {
   mountProfileSearch,
   ProfileSearch,
   profileSearchReducer
 } from '@/features/profile-search'
-import { useEffect, useRef } from 'react'
 import {
   DynamicModuleLoader,
   TReducersList
-} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader'
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch'
-import { useSearchParams } from 'react-router-dom'
+} from '@/shared/lib/components/DynamicModuleLoader'
 
 const reducers: TReducersList = {
   profileSearch: profileSearchReducer

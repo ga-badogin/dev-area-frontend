@@ -16,11 +16,12 @@ interface NotificationItemProps {
 
 export const NotificationItem = memo((props: NotificationItemProps) => {
   const { className, notification } = props
-  const { id, deleted, title, paragraph, approveId, rejectId } = notification
+  const { id, deleted, title, paragraph, confirmationIds } = notification
 
   const { deleteNotification } = useNotificationThunks()
 
-  const handleAction = (callback?: () => void) => () => {
+  const handleAction = (actionId: string) => () => {
+    const callback = getResolver(actionId)
     callback?.()
     deleteNotification(id)
   }
@@ -41,25 +42,21 @@ export const NotificationItem = memo((props: NotificationItemProps) => {
           {title}
         </Title>
         <Paragraph size={Sizes.S}>{paragraph}</Paragraph>
-        {(rejectId || approveId) && (
+        {confirmationIds && (
           <div className={cls.actions}>
-            {rejectId && (
-              <Button
-                className={cls.button}
-                theme={ButtonTheme.OUTLINE}
-                onClick={handleAction(getResolver(rejectId))}
-              >
-                Отмена
-              </Button>
-            )}
-            {approveId && (
-              <Button
-                className={cls.button}
-                onClick={handleAction(getResolver(approveId))}
-              >
-                Ок
-              </Button>
-            )}
+            <Button
+              className={cls.button}
+              theme={ButtonTheme.OUTLINE}
+              onClick={handleAction(confirmationIds.rejectId)}
+            >
+              Отмена
+            </Button>
+            <Button
+              className={cls.button}
+              onClick={handleAction(confirmationIds.approveId)}
+            >
+              Ок
+            </Button>
           </div>
         )}
       </Block>

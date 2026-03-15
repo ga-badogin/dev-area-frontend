@@ -11,5 +11,5 @@ export type {
 export {
   getNotificationThunks,
   useNotificationThunks
-} from './model/thunks/notificationThunks'
+} from './model/services/notificationThunks'
 export { useNotifications } from './model/selectors/getNotifications'

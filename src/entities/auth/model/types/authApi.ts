@@ -17,18 +17,8 @@ export interface IResetPasswordReqBody {
   code?: string
 }
 
-export type IResetResponse =
-  | boolean
-  | {
-      message: string
-      statusCode: number
-    }
+export type IResetResponse = { step: 'DONE' | 'CONFIRM_CODE' }
 
 export type IAuthResponse =
-  | {
-      accessToken: string
-    }
-  | {
-      message: string
-      statusCode: number
-    }
+  | { step: 'DONE'; accessToken: string }
+  | { step: 'CONFIRM_CODE' }

@@ -1,7 +1,7 @@
 import { classNames } from '@/shared/lib/classNames/classNames'
 import cls from './About.module.scss'
 import { memo } from 'react'
-import { Skeleton } from '@/shared/ui/Skeleton/ui/Skeleton/Skeleton'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
 interface AboutSkeletonProps {
   className?: string

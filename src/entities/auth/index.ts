@@ -1,4 +1,4 @@
-import cls from './ui/AuthFormTemplate/AuthFormTemplate.module.scss'
+import cls from './ui/AuthFormTemplate.module.scss'
 export { cls }
 export {
   loginInitiate,
@@ -14,7 +14,7 @@ export {
   getAuthActions,
   useAuthActions
 } from './model/slice/authSlice'
-export { AuthFormTemplate } from './ui/AuthFormTemplate/AuthFormTemplate'
+export { AuthFormTemplate } from './ui/AuthFormTemplate'
 export type {
   ILoginReqBody,
   IRegisterReqBody,

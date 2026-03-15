@@ -7,8 +7,6 @@
   @include font;
 
   &:not(.readOnly) {
-    z-index: 2;
-
     &.main {
       color: var(--light-font-color);
       background-color: var(--accent-color);

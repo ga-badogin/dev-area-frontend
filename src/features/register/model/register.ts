@@ -29,7 +29,7 @@ export const register = createAsyncThunk<
 
     if (!response) {
       throw new Error()
-    } else if ('accessToken' in response) {
+    } else if (response.step === 'DONE') {
       localStorage.setItem(ACCESS_TOKEN_KEY, response.accessToken)
       dispatch(rtkApi.util.invalidateTags(['User']))
       addNotification({
@@ -40,7 +40,7 @@ export const register = createAsyncThunk<
       setIsCode(true)
       addNotification({
         title: 'Введите код',
-        paragraph: response.message
+        paragraph: 'Код подтверждения направлен на почту'
       })
     }
 

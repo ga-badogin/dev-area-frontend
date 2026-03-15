@@ -1,6 +1,6 @@
 import { cls } from '@/entities/auth'
 import { memo } from 'react'
-import { Skeleton } from '@/shared/ui/Skeleton/ui/Skeleton/Skeleton'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
 export const RegisterFormSkeleton = memo(() => {
   return (

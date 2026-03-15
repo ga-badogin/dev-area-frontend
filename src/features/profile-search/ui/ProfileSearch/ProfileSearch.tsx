@@ -33,8 +33,6 @@ export const ProfileSearch = memo((props: ProfileSearchProps) => {
     if (hasMore) {
       nextPage()
       dispatch(profileSearch({}))
-
-      console.log('CALLBACK')
     }
   }, [hasMore])
 

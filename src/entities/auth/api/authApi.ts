@@ -23,6 +23,13 @@ const authApi = rtkApi.injectEndpoints({
         body
       })
     }),
+    resetPassword: build.mutation<IResetResponse, IResetPasswordReqBody>({
+      query: (body) => ({
+        url: '/auth/reset-password',
+        method: 'PUT',
+        body
+      })
+    }),
     logout: build.mutation<true, void>({
       query: () => ({
         url: '/auth/logout',
@@ -30,13 +37,6 @@ const authApi = rtkApi.injectEndpoints({
       }),
 
       invalidatesTags: ['User']
-    }),
-    resetPassword: build.mutation<IResetResponse, IResetPasswordReqBody>({
-      query: (body) => ({
-        url: '/auth/reset-password',
-        method: 'PUT',
-        body
-      })
     }),
     checkEmailUnique: build.query<boolean, string>({
       query: (email) => ({

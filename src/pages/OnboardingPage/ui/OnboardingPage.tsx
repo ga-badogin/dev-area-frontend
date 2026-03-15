@@ -6,7 +6,7 @@ import { OnboardingForm } from '@/widgets/onboarding-form'
 import {
   DynamicModuleLoader,
   TReducersList
-} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader'
+} from '@/shared/lib/components/DynamicModuleLoader'
 import { profileReducer } from '@/entities/profile'
 
 const reducers: TReducersList = {

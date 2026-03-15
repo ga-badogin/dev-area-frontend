@@ -1,9 +1,9 @@
 import cls from './ImageUploader.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ChangeEvent, CSSProperties, FC, memo, SVGProps, useRef } from 'react'
-import { Image } from '../Image/Image'
-import { Block, BlockTheme } from '../Block/Block'
-import { Button, ButtonTheme } from '../Button/Button'
+import { Image } from '../Image'
+import { Block, BlockTheme } from '../../Block/Block'
+import { Button, ButtonTheme } from '../../Button/Button'
 import ChangeImageIcon from '@/shared/assets/icons/ChangeImage.svg'
 import RemoveImageIcon from '@/shared/assets/icons/RemoveImageIcon.svg'
 
@@ -69,11 +69,7 @@ export const ImageUploader = memo((props: ImageProps) => {
       />
 
       {!readOnly && (
-        <Block
-          className={cls.actionBlock}
-          wrapperClassName={cls.blockWrapper}
-          theme={BlockTheme.SMALL}
-        >
+        <Block className={cls.actionBlock} theme={BlockTheme.SMALL}>
           <Button onClick={openFileDialog} theme={ButtonTheme.CLEAR}>
             <ChangeImageIcon className={cls.changeIcon} />
           </Button>

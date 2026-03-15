@@ -2,7 +2,7 @@ import cls from './ExperienceItem.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
 import { Block } from '@/shared/ui/Block/Block'
-import { Skeleton } from '@/shared/ui/Skeleton/ui/Skeleton/Skeleton'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 
 interface ExperienceItemSkeletonProps {
   className?: string

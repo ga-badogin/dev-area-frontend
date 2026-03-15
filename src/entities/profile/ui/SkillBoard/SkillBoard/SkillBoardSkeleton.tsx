@@ -1,7 +1,7 @@
 import cls from './SkillBoard.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { Skeleton } from '@/shared/ui/Skeleton/ui/Skeleton/Skeleton'
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton'
 import { Block } from '@/shared/ui/Block/Block'
 
 interface SkillBoardSkeletonProps {
