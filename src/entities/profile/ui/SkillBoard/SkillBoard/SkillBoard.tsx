@@ -8,16 +8,15 @@ import { EMPTY_SKILL } from '../../../model/consts/empty'
 import { IProfileForm } from '../../../model/types/profileForm'
 import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
 import { FontTheme } from '@/shared/consts/ui'
-import { useIsEdit } from '../../../model/selectors/getIsEdit'
 
 interface SkillBoardProps {
   className?: string
+  isEdit: boolean
 }
 
-export const SkillBoard = memo((props: SkillBoardProps) => {
-  const { className } = props
+const SkillBoard = memo((props: SkillBoardProps) => {
+  const { className, isEdit } = props
 
-  const isEdit = useIsEdit()
   const { control } = useFormContext<IProfileForm>()
 
   const { fields, remove, append } = useFieldArray({ control, name: 'skill' })
@@ -32,6 +31,7 @@ export const SkillBoard = memo((props: SkillBoardProps) => {
         <SkillItem
           key={field.id}
           index={index}
+          isEdit={isEdit}
           onRemove={() => remove(index)}
         />
       ))}

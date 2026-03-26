@@ -5,19 +5,19 @@ import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { Block } from '@/shared/ui/Block/Block'
 import { Sizes } from '@/shared/consts/ui'
 import { useController, useFormContext } from 'react-hook-form'
-import { useIsEdit } from '../../../model/selectors/getIsEdit'
 import { DatePicker } from '@/shared/ui/DatePicker/DatePicker'
 import { IProfileForm } from '../../../model/types/profileForm'
 
 interface ExperienceItemProps {
   index: number
   onRemove?: () => void
+  isEdit: boolean
 }
 
 export const ExperienceItem = memo((props: ExperienceItemProps) => {
-  const { index, onRemove } = props
+  const { index, onRemove, isEdit } = props
 
-  const isEdit = !useIsEdit()
+  const readOnly = !isEdit
 
   const {
     register,
@@ -38,13 +38,13 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
   return (
     <Block
       className={cls.experienceItem}
-      handleCross={!isEdit ? onRemove : undefined}
+      handleCross={isEdit ? onRemove : undefined}
     >
       <Input
         className={cls.position}
         theme={InputTheme.MINIMAL}
         fontSize={Sizes.L}
-        readOnly={isEdit}
+        readOnly={readOnly}
         error={errors.experience?.[index]?.position?.message}
         placeholder="Должность"
         {...register(`experience.${index}.position`)}
@@ -52,7 +52,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
       <Input
         className={cls.company}
         theme={InputTheme.MINIMAL}
-        readOnly={isEdit}
+        readOnly={readOnly}
         error={errors.experience?.[index]?.company?.message}
         placeholder="Компания"
         {...register(`experience.${index}.company`)}
@@ -60,7 +60,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
       <Textarea
         className={cls.description}
         size={Sizes.S}
-        readOnly={isEdit}
+        readOnly={readOnly}
         error={errors.experience?.[index]?.description?.message}
         placeholder="Описание"
         {...register(`experience.${index}.description`)}
@@ -79,7 +79,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
           endDate.onChange(secondDate)
         }}
         isFutureDateDisabled
-        readOnly={isEdit}
+        readOnly={readOnly}
       />
     </Block>
   )

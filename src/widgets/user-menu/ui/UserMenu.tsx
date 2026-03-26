@@ -5,7 +5,7 @@ import UserIcon from '@/shared/assets/icons/User.svg'
 import { useNavigate } from 'react-router-dom'
 import { Image } from '@/shared/ui/Image/Image'
 import LogoutIcon from '@/shared/assets/icons/Logout.svg'
-import { getAppRoute } from '@/shared/lib/router/getRoute'
+import { getAppRoute, getAuthRoute } from '@/shared/lib/router/getRoute'
 import { useUserInfo } from '@/entities/user'
 import { useLogoutMutation } from '@/entities/auth'
 import { ACCESS_TOKEN_KEY } from '@/shared/consts/localestorage'
@@ -32,6 +32,12 @@ export const UserMenu = memo((props: UserMenuProps) => {
               getAppRoute(['profile', { username: userInfo?.username || '' }])
             )
         },
+        {
+          text: 'Вход',
+          Icon: LogoutIcon,
+          onClick: () => navigate(getAuthRoute(['login']))
+        },
+
         {
           text: 'Выход',
           Icon: LogoutIcon,

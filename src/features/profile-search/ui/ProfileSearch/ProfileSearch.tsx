@@ -17,7 +17,7 @@ interface ProfileSearchProps {
   className?: string
 }
 
-export const ProfileSearch = memo((props: ProfileSearchProps) => {
+const ProfileSearch = memo((props: ProfileSearchProps) => {
   const { className } = props
 
   const scrollParentRef = useRef<HTMLDivElement>(null)
@@ -44,6 +44,7 @@ export const ProfileSearch = memo((props: ProfileSearchProps) => {
     >
       <SearchFilter className={cls.searchFilter} />
       <ProfileList
+        className={cls.profileList}
         profiles={profiles}
         virtualized
         scrollParent={scrollParentRef}
@@ -54,3 +55,5 @@ export const ProfileSearch = memo((props: ProfileSearchProps) => {
     </InfiniteScrollWrapper>
   )
 })
+
+export default ProfileSearch

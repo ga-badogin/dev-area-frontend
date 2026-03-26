@@ -13,8 +13,7 @@ interface RenderRouterProps {
 
 export const RenderRouter = ({
   routeConfig,
-  isChildRouter,
-  firstRenderRoute
+  isChildRouter
 }: RenderRouterProps) => {
   const renderWithWrapper = useCallback(
     (route: TRouteProps) => {
@@ -30,9 +29,7 @@ export const RenderRouter = ({
       )
 
       const routeElement = isChildRouter ? (
-        <RequireFirstRender firstRenderRoute={firstRenderRoute}>
-          {content}
-        </RequireFirstRender>
+        content
       ) : (
         <RequireAuth unAuthOnly={unAuthOnly} authOnly={authOnly}>
           <RequireProfile onboarding={onboarding}>{content}</RequireProfile>

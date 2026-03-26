@@ -3,18 +3,16 @@ import { memo } from 'react'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
 import { useFormContext } from 'react-hook-form'
 import { Input, InputTheme } from '@/shared/ui/Input/Input'
-import { useIsEdit } from '../../../model/selectors/getIsEdit'
 import { IProfileForm } from '../../../model/types/profileForm'
 
 interface SkillItemProps {
   index: number
   onRemove?: () => void
+  isEdit: boolean
 }
 
 export const SkillItem = memo((props: SkillItemProps) => {
-  const { index, onRemove } = props
-
-  const isEdit = !useIsEdit()
+  const { index, onRemove, isEdit } = props
 
   const {
     register,
@@ -24,11 +22,11 @@ export const SkillItem = memo((props: SkillItemProps) => {
   return (
     <Block
       theme={BlockTheme.SMALL}
-      handleCross={!isEdit ? onRemove : undefined}
+      handleCross={isEdit ? onRemove : undefined}
       className={cls.skillItem}
     >
       <Input
-        readOnly={isEdit}
+        readOnly={!isEdit}
         theme={InputTheme.MINIMAL}
         className={cls.input}
         placeholder="Навык"

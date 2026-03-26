@@ -8,16 +8,15 @@ import { EMPTY_EDUCATION } from '../../../model/consts/empty'
 import { IProfileForm } from '../../../model/types/profileForm'
 import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
 import { FontTheme } from '@/shared/consts/ui'
-import { useIsEdit } from '../../../model/selectors/getIsEdit'
 
 interface EducationListProps {
   className?: string
+  isEdit: boolean
 }
 
-export const EducationList = memo((props: EducationListProps) => {
-  const { className } = props
+const EducationList = memo((props: EducationListProps) => {
+  const { className, isEdit } = props
 
-  const isEdit = useIsEdit()
   const { control } = useFormContext<IProfileForm>()
 
   const { fields, remove, append } = useFieldArray({
@@ -36,6 +35,7 @@ export const EducationList = memo((props: EducationListProps) => {
         <EducationItem
           key={field.id}
           index={index}
+          isEdit={isEdit}
           onRemove={() => remove(index)}
         />
       ))}

@@ -57,6 +57,9 @@ const RegisterForm = memo((props: RegisterProps) => {
 
   return (
     <AuthFormTemplate
+      title="Регистрация"
+      paragraph="Введите данные, чтобы создать учетную запись"
+      button="Зарегистрироваться"
       resolver={registerFormResolver(isCode)}
       onSubmit={(data) => dispatch(register(data))}
       codeName={'code'}

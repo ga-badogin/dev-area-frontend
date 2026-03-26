@@ -12,9 +12,9 @@ export type TRouteConfig<T extends string> = Record<T, TRouteProps>
 
 export type TAppRoutes = {
   auth: null
-  profiles: null
+  searchProfile: null
   profile: { username: string }
-  onboarding: null
+  createProfile: null
   other: null
 }
 

@@ -18,6 +18,9 @@ const ResetPasswordForm = memo((props: ResetPasswordProps) => {
 
   return (
     <AuthFormTemplate
+      title="Смена пароля"
+      paragraph="Введите данные, чтобы сменить пароль учетной записи"
+      button="Сменить"
       resolver={resetPasswordFormResolver(isCode)}
       onSubmit={(data) => dispatch(resetPassword(data))}
       codeName="code"

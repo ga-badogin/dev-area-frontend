@@ -4,19 +4,19 @@ import { Block } from '@/shared/ui/Block/Block'
 import { Input, InputTheme } from '@/shared/ui/Input/Input'
 import { Sizes } from '@/shared/consts/ui'
 import { useController, useFormContext } from 'react-hook-form'
-import { useIsEdit } from '../../../model/selectors/getIsEdit'
 import { DatePicker } from '@/shared/ui/DatePicker/DatePicker'
 import { IProfileForm } from '../../../model/types/profileForm'
 
 interface EducationItemProps {
   index: number
   onRemove?: () => void
+  isEdit: boolean
 }
 
 export const EducationItem = memo((props: EducationItemProps) => {
-  const { index, onRemove } = props
+  const { index, onRemove, isEdit } = props
 
-  const isEdit = !useIsEdit()
+  const readOnly = !isEdit
 
   const {
     register,
@@ -37,13 +37,13 @@ export const EducationItem = memo((props: EducationItemProps) => {
   return (
     <Block
       className={cls.educationItem}
-      handleCross={!isEdit ? onRemove : undefined}
+      handleCross={isEdit ? onRemove : undefined}
     >
       <Input
         className={cls.speciality}
         theme={InputTheme.MINIMAL}
         fontSize={Sizes.L}
-        readOnly={isEdit}
+        readOnly={readOnly}
         error={errors.education?.[index]?.speciality?.message}
         placeholder="Специальность"
         {...register(`education.${index}.speciality`)}
@@ -51,7 +51,7 @@ export const EducationItem = memo((props: EducationItemProps) => {
       <Input
         className={cls.institution}
         theme={InputTheme.MINIMAL}
-        readOnly={isEdit}
+        readOnly={readOnly}
         error={errors.education?.[index]?.institution?.message}
         placeholder="Учебное заведение"
         {...register(`education.${index}.institution`)}
@@ -70,7 +70,7 @@ export const EducationItem = memo((props: EducationItemProps) => {
           endDate.onChange(secondDate)
         }}
         isFutureDateDisabled
-        readOnly={isEdit}
+        readOnly={readOnly}
       />
     </Block>
   )

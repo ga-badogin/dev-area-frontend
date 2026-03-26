@@ -1,5 +1,14 @@
 .profileSearch {
   position: relative;
+  overflow: hidden auto;
+
+  &.skeleton {
+    overflow: hidden;
+  }
+}
+
+.profileList {
+  padding: 0 20px;
 }
 
 .searchFilter {

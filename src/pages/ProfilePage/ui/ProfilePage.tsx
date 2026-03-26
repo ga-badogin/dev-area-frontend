@@ -6,11 +6,13 @@ import {
   DynamicModuleLoader,
   TReducersList
 } from '@/shared/lib/components/DynamicModuleLoader'
-import { profileReducer } from '@/entities/profile'
-import { ProfileForm } from '@/widgets/profile-form'
+import {
+  UpdateProfileForm,
+  updateProfileReducer
+} from '@/features/update-profile'
 
 const reducers: TReducersList = {
-  profile: profileReducer
+  updateProfile: updateProfileReducer
 }
 
 interface ProfilePageProps {
@@ -23,7 +25,7 @@ const ProfilePage = memo((props: ProfilePageProps) => {
   return (
     <DynamicModuleLoader reducers={reducers}>
       <Page container className={classNames(cls.profilePage, {}, [className])}>
-        <ProfileForm />
+        <UpdateProfileForm />
       </Page>
     </DynamicModuleLoader>
   )

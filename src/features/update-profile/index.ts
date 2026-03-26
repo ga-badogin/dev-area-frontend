@@ -1,0 +1,5 @@
+export { UpdateProfileForm } from './ui/UpdateProfileForm'
+export { UpdateProfileFormSkeleton } from './ui/UpdateProfileFormSkeleton'
+export { updateProfileFormResolver } from './lib/updateProfileFormResolver'
+export type { IUpdateProfileSchema } from './model/types/updateProfileShema'
+export { updateProfileReducer } from './model/slice/updateProfileSlice'

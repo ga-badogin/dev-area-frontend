@@ -5,12 +5,12 @@ export const getAppRoute = ([path, params]: TKeyWithParams<TAppRoutes>) => {
   switch (path) {
     case 'auth':
       return '/auth/*'
-    case 'profiles':
-      return '/profiles'
+    case 'searchProfile':
+      return '/search-profile'
     case 'profile':
       return `/profile/${params.username}`
-    case 'onboarding':
-      return '/onboarding/*'
+    case 'createProfile':
+      return '/create-profile/*'
     case 'other':
       return '*'
   }
@@ -34,11 +34,11 @@ export const getAuthRoute = (
   }
 }
 
-export const getOnboardingRoute = (
+export const getCreateProfileRoute = (
   [path]: TKeyWithParams<TOnboardingRoutes>,
   type: 'nav' | 'path' = 'nav'
 ) => {
-  const parentRoute = type === 'nav' ? '/onboarding' : ''
+  const parentRoute = type === 'nav' ? '/create-profile' : ''
 
   switch (path) {
     case 'welcome':

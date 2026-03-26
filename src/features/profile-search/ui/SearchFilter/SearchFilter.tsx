@@ -12,6 +12,7 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import { profileSearch } from '../../model/services/profileSearch'
 import { useSearchParams } from '../../model/selectors/getSearchParams'
 import { useIsLoading } from '../../model/selectors/getIsLoading'
+import { Block } from '@/shared/ui/Block/Block'
 
 interface SearchFilterProps {
   className?: string
@@ -37,7 +38,7 @@ export const SearchFilter = memo((props: SearchFilterProps) => {
   }, [])
 
   return (
-    <div className={classNames(cls.searchFilter, {}, [className])}>
+    <Block className={classNames(cls.searchFilter, {}, [className])}>
       <Input
         value={search}
         onChange={onChangeSearch}
@@ -50,6 +51,6 @@ export const SearchFilter = memo((props: SearchFilterProps) => {
         selectedValue={view}
         onSelect={(value) => setView(value)}
       />
-    </div>
+    </Block>
   )
 })

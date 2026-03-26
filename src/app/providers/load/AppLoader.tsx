@@ -10,9 +10,9 @@ interface AuthProviderProps {
 export const AppLoader = (props: AuthProviderProps) => {
   const { className, children } = props
 
-  const { isLoading } = useGetMeQuery()
+  const { isFetching } = useGetMeQuery()
 
-  if (isLoading) return <NavbarSkeleton />
+  if (isFetching) return <NavbarSkeleton />
 
   return children
 }

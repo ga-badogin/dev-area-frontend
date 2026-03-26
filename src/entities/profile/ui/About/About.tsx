@@ -6,19 +6,19 @@ import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
 import { Sizes } from '@/shared/consts/ui'
 import { Controller, useFormContext } from 'react-hook-form'
-import { useIsEdit } from '../../model/selectors/getIsEdit'
 import { ImageUploader } from '@/shared/ui/Image/ImageUploader/ImageUploader'
 import { IProfileForm } from '../../model/types/profileForm'
 import UserIcon from '@/shared/assets/icons/User.svg'
 
 interface ProfileCardProps {
   className?: string
+  isEdit: boolean
 }
 
-export const About = memo((props: ProfileCardProps) => {
-  const { className } = props
+const About = memo((props: ProfileCardProps) => {
+  const { className, isEdit } = props
 
-  const isEdit = !useIsEdit()
+  const readOnly = !isEdit
 
   const {
     register,
@@ -37,7 +37,7 @@ export const About = memo((props: ProfileCardProps) => {
             onChange={field.onChange}
             className={cls.icon}
             FallbackImage={UserIcon}
-            readOnly={isEdit}
+            readOnly={readOnly}
           />
         )}
       />
@@ -46,7 +46,7 @@ export const About = memo((props: ProfileCardProps) => {
         <Input
           theme={InputTheme.MINIMAL}
           fontSize={Sizes.XL}
-          readOnly={isEdit}
+          readOnly={readOnly}
           error={errors.firstName?.message}
           placeholder="Имя"
           {...register('firstName')}
@@ -54,14 +54,14 @@ export const About = memo((props: ProfileCardProps) => {
         <Input
           theme={InputTheme.MINIMAL}
           fontSize={Sizes.XL}
-          readOnly={isEdit}
+          readOnly={readOnly}
           error={errors.lastName?.message}
           placeholder="Фамилия"
           {...register('lastName')}
         />
         <Input
           theme={InputTheme.MINIMAL}
-          readOnly={isEdit}
+          readOnly={readOnly}
           error={errors.title?.message}
           placeholder="Специальность"
           {...register('title')}
@@ -70,7 +70,7 @@ export const About = memo((props: ProfileCardProps) => {
 
       <Block className={cls.block} theme={BlockTheme.CLEAR} title="О себе">
         <Textarea
-          readOnly={isEdit}
+          readOnly={readOnly}
           error={errors.bio?.message}
           placeholder="Описание"
           {...register('bio')}

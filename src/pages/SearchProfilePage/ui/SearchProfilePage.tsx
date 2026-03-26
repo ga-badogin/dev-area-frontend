@@ -6,7 +6,7 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import { useSearchParams } from 'react-router-dom'
 import {
   mountProfileSearch,
-  ProfileSearch,
+  ProfileSearchAsync,
   profileSearchReducer
 } from '@/features/profile-search'
 import {
@@ -41,7 +41,7 @@ const SearchProfilePage = (props: SearchProfilePageProps) => {
         container
         className={classNames(cls.searchProfilePage, {}, [className])}
       >
-        <ProfileSearch className={cls.profileSearch} />
+        <ProfileSearchAsync className={cls.profileSearch} />
       </Page>
     </DynamicModuleLoader>
   )

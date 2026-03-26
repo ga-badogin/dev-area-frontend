@@ -5,19 +5,18 @@ import { ExperienceItem } from '../ExperienceItem/ExperienceItem'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { EMPTY_EXPERIENCE } from '../../../model/consts/empty'
-import { useIsEdit } from '../../../model/selectors/getIsEdit'
 import { IProfileForm } from '../../../model/types/profileForm'
 import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
 import { FontTheme } from '@/shared/consts/ui'
 
 interface ExperienceProps {
   className?: string
+  isEdit: boolean
 }
 
-export const ExperienceList = memo((props: ExperienceProps) => {
-  const { className } = props
+const ExperienceList = memo((props: ExperienceProps) => {
+  const { className, isEdit } = props
 
-  const isEdit = useIsEdit()
   const { control } = useFormContext<IProfileForm>()
 
   const { fields, remove, append } = useFieldArray({
@@ -36,6 +35,7 @@ export const ExperienceList = memo((props: ExperienceProps) => {
         <ExperienceItem
           key={field.id}
           index={index}
+          isEdit={isEdit}
           onRemove={() => remove(index)}
         />
       ))}

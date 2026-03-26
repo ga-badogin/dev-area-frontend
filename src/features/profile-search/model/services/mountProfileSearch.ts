@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { IThunkConfig } from '@/app/providers/store/exclude'
 import { getMounted } from '../selectors/getMounted'
 import { getProfileSearchActions } from '../slice/profileSearchSlice'
-import { profileSearch } from './profileSearch'
 
 export const mountProfileSearch = createAsyncThunk<
   any,
@@ -22,6 +21,5 @@ export const mountProfileSearch = createAsyncThunk<
     }
 
     initState()
-    dispatch(profileSearch({}))
   }
 })

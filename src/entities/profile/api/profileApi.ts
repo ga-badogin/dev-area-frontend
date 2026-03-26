@@ -22,8 +22,7 @@ const profileApi = rtkApi.injectEndpoints({
         url: '/profile/create',
         method: 'POST',
         body: profile
-      }),
-      invalidatesTags: ['User']
+      })
     }),
     updateAvatar: build.mutation<boolean, File>({
       query: (file) => {
@@ -44,5 +43,5 @@ export const {
   getProfile: { useQuery: useGetProfile },
   updateProfile: { initiate: updateProfileInitiate },
   updateAvatar: { initiate: updateAvatarInitiate },
-  createProfile: { useMutation: useCreateProfile }
+  createProfile: { initiate: createProfileInitiate }
 } = profileApi.endpoints

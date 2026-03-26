@@ -8,9 +8,7 @@ export default (env: IBuildEnv): webpack.Configuration => {
     entry: path.resolve(__dirname, 'src', 'app', 'entrypoint', 'index.tsx'),
     build: path.resolve(__dirname, 'build'),
     html: path.resolve(__dirname, 'public', 'index.html'),
-    src: path.resolve(__dirname, 'src'),
-    locales: path.resolve(__dirname, 'public', 'locales'),
-    buildLocales: path.resolve(__dirname, 'build', 'locales')
+    src: path.resolve(__dirname, 'src')
   }
 
   const port = env.port || 3000

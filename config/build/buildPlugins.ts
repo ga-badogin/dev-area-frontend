@@ -1,10 +1,9 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import webpack from 'webpack'
-import {IBuildOptions} from './types/config'
+import { IBuildOptions } from './types/config'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
-import CopyPlugin from 'copy-webpack-plugin'
 import CircularDependencyPlugin from 'circular-dependency-plugin'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 
@@ -50,9 +49,6 @@ export function buildPlugins({
     plugins.push(new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
       chunkFilename: 'css/[name].[contenthash].css',
-    }))
-    plugins.push(new CopyPlugin({
-      patterns: [{ from: paths.locales, to: paths.buildLocales }],
     }))
   }
 

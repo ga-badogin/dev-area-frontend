@@ -7,10 +7,10 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Logo } from '@/shared/ui/Logo/Logo'
 import { Block } from '@/shared/ui/Block/Block'
 import { navbarSelectConfig } from '../lib/navbarSelectConfig'
-import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
+import { Button } from '@/shared/ui/Button/Button'
 import { UserMenu } from '../../user-menu'
-import { getAppRoute, getAuthRoute } from '@/shared/lib/router/getRoute'
-import { Authorized, UnAuthorized } from '@/features/access-control'
+import { getAppRoute } from '@/shared/lib/router/getRoute'
+import { Authorized } from '@/features/access-control'
 
 interface NavbarProps {
   className?: string
@@ -35,31 +35,16 @@ export const Navbar = memo((props: NavbarProps) => {
         selectedValue={pathname}
         options={navbarSelectConfig}
       />
-      <UnAuthorized>
-        <Button
-          onClick={() => navigate(getAuthRoute(['login']))}
-          className={cls.button}
-        >
-          Вход
-        </Button>
-        <Button
-          onClick={() => navigate(getAuthRoute(['register']))}
-          className={cls.button}
-          theme={ButtonTheme.OUTLINE}
-        >
-          Регистрация
-        </Button>
-      </UnAuthorized>
       <Authorized>
         <Button
-          onClick={() => navigate(getAppRoute(['profiles']))}
+          onClick={() => navigate(getAppRoute(['searchProfile']))}
           className={cls.button}
         >
           Профили
         </Button>
-        <UserMenu />
       </Authorized>
       <ThemeSwitcher className={cls.themeSwitcher} />
+      <UserMenu />
     </Block>
   )
 })

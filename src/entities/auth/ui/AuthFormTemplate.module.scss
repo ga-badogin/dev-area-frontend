@@ -1,9 +1,17 @@
-.input {
+.authFormWrapper {
+  max-width: 500px;
+  width: 100%;
+}
+
+.title {
+  margin: 4px 0 8px 0;
+}
+
+.input,
+.codeInput {
   margin-top: 10px;
 }
 
-.input:first-child,
-.btn,
-.codeInput {
+.btn {
   margin-top: 20px;
 }

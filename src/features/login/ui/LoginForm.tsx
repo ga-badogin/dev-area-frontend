@@ -16,6 +16,9 @@ const LoginForm = memo((props: LoginProps) => {
 
   return (
     <AuthFormTemplate
+      title="Вход"
+      paragraph="Введите данные, чтобы войти в учетную запись"
+      button="Войти"
       resolver={loginFormResolver(isCode)}
       onSubmit={(data) => dispatch(login(data))}
       codeName="code"

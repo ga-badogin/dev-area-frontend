@@ -16,7 +16,7 @@ export const RequireAuth = (props: RequireAuthProps) => {
 
   if (isAuth !== undefined) {
     if (unAuthOnly && isAuth) {
-      return <Navigate to={getAppRoute(['profiles'])} replace />
+      return <Navigate to={getAppRoute(['searchProfile'])} replace />
     }
 
     if (authOnly && !isAuth) {

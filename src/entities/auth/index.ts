@@ -15,6 +15,7 @@ export {
   useAuthActions
 } from './model/slice/authSlice'
 export { AuthFormTemplate } from './ui/AuthFormTemplate'
+export { AuthFormTemplateSkeleton } from './ui/AuthFormTemplateSkeleton'
 export type {
   ILoginReqBody,
   IRegisterReqBody,
@@ -22,4 +23,3 @@ export type {
   IResetPasswordReqBody
 } from './model/types/authApi'
 export type { IAuthSchema } from './model/types/authSchema'
-export { authRoutesContent } from './model/consts/content'

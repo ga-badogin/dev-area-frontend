@@ -4,9 +4,10 @@ import { INotificationSchema } from '@/entities/notification'
 import { AppDispatch } from './appDispatch'
 import { NavigateFunction } from 'react-router-dom'
 import { IThemeSchema } from '@/entities/theme'
-import { IProfileSchema } from '@/entities/profile'
 import { IUserSchema } from '@/entities/user'
 import { IProfileSearchSchema } from '@/features/profile-search'
+import { ICreateProfileSchema } from '@/features/create-profile'
+import { IUpdateProfileSchema } from '@/features/update-profile'
 
 export interface IStateSchema {
   notification: INotificationSchema
@@ -15,9 +16,10 @@ export interface IStateSchema {
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 
   // async reducers
-  profile?: IProfileSchema
   auth?: IAuthSchema
   profileSearch?: IProfileSearchSchema
+  createProfile?: ICreateProfileSchema
+  updateProfile?: IUpdateProfileSchema
 }
 
 export type TStateSchemaKey = keyof IStateSchema
