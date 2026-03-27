@@ -4,13 +4,10 @@ import { Navigate } from 'react-router-dom'
 import { ProfilePageAsync, ProfilePageSkeleton } from '@/pages/ProfilePage'
 import { AuthPage } from '@/pages/AuthPage'
 import {
-  CreateProfilePageAsync,
-  CreateProfilePageSkeleton
-} from '@/pages/CreateProfilePage'
-import {
   SearchProfilePageAsync,
   SearchProfilePageSkeleton
 } from '@/pages/SearchProfilePage'
+import { CreateProfilePageAsync } from '@/pages/CreateProfilePage'
 
 export const appRouteConfig: TRouteConfig<keyof TAppRoutes> = {
   auth: {
@@ -32,7 +29,6 @@ export const appRouteConfig: TRouteConfig<keyof TAppRoutes> = {
   createProfile: {
     path: getAppRoute(['createProfile']),
     element: <CreateProfilePageAsync />,
-    fallback: <CreateProfilePageSkeleton />,
     onboarding: true,
     authOnly: true
   },

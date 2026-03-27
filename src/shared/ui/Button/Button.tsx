@@ -48,7 +48,8 @@ export const Button = memo((props: ButtonProps) => {
       type={type}
       {...otherProps}
     >
-      {isLoading ? <Loader size="80%" /> : children}
+      <div className={cls.content}>{children}</div>
+      {isLoading && <Loader size="80%" className={cls.loader} />}
     </button>
   )
 })

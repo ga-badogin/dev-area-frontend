@@ -1,5 +1,6 @@
 import { rtkApi } from '@/shared/api/rtkApi'
 import { IGetMeResponse } from '../model/types/userApi'
+import { CreateProfilePageAsync } from '../../../pages/CreateProfilePage'
 
 export const userApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
@@ -8,7 +9,14 @@ export const userApi = rtkApi.injectEndpoints({
         url: `/auth/me`,
         method: 'GET'
       }),
-      providesTags: ['User']
+      providesTags: ['User'],
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+
+          if (!data.profile) await CreateProfilePageAsync.preload()
+        } catch {}
+      }
     })
   })
 })

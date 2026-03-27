@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom'
 import { RequireAuth } from './RequireAuth'
 import { TRouteProps } from '../../../../shared/lib/router/types'
 import { RequireProfile } from './RequireProfile'
-import { RequireFirstRender } from './RequireFirstRender'
 
 interface RenderRouterProps {
   routeConfig: Record<string, TRouteProps>

@@ -1,7 +1,6 @@
-import { getCreateProfileRoute } from '@/shared/lib/router/getRoute'
-
-export const chainNavigation = {
-  [getCreateProfileRoute(['about'])]: getCreateProfileRoute(['experience']),
-  [getCreateProfileRoute(['experience'])]: getCreateProfileRoute(['education']),
-  [getCreateProfileRoute(['education'])]: getCreateProfileRoute(['skill'])
+export const chainNavigation: Record<string, string> = {
+  about: 'experience',
+  experience: 'education',
+  education: 'skill',
+  skill: 'about'
 }

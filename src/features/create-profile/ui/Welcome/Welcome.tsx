@@ -4,21 +4,14 @@ import { memo } from 'react'
 import { Title } from '@/shared/ui/Title/Title'
 import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
 import { Button } from '@/shared/ui/Button/Button'
-import { getCreateProfileRoute } from '@/shared/lib/router/getRoute'
-import { useNavigate } from 'react-router-dom'
 
 interface WelcomeProps {
   className?: string
+  onClick: () => void
 }
 
 export const Welcome = memo((props: WelcomeProps) => {
-  const { className } = props
-
-  const navigate = useNavigate()
-
-  const handleClick = () => {
-    navigate(getCreateProfileRoute(['about']))
-  }
+  const { className, onClick } = props
 
   return (
     <div className={classNames(cls.welcome, {}, [className])}>
@@ -29,7 +22,7 @@ export const Welcome = memo((props: WelcomeProps) => {
         Рады видеть тебя здесь. Давай создадим твой профиль — это займёт всего
         пару минут и поможет нам настроить приложение под тебя.
       </Paragraph>
-      <Button onClick={handleClick} className={cls.btn}>
+      <Button onClick={onClick} className={cls.btn}>
         Начнем!
       </Button>
     </div>

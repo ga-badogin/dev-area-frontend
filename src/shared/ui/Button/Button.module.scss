@@ -4,6 +4,7 @@
 .button {
   width: 100%;
   height: var(--ui-height);
+  position: relative;
   @include font;
 
   &:not(.readOnly) {
@@ -23,6 +24,19 @@
 
     &:disabled {
       opacity: var(--disabled-opacity);
+    }
+  }
+
+  & .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &:has(.loader) {
+    .content {
+      visibility: hidden;
     }
   }
 

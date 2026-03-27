@@ -1,14 +1,11 @@
 import cls from './CreateProfileForm.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { RenderRouter } from '@/app/providers/router/exclude'
 import { ActionBar } from '@/shared/ui/ActionBar/ActionBar'
 import { Select } from '@/shared/ui/Select/Select'
 import { createProfileSelectConfig } from '../../lib/createProfileSelectConfig'
-import { useLocation, useNavigate } from 'react-router-dom'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
-import { chainNavigation } from '../../model/consts/navigate'
 import { useNotificationThunks } from '@/entities/notification'
 import { Form } from '@/shared/ui/Form/Form'
 import { Title } from '@/shared/ui/Title/Title'
@@ -18,9 +15,10 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import { createProfile } from '../../model/services/createProfile'
 import { useIsLoading } from '../../model/selectors/getIsLoading'
 import { IProfileForm } from '@/entities/profile'
-import { createProfileRouteConfig } from '../../lib/createProfileRouteConfig'
 import { updateProfileFormResolver } from '../../../update-profile'
-import { getCreateProfileRoute } from '@/shared/lib/router/getRoute'
+import { ViewSwitcher } from '@/shared/ui/ViewSwitcher/ViewSwitcher'
+import { viewSwitcherConfig } from '../../lib/viewSwitcherConfig'
+import { chainNavigation } from '../../model/consts/navigate'
 
 interface CreateProfileFormProps {
   className?: string
@@ -29,8 +27,8 @@ interface CreateProfileFormProps {
 export const CreateProfileForm = memo((props: CreateProfileFormProps) => {
   const { className } = props
 
-  const { pathname } = useLocation()
-  const navigate = useNavigate()
+  const [view, setView] = useState<string>('welcome')
+
   const { addNotification } = useNotificationThunks()
   const dispatch = useAppDispatch()
   const isLoading = useIsLoading()
@@ -40,14 +38,13 @@ export const CreateProfileForm = memo((props: CreateProfileFormProps) => {
   })
 
   const { handleSubmit, trigger } = methods
-  const actionBarVisibility = getCreateProfileRoute(['welcome']) !== pathname
-  const content = createProfileRoutesContent[pathname]
+  const content = createProfileRoutesContent[view]
 
   const handleNavigation = async (value?: string) => {
-    const isValid = await trigger()
+    const isValid = true
+    // await trigger()
     if (isValid) {
-      const path = !value ? chainNavigation[pathname] : value
-      navigate(path)
+      setView((prev) => (!value ? chainNavigation[prev] : value))
     } else {
       addNotification({
         title: 'Предупреждение',
@@ -71,12 +68,18 @@ export const CreateProfileForm = memo((props: CreateProfileFormProps) => {
         </>
       )}
 
-      <RenderRouter routeConfig={createProfileRouteConfig} isChildRouter />
-      {actionBarVisibility && (
+      <ViewSwitcher
+        selectedView={view}
+        elements={viewSwitcherConfig({
+          onClickWelcome: () => setView('about')
+        })}
+      />
+
+      {view !== 'welcome' && (
         <ActionBar>
           <Select
             className={cls.select}
-            selectedValue={pathname}
+            selectedValue={view}
             onSelect={handleNavigation}
             options={createProfileSelectConfig}
           />
