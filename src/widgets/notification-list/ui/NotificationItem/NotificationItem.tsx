@@ -7,7 +7,7 @@ import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
 import { Sizes } from '@/shared/consts/ui'
 import { Block } from '@/shared/ui/Block/Block'
 import { Button, ButtonTheme } from '@/shared/ui/Button/Button'
-import { getResolver } from '@/shared/lib/store/resolverRegister'
+import { resolverManager } from '@/shared/lib/store/resolverRegister'
 
 interface NotificationItemProps {
   className?: string
@@ -21,7 +21,7 @@ export const NotificationItem = memo((props: NotificationItemProps) => {
   const { deleteNotification } = useNotificationThunks()
 
   const handleAction = (actionId: string) => () => {
-    const callback = getResolver(actionId)
+    const callback = resolverManager.get(actionId)
     callback?.()
     deleteNotification(id)
   }

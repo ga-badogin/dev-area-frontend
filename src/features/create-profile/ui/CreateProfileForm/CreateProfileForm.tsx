@@ -1,6 +1,6 @@
 import cls from './CreateProfileForm.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { memo, useState } from 'react'
+import { memo, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { ActionBar } from '@/shared/ui/ActionBar/ActionBar'
 import { Select } from '@/shared/ui/Select/Select'
@@ -18,7 +18,10 @@ import { IProfileForm } from '@/entities/profile'
 import { updateProfileFormResolver } from '../../../update-profile'
 import { ViewSwitcher } from '@/shared/ui/ViewSwitcher/ViewSwitcher'
 import { viewSwitcherConfig } from '../../lib/viewSwitcherConfig'
+import { useView } from '../../model/selectors/getView'
+import { useCreateProfileActions } from '../../model/slice/createProfileSlice'
 import { chainNavigation } from '../../model/consts/navigate'
+import { TView } from '../../model/types/createProfileSchema'
 
 interface CreateProfileFormProps {
   className?: string
@@ -27,8 +30,8 @@ interface CreateProfileFormProps {
 export const CreateProfileForm = memo((props: CreateProfileFormProps) => {
   const { className } = props
 
-  const [view, setView] = useState<string>('welcome')
-
+  const view = useView()
+  const { setView } = useCreateProfileActions()
   const { addNotification } = useNotificationThunks()
   const dispatch = useAppDispatch()
   const isLoading = useIsLoading()
@@ -40,18 +43,22 @@ export const CreateProfileForm = memo((props: CreateProfileFormProps) => {
   const { handleSubmit, trigger } = methods
   const content = createProfileRoutesContent[view]
 
-  const handleNavigation = async (value?: string) => {
-    const isValid = true
-    // await trigger()
-    if (isValid) {
-      setView((prev) => (!value ? chainNavigation[prev] : value))
-    } else {
-      addNotification({
-        title: 'Предупреждение',
-        paragraph: 'Заполните обязательные поля'
-      })
-    }
-  }
+  const handleNavigation = useCallback(
+    async (value?: TView) => {
+      const isValid = await trigger()
+
+      if (isValid) {
+        const nextView = !value ? chainNavigation[view] : value
+        setView(nextView)
+      } else {
+        addNotification({
+          title: 'Предупреждение',
+          paragraph: 'Заполните обязательные поля'
+        })
+      }
+    },
+    [view, trigger, addNotification]
+  )
 
   return (
     <Form
@@ -68,12 +75,7 @@ export const CreateProfileForm = memo((props: CreateProfileFormProps) => {
         </>
       )}
 
-      <ViewSwitcher
-        selectedView={view}
-        elements={viewSwitcherConfig({
-          onClickWelcome: () => setView('about')
-        })}
-      />
+      <ViewSwitcher selectedView={view} elements={viewSwitcherConfig} />
 
       {view !== 'welcome' && (
         <ActionBar>

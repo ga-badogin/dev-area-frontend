@@ -1,24 +1,23 @@
 import { ReactNode, Suspense } from 'react'
 
-export type TViewSwitcherElements<T> = {
-  element: ReactNode
-  fallback?: ReactNode
-  view: T
-}[]
+type TViewSwitcher = string | number
 
-interface ViewSwitcherProps<T> {
+export type TViewSwitcherConfig<T extends TViewSwitcher> = Record<
+  T,
+  { element: ReactNode; fallback?: ReactNode }
+>
+
+interface ViewSwitcherProps<T extends TViewSwitcher> {
   selectedView: T
-  elements: TViewSwitcherElements<T>
+  elements: TViewSwitcherConfig<T>
 }
 
-export const ViewSwitcher = <T,>(props: ViewSwitcherProps<T>) => {
+export const ViewSwitcher = <T extends TViewSwitcher>(
+  props: ViewSwitcherProps<T>
+) => {
   const { elements, selectedView } = props
 
-  const foundElement = elements.find(({ view }) => view === selectedView)
-
-  if (!foundElement) return null
-
-  const { fallback, element } = foundElement
+  const { fallback, element } = elements[selectedView]
 
   return fallback ? <Suspense fallback={fallback}>{element}</Suspense> : element
 }

@@ -1,18 +1,24 @@
 import { ReactNode } from 'react'
 import { useGetMeQuery } from '@/entities/user'
 import { NavbarSkeleton } from '@/widgets/navbar'
+import { CreateProfilePageAsync } from '@/pages/CreateProfilePage'
+import { useLazyPreload } from '@/shared/lib/hooks/useLazyPreload/useLazyPreload'
 
 interface AuthProviderProps {
-  className?: string
   children: ReactNode
 }
 
 export const AppLoader = (props: AuthProviderProps) => {
-  const { className, children } = props
+  const { children } = props
 
-  const { isFetching } = useGetMeQuery()
+  const { isFetching, data } = useGetMeQuery()
 
-  if (isFetching) return <NavbarSkeleton />
+  const { isPreloading } = useLazyPreload(
+    Boolean(data && !data.profile),
+    CreateProfilePageAsync.preload
+  )
+
+  if (isFetching || isPreloading) return <NavbarSkeleton />
 
   return children
 }

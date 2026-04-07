@@ -6,7 +6,7 @@ import {
 import { AppDispatch } from '@/app/providers/store/exclude'
 import { getNotificationActions } from '../slice/notificationSlice'
 import { deleteNotification } from './deleteNotification'
-import { registerResolver } from '@/shared/lib/store/resolverRegister'
+import { resolverManager } from '@/shared/lib/store/resolverRegister'
 
 export const addNotification =
   (payload: INotificationPayload) => (dispatch: AppDispatch) => {
@@ -18,8 +18,8 @@ export const addNotification =
     if (confirmation) {
       const { onApprove, onReject } = confirmation
       confirmationIds = {
-        approveId: registerResolver(onApprove),
-        rejectId: registerResolver(onReject)
+        approveId: resolverManager.set(onApprove),
+        rejectId: resolverManager.set(onReject)
       }
     }
 

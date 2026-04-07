@@ -1,15 +1,19 @@
-const resolvers = new Map<string, () => void>()
+class ResolverManager {
+  private resolvers = new Map<string, () => void>()
 
-export const registerResolver = (callback: () => void) => {
-  const id = crypto.randomUUID()
+  set(callback: () => void) {
+    const id = crypto.randomUUID()
 
-  resolvers.set(id, callback)
+    this.resolvers.set(id, callback)
 
-  return id
+    return id
+  }
+
+  get(id: string) {
+    const resolver = this.resolvers.get(id)
+    this.resolvers.delete(id)
+    return resolver
+  }
 }
 
-export const getResolver = (id: string) => {
-  const resolver = resolvers.get(id)
-  resolvers.delete(id)
-  return resolver
-}
+export const resolverManager = new ResolverManager()

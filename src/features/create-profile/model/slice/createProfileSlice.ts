@@ -1,10 +1,11 @@
 import { buildSlice } from '@/shared/lib/store/buildSlice'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { createProfile } from '../services/createProfile'
-import { ICreateProfileSchema } from '../types/createProfileSchema'
+import { ICreateProfileSchema, TView } from '../types/createProfileSchema'
 
 const initialState: ICreateProfileSchema = {
-  isLoading: false
+  isLoading: false,
+  view: 'welcome'
 }
 
 const createProfileSlice = buildSlice({
@@ -13,6 +14,9 @@ const createProfileSlice = buildSlice({
   reducers: {
     setIsLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.isLoading = payload
+    },
+    setView: (state, { payload }: PayloadAction<TView>) => {
+      state.view = payload
     }
   },
   extraReducers: (builder) =>
@@ -28,4 +32,7 @@ const createProfileSlice = buildSlice({
       })
 })
 
-export const { reducer: createProfileReducer } = createProfileSlice
+export const {
+  reducer: createProfileReducer,
+  useActions: useCreateProfileActions
+} = createProfileSlice

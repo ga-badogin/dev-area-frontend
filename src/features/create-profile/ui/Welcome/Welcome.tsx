@@ -4,14 +4,20 @@ import { memo } from 'react'
 import { Title } from '@/shared/ui/Title/Title'
 import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
 import { Button } from '@/shared/ui/Button/Button'
+import { useCreateProfileActions } from '../../model/slice/createProfileSlice'
 
 interface WelcomeProps {
   className?: string
-  onClick: () => void
 }
 
 export const Welcome = memo((props: WelcomeProps) => {
-  const { className, onClick } = props
+  const { className } = props
+
+  const { setView } = useCreateProfileActions()
+
+  const handleClick = () => {
+    setView('about')
+  }
 
   return (
     <div className={classNames(cls.welcome, {}, [className])}>
@@ -22,7 +28,7 @@ export const Welcome = memo((props: WelcomeProps) => {
         Рады видеть тебя здесь. Давай создадим твой профиль — это займёт всего
         пару минут и поможет нам настроить приложение под тебя.
       </Paragraph>
-      <Button onClick={onClick} className={cls.btn}>
+      <Button onClick={handleClick} className={cls.btn}>
         Начнем!
       </Button>
     </div>

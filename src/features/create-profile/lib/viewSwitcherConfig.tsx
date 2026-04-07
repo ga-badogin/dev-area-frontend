@@ -1,4 +1,3 @@
-import { TViewSwitcherElements } from '@/shared/ui/ViewSwitcher/ViewSwitcher'
 import {
   AboutAsync,
   AboutSkeleton,
@@ -10,34 +9,27 @@ import {
   SkillBoardSkeleton
 } from '@/entities/profile'
 import { Welcome } from '../ui/Welcome/Welcome'
+import { TViewSwitcherConfig } from '../../../shared/ui/ViewSwitcher/ViewSwitcher'
+import { TView } from '../model/types/createProfileSchema'
 
-type TViewSwitcherArgs = { onClickWelcome: () => void }
-
-export const viewSwitcherConfig = ({
-  onClickWelcome
-}: TViewSwitcherArgs): TViewSwitcherElements<string> => [
-  {
-    element: <Welcome onClick={onClickWelcome} />,
-    view: 'welcome'
+export const viewSwitcherConfig: TViewSwitcherConfig<TView> = {
+  welcome: {
+    element: <Welcome />
   },
-  {
+  about: {
     element: <AboutAsync isEdit />,
-    fallback: <AboutSkeleton />,
-    view: 'about'
+    fallback: <AboutSkeleton />
   },
-  {
+  experience: {
     element: <ExperienceListAsync isEdit />,
-    fallback: <ExperienceListSkeleton />,
-    view: 'experience'
+    fallback: <ExperienceListSkeleton />
   },
-  {
+  education: {
     element: <EducationListAsync isEdit />,
-    fallback: <EducationListSkeleton />,
-    view: 'education'
+    fallback: <EducationListSkeleton />
   },
-  {
+  skill: {
     element: <SkillBoardAsync isEdit />,
-    fallback: <SkillBoardSkeleton />,
-    view: 'skill'
+    fallback: <SkillBoardSkeleton />
   }
-]
+}
