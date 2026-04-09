@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  border-radius: var(--ui-border-radius);
 }
 
 .button {
@@ -14,8 +15,10 @@
   position: absolute;
   height: 100%;
   top: 0;
-  transform: translateX(0);
+  transform: translateX(-100%);
   background-color: var(--accent-color);
   border-radius: var(--ui-border-radius);
-  transition: transform 300ms ease;
+  transition:
+    transform 300ms ease,
+    opacity 300ms ease;
 }

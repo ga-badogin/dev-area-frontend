@@ -1,4 +1,3 @@
-import cls from './Toggle.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ReactNode } from 'react'
 import { typedMemo } from '@/shared/consts/memo'
@@ -14,21 +13,18 @@ interface ToggleProps<T> {
 export const Toggle = typedMemo(<T,>(props: ToggleProps<T>) => {
   const { className, values, onToggle, currentValue } = props
 
-  return (
-    <div className={classNames(cls.toggle, {}, [className])}>
-      {values.map(
-        ({ content, value }, index) =>
-          currentValue !== value && (
-            <Button
-              theme={ButtonTheme.CLEAR}
-              onClick={() => onToggle(value)}
-              onMouseDown={(e) => e.preventDefault()}
-              key={index}
-            >
-              {content}
-            </Button>
-          )
-      )}
-    </div>
+  return values.map(
+    ({ content, value }, index) =>
+      currentValue !== value && (
+        <Button
+          className={className}
+          theme={ButtonTheme.CLEAR}
+          onClick={() => onToggle(value)}
+          onMouseDown={(e) => e.preventDefault()}
+          key={index}
+        >
+          {content}
+        </Button>
+      )
   )
 })

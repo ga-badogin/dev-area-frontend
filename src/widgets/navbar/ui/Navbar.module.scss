@@ -1,21 +1,29 @@
 .navbar {
   position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
   width: var(--container-width);
+  top: 20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   display: flex;
   gap: 20px;
   align-items: center;
+  z-index: 50;
 }
 
 .logo {
   margin-right: auto;
 }
 
-.select {
+.authSelect {
   flex: 1;
   max-width: 400px;
+  height: 40px;
+}
+
+.appSelect {
+  flex: 1;
+  max-width: 100px;
   height: 40px;
 }
 

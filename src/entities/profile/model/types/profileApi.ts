@@ -9,6 +9,7 @@ export interface IAbout {
   userId: string
   firstName: string
   lastName: string
+  username: string
   title?: string
   bio?: string
   avatarUrl?: string

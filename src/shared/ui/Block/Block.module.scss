@@ -2,18 +2,23 @@
 
 .block {
   position: relative;
+  z-index: 0;
   padding: 20px;
 
   &:has(.panel) {
     margin-top: 50px;
   }
 
-  &.main {
+  &.main:before,
+  &.small:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
     @include block;
   }
 
   &.small {
-    @include block;
     width: fit-content;
   }
 
@@ -23,6 +28,13 @@
 
   &:hover > .deleteBtn {
     visibility: visible;
+  }
+
+  & .deleteBtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    visibility: hidden;
   }
 }
 
@@ -36,13 +48,6 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-}
-
-.deleteBtn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  visibility: hidden;
 }
 
 .cross {

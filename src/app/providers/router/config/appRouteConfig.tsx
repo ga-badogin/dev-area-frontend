@@ -23,8 +23,7 @@ export const appRouteConfig: TRouteConfig<keyof TAppRoutes> = {
   profile: {
     path: getAppRoute(['profile', { username: ':username' }]),
     element: <ProfilePageAsync />,
-    fallback: <ProfilePageSkeleton />,
-    authOnly: true
+    fallback: <ProfilePageSkeleton />
   },
   createProfile: {
     path: getAppRoute(['createProfile']),

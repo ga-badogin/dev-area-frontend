@@ -7,6 +7,8 @@ import { Image } from '@/shared/ui/Image/Image'
 import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
 import { Sizes } from '@/shared/consts/ui'
 import UserIcon from '@/shared/assets/icons/User.svg'
+import { useNavigate } from 'react-router-dom'
+import { getAppRoute } from '@/shared/lib/router/getRoute'
 
 interface ProfileCardProps {
   className?: string
@@ -15,12 +17,17 @@ interface ProfileCardProps {
 
 export const ProfileCard = memo((props: ProfileCardProps) => {
   const { className, profile } = props
-  const { avatarUrl, bio, firstName, lastName, title } = profile
+  const { avatarUrl, bio, firstName, lastName, title, username } = profile
 
   const fullName = firstName + ' ' + lastName
 
+  const navigate = useNavigate()
+
   return (
-    <Block className={classNames(cls.profileCard, {}, [className])}>
+    <Block
+      onClick={() => navigate(getAppRoute(['profile', { username: username }]))}
+      className={classNames(cls.profileCard, {}, [className])}
+    >
       <Image
         width="150px"
         height="150px"

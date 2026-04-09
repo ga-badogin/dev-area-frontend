@@ -1,0 +1,19 @@
+.dropDown {
+  position: relative;
+  cursor: pointer;
+}
+
+.items {
+  cursor: default;
+  display: flex;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  flex-direction: column;
+  gap: 10px;
+  visibility: hidden;
+
+  &.isActive {
+    visibility: visible;
+  }
+}

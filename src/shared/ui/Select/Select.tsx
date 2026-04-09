@@ -19,16 +19,20 @@ interface SelectProps<T> {
 export const Select = typedMemo(<T,>(props: SelectProps<T>) => {
   const { className, options, onSelect, selectedValue } = props
 
-  const sliderPosition = useMemo(() => {
-    return options.findIndex((option) => option.value === selectedValue)
+  const sliderStyle = useMemo((): CSSProperties => {
+    const position = options.findIndex(
+      (option) => option.value === selectedValue
+    )
+
+    return {
+      width: `${100 / options.length}%`,
+      ...(position >= 0
+        ? { transform: `translateX(${position * 100}%)` }
+        : { opacity: 0 })
+    }
   }, [selectedValue, options])
 
-  const sliderStyle: CSSProperties = {
-    width: `${100 / options.length}%`,
-    transform: `translateX(${sliderPosition * 100}%)`
-  }
-
-  return sliderPosition >= 0 ? (
+  return (
     <div className={classNames(cls.select, {}, [className])}>
       {options.map(({ content, value }, index) => (
         <Button
@@ -42,5 +46,5 @@ export const Select = typedMemo(<T,>(props: SelectProps<T>) => {
       ))}
       <div className={cls.slider} style={sliderStyle} />
     </div>
-  ) : undefined
+  )
 })

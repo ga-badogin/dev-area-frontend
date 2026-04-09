@@ -6,11 +6,12 @@ import { Select } from '@/shared/ui/Select/Select'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Logo } from '@/shared/ui/Logo/Logo'
 import { Block } from '@/shared/ui/Block/Block'
-import { navbarSelectConfig } from '../lib/navbarSelectConfig'
-import { Button } from '@/shared/ui/Button/Button'
 import { UserMenu } from '../../user-menu'
-import { getAppRoute } from '@/shared/lib/router/getRoute'
-import { Authorized } from '@/features/access-control'
+import { Authorized, UnAuthorized } from '@/features/access-control'
+import {
+  appRoutesSelectConfig,
+  authRoutesSelectConfig
+} from '../lib/navbarSelectConfig'
 
 interface NavbarProps {
   className?: string
@@ -29,21 +30,23 @@ export const Navbar = memo((props: NavbarProps) => {
   return (
     <Block className={classNames(cls.navbar, {}, [className])}>
       <Logo className={cls.logo} />
-      <Select
-        className={cls.select}
-        onSelect={handleSelect}
-        selectedValue={pathname}
-        options={navbarSelectConfig}
-      />
+      <UnAuthorized>
+        <Select
+          className={cls.authSelect}
+          onSelect={handleSelect}
+          selectedValue={pathname}
+          options={authRoutesSelectConfig}
+        />
+      </UnAuthorized>
       <Authorized>
-        <Button
-          onClick={() => navigate(getAppRoute(['searchProfile']))}
-          className={cls.button}
-        >
-          Профили
-        </Button>
+        <Select
+          className={cls.appSelect}
+          onSelect={handleSelect}
+          selectedValue={pathname}
+          options={appRoutesSelectConfig}
+        />
       </Authorized>
-      <ThemeSwitcher className={cls.themeSwitcher} />
+      <ThemeSwitcher />
       <UserMenu />
     </Block>
   )

@@ -14,5 +14,5 @@ export const UnAuthorized = (props: UnAuthorizedProps) => {
   const isAuth = useIsAuth()
   const { pathname } = useLocation()
 
-  return !isAuth && !pathname.includes('auth') ? children : null
+  return !isAuth && pathname.includes('auth') ? children : null
 }

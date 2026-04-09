@@ -25,6 +25,14 @@
     &:disabled {
       opacity: var(--disabled-opacity);
     }
+
+    &:has(.loader) {
+      color: transparent;
+
+      & > *:not(.loader) {
+        visibility: hidden;
+      }
+    }
   }
 
   & .loader {
@@ -32,12 +40,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-
-  &:has(.loader) {
-    .content {
-      visibility: hidden;
-    }
   }
 
   &.readOnly,
