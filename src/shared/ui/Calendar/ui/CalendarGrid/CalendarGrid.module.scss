@@ -15,4 +15,16 @@
   &.years {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  & .button {
+    height: auto;
+
+    &.isToday {
+      border-color: var(--accent-color);
+    }
+
+    &.isSelected {
+      background-color: var(--accent-color);
+    }
+  }
 }

@@ -37,6 +37,7 @@ const ExperienceList = memo((props: ExperienceProps) => {
           index={index}
           isEdit={isEdit}
           onRemove={() => remove(index)}
+          style={{ zIndex: fields.length - index }}
         />
       ))}
       {fields.length === 0 && (

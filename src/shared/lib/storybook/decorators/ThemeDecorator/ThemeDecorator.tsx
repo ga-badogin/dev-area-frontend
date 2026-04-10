@@ -1,5 +1,5 @@
 import { Decorator } from '@storybook/react-webpack5'
-import { TAppTheme } from '../../../../entities/theme/model/types/themeSchema'
+import { TAppTheme } from '../../../../../entities/theme/model/types/themeSchema'
 
 export const ThemeDecorator =
   (theme: TAppTheme): Decorator =>

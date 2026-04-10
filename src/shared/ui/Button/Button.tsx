@@ -29,6 +29,7 @@ export const Button = memo((props: ButtonProps) => {
     isLoading,
     readOnly = false,
     error,
+    disabled,
     ...otherProps
   } = props
 
@@ -44,12 +45,12 @@ export const Button = memo((props: ButtonProps) => {
         cls[fontSize],
         className
       ])}
-      disabled={isLoading || readOnly}
+      disabled={isLoading || readOnly || disabled}
       type={type}
       {...otherProps}
     >
       {children}
-      {isLoading && <Loader size="80%" className={cls.loader} />}
+      {isLoading && <Loader size="80%" id={cls.loader} />}
     </button>
   )
 })

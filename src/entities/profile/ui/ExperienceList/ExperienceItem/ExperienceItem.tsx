@@ -1,5 +1,5 @@
 import cls from './ExperienceItem.module.scss'
-import { memo } from 'react'
+import { CSSProperties, memo } from 'react'
 import { Input, InputTheme } from '@/shared/ui/Input/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { Block } from '@/shared/ui/Block/Block'
@@ -12,10 +12,11 @@ interface ExperienceItemProps {
   index: number
   onRemove?: () => void
   isEdit: boolean
+  style?: CSSProperties
 }
 
 export const ExperienceItem = memo((props: ExperienceItemProps) => {
-  const { index, onRemove, isEdit } = props
+  const { index, onRemove, isEdit, style } = props
 
   const readOnly = !isEdit
 
@@ -39,6 +40,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
     <Block
       className={cls.experienceItem}
       handleCross={isEdit ? onRemove : undefined}
+      style={style}
     >
       <Input
         className={cls.position}

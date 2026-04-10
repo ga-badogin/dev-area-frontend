@@ -3,11 +3,11 @@ import { getAppRoute } from '@/shared/lib/router/getRoute'
 import { Navigate } from 'react-router-dom'
 import { ProfilePageAsync, ProfilePageSkeleton } from '@/pages/ProfilePage'
 import { AuthPage } from '@/pages/AuthPage'
+import { CreateProfilePageAsync } from '@/pages/CreateProfilePage'
 import {
   SearchProfilePageAsync,
   SearchProfilePageSkeleton
 } from '@/pages/SearchProfilePage'
-import { CreateProfilePageAsync } from '@/pages/CreateProfilePage'
 
 export const appRouteConfig: TRouteConfig<keyof TAppRoutes> = {
   auth: {

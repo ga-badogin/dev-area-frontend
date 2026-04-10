@@ -2,8 +2,8 @@
 @use '@/shared/styles/block' as *;
 
 .button {
-  width: 100%;
   height: var(--ui-height);
+  width: 100%;
   position: relative;
   @include font;
 
@@ -12,13 +12,17 @@
       color: var(--light-font-color);
       background-color: var(--accent-color);
       border-radius: var(--ui-border-radius);
+
+      &.error {
+        background-color: var(--error-color);
+      }
     }
 
     &.outline {
       @include block;
 
       &.error {
-        border-color: var(--error-color);
+        outline-color: var(--error-color);
       }
     }
 
@@ -26,20 +30,13 @@
       opacity: var(--disabled-opacity);
     }
 
-    &:has(.loader) {
+    &:has(#loader) {
       color: transparent;
 
-      & > *:not(.loader) {
+      & > *:not(#loader) {
         visibility: hidden;
       }
     }
-  }
-
-  & .loader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
   }
 
   &.readOnly,
@@ -47,4 +44,11 @@
     width: fit-content;
     height: fit-content;
   }
+}
+
+#loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

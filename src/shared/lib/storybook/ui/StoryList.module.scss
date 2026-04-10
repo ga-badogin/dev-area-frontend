@@ -1,0 +1,20 @@
+.storyList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.storyListItem {
+  position: relative;
+  outline: var(--block-border);
+  padding: 20px;
+  margin-top: 32px;
+  border-radius: var(--block-border-radius);
+  border-top-left-radius: 0;
+}
+
+.paragraph {
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+}

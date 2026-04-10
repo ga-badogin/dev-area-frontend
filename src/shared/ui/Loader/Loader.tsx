@@ -12,13 +12,15 @@ interface LoaderProps {
   size?: string
   className?: string
   theme?: ValueOf<typeof LoaderTheme>
+  id?: string
 }
 
 export const Loader = memo((props: LoaderProps) => {
-  const { size = '100%', className, theme = LoaderTheme.LIGHT } = props
+  const { size = '100%', className, theme = LoaderTheme.LIGHT, id } = props
 
   return (
     <div
+      id={id}
       className={classNames(cls.loader, {}, [className, cls[theme]])}
       style={{ height: size }}
     >

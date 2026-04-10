@@ -1,5 +1,5 @@
 import { Decorator } from '@storybook/react-webpack5'
-import { TReducersList } from '../../components/DynamicModuleLoader'
+import { TReducersList } from '../../../components/DynamicModuleLoader'
 import { IStateSchema, StoreProvider } from '@/app/providers/store/exclude'
 
 const defaultAsyncReducers: TReducersList = {}

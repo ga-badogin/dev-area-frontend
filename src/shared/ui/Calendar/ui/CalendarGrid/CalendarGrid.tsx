@@ -34,8 +34,11 @@ export const CalendarGrid = memo((props: CalendarGridProps) => {
           fontSize={Sizes.S}
           theme={ButtonTheme.OUTLINE}
           onClick={() => onSelect?.(date)}
-          className={cls.button}
-          // isAccent={isSelected || isToday}
+          className={classNames(
+            cls.button,
+            { [cls.isToday]: isToday, [cls.isSelected]: isSelected },
+            []
+          )}
         >
           {label}
         </Button>
