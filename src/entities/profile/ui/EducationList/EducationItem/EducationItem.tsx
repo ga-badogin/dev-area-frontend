@@ -1,7 +1,7 @@
 import cls from './EducationItem.module.scss'
 import { memo } from 'react'
 import { Block } from '@/shared/ui/Block/Block'
-import { Input, InputTheme } from '@/shared/ui/Input/Input'
+import { Input, InputTheme } from '@/shared/ui/Input/ui/Input'
 import { Sizes } from '@/shared/consts/ui'
 import { useController, useFormContext } from 'react-hook-form'
 import { DatePicker } from '@/shared/ui/DatePicker/DatePicker'

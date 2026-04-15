@@ -12,7 +12,7 @@ export type TSelectConfig<T> = {
 interface SelectProps<T> {
   className?: string
   selectedValue: T
-  onSelect: (value: T) => void
+  onSelect?: (value: T) => void
   options: TSelectConfig<T>
 }
 
@@ -38,7 +38,7 @@ export const Select = typedMemo(<T,>(props: SelectProps<T>) => {
         <Button
           className={cls.button}
           theme={ButtonTheme.CLEAR}
-          onClick={() => onSelect(value)}
+          onClick={() => onSelect?.(value)}
           key={index}
         >
           {content}

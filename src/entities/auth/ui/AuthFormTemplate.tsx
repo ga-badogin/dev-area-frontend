@@ -1,12 +1,11 @@
 import cls from './AuthFormTemplate.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { Input } from '@/shared/ui/Input/Input'
+import { Input } from '@/shared/ui/Input/ui/Input'
 import { Button } from '@/shared/ui/Button/Button'
 import { useIsCode } from '../model/selectors/getIsCode'
 import { FC, HTMLInputTypeAttribute, SVGProps } from 'react'
 import { typedMemo } from '@/shared/consts/memo'
 import { useLocation } from 'react-router-dom'
-import { SegmentedInput } from '@/shared/ui/Input/SegmentedInput/SegmentedInput'
 import { Title } from '@/shared/ui/Title/Title'
 import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
 import { Block } from '@/shared/ui/Block/Block'
@@ -19,6 +18,7 @@ import {
   Resolver,
   useForm
 } from 'react-hook-form'
+import { SegmentedInput } from '@/shared/ui/SegmentedInput/ui/SegmentedInput'
 
 interface AuthFormProps<T extends FieldValues> {
   className?: string

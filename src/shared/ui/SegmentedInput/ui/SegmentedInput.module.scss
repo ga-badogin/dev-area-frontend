@@ -1,0 +1,15 @@
+@use '@/shared/styles/field' as *;
+
+.segmentedInput {
+  display: flex;
+  gap: 10px;
+}
+
+.input {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  caret-color: transparent;
+  font: var(--font-title);
+  text-align: center;
+  @include field(0);
+}

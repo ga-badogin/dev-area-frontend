@@ -1,7 +1,7 @@
 import cls from './SearchFilter.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { ChangeEvent, memo, useCallback } from 'react'
-import { Input } from '@/shared/ui/Input/Input'
+import { Input } from '@/shared/ui/Input/ui/Input'
 import SearchIcon from '@/shared/assets/icons/SearchIcon.svg'
 import { useDebounce } from '@/shared/lib/hooks/useDebounce/useDebounce'
 import { useProfileSearchActions } from '../../model/slice/profileSearchSlice'

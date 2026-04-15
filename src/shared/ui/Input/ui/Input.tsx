@@ -1,16 +1,16 @@
 import cls from './Input.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { Loader, LoaderTheme } from '../Loader/Loader'
+import { Loader, LoaderTheme } from '../../Loader/Loader'
 import { RefCallBack } from 'react-hook-form'
-import { Toggle } from '../Toggle/Toggle'
-import ClosedEye from '@/shared/assets/icons/ClosedEye.svg'
-import OpenedEye from '@/shared/assets/icons/OpenedEye.svg'
 import { ValueOf } from '@/shared/types'
-import { ErrorList } from '../ErrorList/ErrorList'
+import { ErrorList } from '../../ErrorList/ErrorList'
 import { useFocus } from '@/shared/lib/hooks/useFocus/useFocus'
 import { Sizes } from '@/shared/consts/ui'
 import { setRefs } from '@/shared/lib/refs/setRefs'
 import { useDynamicInput } from '@/shared/lib/hooks/useDynamicInput/useDynamicInput'
+import { Toggle } from '../../Toggle/Toggle'
+import { inputToggleConfig } from '../lib/inputToggleConfig'
+import { FieldTheme } from '@/shared/types/style'
 import {
   ChangeEvent,
   FC,
@@ -24,14 +24,9 @@ import {
   useState
 } from 'react'
 
-export const InputTheme = {
-  MAIN: 'main',
-  MINIMAL: 'minimal'
-} as const
-
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   Icon?: FC<SVGProps<SVGSVGElement>>
-  theme?: ValueOf<typeof InputTheme>
+  theme?: ValueOf<typeof FieldTheme>
   fontSize?: ValueOf<typeof Sizes>
   error?: string
   isLoading?: boolean
@@ -46,7 +41,7 @@ export const Input = memo(
       className,
       Icon,
       type = 'text',
-      theme = InputTheme.MAIN,
+      theme = FieldTheme.MAIN,
       fontSize = Sizes.M,
       error,
       isLoading,
@@ -102,27 +97,14 @@ export const Input = memo(
           />
           {Icon && <Icon className={cls.icon} />}
           {isLoading && (
-            <Loader
-              theme={LoaderTheme.ACCENT}
-              className={cls.loader}
-              size="50%"
-            />
+            <Loader theme={LoaderTheme.ACCENT} id={cls.loader} size="50%" />
           )}
           {type === 'password' && (
             <Toggle
-              className={cls.toggle}
+              id={cls.toggle}
               currentValue={passwordType}
               onToggle={handleToggle}
-              values={[
-                {
-                  content: <ClosedEye className={cls.passwordIcon} />,
-                  value: 'text'
-                },
-                {
-                  content: <OpenedEye className={cls.passwordIcon} />,
-                  value: 'password'
-                }
-              ]}
+              values={inputToggleConfig}
             />
           )}
         </div>

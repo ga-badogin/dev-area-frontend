@@ -12,14 +12,11 @@ import {
   useRef
 } from 'react'
 import { useDynamicTextarea } from '@/shared/lib/hooks/useDynamicTextarea/useDynamicTextarea '
-
-export const TextareaTheme = {
-  MAIN: 'main'
-} as const
+import { FieldTheme } from '@/shared/types/style'
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string
-  theme?: ValueOf<typeof TextareaTheme>
+  theme?: ValueOf<typeof FieldTheme>
   size?: ValueOf<typeof Sizes>
   error?: string
 }
@@ -30,7 +27,7 @@ export const Textarea = memo(
       const {
         className,
         size = Sizes.M,
-        theme = TextareaTheme.MAIN,
+        theme = FieldTheme.MAIN,
         error,
         readOnly,
         onChange,
@@ -50,7 +47,10 @@ export const Textarea = memo(
           <textarea
             rows={1}
             ref={setRefs(ref, textareaRef)}
-            className={classNames(cls.textarea, {}, [cls[theme], cls[size]])}
+            className={classNames(cls.textarea, { [cls.error]: error }, [
+              cls[theme],
+              cls[size]
+            ])}
             onChange={handleChange}
             readOnly={readOnly}
             {...otherProps}

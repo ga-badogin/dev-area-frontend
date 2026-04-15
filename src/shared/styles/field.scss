@@ -1,0 +1,29 @@
+@import './font';
+@import './block';
+
+@mixin field($padding: 12px 20px) {
+  @include font;
+
+  &:read-write {
+    &.main {
+      padding: $padding;
+      @include block;
+    }
+
+    &.minimal {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    &::placeholder {
+      color: var(--secondary-color);
+    }
+
+    &:focus {
+      border-color: var(--accent-color);
+    }
+
+    &.error {
+      border-color: var(--error-color);
+    }
+  }
+}

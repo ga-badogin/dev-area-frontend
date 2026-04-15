@@ -1,0 +1,45 @@
+@use '@/shared/styles/field' as *;
+
+.input {
+  width: 100%;
+  @include field;
+}
+
+.inputWrapper {
+  position: relative;
+
+  &:has(.icon) .input {
+    padding-left: var(--input-icon-padding);
+  }
+
+  &:has(#loader, #toggle) .input {
+    padding-right: var(--input-icon-padding);
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 50%;
+  aspect-ratio: 1 / 1;
+  transform: translate(calc((var(--input-icon-padding) - 100%) / 2), -50%);
+  fill: var(--inverted-primary-color);
+}
+
+#loader,
+#toggle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(calc((var(--input-icon-padding) - 100%) / -2), -50%);
+}
+
+#toggle {
+  height: 60%;
+}
+
+.toggleIcon {
+  fill: var(--accent-color);
+  height: 100%;
+}

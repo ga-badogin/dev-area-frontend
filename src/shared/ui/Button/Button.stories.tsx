@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import { Button, ButtonTheme } from './Button'
 import { StoryList } from '@/shared/lib/storybook/ui/StoryList'
 import { ComponentProps } from 'react'
-import { Input } from '../Input/Input'
 
 const meta = {
   title: 'shared/Button',

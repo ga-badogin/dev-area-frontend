@@ -78,7 +78,7 @@ export const validateCode = (
   return errors.length > 0
     ? {
         type: 'required',
-        message: errors.join('/')
+        message: errors.join('/'),
       }
     : undefined
 }

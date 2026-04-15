@@ -37,15 +37,17 @@
   // Border
   --ui-border-radius: 15px;
   --block-border-radius: 30px;
-  --error-border: 2px solid var(--error-color);
 
   // Opacity
   --disabled-opacity: 0.5;
 
   // Sizes
-  --ui-height: 50px;
+  --control-height: 50px;
   --container-width: 80vw;
   --container-height: calc(100vh - 132px);
+
+  // Paddings
+  --input-icon-padding: 70px;
 
   // Backdrop
   --frosted-glass-blur: blur(10px);

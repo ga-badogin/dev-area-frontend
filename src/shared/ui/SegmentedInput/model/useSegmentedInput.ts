@@ -16,19 +16,20 @@ export const useSegmentedInput = (
     (
       e: ChangeEvent<HTMLInputElement>,
       index: number,
-      fieldValue: string,
-      onChange: (value: string) => void
+      fieldValue?: string,
+      onChange?: (value: string) => void
     ) => {
       const { value } = e.target
 
-      const pattern = inputMode === 'text' ? /^[a-zA-Zа-яА-ЯёЁ]$/ : /^\d$/
+      const pattern = inputMode === 'text' ? /^[a-zA-Zа-яА-ЯёЁ0-9]$/ : /^\d$/
 
       if (pattern.test(value)) {
-        const chars = fieldValue.split('')
-        chars[index] = value
-        const nextValue = chars.join('').slice(0, length)
-
-        onChange(nextValue)
+        if (fieldValue && onChange) {
+          const chars = fieldValue.split('')
+          chars[index] = value
+          const nextValue = chars.join('').slice(0, length)
+          onChange(nextValue)
+        }
 
         inputsRef.current[index + 1]?.focus()
       }
@@ -39,7 +40,7 @@ export const useSegmentedInput = (
   const handlePaste = useCallback(
     (
       e: ClipboardEvent<HTMLInputElement>,
-      onChange: (value: string) => void
+      onChange?: (value: string) => void
     ) => {
       e.preventDefault()
 
@@ -52,7 +53,7 @@ export const useSegmentedInput = (
 
       if (!pastedText) return
 
-      onChange(pastedText)
+      onChange?.(pastedText)
 
       const focusIndex =
         pastedText.length >= length ? length - 1 : pastedText.length
@@ -65,8 +66,8 @@ export const useSegmentedInput = (
     (
       e: KeyboardEvent<HTMLInputElement>,
       index: number,
-      fieldValue: string,
-      onChange: (value: string) => void
+      fieldValue?: string,
+      onChange?: (value: string) => void
     ) => {
       switch (e.key) {
         case 'ArrowRight':
@@ -76,16 +77,28 @@ export const useSegmentedInput = (
           inputsRef.current[index - 1]?.focus()
           break
         case 'Backspace':
-          const chars = fieldValue.split('')
+          const currentInput = inputsRef.current[index]
+          const prevInput = inputsRef.current[index - 1]
 
-          if (chars[index]) {
-            chars[index] = ''
+          if (fieldValue && onChange) {
+            const chars = fieldValue.split('')
+
+            if (chars[index]) {
+              chars[index] = ''
+            } else {
+              prevInput?.focus()
+              chars[index - 1] = ''
+            }
+
+            onChange(chars.join(''))
           } else {
-            inputsRef.current[index - 1]?.focus()
-            chars[index - 1] = ''
+            if (currentInput?.value) {
+              currentInput.value = ''
+            } else if (prevInput) {
+              prevInput.focus()
+              prevInput.value = ''
+            }
           }
-
-          onChange(chars.join(''))
           break
       }
     },

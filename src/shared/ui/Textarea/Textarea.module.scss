@@ -1,35 +1,11 @@
-@use '@/shared/styles/font' as *;
-@use '@/shared/styles/block' as *;
+@use '@/shared/styles/field' as *;
 
 .textarea {
   display: block;
   resize: none;
   overflow: hidden;
   width: 100%;
+  outline: none;
 
-  @include font;
-
-  &:read-write {
-    padding: 20px;
-
-    &.main {
-      @include block;
-
-      &:focus {
-        outline: 2px solid var(--accent-color);
-      }
-
-      &.error {
-        outline: var(--error-border);
-      }
-    }
-
-    &::placeholder {
-      color: var(--secondary-color);
-    }
-  }
-
-  &:focus {
-    outline: none;
-  }
+  @include field;
 }

@@ -1,7 +1,7 @@
 import cls from './About.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { Input, InputTheme } from '@/shared/ui/Input/Input'
+import { Input, InputTheme } from '@/shared/ui/Input/ui/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
 import { Sizes } from '@/shared/consts/ui'

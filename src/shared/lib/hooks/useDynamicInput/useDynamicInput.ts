@@ -5,7 +5,8 @@ export const useDynamicInput = (
   ref: RefObject<HTMLInputElement | null>,
   isDynamic?: boolean
 ) => {
-  const fontRef = useRef('')
+  const fontRef = useRef<string>('')
+  const extraWidth = useRef<number>(0)
 
   const resizeWidth = useCallback(() => {
     if (!isDynamic) return
@@ -16,13 +17,15 @@ export const useDynamicInput = (
     if (!fontRef.current) {
       const style = getComputedStyle(el)
       fontRef.current = style.font
-      // console.log('getComputedStyle')
+      extraWidth.current =
+        parseFloat(style.paddingLeft) +
+        parseFloat(style.paddingRight) +
+        parseFloat(style.borderLeftWidth) +
+        parseFloat(style.borderRightWidth)
     }
 
     const text = el.value || el.placeholder || ' '
-    const width = getTextWidth(text, fontRef.current)
-
-    // console.log(width)
+    const width = getTextWidth(text, fontRef.current, extraWidth.current)
 
     el.style.width = 'auto'
     el.style.width = `${width}px`

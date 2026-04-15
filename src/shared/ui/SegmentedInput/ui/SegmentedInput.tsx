@@ -1,28 +1,35 @@
 import cls from './SegmentedInput.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo, useEffect } from 'react'
-import { useSegmentedInput } from './model/useSegmentedInput'
+import { useSegmentedInput } from '../model/useSegmentedInput'
 import { ErrorList } from '../../ErrorList/ErrorList'
+import { ValueOf } from '@/shared/types'
+import { Sizes } from '@/shared/consts/ui'
+import { FieldTheme } from '@/shared/types/style'
 
 interface SegmentedInputProps {
   className?: string
-  length: number
+  length?: number
   error?: string
 
-  value: string
-  onChange: () => void
+  value?: string
+  onChange?: () => void
 
   inputMode?: 'text' | 'numeric'
+  fontSize?: ValueOf<typeof Sizes>
+  theme?: ValueOf<typeof FieldTheme>
 }
 
 export const SegmentedInput = memo((props: SegmentedInputProps) => {
   const {
     className,
     value,
-    length,
+    length = 6,
     onChange,
     error,
-    inputMode = 'text'
+    inputMode = 'text',
+    fontSize = Sizes.XXL,
+    theme = FieldTheme.MAIN
   } = props
 
   const { inputsRef, handlePaste, handleKeyDown, handleChange } =
@@ -40,13 +47,14 @@ export const SegmentedInput = memo((props: SegmentedInputProps) => {
             ref={(el) => {
               inputsRef.current[index] = el
             }}
-            value={value[index] ?? ''}
+            value={value?.[index]}
             onChange={(e) => handleChange(e, index, value, onChange)}
             onKeyDown={(e) => handleKeyDown(e, index, value, onChange)}
             onPaste={(e) => handlePaste(e, onChange)}
             maxLength={1}
             className={classNames(cls.input, { [cls.error]: error }, [
-              cls.main
+              cls[fontSize],
+              cls[theme]
             ])}
             inputMode={inputMode}
             key={index}

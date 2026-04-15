@@ -2,7 +2,7 @@
 @use '@/shared/styles/block' as *;
 
 .button {
-  height: var(--ui-height);
+  height: var(--control-height);
   width: 100%;
   position: relative;
   @include font;
@@ -22,7 +22,7 @@
       @include block;
 
       &.error {
-        outline-color: var(--error-color);
+        border-color: var(--error-color);
       }
     }
 
