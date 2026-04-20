@@ -1,5 +1,6 @@
 .datePicker {
   position: relative;
+  height: fit-content;
 
   &:not(.readOnly) {
     &.days {
@@ -23,14 +24,14 @@
   }
 }
 
-.calendar {
+#calendar {
   position: absolute;
-  left: 0;
-  top: 0;
-  transform: translateX(calc(-100% - 10px));
-  display: none;
+  bottom: 0;
+  right: 0;
+  visibility: hidden;
+  transform: translateY(calc(100% + 10px));
 
   &.isActive {
-    display: block;
+    visibility: visible;
   }
 }

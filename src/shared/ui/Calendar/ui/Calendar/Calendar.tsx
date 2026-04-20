@@ -13,6 +13,7 @@ import {
 } from '../../model/types/calendar'
 
 export interface CalendarProps {
+  id?: string
   className?: string
   initialView?: TCalendarView
   mode?: TCalendarMode
@@ -24,6 +25,7 @@ export interface CalendarProps {
 
 export const Calendar = memo((props: CalendarProps) => {
   const {
+    id,
     className,
     value,
     onSelect,
@@ -55,7 +57,7 @@ export const Calendar = memo((props: CalendarProps) => {
   )
 
   return (
-    <Block className={classNames(cls.calendar, {}, [className])}>
+    <Block id={id} className={classNames(cls.calendar, {}, [className])}>
       <CalendarControls
         calendarDate={calendarDate}
         setCalendarDate={setCalendarDate}

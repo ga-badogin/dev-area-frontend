@@ -1,4 +1,5 @@
 @use '@/shared/styles/field' as *;
+@use '@/shared/styles/font' as *;
 
 .textarea {
   display: block;
@@ -7,5 +8,6 @@
   width: 100%;
   outline: none;
 
+  @include font;
   @include field;
 }

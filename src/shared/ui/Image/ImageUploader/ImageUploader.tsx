@@ -69,7 +69,7 @@ export const ImageUploader = memo((props: ImageProps) => {
       />
 
       {!readOnly && (
-        <Block className={cls.actionBlock} theme={BlockTheme.SMALL}>
+        <Block className={cls.actionBlock} theme={BlockTheme.FIT}>
           <Button onClick={openFileDialog} theme={ButtonTheme.CLEAR}>
             <ChangeImageIcon className={cls.changeIcon} />
           </Button>

@@ -81,7 +81,7 @@ export const Input = memo(
 
     return (
       <div className={className}>
-        <div className={cls.inputWrapper}>
+        <div className={classNames(cls.inputWrapper, {}, [cls[fontSize]])}>
           <input
             className={classNames(
               cls.input,
@@ -97,7 +97,7 @@ export const Input = memo(
           />
           {Icon && <Icon className={cls.icon} />}
           {isLoading && (
-            <Loader theme={LoaderTheme.ACCENT} id={cls.loader} size="50%" />
+            <Loader theme={LoaderTheme.ACCENT} id={cls.loader} size="1lh" />
           )}
           {type === 'password' && (
             <Toggle

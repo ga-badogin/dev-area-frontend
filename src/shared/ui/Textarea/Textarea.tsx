@@ -17,7 +17,7 @@ import { FieldTheme } from '@/shared/types/style'
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string
   theme?: ValueOf<typeof FieldTheme>
-  size?: ValueOf<typeof Sizes>
+  fontSize?: ValueOf<typeof Sizes>
   error?: string
 }
 
@@ -26,7 +26,7 @@ export const Textarea = memo(
     (props: TextareaProps, ref) => {
       const {
         className,
-        size = Sizes.M,
+        fontSize = Sizes.M,
         theme = FieldTheme.MAIN,
         error,
         readOnly,
@@ -49,7 +49,7 @@ export const Textarea = memo(
             ref={setRefs(ref, textareaRef)}
             className={classNames(cls.textarea, { [cls.error]: error }, [
               cls[theme],
-              cls[size]
+              cls[fontSize]
             ])}
             onChange={handleChange}
             readOnly={readOnly}

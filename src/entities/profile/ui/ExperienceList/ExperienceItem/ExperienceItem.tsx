@@ -1,12 +1,13 @@
 import cls from './ExperienceItem.module.scss'
 import { CSSProperties, memo } from 'react'
-import { Input, InputTheme } from '@/shared/ui/Input/ui/Input'
+import { Input } from '@/shared/ui/Input/ui/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { Block } from '@/shared/ui/Block/Block'
 import { Sizes } from '@/shared/consts/ui'
 import { useController, useFormContext } from 'react-hook-form'
 import { DatePicker } from '@/shared/ui/DatePicker/DatePicker'
 import { IProfileForm } from '../../../model/types/profileForm'
+import { FieldTheme } from '@/shared/types/style'
 
 interface ExperienceItemProps {
   index: number
@@ -44,7 +45,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
     >
       <Input
         className={cls.position}
-        theme={InputTheme.MINIMAL}
+        theme={FieldTheme.MINIMAL}
         fontSize={Sizes.L}
         readOnly={readOnly}
         error={errors.experience?.[index]?.position?.message}
@@ -53,7 +54,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
       />
       <Input
         className={cls.company}
-        theme={InputTheme.MINIMAL}
+        theme={FieldTheme.MINIMAL}
         readOnly={readOnly}
         error={errors.experience?.[index]?.company?.message}
         placeholder="Компания"
@@ -61,7 +62,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
       />
       <Textarea
         className={cls.description}
-        size={Sizes.S}
+        fontSize={Sizes.S}
         readOnly={readOnly}
         error={errors.experience?.[index]?.description?.message}
         placeholder="Описание"

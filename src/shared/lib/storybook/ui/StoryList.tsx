@@ -15,7 +15,11 @@ export const StoryList = <T,>(props: StoryListProps<T>) => {
   return (
     <div className={cls.storyList}>
       {states.map((state, index) => (
-        <div className={cls.storyListItem} key={index}>
+        <div
+          className={cls.storyListItem}
+          style={{ zIndex: states.length - index }}
+          key={index}
+        >
           <Paragraph size={Sizes.L} className={cls.paragraph}>
             {Object.keys(state).join(' / ') || 'base props'}
           </Paragraph>

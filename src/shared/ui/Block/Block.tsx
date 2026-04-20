@@ -11,7 +11,7 @@ import PlusIcon from '@/shared/assets/icons/PlusIcon.svg'
 export const BlockTheme = {
   MAIN: 'main',
   CLEAR: 'clear',
-  SMALL: 'small'
+  FIT: 'fit'
 } as const
 
 interface BlockWrapperProps extends HTMLAttributes<HTMLDivElement> {
@@ -55,8 +55,8 @@ export const Block = forwardRef<HTMLDivElement, BlockWrapperProps>(
 
         {handleCross && (
           <Button
-            theme={ButtonTheme.CLEAR}
-            className={cls.deleteBtn}
+            theme={ButtonTheme.OUTLINE}
+            id={cls.deleteBtn}
             onClick={handleCross}
           >
             <CrossIcon className={cls.cross} />

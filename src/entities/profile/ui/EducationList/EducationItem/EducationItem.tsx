@@ -1,11 +1,12 @@
 import cls from './EducationItem.module.scss'
 import { memo } from 'react'
 import { Block } from '@/shared/ui/Block/Block'
-import { Input, InputTheme } from '@/shared/ui/Input/ui/Input'
 import { Sizes } from '@/shared/consts/ui'
 import { useController, useFormContext } from 'react-hook-form'
 import { DatePicker } from '@/shared/ui/DatePicker/DatePicker'
 import { IProfileForm } from '../../../model/types/profileForm'
+import { FieldTheme } from '@/shared/types/style'
+import { Input } from '@/shared/ui/Input/ui/Input'
 
 interface EducationItemProps {
   index: number
@@ -41,7 +42,7 @@ export const EducationItem = memo((props: EducationItemProps) => {
     >
       <Input
         className={cls.speciality}
-        theme={InputTheme.MINIMAL}
+        theme={FieldTheme.MINIMAL}
         fontSize={Sizes.L}
         readOnly={readOnly}
         error={errors.education?.[index]?.speciality?.message}
@@ -50,7 +51,7 @@ export const EducationItem = memo((props: EducationItemProps) => {
       />
       <Input
         className={cls.institution}
-        theme={InputTheme.MINIMAL}
+        theme={FieldTheme.MINIMAL}
         readOnly={readOnly}
         error={errors.education?.[index]?.institution?.message}
         placeholder="Учебное заведение"

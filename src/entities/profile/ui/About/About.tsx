@@ -1,7 +1,7 @@
 import cls from './About.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { Input, InputTheme } from '@/shared/ui/Input/ui/Input'
+import { Input } from '@/shared/ui/Input/ui/Input'
 import { Textarea } from '@/shared/ui/Textarea/Textarea'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
 import { Sizes } from '@/shared/consts/ui'
@@ -9,6 +9,7 @@ import { Controller, useFormContext } from 'react-hook-form'
 import { ImageUploader } from '@/shared/ui/Image/ImageUploader/ImageUploader'
 import { IProfileForm } from '../../model/types/profileForm'
 import UserIcon from '@/shared/assets/icons/User.svg'
+import { FieldTheme } from '@/shared/types/style'
 
 interface ProfileCardProps {
   className?: string
@@ -44,7 +45,7 @@ const About = memo((props: ProfileCardProps) => {
 
       <div className={cls.fields}>
         <Input
-          theme={InputTheme.MINIMAL}
+          theme={FieldTheme.MINIMAL}
           fontSize={Sizes.XL}
           readOnly={readOnly}
           error={errors.firstName?.message}
@@ -52,7 +53,7 @@ const About = memo((props: ProfileCardProps) => {
           {...register('firstName')}
         />
         <Input
-          theme={InputTheme.MINIMAL}
+          theme={FieldTheme.MINIMAL}
           fontSize={Sizes.XL}
           readOnly={readOnly}
           error={errors.lastName?.message}
@@ -60,7 +61,7 @@ const About = memo((props: ProfileCardProps) => {
           {...register('lastName')}
         />
         <Input
-          theme={InputTheme.MINIMAL}
+          theme={FieldTheme.MINIMAL}
           readOnly={readOnly}
           error={errors.title?.message}
           placeholder="Специальность"

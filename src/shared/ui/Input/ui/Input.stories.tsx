@@ -29,7 +29,7 @@ export const Main: Story = {
   ),
   args: {
     theme: FieldTheme.MAIN,
-    fontSize: Sizes.M
+    fontSize: Sizes.XXL
   }
 }
 

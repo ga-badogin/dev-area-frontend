@@ -8,6 +8,10 @@
   @include font;
 
   &:not(.readOnly) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     &.main {
       color: var(--light-font-color);
       background-color: var(--accent-color);
@@ -28,9 +32,11 @@
 
     &:disabled {
       opacity: var(--disabled-opacity);
+      cursor: not-allowed;
     }
 
     &:has(#loader) {
+      cursor: progress;
       color: transparent;
 
       & > *:not(#loader) {

@@ -8,7 +8,7 @@ const meta: Meta<typeof Select<number>> = {
 }
 
 export default meta
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<DeepPartial<typeof meta>>
 
 export const Default: Story = {
   render: ({ selectedValue, ...args }) => {

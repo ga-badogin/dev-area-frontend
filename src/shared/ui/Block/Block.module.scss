@@ -10,7 +10,7 @@
   }
 
   &.main:before,
-  &.small:before {
+  &.fit:before {
     content: '';
     position: absolute;
     inset: 0;
@@ -18,7 +18,7 @@
     @include block;
   }
 
-  &.small {
+  &.fit {
     width: fit-content;
   }
 
@@ -26,15 +26,8 @@
     padding: 0;
   }
 
-  &:hover > .deleteBtn {
+  &:hover > #deleteBtn {
     visibility: visible;
-  }
-
-  & .deleteBtn {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    visibility: hidden;
   }
 }
 
@@ -50,8 +43,19 @@
   margin-bottom: 10px;
 }
 
+#deleteBtn {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  right: 0;
+  transform: translate(25%, -25%);
+  visibility: hidden;
+}
+
 .cross {
   width: 20px;
+  height: 20px;
   fill: var(--error-color);
 }
 

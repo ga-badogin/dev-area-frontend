@@ -1,42 +1,76 @@
 @use '@/shared/styles/field' as *;
+@use '@/shared/styles/font' as *;
+
+:root {
+  --input-padding-main: 2lh;
+  --input-padding-minimal: 1.5lh;
+  --input-icon-size: 1lh;
+
+  --left-padding-center: calc((var(--input-padding-main) - 100%) / 2);
+  --right-padding-center: calc((var(--input-padding-main) - 100%) / -2);
+}
 
 .input {
   width: 100%;
+  font: inherit;
   @include field;
 }
 
 .inputWrapper {
+  @include font;
   position: relative;
 
   &:has(.icon) .input {
-    padding-left: var(--input-icon-padding);
+    &.main {
+      padding-left: var(--input-padding-main);
+    }
+
+    &.minimal {
+      padding-left: var(--input-padding-minimal);
+    }
   }
 
   &:has(#loader, #toggle) .input {
-    padding-right: var(--input-icon-padding);
+    &.main {
+      padding-right: var(--input-padding-main);
+    }
+
+    &.minimal {
+      padding-right: var(--input-padding-minimal);
+    }
+  }
+
+  &:has(.input.main) {
+    .icon {
+      transform: translate(var(--left-padding-center), -50%);
+    }
+
+    #loader,
+    #toggle {
+      transform: translate(var(--right-padding-center), -50%);
+    }
   }
 }
 
-.icon {
+.icon,
+#loader,
+#toggle {
+  font: inherit;
   position: absolute;
   top: 50%;
-  left: 0;
-  height: 50%;
+  height: 1lh;
+  transform: translateY(-50%);
   aspect-ratio: 1 / 1;
-  transform: translate(calc((var(--input-icon-padding) - 100%) / 2), -50%);
+}
+
+.icon {
+  left: 0;
   fill: var(--inverted-primary-color);
 }
 
 #loader,
 #toggle {
-  position: absolute;
   right: 0;
-  top: 50%;
-  transform: translate(calc((var(--input-icon-padding) - 100%) / -2), -50%);
-}
-
-#toggle {
-  height: 60%;
 }
 
 .toggleIcon {

@@ -2,8 +2,9 @@ import cls from './SkillItem.module.scss'
 import { memo } from 'react'
 import { Block, BlockTheme } from '@/shared/ui/Block/Block'
 import { useFormContext } from 'react-hook-form'
-import { Input, InputTheme } from '@/shared/ui/Input/ui/Input'
+import { Input } from '@/shared/ui/Input/ui/Input'
 import { IProfileForm } from '../../../model/types/profileForm'
+import { FieldTheme } from '@/shared/types/style'
 
 interface SkillItemProps {
   index: number
@@ -21,13 +22,13 @@ export const SkillItem = memo((props: SkillItemProps) => {
 
   return (
     <Block
-      theme={BlockTheme.SMALL}
+      theme={BlockTheme.FIT}
       handleCross={isEdit ? onRemove : undefined}
       className={cls.skillItem}
     >
       <Input
         readOnly={!isEdit}
-        theme={InputTheme.MINIMAL}
+        theme={FieldTheme.MINIMAL}
         className={cls.input}
         placeholder="Навык"
         isDynamic

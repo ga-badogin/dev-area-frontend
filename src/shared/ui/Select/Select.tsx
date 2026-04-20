@@ -12,7 +12,7 @@ export type TSelectConfig<T> = {
 interface SelectProps<T> {
   className?: string
   selectedValue: T
-  onSelect?: (value: T) => void
+  onSelect: (value: T) => void
   options: TSelectConfig<T>
 }
 

@@ -1,9 +1,6 @@
-@import './font';
-@import './block';
+@use './block' as *;
 
 @mixin field($padding: 12px 20px) {
-  @include font;
-
   &:read-write {
     &.main {
       padding: $padding;

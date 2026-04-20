@@ -82,10 +82,11 @@ export const DatePicker = memo((props: DatePickerProps) => {
         {inputLabel}
       </Button>
       <Calendar
+        id={cls.calendar}
+        className={classNames('', { [cls.isActive]: isActive })}
         mode={mode}
         initialView={initialView}
         value={value}
-        className={classNames(cls.calendar, { [cls.isActive]: isActive }, [])}
         onSelect={handleSelect}
         isFutureDateDisabled={isFutureDateDisabled}
       />
