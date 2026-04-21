@@ -28,7 +28,10 @@ export const Dropdown = memo((props: DropdownProps) => {
       className={classNames(cls.dropDown, {}, [className])}
     >
       {children}
-      <Block className={classNames(cls.items, { [cls.isActive]: isActive })}>
+      <Block
+        id={cls.items}
+        className={classNames('', { [cls.isActive]: isActive })}
+      >
         {options.map(({ onClick, isLoading, ...other }, index) => (
           <DropdownItem
             onClick={(e) => {

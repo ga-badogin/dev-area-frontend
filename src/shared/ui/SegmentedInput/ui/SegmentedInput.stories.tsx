@@ -12,7 +12,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const state: ComponentProps<typeof SegmentedInput>[] = [{}, { error: 'error' }]
+const state: ComponentProps<typeof SegmentedInput>[] = [
+  {},
+  { error: { message: 'Error', type: 'required' } }
+]
 
 export const Main: Story = {
   render: (args) => (

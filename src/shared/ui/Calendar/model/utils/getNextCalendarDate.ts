@@ -1,9 +1,11 @@
-import { TCalendarMode, TSelectedDate } from '../types/calendar'
+import { TCalendarMode, TCalendarView, TSelectedDate } from '../types/calendar'
 
 export const getNextCalendarDate = (
   date: Date,
   mode: TCalendarMode,
-  prev: TSelectedDate
+  prev: TSelectedDate,
+  view: TCalendarView,
+  initialView: TCalendarView
 ) => {
   const { firstDate, secondDate } = prev
 
@@ -11,7 +13,7 @@ export const getNextCalendarDate = (
     return { firstDate: date, secondDate: null }
   }
 
-  if (!secondDate && mode === 'range') {
+  if (!secondDate && mode === 'range' && view === initialView) {
     return firstDate <= date
       ? { firstDate, secondDate: date }
       : { firstDate: date, secondDate: firstDate }

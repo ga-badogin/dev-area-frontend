@@ -5,7 +5,6 @@ import { Button } from '@/shared/ui/Button/Button'
 import { useIsCode } from '../model/selectors/getIsCode'
 import { FC, HTMLInputTypeAttribute, SVGProps } from 'react'
 import { typedMemo } from '@/shared/consts/memo'
-import { useLocation } from 'react-router-dom'
 import { Title } from '@/shared/ui/Title/Title'
 import { Paragraph } from '@/shared/ui/Paragraph/Paragraph'
 import { Block } from '@/shared/ui/Block/Block'
@@ -14,6 +13,7 @@ import {
   Controller,
   ErrorOption,
   FieldValues,
+  get,
   Path,
   Resolver,
   useForm
@@ -68,7 +68,6 @@ export const AuthFormTemplate = typedMemo(
       mode: 'onChange'
     })
     const isCode = useIsCode()
-    const { pathname } = useLocation()
 
     return (
       <Block className={cls.authFormWrapper}>
@@ -87,7 +86,7 @@ export const AuthFormTemplate = typedMemo(
                   <Input
                     key={index}
                     className={cls.input}
-                    error={errors?.[name]?.message?.toString()}
+                    error={get(errors, name)}
                     isLoading={isLoading && !isSubmitting}
                     onChange={(e) => {
                       onChange(e)
@@ -113,7 +112,7 @@ export const AuthFormTemplate = typedMemo(
                   value={field.value ?? ''}
                   onChange={field.onChange}
                   className={cls.codeInput}
-                  error={errors[codeName]?.message?.toString()}
+                  error={get(errors, codeName)}
                 />
               )}
             />

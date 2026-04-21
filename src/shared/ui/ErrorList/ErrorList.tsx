@@ -1,12 +1,12 @@
 import cls from './ErrorList.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { memo } from 'react'
-import { Sizes } from '@/shared/consts/ui'
-import { Paragraph } from '../Paragraph/Paragraph'
+import { FieldError } from 'react-hook-form'
+import { ErrorItem } from './ErrorItem/ErrorItem'
 
 interface ErrorListProps {
   className?: string
-  error?: string
+  error?: FieldError
   isActive?: boolean
 }
 
@@ -19,13 +19,13 @@ export const ErrorList = memo((props: ErrorListProps) => {
         className
       ])}
     >
-      {error.split('/').map((error, index) => (
-        <li className={cls.listItem} key={index}>
-          <Paragraph className={cls.paragraph} size={Sizes.S}>
-            {error}
-          </Paragraph>
-        </li>
-      ))}
+      {error.types ? (
+        Object.values(error.types).map((error, index) => (
+          <ErrorItem error={error} key={index} />
+        ))
+      ) : (
+        <ErrorItem error={error.message} />
+      )}
     </ul>
   ) : undefined
 })

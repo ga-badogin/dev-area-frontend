@@ -1,12 +1,11 @@
 import { Dispatch, SetStateAction, useCallback, useMemo } from 'react'
 import { TCalendarView } from '../../model/types/calendar'
-
+import { getNextView } from '../../model/utils/getNextView'
 import {
   formatMonth,
   formatYear,
   formatYearRange
 } from '@/shared/lib/date/format'
-import { getNextView } from '@/shared/ui/Calendar/model/utils/getNextView'
 
 interface UseCalendarControlsParams {
   calendarDate: Date

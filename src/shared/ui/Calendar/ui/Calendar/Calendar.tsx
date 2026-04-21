@@ -47,13 +47,19 @@ export const Calendar = memo((props: CalendarProps) => {
     (date: Date) => {
       setCalendarDate(date)
 
-      const nextDate = getNextCalendarDate(date, mode, selectedDate)
+      const nextDate = getNextCalendarDate(
+        date,
+        mode,
+        selectedDate,
+        view,
+        initialView
+      )
       setSelectedDate(nextDate)
       onSelect?.(nextDate)
 
       setView(getNextView(initialView, 'next'))
     },
-    [initialView, selectedDate, mode]
+    [initialView, selectedDate, mode, view]
   )
 
   return (

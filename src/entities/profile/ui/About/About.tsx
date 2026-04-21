@@ -48,7 +48,7 @@ const About = memo((props: ProfileCardProps) => {
           theme={FieldTheme.MINIMAL}
           fontSize={Sizes.XL}
           readOnly={readOnly}
-          error={errors.firstName?.message}
+          error={errors.firstName}
           placeholder="Имя"
           {...register('firstName')}
         />
@@ -56,14 +56,14 @@ const About = memo((props: ProfileCardProps) => {
           theme={FieldTheme.MINIMAL}
           fontSize={Sizes.XL}
           readOnly={readOnly}
-          error={errors.lastName?.message}
+          error={errors.lastName}
           placeholder="Фамилия"
           {...register('lastName')}
         />
         <Input
           theme={FieldTheme.MINIMAL}
           readOnly={readOnly}
-          error={errors.title?.message}
+          error={errors.title}
           placeholder="Специальность"
           {...register('title')}
         />
@@ -72,7 +72,7 @@ const About = memo((props: ProfileCardProps) => {
       <Block className={cls.block} theme={BlockTheme.CLEAR} title="О себе">
         <Textarea
           readOnly={readOnly}
-          error={errors.bio?.message}
+          error={errors.bio}
           placeholder="Описание"
           {...register('bio')}
         />

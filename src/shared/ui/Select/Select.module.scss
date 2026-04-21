@@ -1,3 +1,5 @@
+@use '@/shared/styles/block' as *;
+
 .select {
   position: relative;
   display: flex;
@@ -6,8 +8,9 @@
   border-radius: var(--ui-border-radius);
 }
 
-.button {
+#button {
   flex: 1;
+  height: 100%;
   z-index: 2;
 }
 

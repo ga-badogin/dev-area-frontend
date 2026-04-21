@@ -45,7 +45,7 @@ export const EducationItem = memo((props: EducationItemProps) => {
         theme={FieldTheme.MINIMAL}
         fontSize={Sizes.L}
         readOnly={readOnly}
-        error={errors.education?.[index]?.speciality?.message}
+        error={errors.education?.[index]?.speciality}
         placeholder="Специальность"
         {...register(`education.${index}.speciality`)}
       />
@@ -53,7 +53,7 @@ export const EducationItem = memo((props: EducationItemProps) => {
         className={cls.institution}
         theme={FieldTheme.MINIMAL}
         readOnly={readOnly}
-        error={errors.education?.[index]?.institution?.message}
+        error={errors.education?.[index]?.institution}
         placeholder="Учебное заведение"
         {...register(`education.${index}.institution`)}
       />

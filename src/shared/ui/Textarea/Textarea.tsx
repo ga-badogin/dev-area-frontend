@@ -13,12 +13,14 @@ import {
 } from 'react'
 import { useDynamicTextarea } from '@/shared/lib/hooks/useDynamicTextarea/useDynamicTextarea '
 import { FieldTheme } from '@/shared/types/style'
+import { FieldError } from 'react-hook-form'
+import { useFocus } from '@/shared/lib/hooks/useFocus/useFocus'
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string
   theme?: ValueOf<typeof FieldTheme>
   fontSize?: ValueOf<typeof Sizes>
-  error?: string
+  error?: FieldError
 }
 
 export const Textarea = memo(
@@ -36,6 +38,7 @@ export const Textarea = memo(
 
       const textareaRef = useRef<HTMLTextAreaElement>(null)
       const resizeHeight = useDynamicTextarea(textareaRef)
+      const { isFocused, handlers } = useFocus()
 
       const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         onChange?.(e)
@@ -47,15 +50,17 @@ export const Textarea = memo(
           <textarea
             rows={1}
             ref={setRefs(ref, textareaRef)}
-            className={classNames(cls.textarea, { [cls.error]: error }, [
-              cls[theme],
-              cls[fontSize]
-            ])}
+            className={classNames(
+              cls.textarea,
+              { [cls.error]: Boolean(error) },
+              [cls[theme], cls[fontSize]]
+            )}
             onChange={handleChange}
             readOnly={readOnly}
             {...otherProps}
+            {...handlers}
           />
-          <ErrorList error={error} />
+          <ErrorList error={error} isActive={isFocused} />
         </div>
       )
     }

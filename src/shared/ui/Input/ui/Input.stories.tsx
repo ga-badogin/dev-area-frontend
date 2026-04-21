@@ -18,7 +18,7 @@ const states: ComponentProps<typeof Input>[] = [
   { Icon: SearchIcon, isLoading: true },
   { type: 'password' },
   { isLoading: true },
-  { error: 'error' },
+  { error: { message: 'Error', type: 'required' } },
   { isError: true },
   { isDynamic: true, placeholder: 'Skill' }
 ]
@@ -29,7 +29,7 @@ export const Main: Story = {
   ),
   args: {
     theme: FieldTheme.MAIN,
-    fontSize: Sizes.XXL
+    fontSize: Sizes.M
   }
 }
 

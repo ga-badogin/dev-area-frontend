@@ -6,11 +6,12 @@ import { ErrorList } from '../../ErrorList/ErrorList'
 import { ValueOf } from '@/shared/types'
 import { Sizes } from '@/shared/consts/ui'
 import { FieldTheme } from '@/shared/types/style'
+import { FieldError } from 'react-hook-form'
 
 interface SegmentedInputProps {
   className?: string
   length?: number
-  error?: string
+  error?: FieldError
 
   value?: string
   onChange?: () => void
@@ -52,7 +53,7 @@ export const SegmentedInput = memo((props: SegmentedInputProps) => {
             onKeyDown={(e) => handleKeyDown(e, index, value, onChange)}
             onPaste={(e) => handlePaste(e, onChange)}
             maxLength={1}
-            className={classNames(cls.input, { [cls.error]: error }, [
+            className={classNames(cls.input, { [cls.error]: Boolean(error) }, [
               cls[fontSize],
               cls[theme]
             ])}

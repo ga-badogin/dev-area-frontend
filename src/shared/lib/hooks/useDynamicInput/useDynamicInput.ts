@@ -14,7 +14,7 @@ export const useDynamicInput = (
     const el = ref.current
     if (!el) return
 
-    if (!fontRef.current) {
+    if (!fontRef.current && !extraWidth.current) {
       const style = getComputedStyle(el)
       fontRef.current = style.font
       extraWidth.current =

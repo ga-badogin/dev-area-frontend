@@ -1,6 +1,6 @@
 import { capitalize } from '@/shared/lib/date/format'
 import { TCalendarView, TSelectedDate } from '../../model/types/calendar'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import {
   isSameDay,
   isSameMonth,
@@ -37,8 +37,8 @@ export const useCalendarGrid = (params: UseCalendarGridParams): IDateItem[] => {
   const month = calendarDate.getMonth()
   const today = new Date()
 
-  return useMemo(() => {
-    const makeItem = (
+  const makeItem = useCallback(
+    (
       date: Date,
       label: string | number,
       isSame: TSameFunc,
@@ -53,8 +53,11 @@ export const useCalendarGrid = (params: UseCalendarGridParams): IDateItem[] => {
         isToday: isSame(date, today, null),
         isDisabled
       }
-    }
+    },
+    [isFutureDateDisabled, today, firstDate, secondDate]
+  )
 
+  return useMemo(() => {
     switch (view) {
       case 'days':
         const daysInMonth = new Date(year, month + 1, 0).getDate()
@@ -81,5 +84,5 @@ export const useCalendarGrid = (params: UseCalendarGridParams): IDateItem[] => {
           return makeItem(d, d.getFullYear(), isSameYear, isFutureYear)
         })
     }
-  }, [firstDate, year, month, view, today])
+  }, [year, month, view, makeItem])
 }

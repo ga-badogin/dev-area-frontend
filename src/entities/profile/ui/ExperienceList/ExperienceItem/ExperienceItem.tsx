@@ -48,7 +48,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
         theme={FieldTheme.MINIMAL}
         fontSize={Sizes.L}
         readOnly={readOnly}
-        error={errors.experience?.[index]?.position?.message}
+        error={errors.experience?.[index]?.position}
         placeholder="Должность"
         {...register(`experience.${index}.position`)}
       />
@@ -56,7 +56,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
         className={cls.company}
         theme={FieldTheme.MINIMAL}
         readOnly={readOnly}
-        error={errors.experience?.[index]?.company?.message}
+        error={errors.experience?.[index]?.company}
         placeholder="Компания"
         {...register(`experience.${index}.company`)}
       />
@@ -64,7 +64,7 @@ export const ExperienceItem = memo((props: ExperienceItemProps) => {
         className={cls.description}
         fontSize={Sizes.S}
         readOnly={readOnly}
-        error={errors.experience?.[index]?.description?.message}
+        error={errors.experience?.[index]?.description}
         placeholder="Описание"
         {...register(`experience.${index}.description`)}
       />

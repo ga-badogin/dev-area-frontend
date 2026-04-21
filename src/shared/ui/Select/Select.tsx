@@ -36,7 +36,7 @@ export const Select = typedMemo(<T,>(props: SelectProps<T>) => {
     <div className={classNames(cls.select, {}, [className])}>
       {options.map(({ content, value }, index) => (
         <Button
-          className={cls.button}
+          id={cls.button}
           theme={ButtonTheme.CLEAR}
           onClick={() => onSelect?.(value)}
           key={index}

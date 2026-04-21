@@ -1,7 +1,7 @@
 import cls from './Input.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Loader, LoaderTheme } from '../../Loader/Loader'
-import { RefCallBack } from 'react-hook-form'
+import { FieldError, RefCallBack } from 'react-hook-form'
 import { ValueOf } from '@/shared/types'
 import { ErrorList } from '../../ErrorList/ErrorList'
 import { useFocus } from '@/shared/lib/hooks/useFocus/useFocus'
@@ -28,7 +28,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   Icon?: FC<SVGProps<SVGSVGElement>>
   theme?: ValueOf<typeof FieldTheme>
   fontSize?: ValueOf<typeof Sizes>
-  error?: string
+  error?: FieldError
   isLoading?: boolean
   ref?: RefCallBack
   isDynamic?: boolean
@@ -85,7 +85,7 @@ export const Input = memo(
           <input
             className={classNames(
               cls.input,
-              { [cls.error]: error || isError },
+              { [cls.error]: Boolean(error) || isError },
               [cls[theme], cls[fontSize]]
             )}
             ref={setRefs(ref, inputRef)}
